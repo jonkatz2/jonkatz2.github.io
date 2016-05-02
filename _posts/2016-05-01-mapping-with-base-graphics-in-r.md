@@ -8,8 +8,6 @@ tags: [R, Spatial analysis, map, GIS]
 ---
 {% include JB/setup %}
 
-# Mapping with R's base graphics
-
 There must be a half-dozen ways to make maps in R. Let's not conflate spatial analysis with making maps; there is typically only one - maybe two - ways to do any given spatial analysis. Reading and writing vector files: use package rgdal. Spatial analysis with vector files: use packages sp and rgeos. Use package raster (and occasionally gstat) to work with rasters.  
 
 When it comes to plotting the output, you can take your pick of methods. If you are reading this post, you've probably already seen a few other more popular posts. I'll single out this one because I refer to it regularly, plus it links to many other excellent pages:  
