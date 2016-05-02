@@ -8,6 +8,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 <div class="navbar">
   <div class="navbar-inner">
       <ul class="nav">
+          <li><a href="{{ BASE_PATH }}/assets/blog/blog.html">blog</a></li>
           <li><a href="{{ BASE_PATH }}/assets/jkatzResume.pdf">resume</a></li>
           <li><a href="https://github.com/jonkatz2">github</a></li>
 <!--          <li><a href="http://kbroman.wordpress.com">blog</a></li>-->
