@@ -13,7 +13,7 @@ There must be a half-dozen ways to make maps in R. Let's not conflate spatial an
 When it comes to plotting the output, you can take your pick of methods. If you are reading this post, you've probably already seen a few other more popular posts. I'll single out this one because I refer to it regularly, plus it links to many other excellent pages:  
 [https://pakillo.github.io/R-GIS-tutorial/]()  
 
-### Here are my feelings towards what I believe are the two most popular mapping methods.
+### Here are my feelings towards what I perceive to be the two most popular mapping methods.
   * **sp::spplot**  
      + Pros: Offers fine control for overlays for a professionally finished look.  
      + Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is which basically a whole different plotting language--users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increase dramatically with each new feature plotted including text overlays, scale bars, north arrows--and we haven't even added additional overlays. Each feature is a list of lists, possibly nested even deeper.  
@@ -91,9 +91,10 @@ zdata[sample(1:nrow(zdata), 20),]
 ## 301 44.26225 -72.78795 340000  3.0     3 2296        35.00     1988
 ```
 
-Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the `lat` and `long` fields are intact though.
+Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the `lat` and `long` fields are intact though.  
 
-I'm going to limit this post to vector data so I can keep the packages to a minimum. Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:
+I'm going to limit this post to vector data so I can keep the packages to a minimum.  
+Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:
 
 
 ```r
@@ -177,6 +178,7 @@ hist(price$price, main='Median home price by Vermont town', xlab='Price in US Do
 ```
 
 ![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png) 
+
 Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but more than one are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected.  
 I'll start with a simple linear shading scheme, using the built-in `heat.colors` function for the `col` argument.
 
