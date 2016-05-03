@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Mapping with base graphics in R</title>
+    <title>Mapping vector data with base graphics in R</title>
     <meta name="description" content="">
     
     <meta name="author" content="Jon Katz">
@@ -17,8 +17,10 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/themes//bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
-    <link href="/assets/themes//css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+<!--    <link href="/assets/themes//bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">-->
+<!--    <link href="/assets/themes//css/style.css?body=1" rel="stylesheet" type="text/css" media="all">-->
 <!--    <link href="/assets/themes//css/kbroman.css" rel="stylesheet" type="text/css" media="all">-->
 
     <!-- Le fav and touch icons -->
@@ -51,46 +53,63 @@
 
       <div class="content">
         
-<p>There must be a half-dozen ways to make maps in R. Let’s not conflate spatial analysis with making maps; there is typically only one - maybe two - ways to do any given spatial analysis. Reading and writing vector files: use package rgdal. Spatial analysis with vector files: use packages sp and rgeos. Use package raster (and occasionally gstat) to work with rasters.</p>
+<div class="page-header">
+  <h1>Mapping vector data with base graphics in R </h1>
+</div>
 
-<p>When it comes to plotting the output, you can take your pick of methods. If you are reading this post, you’ve probably already seen a few other more popular posts. I’ll single out this one because I refer to it regularly, plus it links to many other excellent pages:<br />
-<a href="">https://pakillo.github.io/R-GIS-tutorial/</a></p>
+<div class="row-fluid post-full">
+  <div class="span12">
+    <div class="date">
+      <span>01 May 2016</span>
+    </div>
+    <div class="content">
+      
+<h3 id="spplot-and-ggplot-are-probably-the-two-most-popular-mapping-methods-for-vector-data-but-both-are-hard-to-use-are-base-graphics-any-easier">spplot and ggplot are probably the two most popular mapping methods for vector data, but both are hard to use. Are base graphics any easier?</h3>
 
-<h3 id="here-are-my-feelings-towards-what-i-perceive-to-be-the-two-most-popular-mapping-methods">Here are my feelings towards what I perceive to be the two most popular mapping methods.</h3>
+<p>When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you’ve probably already done a fair amount of web searching and seen a few other popular sites–<strong>because mapping in R is tedious</strong>. I’ll single out this site because I refer to it regularly, plus it links to many other excellent pages: <a href="">https://pakillo.github.io/R-GIS-tutorial/</a>. Go, follow the link and look around there, and then come back and see what the base graphics have to offer.</p>
+
+<p>The methods I perceive as most popular in R both have pros and cons:</p>
+
 <ul>
   <li><strong>sp::spplot</strong>
     <ul>
       <li>Pros: Offers fine control for overlays for a professionally finished look.</li>
-      <li>Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is which basically a whole different plotting language–users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increase dramatically with each new feature plotted including text overlays, scale bars, north arrows–and we haven’t even added additional overlays. Each feature is a list of lists, possibly nested even deeper.</li>
+      <li>Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is basically a whole different plotting language–users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increases dramatically with each new feature plotted including text labels, scale bars, north arrows–and we haven’t even added additional overlays. Each feature is a list of lists, possibly nested even deeper.</li>
     </ul>
   </li>
-  <li><strong>ggplot2</strong>
+  <li><strong>ggplot2::ggplot</strong>
     <ul>
-      <li>Pros: Offers fine control for overlays for a professionally finished look. Map has the smooth appearance of a ggplot.</li>
-      <li>Cons: ggplot is the <em>grammar of graphics</em>, which is also a whole different plotting language. I’m not a ggplot user, although I agree the plots look fantastic.</li>
+      <li>Pros: Offers fine control for overlays for a professionally finished look. Map has a slick gray background, gridlines, and nice coloration right out of the box.</li>
+      <li>Cons: ggplot is the <em>grammar of graphics</em>, which is also a whole different plotting language. I’m not a ggplot user because I am not eager to learn a redundant plotting language, although I agree the plots look fantastic, and most are probably more appealing to the general public.</li>
     </ul>
   </li>
 </ul>
 
-<p>The handicap that both of these share is that neither plays well with R’s base graphics. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics. The trend-following part of me wants to learn ggplot because the plots are slick and colorful, but the swim-against-the-current part of me prefers a good old-fashioned black-and-white line graph.</p>
+<p>Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R’s base graphics, which is a bummer because I’ve finally memorized the entire list of <code class="highlighter-rouge">par</code> options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.</p>
 
-<p>For mapping I am usually in a small hurry, so oftentimes I prefer to use the base graphics because they are so easy–read in a layer, then send the plot command, and be done. <br />
-Let’s run through a quick example.</p>
+<p>For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done. <br />
+Let’s run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I’d like to make a quick note about how we can find package help.</p>
 
 <h3 id="getting-help-with-plot-methods">Getting help with plot methods</h3>
-<p>First off, finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the <code class="highlighter-rouge">methods</code> package extends functionality of the <code class="highlighter-rouge">'?'</code> function, so as you might get help for an S3 plot method with <code class="highlighter-rouge">?plot</code> or <code class="highlighter-rouge">?plot.data.frame</code>, you get help for an S4 method with something like <code class="highlighter-rouge">method?plot('SpatialPoints')</code>. A little more cumbersome, but a must know to get anything done with an S4 package.</p>
+<p>Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the <code class="highlighter-rouge">methods</code> package extends functionality of the <code class="highlighter-rouge">'?'</code> function, so as you might get help for an S3 plot method with <code class="highlighter-rouge">?plot</code> or <code class="highlighter-rouge">?plot.data.frame</code>, you get help for an S4 method such as plotting an object of class <code class="highlighter-rouge">SpatialPoints</code> with the command <code class="highlighter-rouge">method?plot('SpatialPoints')</code>. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.</p>
 
 <h3 id="quick-choropleth-mapping-with-base-graphics">Quick choropleth mapping with base graphics</h3>
-<p>The general outline of tasks is:
-  1. Get the homes for sale data.
-  2. Aggregate the data by town.
-  3. Plot the aggregated data.
-  4. See what can be done to make ourselves more proud of the plot.</p>
+<p>The general outline of our task today is:</p>
+
+<blockquote>
+  <ol>
+    <li>Get the homes for sale data.</li>
+    <li>Aggregate the data by town.</li>
+    <li>Plot the aggregated data.</li>
+    <li>See what can be done to make ourselves more proud of the plot.</li>
+  </ol>
+</blockquote>
 
 <h4 id="get-the-data">1. Get the data</h4>
 <p>To keep this simple I’ll just read in some data rather than finding it right now. Our sample data today will be the subject of a future post: homes for sale in Vermont, scraped from Zillow’s website. I’ll read in a snapshot of homes for sale on May 1, 2016.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">zdata</span> <span class="o">&lt;-</span> <span class="n">read.csv</span><span class="p">(</span><span class="s1">'data/FS_2016May01.csv'</span><span class="p">)</span>
+
 <span class="c1"># Get a random preview of the table
 </span><span class="n">zdata</span><span class="p">[</span><span class="n">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">zdata</span><span class="p">),</span> <span class="m">20</span><span class="p">),]</span>
 </code></pre>
@@ -192,18 +211,19 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 </code></pre>
 </div>
 
-<p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" /></p>
+<!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) -->
 
-<p>For a quick comparison, here’s what the map looks like on it’s home site:</p>
-<div style="text-align:center;">
-<img src="/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501" />
+<p>For a quick side-by-side comparison, here’s our plot on the left and Zillow’s map on it’s home site this same day:</p>
+<div>
+    <img style="width:47%;float:left;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png" alt="Our plot 20160501" />
+    <img style="width:52%;float:right;" src="/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501" />
 </div>
+<div style="clear:both;"></div>
 
 <h4 id="aggregate-the-data-by-town">2. Aggregate the data by town.</h4>
-<p>Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town.</p>
+<p>Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town. The package <code class="highlighter-rouge">sp</code> has a great spatial aggregation method, so there’s no need to explicitly do any overlay.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># sp has a great spatial aggregation tool, no need to actually do any overlay
-</span><span class="n">price</span> <span class="o">&lt;-</span> <span class="n">aggregate</span><span class="p">(</span><span class="n">z.spat</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="n">vt.twn</span><span class="p">[</span><span class="s1">'TOWNNAME'</span><span class="p">],</span> <span class="n">FUN</span><span class="o">=</span><span class="n">median</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span> 
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">price</span> <span class="o">&lt;-</span> <span class="n">aggregate</span><span class="p">(</span><span class="n">z.spat</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="n">vt.twn</span><span class="p">[</span><span class="s1">'TOWNNAME'</span><span class="p">],</span> <span class="n">FUN</span><span class="o">=</span><span class="n">median</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span> 
 <span class="n">price</span>
 </code></pre>
 </div>
@@ -226,49 +246,57 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /></p>
 
-<p>Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but more than one are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected.<br />
-I’ll start with a simple linear shading scheme, using the built-in <code class="highlighter-rouge">heat.colors</code> function for the <code class="highlighter-rouge">col</code> argument.</p>
+<p>Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.<br />
+I’ll start with a simple linear shading scheme, using the built-in <code class="highlighter-rouge">heat.colors</code> gradient for the <code class="highlighter-rouge">col</code> argument.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">price</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">heat.colors</span><span class="p">(</span><span class="m">255</span><span class="p">),</span> <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">price</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">heat.colors</span><span class="p">(</span><span class="m">255</span><span class="p">),</span> 
+    <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
 <span class="n">box</span><span class="p">()</span>
 </code></pre>
 </div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" /></p>
 
-<p>OK, it is clear from the plot that the base plot method just colors towns based on plot order rather than on the underlying value in the attribute table. Maybe this is not as simple as I initially expected.</p>
+<p>OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.</p>
 
-<p>I tested various options for a solid hour, and here’s what I came up with. I can’t change the plot order, but I can change the coloration. I need to rearrange the colors in <code class="highlighter-rouge">heat.colors()</code> and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:
-  1. Use the <code class="highlighter-rouge">hist</code> function to compute price bins.
-  2. Assign the prices to bins.
-  3. Use the assigned bins to rarrange the color vector.
-  4. Plot the map.
-  5. Return an invisible vector of bins to use in the legend.</p>
+<p>After testing various options for a solid hour, here’s what I came up with. I can’t change the plot order, but I <em>can</em> change the coloration. I need to rearrange the colors in <code class="highlighter-rouge">heat.colors()</code> and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:</p>
 
-<p>I’m going to do this by defining a quick custom function. The “quick” part is that I’m not including any argument checking that would make a more finished function in a package. The following function will perform the above steps.</p>
+<blockquote>
+  <ol>
+    <li>Use the <code class="highlighter-rouge">hist</code> function to compute price bins.</li>
+    <li>Assign the prices to bins.</li>
+    <li>Use the assigned bins to rarrange the color vector.</li>
+    <li>Plot the map.</li>
+    <li>Return an invisible vector of bins to use in the legend.</li>
+  </ol>
+</blockquote>
+
+<p>I’m going to do this by defining a quick custom function. The “quick” part is that I’m not including any argument checking characteristic of a high level function in a package.<br />
+The following function will perform the above steps.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">choropleth</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span>
-    <span class="n">sp</span><span class="p">,</span>         <span class="c1"># the feature to plot as an R object; any feature derived from package sp.
-</span>    <span class="n">attrib</span><span class="p">,</span>     <span class="c1"># the attribute name in the table; length 1 character vector.
+    <span class="n">sp</span><span class="p">,</span>         <span class="c1"># R object--any feature derived from package sp.
+</span>    <span class="n">attrib</span><span class="p">,</span>     <span class="c1"># Attribute name in the table; length 1 character vector.
 </span>    <span class="n">color.ramp</span><span class="o">=</span><span class="n">heat.colors</span><span class="p">,</span>  <span class="c1"># The color ramp to use. Can also use colorRampPalette().
 </span>    <span class="n">hist.args</span><span class="o">=</span><span class="n">NULL</span><span class="p">,</span>  <span class="c1"># Named list of additional arguments to hist(), excluding `plot`.
 </span>    <span class="k">...</span>         <span class="c1"># Additional arguments to plot().
 </span><span class="p">)</span> <span class="p">{</span>
     <span class="n">spa</span> <span class="o">&lt;-</span> <span class="n">na.omit</span><span class="p">(</span><span class="n">sp</span><span class="p">[[</span><span class="n">attrib</span><span class="p">]])</span>
-    <span class="c1"># Step 1
+    <span class="c1"># Step 1 : compute price bins
 </span>    <span class="n">ha</span> <span class="o">&lt;-</span> <span class="n">list</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">spa</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
     <span class="n">ha</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">ha</span><span class="p">,</span> <span class="n">hist.args</span><span class="p">)</span>
     <span class="n">bins</span> <span class="o">&lt;-</span> <span class="n">do.call</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">ha</span><span class="p">)</span><span class="o">$</span><span class="n">breaks</span>
-    <span class="c1"># Step 2
+    <span class="c1"># Step 2: assign data to bins
 </span>    <span class="n">bin</span> <span class="o">&lt;-</span> <span class="n">rep</span><span class="p">(</span><span class="n">NA</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">spa</span><span class="p">))</span>
     <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">length</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">:</span><span class="m">1</span><span class="p">)</span> <span class="n">bin</span><span class="p">[</span><span class="n">spa</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="o">&amp;</span> <span class="n">spa</span> <span class="o">&lt;=</span> <span class="n">bins</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="n">i</span><span class="m">-1</span>
-    <span class="c1"># Step 3
+    <span class="c1"># Step 3: rearrange color vector
 </span>    <span class="n">sp</span><span class="o">$</span><span class="n">bin</span> <span class="o">&lt;-</span> <span class="n">NA</span>
     <span class="n">sp</span><span class="p">[[</span><span class="s1">'bin'</span><span class="p">]][</span><span class="o">!</span><span class="n">is.na</span><span class="p">(</span><span class="n">sp</span><span class="p">[[</span><span class="n">attrib</span><span class="p">]])]</span> <span class="o">&lt;-</span> <span class="n">bin</span>
     <span class="n">customcolor</span> <span class="o">&lt;-</span> <span class="n">rev</span><span class="p">(</span><span class="n">color.ramp</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="m">-1</span><span class="p">))</span>
     <span class="n">customcolor</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s2">"#FFFFFF"</span>
-    <span class="n">plot</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">customcolor</span><span class="p">[</span><span class="n">sp</span><span class="o">$</span><span class="n">bin</span><span class="p">],</span> <span class="k">...</span><span class="p">)</span>
-    <span class="c1"># Step 4
+    <span class="c1"># Step 4: plot
+</span>    <span class="n">plot</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">customcolor</span><span class="p">[</span><span class="n">sp</span><span class="o">$</span><span class="n">bin</span><span class="p">],</span> <span class="k">...</span><span class="p">)</span>
+    <span class="c1"># Step 5: return a vector to use for the legend
 </span>    <span class="n">low.bin</span> <span class="o">&lt;-</span> <span class="n">bins</span> <span class="o">+</span> <span class="m">1</span>
     <span class="n">low.bin</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">0</span>
     <span class="n">oldopts</span> <span class="o">&lt;-</span> <span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="o">=</span><span class="m">100000</span><span class="p">)</span>
@@ -278,26 +306,38 @@ I’ll start with a simple linear shading scheme, using the built-in <code class
 </code></pre>
 </div>
 
-<p>Now the first test. I’m going to put a legend on to see how it looks.</p>
+<p>Now the first test. I’m going to save a plot and put a legend on right away, just to see how it looks.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
-<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">rev</span><span class="p">(</span><span class="n">heat.colors</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'$US'</span><span class="p">)</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> 
+    <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+    
+<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">rev</span><span class="p">(</span><span class="n">heat.colors</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> 
+    <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'$US'</span><span class="p">)</span>
+    
 <span class="n">box</span><span class="p">()</span>
 </code></pre>
 </div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" /></p>
 
-<p>This looks more-or-less OK, but I’ve plotted two yellows, two oranges, and three reds that I can’t distinguish. I think I would be better off with a white, then some distinct colors. I will solve this with a one-two puch top improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using <code class="highlighter-rouge">hist()</code> to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for higher than $450,000.</p>
+<p>This looks more-or-less OK, but I’ve plotted two yellows, two oranges, and three reds that I can’t distinguish. I think I would be better off with a white followed by some more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using <code class="highlighter-rouge">hist()</code> to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.</p>
 
-<p><code class="highlighter-rouge">r
- fill.col &lt;- colorRampPalette(c('red', 'orange', 'lightgray'))
- x &lt;- choropleth(price, 'price', color.ramp=fill.col, hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), main='Median home price in Vermont, by town', axes=TRUE)
- fill &lt;- rev(fill.col(length(x)))
- fill[1] &lt;- 'white'
- legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', box.cex=c(2, 0.8))
- box()
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">fill.col</span> <span class="o">&lt;-</span> <span class="n">colorRampPalette</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'orange'</span><span class="p">,</span> <span class="s1">'lightgray'</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="n">color.ramp</span><span class="o">=</span><span class="n">fill.col</span><span class="p">,</span> 
+   <span class="n">hist.args</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">seq</span><span class="p">(</span><span class="m">250000</span><span class="p">,</span> <span class="m">450000</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">100000</span><span class="p">),</span> <span class="m">1500000</span><span class="p">)),</span> 
+   <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+
+<span class="n">fill</span> <span class="o">&lt;-</span> <span class="n">rev</span><span class="p">(</span><span class="n">fill.col</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+
+<span class="n">fill</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'white'</span>
+
+<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> 
+   <span class="n">title</span><span class="o">=</span><span class="s1">'Asking Price ($US)'</span><span class="p">,</span> <span class="n">box.cex</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
+
+<span class="n">box</span><span class="p">()</span>
+</code></pre>
+</div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" /></p>
 
@@ -307,20 +347,86 @@ I’ll start with a simple linear shading scheme, using the built-in <code class
 <span class="n">source</span><span class="p">(</span><span class="s2">"http://www.math.mcmaster.ca/bolker/R/misc/legendx.R"</span><span class="p">)</span>
 
 <span class="n">fill.col</span> <span class="o">&lt;-</span> <span class="n">colorRampPalette</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'orange'</span><span class="p">,</span> <span class="s1">'lightgray'</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="n">color.ramp</span><span class="o">=</span><span class="n">fill.col</span><span class="p">,</span> <span class="n">hist.args</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">seq</span><span class="p">(</span><span class="m">250000</span><span class="p">,</span> <span class="m">450000</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">100000</span><span class="p">),</span> <span class="m">1500000</span><span class="p">)),</span> <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="n">color.ramp</span><span class="o">=</span><span class="n">fill.col</span><span class="p">,</span> 
+    <span class="n">hist.args</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">seq</span><span class="p">(</span><span class="m">250000</span><span class="p">,</span> <span class="m">450000</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">100000</span><span class="p">),</span> <span class="m">1500000</span><span class="p">)),</span> 
+    <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+
 <span class="n">fill</span> <span class="o">&lt;-</span> <span class="n">rev</span><span class="p">(</span><span class="n">fill.col</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+
 <span class="n">fill</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'white'</span>
-<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Asking Price ($US)'</span><span class="p">,</span> <span class="n">box.cex</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">.25</span><span class="p">))</span>
-<span class="n">scalebarTanimura</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.3960193</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.52</span><span class="p">,</span> <span class="m">-0.75</span><span class="p">),</span> <span class="n">mapunit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">,</span> <span class="n">unit.lab</span><span class="o">=</span><span class="s2">"miles"</span><span class="p">)</span>
+
+<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Asking Price ($US)'</span><span class="p">,</span> 
+    <span class="n">box.cex</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">.25</span><span class="p">))</span>
+
+<span class="n">scalebarTanimura</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.3960193</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.52</span><span class="p">,</span> <span class="m">-0.75</span><span class="p">),</span> 
+    <span class="n">mapunit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">,</span> <span class="n">unit.lab</span><span class="o">=</span><span class="s2">"miles"</span><span class="p">)</span>
 <span class="n">northarrowTanimura</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="m">0.4</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">mapunit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">)</span>
-<span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">2</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">vt.twn</span><span class="o">$</span><span class="n">TOWNNAME</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="m">0.3</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span>
+
+<span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">2</span><span class="p">],</span> 
+    <span class="n">labels</span><span class="o">=</span><span class="n">vt.twn</span><span class="o">$</span><span class="n">TOWNNAME</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="m">0.3</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span>
+
 <span class="n">count</span> <span class="o">&lt;-</span> <span class="n">aggregate</span><span class="p">(</span><span class="n">z.spat</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="n">vt.twn</span><span class="p">[</span><span class="s1">'TOWNNAME'</span><span class="p">],</span> <span class="n">FUN</span><span class="o">=</span><span class="n">length</span><span class="p">)</span> 
-<span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">2</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="n">count</span><span class="o">$</span><span class="n">price</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="m">0.6</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.6</span><span class="p">)</span>
+
+<span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">2</span><span class="p">],</span> 
+    <span class="n">labels</span><span class="o">=</span><span class="n">count</span><span class="o">$</span><span class="n">price</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="m">0.6</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.6</span><span class="p">)</span>
+
 <span class="n">box</span><span class="p">()</span>
 </code></pre>
 </div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" /></p>
+
+
+    </div>
+
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="icon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>1</span></a></li>
+     
+    	<li><a href="nil#Spatial analysis-ref">Spatial analysis <span>1</span></a></li>
+     
+    	<li><a href="nil#Mapping-ref">Mapping <span>1</span></a></li>
+     
+    	<li><a href="nil#GIS-ref">GIS <span>1</span></a></li>
+     
+    	<li><a href="nil#Code-ref">Code <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev disabled"><a>&larr; Previous</a></li>
+      
+        <li><a href="nil">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    </div>
+    <hr>
+    
+  </div>
+</div>
+
+
+
 
 
       </div>

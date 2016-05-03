@@ -1,40 +1,40 @@
 ---
 layout: post
-title: "Mapping with base graphics in R"
+title: "Mapping vector data with base graphics in R"
 date: 2016-05-01
 description: ""
 category: 
-tags: ["R", "Spatial analysis", "Mapping", "GIS"]
+tags: ["R", "Spatial analysis", "Mapping", "GIS", "Code"]
 ---
 {% include JB/setup %}
+### spplot and ggplot are probably the two most popular mapping methods for vector data, but both are hard to use. Are base graphics any easier?
 
-There must be a half-dozen ways to make maps in R. Let's not conflate spatial analysis with making maps; there is typically only one - maybe two - ways to do any given spatial analysis. Reading and writing vector files: use package rgdal. Spatial analysis with vector files: use packages sp and rgeos. Use package raster (and occasionally gstat) to work with rasters.  
+When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you've probably already done a fair amount of web searching and seen a few other popular sites--**because mapping in R is tedious**. I'll single out this site because I refer to it regularly, plus it links to many other excellent pages: [https://pakillo.github.io/R-GIS-tutorial/](). Go, follow the link and look around there, and then come back and see what the base graphics have to offer.  
 
-When it comes to plotting the output, you can take your pick of methods. If you are reading this post, you've probably already seen a few other more popular posts. I'll single out this one because I refer to it regularly, plus it links to many other excellent pages:  
-[https://pakillo.github.io/R-GIS-tutorial/]()  
+The methods I perceive as most popular in R both have pros and cons:  
 
-### Here are my feelings towards what I perceive to be the two most popular mapping methods.
   * **sp::spplot**  
      + Pros: Offers fine control for overlays for a professionally finished look.  
-     + Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is which basically a whole different plotting language--users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increase dramatically with each new feature plotted including text overlays, scale bars, north arrows--and we haven't even added additional overlays. Each feature is a list of lists, possibly nested even deeper.  
-  * **ggplot2**  
-     + Pros: Offers fine control for overlays for a professionally finished look. Map has the smooth appearance of a ggplot.  
-     + Cons: ggplot is the *grammar of graphics*, which is also a whole different plotting language. I'm not a ggplot user, although I agree the plots look fantastic.  
+     + Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is basically a whole different plotting language--users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increases dramatically with each new feature plotted including text labels, scale bars, north arrows--and we haven't even added additional overlays. Each feature is a list of lists, possibly nested even deeper.  
+  * **ggplot2::ggplot**  
+     + Pros: Offers fine control for overlays for a professionally finished look. Map has a slick gray background, gridlines, and nice coloration right out of the box.  
+     + Cons: ggplot is the *grammar of graphics*, which is also a whole different plotting language. I'm not a ggplot user because I am not eager to learn a redundant plotting language, although I agree the plots look fantastic, and most are probably more appealing to the general public.  
 
-The handicap that both of these share is that neither plays well with R's base graphics. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics. The trend-following part of me wants to learn ggplot because the plots are slick and colorful, but the swim-against-the-current part of me prefers a good old-fashioned black-and-white line graph.  
+Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R's base graphics, which is a bummer because I've finally memorized the entire list of `par` options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.  
 
-For mapping I am usually in a small hurry, so oftentimes I prefer to use the base graphics because they are so easy--read in a layer, then send the plot command, and be done.   
-Let's run through a quick example.
+For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done.   
+Let's run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I'd like to make a quick note about how we can find package help.  
 
 ### Getting help with plot methods
-First off, finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the `methods` package extends functionality of the `'?'` function, so as you might get help for an S3 plot method with `?plot` or `?plot.data.frame`, you get help for an S4 method with something like `method?plot('SpatialPoints')`. A little more cumbersome, but a must know to get anything done with an S4 package.
+Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the `methods` package extends functionality of the `'?'` function, so as you might get help for an S3 plot method with `?plot` or `?plot.data.frame`, you get help for an S4 method such as plotting an object of class `SpatialPoints` with the command `method?plot('SpatialPoints')`. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.
 
 ### Quick choropleth mapping with base graphics
-The general outline of tasks is:
-  1. Get the homes for sale data.
-  2. Aggregate the data by town.
-  3. Plot the aggregated data.
-  4. See what can be done to make ourselves more proud of the plot.
+The general outline of our task today is:  
+
+  >1. Get the homes for sale data.  
+  >2. Aggregate the data by town.  
+  >3. Plot the aggregated data.  
+  >4. See what can be done to make ourselves more proud of the plot.  
 
 #### 1. Get the data
 To keep this simple I'll just read in some data rather than finding it right now. Our sample data today will be the subject of a future post: homes for sale in Vermont, scraped from Zillow's website. I'll read in a snapshot of homes for sale on May 1, 2016.
@@ -42,6 +42,7 @@ To keep this simple I'll just read in some data rather than finding it right now
 
 ```r
 zdata <- read.csv('data/FS_2016May01.csv')
+
 # Get a random preview of the table
 zdata[sample(1:nrow(zdata), 20),]
 ```
@@ -143,20 +144,19 @@ plot(vt.twn)
 plot(z.spat, add=TRUE, pch=19)
 ```
 
-![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) 
+<!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) -->
 
-For a quick comparison, here's what the map looks like on it's home site:  
-<div style='text-align:center;'>
-<img src="/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501">
+For a quick side-by-side comparison, here's our plot on the left and Zillow's map on it's home site this same day:  
+<div>
+    <img style="width:47%;float:left;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png" alt="Our plot 20160501">
+    <img style="width:52%;float:right;" src="/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501">
 </div>
-
+<div style="clear:both;"></div>
 
 #### 2. Aggregate the data by town.
-Now that everything appears to be in order, I'd like to shade the map according to one or more of the attributes in the data. I'll begin with home median home price by town.
-
+Now that everything appears to be in order, I'd like to shade the map according to one or more of the attributes in the data. I'll begin with home median home price by town. The package `sp` has a great spatial aggregation method, so there's no need to explicitly do any overlay.
 
 ```r
-# sp has a great spatial aggregation tool, no need to actually do any overlay
 price <- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=median, na.rm=TRUE) 
 price
 ```
@@ -179,51 +179,55 @@ hist(price$price, main='Median home price by Vermont town', xlab='Price in US Do
 
 ![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png) 
 
-Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but more than one are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected.  
-I'll start with a simple linear shading scheme, using the built-in `heat.colors` function for the `col` argument.
+Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.  
+I'll start with a simple linear shading scheme, using the built-in `heat.colors` gradient for the `col` argument.
 
 
 ```r
-plot(price['price'], col=heat.colors(255), main='Median home price in Vermont, by town', axes=TRUE)
+plot(price['price'], col=heat.colors(255), 
+    main='Median home price in Vermont, by town', axes=TRUE)
 box()
 ```
 
 ![plot of chunk unnamed-chunk-5](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png) 
 
-OK, it is clear from the plot that the base plot method just colors towns based on plot order rather than on the underlying value in the attribute table. Maybe this is not as simple as I initially expected.  
+OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.  
 
-I tested various options for a solid hour, and here's what I came up with. I can't change the plot order, but I can change the coloration. I need to rearrange the colors in `heat.colors()` and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I'd like to perform are:
-  1. Use the `hist` function to compute price bins.
-  2. Assign the prices to bins.
-  3. Use the assigned bins to rarrange the color vector.
-  4. Plot the map.
-  5. Return an invisible vector of bins to use in the legend.
+After testing various options for a solid hour, here's what I came up with. I can't change the plot order, but I *can* change the coloration. I need to rearrange the colors in `heat.colors()` and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I'd like to perform are:  
+
+  >1. Use the `hist` function to compute price bins.  
+  >2. Assign the prices to bins.  
+  >3. Use the assigned bins to rarrange the color vector.  
+  >4. Plot the map.  
+  >5. Return an invisible vector of bins to use in the legend.  
   
-I'm going to do this by defining a quick custom function. The "quick" part is that I'm not including any argument checking that would make a more finished function in a package. The following function will perform the above steps.
+I'm going to do this by defining a quick custom function. The "quick" part is that I'm not including any argument checking characteristic of a high level function in a package.  
+The following function will perform the above steps.  
 
 ```r
 choropleth <- function(
-    sp,         # the feature to plot as an R object; any feature derived from package sp.
-    attrib,     # the attribute name in the table; length 1 character vector.
+    sp,         # R object--any feature derived from package sp.
+    attrib,     # Attribute name in the table; length 1 character vector.
     color.ramp=heat.colors,  # The color ramp to use. Can also use colorRampPalette().
     hist.args=NULL,  # Named list of additional arguments to hist(), excluding `plot`.
     ...         # Additional arguments to plot().
 ) {
     spa <- na.omit(sp[[attrib]])
-    # Step 1
+    # Step 1 : compute price bins
     ha <- list(x=spa, plot=FALSE)
     ha <- c(ha, hist.args)
     bins <- do.call(hist, ha)$breaks
-    # Step 2
+    # Step 2: assign data to bins
     bin <- rep(NA, length(spa))
     for(i in length(bins):1) bin[spa > 0 & spa <= bins[i]] <- i-1
-    # Step 3
+    # Step 3: rearrange color vector
     sp$bin <- NA
     sp[['bin']][!is.na(sp[[attrib]])] <- bin
     customcolor <- rev(color.ramp(length(bins)-1))
     customcolor[1] <- "#FFFFFF"
+    # Step 4: plot
     plot(sp, col=customcolor[sp$bin], ...)
-    # Step 4
+    # Step 5: return a vector to use for the legend
     low.bin <- bins + 1
     low.bin[1] <- 0
     oldopts <- options(scipen=100000)
@@ -232,27 +236,39 @@ choropleth <- function(
 }
 ```
 
-Now the first test. I'm going to put a legend on to see how it looks.
+Now the first test. I'm going to save a plot and put a legend on right away, just to see how it looks.
 
 ```r
-x <- choropleth(price, 'price', main='Median home price in Vermont, by town', axes=TRUE)
-legend('bottomright', legend=x, fill=rev(heat.colors(length(x))), bty='n', title='$US')
+x <- choropleth(price, 'price', 
+    main='Median home price in Vermont, by town', axes=TRUE)
+    
+legend('bottomright', legend=x, fill=rev(heat.colors(length(x))), 
+    bty='n', title='$US')
+    
 box()
 ```
 
 ![plot of chunk unnamed-chunk-7](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png) 
 
-This looks more-or-less OK, but I've plotted two yellows, two oranges, and three reds that I can't distinguish. I think I would be better off with a white, then some distinct colors. I will solve this with a one-two puch top improve my odds of success. First I'll set up my color ramp to transition between three colors. Second, since I'm using `hist()` to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for higher than $450,000.
- 
- ```r
- fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
- x <- choropleth(price, 'price', color.ramp=fill.col, hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), main='Median home price in Vermont, by town', axes=TRUE)
- fill <- rev(fill.col(length(x)))
- fill[1] <- 'white'
- legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', box.cex=c(2, 0.8))
- box()
- ```
- 
+This looks more-or-less OK, but I've plotted two yellows, two oranges, and three reds that I can't distinguish. I think I would be better off with a white followed by some more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I'll set up my color ramp to transition between three colors. Second, since I'm using `hist()` to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.  
+
+```r
+fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
+
+x <- choropleth(price, 'price', color.ramp=fill.col, 
+   hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
+   main='Median home price in Vermont, by town', axes=TRUE)
+
+fill <- rev(fill.col(length(x)))
+
+fill[1] <- 'white'
+
+legend('bottomright', legend=x, fill=fill, bty='n', 
+   title='Asking Price ($US)', box.cex=c(2, 0.8))
+
+box()
+```
+
  ![plot of chunk unnamed-chunk-8](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png) 
 
 Now some finishing touches that I'll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale.
@@ -263,15 +279,30 @@ source('mapFunctions.R')
 source("http://www.math.mcmaster.ca/bolker/R/misc/legendx.R")
 
 fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
-x <- choropleth(price, 'price', color.ramp=fill.col, hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), main='Median home price in Vermont, by town', axes=TRUE)
+
+x <- choropleth(price, 'price', color.ramp=fill.col, 
+    hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
+    main='Median home price in Vermont, by town', axes=TRUE)
+
 fill <- rev(fill.col(length(x)))
+
 fill[1] <- 'white'
-legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', box.cex=c(2, 0.8), inset=c(0, .25))
-scalebarTanimura(loc='bottomright', length=0.3960193, inset=c(0.52, -0.75), mapunit='degrees', unit.lab="miles")
+
+legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', 
+    box.cex=c(2, 0.8), inset=c(0, .25))
+
+scalebarTanimura(loc='bottomright', length=0.3960193, inset=c(0.52, -0.75), 
+    mapunit='degrees', unit.lab="miles")
 northarrowTanimura(loc='bottomright', size=0.4, inset=c(0,0), mapunit='degrees')
-text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
+
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
+    labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
+
 count <- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=length) 
-text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], labels=count$price, pos=1, offset=0.6/2, cex=0.6)
+
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
+    labels=count$price, pos=1, offset=0.6/2, cex=0.6)
+
 box()
 ```
 
