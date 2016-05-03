@@ -1,6 +1,10 @@
 ---
 layout: post
 title: "Mapping with base graphics in R"
+date: 2016-05-01
+description: ""
+category: 
+tags: ["R", "Spatial analysis", "Mapping", "GIS"]
 ---
 {% include JB/setup %}
 

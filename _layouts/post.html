@@ -2,5 +2,128 @@
 layout: default
 ---
 {% include JB/setup %}
-{% include themes/twitter/post.html %}
+<!--{% include themes/twitter/post.html %}-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    {% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ ASSET_PATH }}/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
+    <link href="{{ ASSET_PATH }}/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+<!--    <link href="{{ ASSET_PATH }}/css/kbroman.css" rel="stylesheet" type="text/css" media="all">-->
+
+    <!-- Le fav and touch icons -->
+<!--    <link rel="SHORTCUT ICON" href="{{ BASE_PATH }}/assets/me.ico"/>-->
+
+    <!-- atom & rss feed -->
+    <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+          <a class="brand" href="{{ HOME_PATH }}">{{ site.title }}</a>
+          <ul class="nav">
+<!--              <li><a href="{{ BASE_PATH }}/pages/about.html">about</a></li>-->
+<!--              <li><a href="{{ BASE_PATH }}/pages/pubs.html">publications</a></li>-->
+<!--              <li><a href="{{ BASE_PATH }}/pages/talks.html">talks</a></li>-->
+<!--              <li><a href="{{ BASE_PATH }}/pages/software.html">software</a></li>-->
+<!--              <li><a href="{{ BASE_PATH }}/pages/teaching.html">teaching</a></li>-->
+<!--              <li><a href="{{ BASE_PATH }}/pages/tutorials.html">tutorials</a></li>-->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-narrow">
+
+      <div class="content">
+        <div class="page-header">
+          <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
+        </div>
+
+        <div class="row-fluid post-full">
+          <div class="span12">
+            <div class="date">
+              <span>{{ page.date | date_to_long_string }}</span>
+            </div>
+            <div class="content">
+              {{ content }}
+            </div>
+
+          {% unless page.categories == empty %}
+            <ul class="tag_box inline">
+              <li><i class="icon-folder-open"></i></li>
+              {% assign categories_list = page.categories %}
+              {% include JB/categories_list %}
+            </ul>
+          {% endunless %}  
+
+          {% unless page.tags == empty %}
+            <ul class="tag_box inline">
+              <li><i class="icon-tags"></i></li>
+              {% assign tags_list = page.tags %}
+              {% include JB/tags_list %}
+            </ul>
+          {% endunless %}  
+
+            <hr>
+            <div class="pagination">
+              <ul>
+              {% if page.previous %}
+                <li class="prev"><a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a></li>
+              {% else %}
+                <li class="prev disabled"><a>&larr; Previous</a></li>
+              {% endif %}
+                <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
+              {% if page.next %}
+                <li class="next"><a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a></li>
+              {% else %}
+                <li class="next disabled"><a>Next &rarr;</a>
+              {% endif %}
+              </ul>
+            </div>
+            <hr>
+            {% include JB/comments %}
+          </div>
+        </div>
+
+<!--        {{ content }}-->
+      </div>
+
+      <hr>
+
+    </div>
+
+    {% include JB/analytics %}
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
 
