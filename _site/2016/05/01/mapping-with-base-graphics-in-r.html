@@ -51,25 +51,12 @@
 
       <div class="content">
         
-<div class="page-header">
-  <h1>Mapping with base graphics in R </h1>
-</div>
-
-<div class="row-fluid post-full">
-  <div class="span12">
-    <div class="date">
-      <span>01 May 2016</span>
-    </div>
-    <div class="content">
-      
-<h1 id="mapping-with-rs-base-graphics">Mapping with R’s base graphics</h1>
-
 <p>There must be a half-dozen ways to make maps in R. Let’s not conflate spatial analysis with making maps; there is typically only one - maybe two - ways to do any given spatial analysis. Reading and writing vector files: use package rgdal. Spatial analysis with vector files: use packages sp and rgeos. Use package raster (and occasionally gstat) to work with rasters.</p>
 
 <p>When it comes to plotting the output, you can take your pick of methods. If you are reading this post, you’ve probably already seen a few other more popular posts. I’ll single out this one because I refer to it regularly, plus it links to many other excellent pages:<br />
 <a href="">https://pakillo.github.io/R-GIS-tutorial/</a></p>
 
-<h3 id="here-are-my-feelings-towards-what-i-believe-are-the-two-most-popular-mapping-methods">Here are my feelings towards what I believe are the two most popular mapping methods.</h3>
+<h3 id="here-are-my-feelings-towards-what-i-perceive-to-be-the-two-most-popular-mapping-methods">Here are my feelings towards what I perceive to be the two most popular mapping methods.</h3>
 <ul>
   <li><strong>sp::spplot</strong>
     <ul>
@@ -156,7 +143,8 @@ Let’s run through a quick example.</p>
 
 <p>Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the <code class="highlighter-rouge">lat</code> and <code class="highlighter-rouge">long</code> fields are intact though.</p>
 
-<p>I’m going to limit this post to vector data so I can keep the packages to a minimum. Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:</p>
+<p>I’m going to limit this post to vector data so I can keep the packages to a minimum.<br />
+Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rgdal</span><span class="p">)</span>
 <span class="n">library</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
@@ -236,8 +224,9 @@ Let’s run through a quick example.</p>
 </code></pre>
 </div>
 
-<p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /> 
-Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but more than one are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected.<br />
+<p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /></p>
+
+<p>Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but more than one are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected.<br />
 I’ll start with a simple linear shading scheme, using the built-in <code class="highlighter-rouge">heat.colors</code> function for the <code class="highlighter-rouge">col</code> argument.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">price</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">heat.colors</span><span class="p">(</span><span class="m">255</span><span class="p">),</span> <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
@@ -332,53 +321,6 @@ I’ll start with a simple linear shading scheme, using the built-in <code class
 </div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" /></p>
-
-
-    </div>
-
-    
-
-  
-    <ul class="tag_box inline">
-      <li><i class="icon-tags"></i></li>
-      
-      
-
-
-  
-     
-    	<li><a href="nil#R-ref">R <span>1</span></a></li>
-     
-    	<li><a href="nil#Spatial analysis-ref">Spatial analysis <span>1</span></a></li>
-     
-    	<li><a href="nil#map-ref">map <span>1</span></a></li>
-     
-    	<li><a href="nil#GIS-ref">GIS <span>1</span></a></li>
-    
-  
-
-
-
-    </ul>
-    
-
-    <hr>
-    <div class="pagination">
-      <ul>
-      
-        <li class="prev disabled"><a>&larr; Previous</a></li>
-      
-        <li><a href="nil">Archive</a></li>
-      
-        <li class="next disabled"><a>Next &rarr;</a>
-      
-      </ul>
-    </div>
-    <hr>
-    
-  </div>
-</div>
-
 
 
       </div>

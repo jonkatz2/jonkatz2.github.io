@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: "Mapping with base graphics in R"
 date: 2016-05-01
 description: ""

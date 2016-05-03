@@ -52,10 +52,10 @@ northarrowTanimura <- function(loc,size,inset,bearing=0,cols,cex=1,mapunit="mete
     radii <- rep(size/c(1,4,2,4),4)
     # correct for x distortion in lat-long coordinates
     if(mapunit == 'degrees') {
-        xcf <- 69 / long2meter(loc[2]) * loc[2]
+        xcf <- 69 / long2meter(loc[2])
         radii <- radii + c(xcf,0,xcf/2,0,0,0,xcf/2,0,xcf,0,xcf/2,0,0,0,xcf/2,0)
         xcfl <- c(xcf,0,xcf,0)
-    }
+    } else xcfl <- c(0,0,0,0)
     # calculating coordinates of polygons
     x <- radii[(0:15)+1]*cos((0:15)*pi/8+bearing)+loc[1]
     y <- radii[(0:15)+1]*sin((0:15)*pi/8+bearing)+loc[2]
