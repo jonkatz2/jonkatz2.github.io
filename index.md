@@ -1,21 +1,23 @@
 ---
+theme :
+  name : bootstrap-3
 layout: default
 title: Jon Katz
 description: Jon Katz is a postdoctoral researcher at the University of Vermont's Cooperative Fish adn Wildlife Research Unit.
 keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 ---
 
-<!--<div class="navbar navbar-default">-->
-<!--  <div class="navbar navbar-collapse" style="margin-bottom:0px;">-->
-<!--      <ul class="nav navbar-nav">-->
-<!--          <li><a href="{{ BASE_PATH }}/assets/blog/blog.html">blog</a></li>-->
-<!--          <li><a href="{{ BASE_PATH }}/assets/jkatzResume.pdf">resume</a></li>-->
-<!--          <li><a href="https://github.com/jonkatz2">github</a></li>-->
-<!--<!--          <li><a href="http://kbroman.wordpress.com">blog</a></li>-->-->
-<!--<!--          <li><a href="https://twitter.com/kwbroman">@kwbroman</a></li>-->-->
-<!--      </ul>-->
-<!--  </div>-->
-<!--</div>-->
+<div class="navbar navbar-default">
+  <div class="navbar navbar-collapse" style="margin-bottom:0px;">
+      <ul class="nav navbar-nav">
+          <li><a href="{{ BASE_PATH }}/assets/blog/blog.html">blog</a></li>
+          <li><a href="{{ BASE_PATH }}/assets/jkatzResume.pdf">resume</a></li>
+          <li><a href="https://github.com/jonkatz2">github</a></li>
+<!--          <li><a href="http://kbroman.wordpress.com">blog</a></li>-->
+<!--          <li><a href="https://twitter.com/kwbroman">@kwbroman</a></li>-->
+      </ul>
+  </div>
+</div>
 
 <div>
     <p class='text-center'>You'll find great things here soon, I promise. Try again next week.</p>
