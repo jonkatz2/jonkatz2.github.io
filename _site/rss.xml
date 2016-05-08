@@ -5,42 +5,47 @@
         <description>Jon Katz - Jon Katz</description>
         <link>http://jonkatz2.github.io</link>
         <atom:link href="http://jonkatz2.github.ionil" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Sun, 08 May 2016 00:26:12 -0400</lastBuildDate>
-        <pubDate>Sun, 08 May 2016 00:26:12 -0400</pubDate>
+        <lastBuildDate>Sun, 08 May 2016 11:33:33 -0400</lastBuildDate>
+        <pubDate>Sun, 08 May 2016 11:33:33 -0400</pubDate>
         <ttl>60</ttl>
 
 
         <item>
                 <title>Mapping vector data with base graphics in R</title>
                 <description>
-&lt;h3 id=&quot;spplot-and-ggplot-are-probably-the-two-most-popular-mapping-methods-for-vector-data-but-both-are-hard-to-use-are-base-graphics-any-easier&quot;&gt;spplot and ggplot are probably the two most popular mapping methods for vector data, but both are hard to use. Are base graphics any easier?&lt;/h3&gt;
+&lt;h3 id=&quot;spplot-and-ggplot-both-make-maps-in-r-but-both-are-hard-to-use-are-base-graphics-any-easier&quot;&gt;spplot and ggplot both make maps in R, but both are hard to use. Are base graphics any easier?&lt;/h3&gt;
 
-&lt;p&gt;When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you’ve probably already done a fair amount of web searching and seen a few other popular sites–&lt;strong&gt;because mapping in R is tedious&lt;/strong&gt;. I’ll single out this site because I refer to it regularly, plus it links to many other excellent pages: &lt;a href=&quot;&quot;&gt;https://pakillo.github.io/R-GIS-tutorial/&lt;/a&gt;. Go, follow the link and look around there, and then come back and see what the base graphics have to offer.&lt;/p&gt;
+&lt;p&gt;When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you’ve probably already done a fair amount of web searching and seen a few other popular sites–you’ve probably searched the web a couple of times &lt;strong&gt;because mapping in R is tedious&lt;/strong&gt;. I’ll single out a useful site that I refer to regularly, plus it links to many other excellent pages: &lt;a href=&quot;&quot;&gt;https://pakillo.github.io/R-GIS-tutorial/&lt;/a&gt;. Go, follow the link and look around there, and then come back and see what the base graphics have to offer.&lt;/p&gt;
 
-&lt;p&gt;The methods I perceive as most popular in R both have pros and cons:&lt;/p&gt;
+&lt;p&gt;The two popular methods mentioned both have pros and cons:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;sp::spplot&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Pros: Offers fine control for overlays for a professionally finished look.&lt;/li&gt;
-      &lt;li&gt;Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is basically a whole different plotting language–users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increases dramatically with each new feature plotted including text labels, scale bars, north arrows–and we haven’t even added additional overlays. Each feature is a list of lists, possibly nested even deeper.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ggplot2::ggplot&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Pros: Offers fine control for overlays for a professionally finished look. Map has a slick gray background, gridlines, and nice coloration right out of the box.&lt;/li&gt;
-      &lt;li&gt;Cons: ggplot is the &lt;em&gt;grammar of graphics&lt;/em&gt;, which is also a whole different plotting language. I’m not a ggplot user because I am not eager to learn a redundant plotting language, although I agree the plots look fantastic, and most are probably more appealing to the general public.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th style=&quot;width:6%;&quot;&gt;&lt;/th&gt;
+        &lt;th style=&quot;text-align:center;width:42%;&quot;&gt; sp::spplot &lt;/th&gt;
+        &lt;th style=&quot;text-align:center;width:42%;&quot;&gt; ggplot2::ggplot &lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:6%;&quot;&gt; &lt;i class=&quot;fa fa-thumbs-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/td&gt;
+        &lt;td style=&quot;width:42%;&quot;&gt; Fine control of overlays for a professionally finished look. &lt;/td&gt;
+        &lt;td style=&quot;width:42%;&quot;&gt; Fine control of overlays for a professionally finished look. &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:6%;&quot;&gt; &lt;i class=&quot;fa fa-thumbs-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/td&gt;
+        &lt;td style=&quot;width:42%;&quot;&gt; Uses lattice, an implementation of Trellis graphics for R. &lt;/td&gt;
+        &lt;td style=&quot;width:42%;&quot;&gt; ggplot is the grammar of graphics, which is also a whole different plotting language implemented in R. &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R’s base graphics, which is a bummer because I’ve finally memorized the entire list of &lt;code&gt;par&lt;/code&gt; options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.&lt;/p&gt;
+&lt;p&gt;Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R’s base graphics, which is a bummer for me because I’ve finally memorized the entire list of &lt;code class=&quot;highlighter-rouge&quot;&gt;par&lt;/code&gt; options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.&lt;/p&gt;
 
-&lt;p&gt;For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done. &lt;br /&gt;
-Let’s run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I’d like to make a quick note about how we can find package help.&lt;/p&gt;
+&lt;p&gt;For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done.&lt;/p&gt;
+
+&lt;p&gt;Let’s run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I’d like to make a quick note about how we can find package help.&lt;/p&gt;
 
 &lt;h3 id=&quot;getting-help-with-plot-methods&quot;&gt;Getting help with plot methods&lt;/h3&gt;
-&lt;p&gt;Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the &lt;code&gt;methods&lt;/code&gt; package extends functionality of the &lt;code&gt;&#39;?&#39;&lt;/code&gt; function, so as you might get help for an S3 plot method with &lt;code&gt;?plot&lt;/code&gt; or &lt;code&gt;?plot.data.frame&lt;/code&gt;, you get help for an S4 method such as plotting an object of class &lt;code&gt;SpatialPoints&lt;/code&gt; with the command &lt;code&gt;method?plot(&#39;SpatialPoints&#39;)&lt;/code&gt;. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.&lt;/p&gt;
+&lt;p&gt;Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the &lt;code class=&quot;highlighter-rouge&quot;&gt;methods&lt;/code&gt; package extends functionality of the &lt;code class=&quot;highlighter-rouge&quot;&gt;&#39;?&#39;&lt;/code&gt; function, so as you might get help for an S3 plot method with &lt;code class=&quot;highlighter-rouge&quot;&gt;?plot&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;?plot.data.frame&lt;/code&gt;, you get help for an S4 method such as plotting an object of class &lt;code class=&quot;highlighter-rouge&quot;&gt;SpatialPoints&lt;/code&gt; with the command &lt;code class=&quot;highlighter-rouge&quot;&gt;method?plot(&#39;SpatialPoints&#39;)&lt;/code&gt;. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.&lt;/p&gt;
 
 &lt;h3 id=&quot;quick-choropleth-mapping-with-base-graphics&quot;&gt;Quick choropleth mapping with base graphics&lt;/h3&gt;
 &lt;p&gt;The general outline of our task today is:&lt;/p&gt;
@@ -57,13 +62,14 @@ Let’s run through a quick example, and you can decide whether this sounds pain
 &lt;h4 id=&quot;get-the-data&quot;&gt;1. Get the data&lt;/h4&gt;
 &lt;p&gt;To keep this simple I’ll just read in some data rather than finding it right now. Our sample data today will be the subject of a future post: homes for sale in Vermont, scraped from Zillow’s website. I’ll read in a snapshot of homes for sale on May 1, 2016.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;zdata &amp;lt;- read.csv(&#39;data/FS_2016May01.csv&#39;)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;zdata&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;read.csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;data/FS_2016May01.csv&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-# Get a random preview of the table
-zdata[sample(1:nrow(zdata), 20),]
+&lt;span class=&quot;c1&quot;&gt;# Get a random preview of the table
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),]&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;##                z_id                                          address
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;##                z_id                                          address
 ## 86  zpid_2098805784                      Hathaway-Trl-Dover-VT-05356
 ## 505 zpid_2098847499 83-S-Jefferson-Rd-39-R-South-Burlington-VT-05403
 ## 306   zpid_75444614     3534-Sawnee-Bean-Rd-Thetford-Center-VT-05075
@@ -106,34 +112,38 @@ zdata[sample(1:nrow(zdata), 20),]
 ## 304 44.26341 -72.56707 230000  3.0    NA 1476           NA     1900
 ## 301 44.26225 -72.78795 340000  3.0     3 2296        35.00     1988
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the &lt;code&gt;lat&lt;/code&gt; and &lt;code&gt;long&lt;/code&gt; fields are intact though.&lt;/p&gt;
+&lt;p&gt;Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the &lt;code class=&quot;highlighter-rouge&quot;&gt;lat&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; fields are intact though.&lt;/p&gt;
 
 &lt;p&gt;I’m going to limit this post to vector data so I can keep the packages to a minimum.&lt;br /&gt;
 Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;library(rgdal)
-library(sp)
-library(raster) # for its summary print method
-
-# Convert zillow data to a SpatialPointsDataFrame using the International Association 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rgdal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;raster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# for its summary print method
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Convert zillow data to a SpatialPointsDataFrame using the International Association 
 # of Oil &amp;amp; Gas Producers EPSG code for WGS84 projection:
-z.spat &amp;lt;- SpatialPointsDataFrame(zdata[,c(&#39;long&#39;, &#39;lat&#39;)], data=zdata, proj4string=CRS(&quot;+init=epsg:4326&quot;))
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z.spat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;SpatialPointsDataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;long&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;lat&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zdata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;proj4string&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CRS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;+init=epsg:4326&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-# Read in town boundaries
-vt.twn &amp;lt;- readOGR(dsn=&#39;data/Boundary_TWNBNDS&#39;, layer=&#39;Boundary_TWNBNDS_poly&#39;)
+&lt;span class=&quot;c1&quot;&gt;# Read in town boundaries
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;readOGR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dsn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;data/Boundary_TWNBNDS&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;layer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Boundary_TWNBNDS_poly&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;## OGR data source with driver: ESRI Shapefile 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## OGR data source with driver: ESRI Shapefile 
 ## Source: &quot;data/Boundary_TWNBNDS&quot;, layer: &quot;Boundary_TWNBNDS_poly&quot;
 ## with 255 features
 ## It has 5 fields
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;vt.twn
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;## class       : SpatialPolygonsDataFrame 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## class       : SpatialPolygonsDataFrame 
 ## features    : 255 
 ## extent      : 424788.8, 581562, 25211.84, 279799  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=tmerc +lat_0=42.5 +lon_0=-72.5 +k=0.9999642857142857 +x_0=500000 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
@@ -142,15 +152,18 @@ vt.twn &amp;lt;- readOGR(dsn=&#39;data/Boundary_TWNBNDS&#39;, layer=&#39;Boundar
 ## min values  :  1005,   ADDISON,    1,  100122404, 10203.963 
 ## max values  :  9095, WORCESTER,    9,   99942616,  9386.921
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;# transform town boundary projection to match the points
-vt.twn &amp;lt;- spTransform(vt.twn, CRSobj=proj4string(z.spat))
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# transform town boundary projection to match the points
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spTransform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CRSobj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;proj4string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z.spat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 &lt;p&gt;To see how quickly the base graphics get us up and running with a visual, lets plot the points.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;plot(vt.twn)
-plot(z.spat, add=TRUE, pch=19)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z.spat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) --&gt;
 
@@ -162,13 +175,14 @@ plot(z.spat, add=TRUE, pch=19)
 &lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;aggregate-the-data-by-town&quot;&gt;2. Aggregate the data by town.&lt;/h4&gt;
-&lt;p&gt;Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town. The package &lt;code&gt;sp&lt;/code&gt; has a great spatial aggregation method, so there’s no need to explicitly do any overlay.&lt;/p&gt;
+&lt;p&gt;Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town. The package &lt;code class=&quot;highlighter-rouge&quot;&gt;sp&lt;/code&gt; has a great spatial aggregation method, so there’s no need to explicitly do any overlay.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;price &amp;lt;- aggregate(z.spat[&#39;price&#39;], by=vt.twn[&#39;TOWNNAME&#39;], FUN=median, na.rm=TRUE) 
-price
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aggregate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z.spat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;price&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;TOWNNAME&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FUN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;median&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;na.rm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;## class       : SpatialPolygonsDataFrame 
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## class       : SpatialPolygonsDataFrame 
 ## features    : 255 
 ## extent      : -73.4379, -71.46528, 42.72696, 45.01666  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
@@ -177,30 +191,34 @@ price
 ## min values  :   50000 
 ## max values  : 1395000
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;# see what values price has
-hist(price$price, main=&#39;Median home price by Vermont town&#39;, xlab=&#39;Price in US Dollars&#39;)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# see what values price has
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Median home price by Vermont town&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xlab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Price in US Dollars&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-4&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img id=&quot;finalMapImg&quot; style=&quot;width:100%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+&lt;!--![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png) --&gt;&lt;/p&gt;
 
 &lt;p&gt;Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.&lt;br /&gt;
-I’ll start with a simple linear shading scheme, using the built-in &lt;code&gt;heat.colors&lt;/code&gt; gradient for the &lt;code&gt;col&lt;/code&gt; argument.&lt;/p&gt;
+I’ll start with a simple linear shading scheme, using the built-in &lt;code class=&quot;highlighter-rouge&quot;&gt;heat.colors&lt;/code&gt; gradient for the &lt;code class=&quot;highlighter-rouge&quot;&gt;col&lt;/code&gt; argument.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;plot(price[&#39;price&#39;], col=heat.colors(255), 
-    main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
-box()
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;price&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heat.colors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Median home price in Vermont, by town&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-5&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img id=&quot;finalMapImg&quot; style=&quot;width:100%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+&lt;!--![plot of chunk unnamed-chunk-5](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png) --&gt;&lt;/p&gt;
 
 &lt;p&gt;OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.&lt;/p&gt;
 
-&lt;p&gt;After testing various options for a solid hour, here’s what I came up with. I can’t change the plot order, but I &lt;em&gt;can&lt;/em&gt; change the coloration. I need to rearrange the colors in &lt;code&gt;heat.colors()&lt;/code&gt; and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:&lt;/p&gt;
+&lt;p&gt;After testing various options for a solid hour, here’s what I came up with. I can’t change the plot order, but I &lt;em&gt;can&lt;/em&gt; change the coloration. I need to rearrange the colors in &lt;code class=&quot;highlighter-rouge&quot;&gt;heat.colors()&lt;/code&gt; and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;ol&gt;
-    &lt;li&gt;Use the &lt;code&gt;hist&lt;/code&gt; function to compute price bins.&lt;/li&gt;
+    &lt;li&gt;Use the &lt;code class=&quot;highlighter-rouge&quot;&gt;hist&lt;/code&gt; function to compute price bins.&lt;/li&gt;
     &lt;li&gt;Assign the prices to bins.&lt;/li&gt;
     &lt;li&gt;Use the assigned bins to rarrange the color vector.&lt;/li&gt;
     &lt;li&gt;Plot the map.&lt;/li&gt;
@@ -211,106 +229,110 @@ box()
 &lt;p&gt;I’m going to do this by defining a quick custom function. The “quick” part is that I’m not including any argument checking characteristic of a high level function in a package.&lt;br /&gt;
 The following function will perform the above steps.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;choropleth &amp;lt;- function(
-    sp,         # R object--any feature derived from package sp.
-    attrib,     # Attribute name in the table; length 1 character vector.
-    color.ramp=heat.colors,  # The color ramp to use. Can also use colorRampPalette().
-    hist.args=NULL,  # Named list of additional arguments to hist(), excluding `plot`.
-    ...         # Additional arguments to plot().
-) {
-    spa &amp;lt;- na.omit(sp[[attrib]])
-    # Step 1 : compute price bins
-    ha &amp;lt;- list(x=spa, plot=FALSE)
-    ha &amp;lt;- c(ha, hist.args)
-    bins &amp;lt;- do.call(hist, ha)$breaks
-    # Step 2: assign data to bins
-    bin &amp;lt;- rep(NA, length(spa))
-    for(i in length(bins):1) bin[spa &amp;gt; 0 &amp;amp; spa &amp;lt;= bins[i]] &amp;lt;- i-1
-    # Step 3: rearrange color vector
-    sp$bin &amp;lt;- NA
-    sp[[&#39;bin&#39;]][!is.na(sp[[attrib]])] &amp;lt;- bin
-    customcolor &amp;lt;- rev(color.ramp(length(bins)-1))
-    customcolor[1] &amp;lt;- &quot;#FFFFFF&quot;
-    # Step 4: plot
-    plot(sp, col=customcolor[sp$bin], ...)
-    # Step 5: return a vector to use for the legend
-    low.bin &amp;lt;- bins + 1
-    low.bin[1] &amp;lt;- 0
-    oldopts &amp;lt;- options(scipen=100000)
-    on.exit(options(oldopts))
-    invisible(paste(low.bin[1:(length(low.bin)-1)], &#39;-&#39;, bins[2:length(bins)]))
-}
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;choropleth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# R object--any feature derived from package sp.
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;attrib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;# Attribute name in the table; length 1 character vector.
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;color.ramp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heat.colors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# The color ramp to use. Can also use colorRampPalette().
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;hist.args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# Named list of additional arguments to hist(), excluding `plot`.
+&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;# Additional arguments to plot().
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;spa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;na.omit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attrib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Step 1 : compute price bins
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ha&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hist.args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;do.call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ha&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;breaks&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Step 2: assign data to bins
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spa&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Step 3: rearrange color vector
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NA&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bin&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]][&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is.na&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attrib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;customcolor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color.ramp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;customcolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;#FFFFFF&quot;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Step 4: plot
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customcolor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Step 5: return a vector to use for the legend
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;low.bin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;low.bin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;oldopts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scipen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;on.exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oldopts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;invisible&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low.bin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low.bin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)],&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;-&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;Now the first test. I’m going to put a legend on right away, just to see how it looks.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;x &amp;lt;- choropleth(price, &#39;price&#39;, 
-    main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choropleth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;price&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Median home price in Vermont, by town&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     
-legend(&#39;bottomright&#39;, legend=x, fill=rev(heat.colors(length(x))), 
-    bty=&#39;n&#39;, title=&#39;$US&#39;)
+&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bottomright&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heat.colors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))),&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;bty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;n&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;$US&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     
-box()
+&lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img id=&quot;finalMapImg&quot; style=&quot;width:100%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+&lt;!--![plot of chunk unnamed-chunk-7](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png) --&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-7&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This looks more-or-less OK, but I’ve plotted two oranges and three reds that I can’t distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using &lt;code class=&quot;highlighter-rouge&quot;&gt;hist()&lt;/code&gt; to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using &lt;code class=&quot;highlighter-rouge&quot;&gt;hist&lt;/code&gt;). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.&lt;/p&gt;
 
-&lt;p&gt;This looks more-or-less OK, but I’ve plotted two oranges and three reds that I can’t distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using &lt;code&gt;hist()&lt;/code&gt; to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using &lt;code&gt;hist&lt;/code&gt;). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;fill.col&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colorRampPalette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;red&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;orange&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;lightgray&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;fill.col &amp;lt;- colorRampPalette(c(&#39;red&#39;, &#39;orange&#39;, &#39;lightgray&#39;))
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choropleth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;price&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color.ramp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill.col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+   &lt;span class=&quot;n&quot;&gt;hist.args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;breaks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;250000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;450000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1500000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; 
+   &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Median home price in Vermont, by town&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-x &amp;lt;- choropleth(price, &#39;price&#39;, color.ramp=fill.col, 
-   hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
-   main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill.col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
 
-fill &amp;lt;- rev(fill.col(length(x)))
+&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;white&#39;&lt;/span&gt;
 
-fill[1] &amp;lt;- &#39;white&#39;
+&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bottomright&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;n&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+   &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Asking Price ($US)&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;box.cex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-legend(&#39;bottomright&#39;, legend=x, fill=fill, bty=&#39;n&#39;, 
-   title=&#39;Asking Price ($US)&#39;, box.cex=c(2, 0.8))
-
-box()
+&lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-8&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;img id=&quot;finalMapImg&quot; style=&quot;width:100%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+&lt;!-- ![plot of chunk unnamed-chunk-8](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png) --&gt;&lt;/p&gt;
 
 &lt;p&gt;Now some finishing touches that I’ll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale. Click on the map to see it larger.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;source(&#39;mapFunctions.R&#39;)
-source(&quot;http://www.math.mcmaster.ca/bolker/R/misc/legendx.R&quot;)
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;mapFunctions.R&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://www.math.mcmaster.ca/bolker/R/misc/legendx.R&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-fill.col &amp;lt;- colorRampPalette(c(&#39;red&#39;, &#39;orange&#39;, &#39;lightgray&#39;))
+&lt;span class=&quot;n&quot;&gt;fill.col&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;colorRampPalette&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;red&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;orange&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;lightgray&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-x &amp;lt;- choropleth(price, &#39;price&#39;, color.ramp=fill.col, 
-    hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
-    main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;choropleth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;price&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;color.ramp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill.col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;hist.args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;breaks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;250000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;450000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1500000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Median home price in Vermont, by town&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;axes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-fill &amp;lt;- rev(fill.col(length(x)))
+&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill.col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
 
-fill[1] &amp;lt;- &#39;white&#39;
+&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;white&#39;&lt;/span&gt;
 
-legend(&#39;bottomright&#39;, legend=x, fill=fill, bty=&#39;n&#39;, title=&#39;Asking Price ($US)&#39;, 
-    box.cex=c(2, 0.8), inset=c(0, .25))
+&lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bottomright&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;legend&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;n&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Asking Price ($US)&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;box.cex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 
-scalebarTanimura(loc=&#39;bottomright&#39;, length=0.3960193, inset=c(0.52, -0.75), 
-    mapunit=&#39;degrees&#39;, unit.lab=&quot;miles&quot;)
-northarrowTanimura(loc=&#39;bottomright&#39;, size=0.4, inset=c(0,0), mapunit=&#39;degrees&#39;)
+&lt;span class=&quot;n&quot;&gt;scalebarTanimura&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bottomright&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.3960193&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.52&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-0.75&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;mapunit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;degrees&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unit.lab&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;miles&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;northarrowTanimura&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;bottomright&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mapunit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;degrees&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
-    labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
+&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TOWNNAME&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-count &amp;lt;- aggregate(z.spat[&#39;price&#39;], by=vt.twn[&#39;TOWNNAME&#39;], FUN=length) 
+&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;aggregate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;z.spat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;price&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;TOWNNAME&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;FUN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
 
-text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
-    labels=count$price, pos=1, offset=0.6/2, cex=0.6)
+&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coordinates&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vt.twn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;price&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-box()
+&lt;span class=&quot;n&quot;&gt;box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;!-- Trigger the modal--&gt;
 &lt;p&gt;&lt;a href=&quot;#&quot; data-toggle=&quot;modal&quot; data-target=&quot;#myModal&quot;&gt;
-    &lt;img id=&quot;finalMapImg&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+    &lt;img id=&quot;finalMapImg&quot; style=&quot;width:100%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png&quot; alt=&quot;The final map&quot; /&gt; 
 &lt;/a&gt;
 &lt;!-- Modal --&gt;&lt;/p&gt;
 &lt;div id=&quot;myModal&quot; class=&quot;modal fade&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot;&gt;

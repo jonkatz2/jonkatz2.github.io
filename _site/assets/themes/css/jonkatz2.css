@@ -1,8 +1,15 @@
-body {
+body, html {
     max-width: 768px;
     margin: auto;
 }
 
-.container {
-    width: 768px;
+/*.container {*/
+/*    width: 768px;*/
+/*    max-width:768px;*/
+/*}*/
+
+@media (min-width: 800px) {
+    .container-fluid{
+        max-width: 768px;
+    }
 }

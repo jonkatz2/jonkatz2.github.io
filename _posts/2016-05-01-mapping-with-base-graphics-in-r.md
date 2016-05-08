@@ -7,22 +7,35 @@ category:
 tags: ["R", "Spatial analysis", "Mapping", "GIS", "Code"]
 ---
 {% include JB/setup %}
-### spplot and ggplot are probably the two most popular mapping methods for vector data, but both are hard to use. Are base graphics any easier?
+### spplot and ggplot both make maps in R, but both are hard to use. Are base graphics any easier?
 
-When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you've probably already done a fair amount of web searching and seen a few other popular sites--**because mapping in R is tedious**. I'll single out this site because I refer to it regularly, plus it links to many other excellent pages: [https://pakillo.github.io/R-GIS-tutorial/](). Go, follow the link and look around there, and then come back and see what the base graphics have to offer.  
+When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you've probably already done a fair amount of web searching and seen a few other popular sites--you've probably searched the web a couple of times **because mapping in R is tedious**. I'll single out a useful site that I refer to regularly, plus it links to many other excellent pages: [https://pakillo.github.io/R-GIS-tutorial/](). Go, follow the link and look around there, and then come back and see what the base graphics have to offer.  
 
-The methods I perceive as most popular in R both have pros and cons:  
+The two popular methods mentioned both have pros and cons:  
+ 
+<table>
+    <tr>
+        <th style="width:6%;"></th>
+        <th style="text-align:center;width:42%;"> sp::spplot </th>
+        <th style="text-align:center;width:42%;"> ggplot2::ggplot </th>
+    </tr>
+    <tr>
+        <td style="padding: 0em 1em;width:6%;"> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </td>
+        <td style="width:42%;"> Fine control of overlays for a professionally finished look. </td>
+        <td style="width:42%;"> Fine control of overlays for a professionally finished look. </td>
+    </tr>
+    <tr>
+        <td style="padding: 0em 1em;width:6%;"> <i class="fa fa-thumbs-down" aria-hidden="true"></i> </td>
+        <td style="width:42%;"> Uses lattice, an implementation of Trellis graphics for R. </td>
+        <td style="width:42%;"> ggplot is the grammar of graphics, which is also a whole different plotting language implemented in R. </td>
+    </tr>
+</table>
+<br/>
 
-  * **sp::spplot**  
-     + Pros: Offers fine control for overlays for a professionally finished look.  
-     + Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is basically a whole different plotting language--users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increases dramatically with each new feature plotted including text labels, scale bars, north arrows--and we haven't even added additional overlays. Each feature is a list of lists, possibly nested even deeper.  
-  * **ggplot2::ggplot**  
-     + Pros: Offers fine control for overlays for a professionally finished look. Map has a slick gray background, gridlines, and nice coloration right out of the box.  
-     + Cons: ggplot is the *grammar of graphics*, which is also a whole different plotting language. I'm not a ggplot user because I am not eager to learn a redundant plotting language, although I agree the plots look fantastic, and most are probably more appealing to the general public.  
-
-Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R's base graphics, which is a bummer because I've finally memorized the entire list of `par` options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.  
+Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R's base graphics, which is a bummer for me because I've finally memorized the entire list of `par` options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.  
 
 For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done.   
+
 Let's run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I'd like to make a quick note about how we can find package help.  
 
 ### Getting help with plot methods
