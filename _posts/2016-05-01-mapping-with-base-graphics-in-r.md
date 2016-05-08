@@ -177,7 +177,8 @@ price
 hist(price$price, main='Median home price by Vermont town', xlab='Price in US Dollars')
 ```
 
-![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png) 
+<img id="finalMapImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png" alt="The final map"> 
+<!--![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png) -->
 
 Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.  
 I'll start with a simple linear shading scheme, using the built-in `heat.colors` gradient for the `col` argument.
