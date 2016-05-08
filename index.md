@@ -1,5 +1,5 @@
 ---
-layout: frontpage
+layout: default
 title: Jon Katz
 description: Jon Katz is a postdoctoral researcher at the University of Vermont's Cooperative Fish adn Wildlife Research Unit.
 keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
