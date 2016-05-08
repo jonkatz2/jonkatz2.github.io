@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Jon Katz</title>
+ <link href="http://jonkatz2.github.ionil" rel="self"/>
+ <link href="http://jonkatz2.github.io"/>
+ <updated>2016-05-08T00:04:33-04:00</updated>
+ <id>http://jonkatz2.github.io</id>
+ <author>
+   <name>Jon Katz</name>
+   <email>jonkatz2@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Mapping vector data with base graphics in R</title>
+   <link href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r"/>
+   <updated>2016-05-01T00:00:00-04:00</updated>
+   <id>http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r</id>
+   <content type="html">
+&lt;h3 id=&quot;spplot-and-ggplot-are-probably-the-two-most-popular-mapping-methods-for-vector-data-but-both-are-hard-to-use-are-base-graphics-any-easier&quot;&gt;spplot and ggplot are probably the two most popular mapping methods for vector data, but both are hard to use. Are base graphics any easier?&lt;/h3&gt;
+
+&lt;p&gt;When it comes to mapping in R, you can take your pick of methods. If you are reading this post, you’ve probably already done a fair amount of web searching and seen a few other popular sites–&lt;strong&gt;because mapping in R is tedious&lt;/strong&gt;. I’ll single out this site because I refer to it regularly, plus it links to many other excellent pages: &lt;a href=&quot;&quot;&gt;https://pakillo.github.io/R-GIS-tutorial/&lt;/a&gt;. Go, follow the link and look around there, and then come back and see what the base graphics have to offer.&lt;/p&gt;
+
+&lt;p&gt;The methods I perceive as most popular in R both have pros and cons:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;sp::spplot&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Pros: Offers fine control for overlays for a professionally finished look.&lt;/li&gt;
+      &lt;li&gt;Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is basically a whole different plotting language–users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increases dramatically with each new feature plotted including text labels, scale bars, north arrows–and we haven’t even added additional overlays. Each feature is a list of lists, possibly nested even deeper.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;ggplot2::ggplot&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Pros: Offers fine control for overlays for a professionally finished look. Map has a slick gray background, gridlines, and nice coloration right out of the box.&lt;/li&gt;
+      &lt;li&gt;Cons: ggplot is the &lt;em&gt;grammar of graphics&lt;/em&gt;, which is also a whole different plotting language. I’m not a ggplot user because I am not eager to learn a redundant plotting language, although I agree the plots look fantastic, and most are probably more appealing to the general public.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R’s base graphics, which is a bummer because I’ve finally memorized the entire list of &lt;code&gt;par&lt;/code&gt; options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.&lt;/p&gt;
+
+&lt;p&gt;For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done. &lt;br /&gt;
+Let’s run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I’d like to make a quick note about how we can find package help.&lt;/p&gt;
+
+&lt;h3 id=&quot;getting-help-with-plot-methods&quot;&gt;Getting help with plot methods&lt;/h3&gt;
+&lt;p&gt;Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the &lt;code&gt;methods&lt;/code&gt; package extends functionality of the &lt;code&gt;&#39;?&#39;&lt;/code&gt; function, so as you might get help for an S3 plot method with &lt;code&gt;?plot&lt;/code&gt; or &lt;code&gt;?plot.data.frame&lt;/code&gt;, you get help for an S4 method such as plotting an object of class &lt;code&gt;SpatialPoints&lt;/code&gt; with the command &lt;code&gt;method?plot(&#39;SpatialPoints&#39;)&lt;/code&gt;. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.&lt;/p&gt;
+
+&lt;h3 id=&quot;quick-choropleth-mapping-with-base-graphics&quot;&gt;Quick choropleth mapping with base graphics&lt;/h3&gt;
+&lt;p&gt;The general outline of our task today is:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Get the homes for sale data.&lt;/li&gt;
+    &lt;li&gt;Aggregate the data by town.&lt;/li&gt;
+    &lt;li&gt;Plot the aggregated data.&lt;/li&gt;
+    &lt;li&gt;See what can be done to make ourselves more proud of the plot.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;get-the-data&quot;&gt;1. Get the data&lt;/h4&gt;
+&lt;p&gt;To keep this simple I’ll just read in some data rather than finding it right now. Our sample data today will be the subject of a future post: homes for sale in Vermont, scraped from Zillow’s website. I’ll read in a snapshot of homes for sale on May 1, 2016.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;zdata &amp;lt;- read.csv(&#39;data/FS_2016May01.csv&#39;)
+
+# Get a random preview of the table
+zdata[sample(1:nrow(zdata), 20),]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;##                z_id                                          address
+## 86  zpid_2098805784                      Hathaway-Trl-Dover-VT-05356
+## 505 zpid_2098847499 83-S-Jefferson-Rd-39-R-South-Burlington-VT-05403
+## 306   zpid_75444614     3534-Sawnee-Bean-Rd-Thetford-Center-VT-05075
+## 350 zpid_2144685253          3-Haycorn-Hollow-Rd-South-Hero-VT-05486
+## 504   zpid_92005276                333-Lower-Main-W-Johnson-VT-05656
+## 166 zpid_2107354132                  12-Ketch-Rd-Grand-Isle-VT-05458
+## 21    zpid_12651227                   80-Ward-St-Burlington-VT-05401
+## 206   zpid_75459794               17-W-Crystal-Hvn-Bomoseen-VT-05732
+## 423 zpid_2102587266                      752-Cook-Rd-Barton-VT-05822
+## 204   zpid_75432590                  1-Twin-Ct-Saint-Albans-VT-05478
+## 395 zpid_2098863215                     850-Park-St-Brandon-VT-05733
+## 349 zpid_2098898520     236-Qtr-I-I-Jackson-Gore-Inn-Ludlow-VT-05149
+## 8     zpid_81613208           21-Glen-Ridge-Ln-Saint-Albans-VT-05478
+## 96    zpid_75452756                  5695-Route-14-Irasburg-VT-05845
+## 302 zpid_2098865675      N15-Stonehedge-Dr-South-Burlington-VT-05403
+## 383 zpid_2133613637           1033-Portland-St-St-Johnsbury-VT-05819
+## 131 zpid_2098804675                  0-N-Route-30-N-Sudbury-VT-05733
+## 486 zpid_2116639515                    127-South-St-Rutland-VT-05701
+## 304   zpid_75467230                  15-Ewing-St-Montpelier-VT-05602
+## 301 zpid_2098842580           1903-Vt-Rte-100-South-Duxbury-VT-05660
+##          lat      long  price beds baths sqft        acres yr_built
+## 86  42.97606 -72.86359 300000   NA    NA   NA        95.20       NA
+## 505 44.43980 -73.19180 424900  3.0     3 1775           NA     2016
+## 306 43.87669 -72.28931 555000  3.0     2 2317        95.00     1978
+## 350 44.64687 -73.28166 175000  2.0     1  732         1.00     1920
+## 504 44.63641 -72.68568 200000  3.0     2 1900         0.40     1890
+## 166 44.70205 -73.29071 113000   NA     1  512           NA       NA
+## 21  44.48743 -73.22118 199900  2.0     1  928           NA       NA
+## 206 43.66443 -73.19317 450000  3.0     2 1892 738963950.69     1940
+## 423 44.76370 -72.11372  65000   NA     1  480        10.40     2004
+## 204 44.79575 -73.08109 221500  3.0     2 1572         0.51     1983
+## 395 43.80371 -73.07260 230000  6.0     3 3202         4.00     1850
+## 349 43.40596 -72.69549  31000  0.5     1  390           NA     2003
+## 8   44.90524 -73.06560 197000  3.0     1 1458           NA       NA
+## 96  44.79241 -72.29267 159900  3.0     1   NA        10.00     1978
+## 302 44.43470 -73.19590 244000  4.0     3 2076           NA     1988
+## 383 44.42179 -71.99540  89900  3.0     2 1508         0.50     1900
+## 131 43.79329 -73.20483  70000   NA    NA   NA         5.53       NA
+## 486 43.60036 -72.98443  75000  4.0     2 3006 971089554.22     1919
+## 304 44.26341 -72.56707 230000  3.0    NA 1476           NA     1900
+## 301 44.26225 -72.78795 340000  3.0     3 2296        35.00     1988
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the &lt;code&gt;lat&lt;/code&gt; and &lt;code&gt;long&lt;/code&gt; fields are intact though.&lt;/p&gt;
+
+&lt;p&gt;I’m going to limit this post to vector data so I can keep the packages to a minimum.&lt;br /&gt;
+Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;library(rgdal)
+library(sp)
+library(raster) # for its summary print method
+
+# Convert zillow data to a SpatialPointsDataFrame using the International Association 
+# of Oil &amp;amp; Gas Producers EPSG code for WGS84 projection:
+z.spat &amp;lt;- SpatialPointsDataFrame(zdata[,c(&#39;long&#39;, &#39;lat&#39;)], data=zdata, proj4string=CRS(&quot;+init=epsg:4326&quot;))
+
+# Read in town boundaries
+vt.twn &amp;lt;- readOGR(dsn=&#39;data/Boundary_TWNBNDS&#39;, layer=&#39;Boundary_TWNBNDS_poly&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;data/Boundary_TWNBNDS&quot;, layer: &quot;Boundary_TWNBNDS_poly&quot;
+## with 255 features
+## It has 5 fields
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;vt.twn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## class       : SpatialPolygonsDataFrame 
+## features    : 255 
+## extent      : 424788.8, 581562, 25211.84, 279799  (xmin, xmax, ymin, ymax)
+## coord. ref. : +proj=tmerc +lat_0=42.5 +lon_0=-72.5 +k=0.9999642857142857 +x_0=500000 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
+## variables   : 5
+## names       : FIPS6,  TOWNNAME, CNTY, SHAPE_area, SHAPE_len 
+## min values  :  1005,   ADDISON,    1,  100122404, 10203.963 
+## max values  :  9095, WORCESTER,    9,   99942616,  9386.921
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;# transform town boundary projection to match the points
+vt.twn &amp;lt;- spTransform(vt.twn, CRSobj=proj4string(z.spat))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To see how quickly the base graphics get us up and running with a visual, lets plot the points.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;plot(vt.twn)
+plot(z.spat, add=TRUE, pch=19)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) --&gt;
+
+&lt;p&gt;For a quick side-by-side comparison, here’s our plot on the left and Zillow’s map on it’s home site this same day:&lt;/p&gt;
+&lt;div&gt;
+    &lt;img style=&quot;width:47%;float:left;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png&quot; alt=&quot;Our plot 20160501&quot; /&gt;
+    &lt;img style=&quot;width:52%;float:right;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png&quot; alt=&quot;Zillow Screengrab 20160501&quot; /&gt;
+&lt;/div&gt;
+&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;aggregate-the-data-by-town&quot;&gt;2. Aggregate the data by town.&lt;/h4&gt;
+&lt;p&gt;Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town. The package &lt;code&gt;sp&lt;/code&gt; has a great spatial aggregation method, so there’s no need to explicitly do any overlay.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;price &amp;lt;- aggregate(z.spat[&#39;price&#39;], by=vt.twn[&#39;TOWNNAME&#39;], FUN=median, na.rm=TRUE) 
+price
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;## class       : SpatialPolygonsDataFrame 
+## features    : 255 
+## extent      : -73.4379, -71.46528, 42.72696, 45.01666  (xmin, xmax, ymin, ymax)
+## coord. ref. : +init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
+## variables   : 1
+## names       :   price 
+## min values  :   50000 
+## max values  : 1395000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;# see what values price has
+hist(price$price, main=&#39;Median home price by Vermont town&#39;, xlab=&#39;Price in US Dollars&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.&lt;br /&gt;
+I’ll start with a simple linear shading scheme, using the built-in &lt;code&gt;heat.colors&lt;/code&gt; gradient for the &lt;code&gt;col&lt;/code&gt; argument.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;plot(price[&#39;price&#39;], col=heat.colors(255), 
+    main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+box()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-5&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.&lt;/p&gt;
+
+&lt;p&gt;After testing various options for a solid hour, here’s what I came up with. I can’t change the plot order, but I &lt;em&gt;can&lt;/em&gt; change the coloration. I need to rearrange the colors in &lt;code&gt;heat.colors()&lt;/code&gt; and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Use the &lt;code&gt;hist&lt;/code&gt; function to compute price bins.&lt;/li&gt;
+    &lt;li&gt;Assign the prices to bins.&lt;/li&gt;
+    &lt;li&gt;Use the assigned bins to rarrange the color vector.&lt;/li&gt;
+    &lt;li&gt;Plot the map.&lt;/li&gt;
+    &lt;li&gt;Return an invisible vector of bins to use in the legend.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I’m going to do this by defining a quick custom function. The “quick” part is that I’m not including any argument checking characteristic of a high level function in a package.&lt;br /&gt;
+The following function will perform the above steps.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;choropleth &amp;lt;- function(
+    sp,         # R object--any feature derived from package sp.
+    attrib,     # Attribute name in the table; length 1 character vector.
+    color.ramp=heat.colors,  # The color ramp to use. Can also use colorRampPalette().
+    hist.args=NULL,  # Named list of additional arguments to hist(), excluding `plot`.
+    ...         # Additional arguments to plot().
+) {
+    spa &amp;lt;- na.omit(sp[[attrib]])
+    # Step 1 : compute price bins
+    ha &amp;lt;- list(x=spa, plot=FALSE)
+    ha &amp;lt;- c(ha, hist.args)
+    bins &amp;lt;- do.call(hist, ha)$breaks
+    # Step 2: assign data to bins
+    bin &amp;lt;- rep(NA, length(spa))
+    for(i in length(bins):1) bin[spa &amp;gt; 0 &amp;amp; spa &amp;lt;= bins[i]] &amp;lt;- i-1
+    # Step 3: rearrange color vector
+    sp$bin &amp;lt;- NA
+    sp[[&#39;bin&#39;]][!is.na(sp[[attrib]])] &amp;lt;- bin
+    customcolor &amp;lt;- rev(color.ramp(length(bins)-1))
+    customcolor[1] &amp;lt;- &quot;#FFFFFF&quot;
+    # Step 4: plot
+    plot(sp, col=customcolor[sp$bin], ...)
+    # Step 5: return a vector to use for the legend
+    low.bin &amp;lt;- bins + 1
+    low.bin[1] &amp;lt;- 0
+    oldopts &amp;lt;- options(scipen=100000)
+    on.exit(options(oldopts))
+    invisible(paste(low.bin[1:(length(low.bin)-1)], &#39;-&#39;, bins[2:length(bins)]))
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the first test. I’m going to put a legend on right away, just to see how it looks.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;x &amp;lt;- choropleth(price, &#39;price&#39;, 
+    main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+    
+legend(&#39;bottomright&#39;, legend=x, fill=rev(heat.colors(length(x))), 
+    bty=&#39;n&#39;, title=&#39;$US&#39;)
+    
+box()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-7&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This looks more-or-less OK, but I’ve plotted two oranges and three reds that I can’t distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using &lt;code&gt;hist()&lt;/code&gt; to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using &lt;code&gt;hist&lt;/code&gt;). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;fill.col &amp;lt;- colorRampPalette(c(&#39;red&#39;, &#39;orange&#39;, &#39;lightgray&#39;))
+
+x &amp;lt;- choropleth(price, &#39;price&#39;, color.ramp=fill.col, 
+   hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
+   main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+
+fill &amp;lt;- rev(fill.col(length(x)))
+
+fill[1] &amp;lt;- &#39;white&#39;
+
+legend(&#39;bottomright&#39;, legend=x, fill=fill, bty=&#39;n&#39;, 
+   title=&#39;Asking Price ($US)&#39;, box.cex=c(2, 0.8))
+
+box()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png&quot; alt=&quot;plot of chunk unnamed-chunk-8&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now some finishing touches that I’ll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale. Click on the map to see it larger.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-r&quot;&gt;source(&#39;mapFunctions.R&#39;)
+source(&quot;http://www.math.mcmaster.ca/bolker/R/misc/legendx.R&quot;)
+
+fill.col &amp;lt;- colorRampPalette(c(&#39;red&#39;, &#39;orange&#39;, &#39;lightgray&#39;))
+
+x &amp;lt;- choropleth(price, &#39;price&#39;, color.ramp=fill.col, 
+    hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
+    main=&#39;Median home price in Vermont, by town&#39;, axes=TRUE)
+
+fill &amp;lt;- rev(fill.col(length(x)))
+
+fill[1] &amp;lt;- &#39;white&#39;
+
+legend(&#39;bottomright&#39;, legend=x, fill=fill, bty=&#39;n&#39;, title=&#39;Asking Price ($US)&#39;, 
+    box.cex=c(2, 0.8), inset=c(0, .25))
+
+scalebarTanimura(loc=&#39;bottomright&#39;, length=0.3960193, inset=c(0.52, -0.75), 
+    mapunit=&#39;degrees&#39;, unit.lab=&quot;miles&quot;)
+northarrowTanimura(loc=&#39;bottomright&#39;, size=0.4, inset=c(0,0), mapunit=&#39;degrees&#39;)
+
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
+    labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
+
+count &amp;lt;- aggregate(z.spat[&#39;price&#39;], by=vt.twn[&#39;TOWNNAME&#39;], FUN=length) 
+
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
+    labels=count$price, pos=1, offset=0.6/2, cex=0.6)
+
+box()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;!-- Trigger the modal--&gt;
+&lt;p&gt;&lt;a href=&quot;#&quot; data-toggle=&quot;modal&quot; data-target=&quot;#myModal&quot;&gt;
+    &lt;img id=&quot;finalMapImg&quot; style=&quot;width:50%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+&lt;/a&gt;
+&lt;!-- Modal --&gt;&lt;/p&gt;
+&lt;div id=&quot;myModal&quot; class=&quot;modal fade&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot;&gt;
+  &lt;div class=&quot;modal-dialog&quot; style=&quot;width:1000px;&quot;&gt;
+
+    &lt;!-- Modal content--&gt;
+    &lt;div class=&quot;modal-content&quot;&gt;
+      &lt;div class=&quot;modal-header&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+        &lt;!-- &lt;h4 class=&quot;modal-title&quot;&gt;Modal Header&lt;/h4&gt;--&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;modal-body&quot;&gt;
+        &lt;div style=&quot;overflow:hidden;&quot;&gt; 
+          &lt;img id=&quot;finalMapImgLg&quot; style=&quot;width:950px;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png&quot; alt=&quot;The final map&quot; /&gt;
+        &lt;/div&gt;
+        &lt;!-- &lt;p&gt;Some text in the modal.&lt;/p&gt;--&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;modal-footer&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ 
+</feed>

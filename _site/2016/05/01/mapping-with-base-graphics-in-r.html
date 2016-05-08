@@ -3,28 +3,40 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>Mapping vector data with base graphics in R</title>
     <meta name="description" content="">
-    
     <meta name="author" content="Jon Katz">
 
     <!-- Enable responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!-- Bootstrap styles -->
+    <link href="/assets/themes//bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/assets/themes//bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/assets/themes//bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link href="/assets/themes//css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes//css/jonkatz2.css?body=1" rel="stylesheet" type="text/css" media="all">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Le styles -->
-    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">
-    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
-<!--    <link href="/assets/themes//bootstrap/css/bootstrap.2.2.2.min.css" rel="stylesheet">-->
-<!--    <link href="/assets/themes//css/style.css?body=1" rel="stylesheet" type="text/css" media="all">-->
-<!--    <link href="/assets/themes//css/kbroman.css" rel="stylesheet" type="text/css" media="all">-->
-
-    <!-- Le fav and touch icons -->
-<!--    <link rel="SHORTCUT ICON" href="/assets/me.ico"/>-->
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
 
     <!-- atom & rss feed -->
     <link href="nil" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
@@ -33,32 +45,105 @@
   </head>
 
   <body>
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container-narrow">
-          <a class="brand" href="/">Jon Katz</a>
-          <ul class="nav">
-<!--              <li><a href="/pages/about.html">about</a></li>-->
-<!--              <li><a href="/pages/pubs.html">publications</a></li>-->
-<!--              <li><a href="/pages/talks.html">talks</a></li>-->
-<!--              <li><a href="/pages/software.html">software</a></li>-->
-<!--              <li><a href="/pages/teaching.html">teaching</a></li>-->
-<!--              <li><a href="/pages/tutorials.html">tutorials</a></li>-->
-          </ul>
+    <div id="wrap">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jon Katz</a>
         </div>
-      </div>
-    </div>
 
-    <div class="container-narrow">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
 
-      <div class="content">
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div class="container">
         
 <div class="page-header">
   <h1>Mapping vector data with base graphics in R </h1>
 </div>
 
-<div class="row-fluid post-full">
-  <div class="span12">
+<div class="row post-full">
+  <div class="col-xs-12">
     <div class="date">
       <span>01 May 2016</span>
     </div>
@@ -85,13 +170,13 @@
   </li>
 </ul>
 
-<p>Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R’s base graphics, which is a bummer because I’ve finally memorized the entire list of <code class="highlighter-rouge">par</code> options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.</p>
+<p>Well, it turns out they both have the same pro and the same con. In any case, neither plays well with R’s base graphics, which is a bummer because I’ve finally memorized the entire list of <code>par</code> options. While the trend-following part of me wants to learn ggplot because the plots are slick and colorful, the swim-against-the-current, roll-your-own-everything part of me prefers a good old-fashioned black-and-white line graph. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics.</p>
 
 <p>For mapping I am usually in a small hurry, so oftentimes I use the base graphics because I think they require less setup: read in a layer, send the plot command, and be done. <br />
 Let’s run through a quick example, and you can decide whether this sounds painful compared to ggplot. Before we start, I’d like to make a quick note about how we can find package help.</p>
 
 <h3 id="getting-help-with-plot-methods">Getting help with plot methods</h3>
-<p>Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the <code class="highlighter-rouge">methods</code> package extends functionality of the <code class="highlighter-rouge">'?'</code> function, so as you might get help for an S3 plot method with <code class="highlighter-rouge">?plot</code> or <code class="highlighter-rouge">?plot.data.frame</code>, you get help for an S4 method such as plotting an object of class <code class="highlighter-rouge">SpatialPoints</code> with the command <code class="highlighter-rouge">method?plot('SpatialPoints')</code>. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.</p>
+<p>Finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the <code>methods</code> package extends functionality of the <code>'?'</code> function, so as you might get help for an S3 plot method with <code>?plot</code> or <code>?plot.data.frame</code>, you get help for an S4 method such as plotting an object of class <code>SpatialPoints</code> with the command <code>method?plot('SpatialPoints')</code>. Its a little more cumbersome compared to S3 method dispatch, but for the most part I believe the S4 methodology is worth the hassle, so I put up with it.</p>
 
 <h3 id="quick-choropleth-mapping-with-base-graphics">Quick choropleth mapping with base graphics</h3>
 <p>The general outline of our task today is:</p>
@@ -108,14 +193,13 @@ Let’s run through a quick example, and you can decide whether this sounds pain
 <h4 id="get-the-data">1. Get the data</h4>
 <p>To keep this simple I’ll just read in some data rather than finding it right now. Our sample data today will be the subject of a future post: homes for sale in Vermont, scraped from Zillow’s website. I’ll read in a snapshot of homes for sale on May 1, 2016.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">zdata</span> <span class="o">&lt;-</span> <span class="n">read.csv</span><span class="p">(</span><span class="s1">'data/FS_2016May01.csv'</span><span class="p">)</span>
+<pre><code class="language-r">zdata &lt;- read.csv('data/FS_2016May01.csv')
 
-<span class="c1"># Get a random preview of the table
-</span><span class="n">zdata</span><span class="p">[</span><span class="n">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">zdata</span><span class="p">),</span> <span class="m">20</span><span class="p">),]</span>
+# Get a random preview of the table
+zdata[sample(1:nrow(zdata), 20),]
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>##                z_id                                          address
+<pre><code>##                z_id                                          address
 ## 86  zpid_2098805784                      Hathaway-Trl-Dover-VT-05356
 ## 505 zpid_2098847499 83-S-Jefferson-Rd-39-R-South-Burlington-VT-05403
 ## 306   zpid_75444614     3534-Sawnee-Bean-Rd-Thetford-Center-VT-05075
@@ -158,38 +242,34 @@ Let’s run through a quick example, and you can decide whether this sounds pain
 ## 304 44.26341 -72.56707 230000  3.0    NA 1476           NA     1900
 ## 301 44.26225 -72.78795 340000  3.0     3 2296        35.00     1988
 </code></pre>
-</div>
 
-<p>Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the <code class="highlighter-rouge">lat</code> and <code class="highlighter-rouge">long</code> fields are intact though.</p>
+<p>Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the <code>lat</code> and <code>long</code> fields are intact though.</p>
 
 <p>I’m going to limit this post to vector data so I can keep the packages to a minimum.<br />
 Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rgdal</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">raster</span><span class="p">)</span> <span class="c1"># for its summary print method
-</span>
-<span class="c1"># Convert zillow data to a SpatialPointsDataFrame using the International Association 
+<pre><code class="language-r">library(rgdal)
+library(sp)
+library(raster) # for its summary print method
+
+# Convert zillow data to a SpatialPointsDataFrame using the International Association 
 # of Oil &amp; Gas Producers EPSG code for WGS84 projection:
-</span><span class="n">z.spat</span> <span class="o">&lt;-</span> <span class="n">SpatialPointsDataFrame</span><span class="p">(</span><span class="n">zdata</span><span class="p">[,</span><span class="n">c</span><span class="p">(</span><span class="s1">'long'</span><span class="p">,</span> <span class="s1">'lat'</span><span class="p">)],</span> <span class="n">data</span><span class="o">=</span><span class="n">zdata</span><span class="p">,</span> <span class="n">proj4string</span><span class="o">=</span><span class="n">CRS</span><span class="p">(</span><span class="s2">"+init=epsg:4326"</span><span class="p">))</span>
+z.spat &lt;- SpatialPointsDataFrame(zdata[,c('long', 'lat')], data=zdata, proj4string=CRS("+init=epsg:4326"))
 
-<span class="c1"># Read in town boundaries
-</span><span class="n">vt.twn</span> <span class="o">&lt;-</span> <span class="n">readOGR</span><span class="p">(</span><span class="n">dsn</span><span class="o">=</span><span class="s1">'data/Boundary_TWNBNDS'</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="s1">'Boundary_TWNBNDS_poly'</span><span class="p">)</span>
+# Read in town boundaries
+vt.twn &lt;- readOGR(dsn='data/Boundary_TWNBNDS', layer='Boundary_TWNBNDS_poly')
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>## OGR data source with driver: ESRI Shapefile 
+<pre><code>## OGR data source with driver: ESRI Shapefile 
 ## Source: "data/Boundary_TWNBNDS", layer: "Boundary_TWNBNDS_poly"
 ## with 255 features
 ## It has 5 fields
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">vt.twn</span>
+<pre><code class="language-r">vt.twn
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>## class       : SpatialPolygonsDataFrame 
+<pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 255 
 ## extent      : 424788.8, 581562, 25211.84, 279799  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +proj=tmerc +lat_0=42.5 +lon_0=-72.5 +k=0.9999642857142857 +x_0=500000 +y_0=0 +datum=NAD83 +units=m +no_defs +ellps=GRS80 +towgs84=0,0,0 
@@ -198,18 +278,15 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 ## min values  :  1005,   ADDISON,    1,  100122404, 10203.963 
 ## max values  :  9095, WORCESTER,    9,   99942616,  9386.921
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># transform town boundary projection to match the points
-</span><span class="n">vt.twn</span> <span class="o">&lt;-</span> <span class="n">spTransform</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">,</span> <span class="n">CRSobj</span><span class="o">=</span><span class="n">proj4string</span><span class="p">(</span><span class="n">z.spat</span><span class="p">))</span>
+<pre><code class="language-r"># transform town boundary projection to match the points
+vt.twn &lt;- spTransform(vt.twn, CRSobj=proj4string(z.spat))
 </code></pre>
-</div>
 <p>To see how quickly the base graphics get us up and running with a visual, lets plot the points.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">z.spat</span><span class="p">,</span> <span class="n">add</span><span class="o">=</span><span class="n">TRUE</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">)</span>
+<pre><code class="language-r">plot(vt.twn)
+plot(z.spat, add=TRUE, pch=19)
 </code></pre>
-</div>
 
 <!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) -->
 
@@ -221,14 +298,13 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 <div style="clear:both;"></div>
 
 <h4 id="aggregate-the-data-by-town">2. Aggregate the data by town.</h4>
-<p>Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town. The package <code class="highlighter-rouge">sp</code> has a great spatial aggregation method, so there’s no need to explicitly do any overlay.</p>
+<p>Now that everything appears to be in order, I’d like to shade the map according to one or more of the attributes in the data. I’ll begin with home median home price by town. The package <code>sp</code> has a great spatial aggregation method, so there’s no need to explicitly do any overlay.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">price</span> <span class="o">&lt;-</span> <span class="n">aggregate</span><span class="p">(</span><span class="n">z.spat</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="n">vt.twn</span><span class="p">[</span><span class="s1">'TOWNNAME'</span><span class="p">],</span> <span class="n">FUN</span><span class="o">=</span><span class="n">median</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span> 
-<span class="n">price</span>
+<pre><code class="language-r">price &lt;- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=median, na.rm=TRUE) 
+price
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>## class       : SpatialPolygonsDataFrame 
+<pre><code>## class       : SpatialPolygonsDataFrame 
 ## features    : 255 
 ## extent      : -73.4379, -71.46528, 42.72696, 45.01666  (xmin, xmax, ymin, ymax)
 ## coord. ref. : +init=epsg:4326 +proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0 
@@ -237,33 +313,30 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 ## min values  :   50000 
 ## max values  : 1395000
 </code></pre>
-</div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># see what values price has
-</span><span class="n">hist</span><span class="p">(</span><span class="n">price</span><span class="o">$</span><span class="n">price</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price by Vermont town'</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s1">'Price in US Dollars'</span><span class="p">)</span>
+<pre><code class="language-r"># see what values price has
+hist(price$price, main='Median home price by Vermont town', xlab='Price in US Dollars')
 </code></pre>
-</div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /></p>
 
 <p>Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.<br />
-I’ll start with a simple linear shading scheme, using the built-in <code class="highlighter-rouge">heat.colors</code> gradient for the <code class="highlighter-rouge">col</code> argument.</p>
+I’ll start with a simple linear shading scheme, using the built-in <code>heat.colors</code> gradient for the <code>col</code> argument.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="n">price</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">col</span><span class="o">=</span><span class="n">heat.colors</span><span class="p">(</span><span class="m">255</span><span class="p">),</span> 
-    <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
-<span class="n">box</span><span class="p">()</span>
+<pre><code class="language-r">plot(price['price'], col=heat.colors(255), 
+    main='Median home price in Vermont, by town', axes=TRUE)
+box()
 </code></pre>
-</div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png" alt="plot of chunk unnamed-chunk-5" /></p>
 
 <p>OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.</p>
 
-<p>After testing various options for a solid hour, here’s what I came up with. I can’t change the plot order, but I <em>can</em> change the coloration. I need to rearrange the colors in <code class="highlighter-rouge">heat.colors()</code> and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:</p>
+<p>After testing various options for a solid hour, here’s what I came up with. I can’t change the plot order, but I <em>can</em> change the coloration. I need to rearrange the colors in <code>heat.colors()</code> and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I’d like to perform are:</p>
 
 <blockquote>
   <ol>
-    <li>Use the <code class="highlighter-rouge">hist</code> function to compute price bins.</li>
+    <li>Use the <code>hist</code> function to compute price bins.</li>
     <li>Assign the prices to bins.</li>
     <li>Use the assigned bins to rarrange the color vector.</li>
     <li>Plot the map.</li>
@@ -274,108 +347,130 @@ I’ll start with a simple linear shading scheme, using the built-in <code class
 <p>I’m going to do this by defining a quick custom function. The “quick” part is that I’m not including any argument checking characteristic of a high level function in a package.<br />
 The following function will perform the above steps.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">choropleth</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span>
-    <span class="n">sp</span><span class="p">,</span>         <span class="c1"># R object--any feature derived from package sp.
-</span>    <span class="n">attrib</span><span class="p">,</span>     <span class="c1"># Attribute name in the table; length 1 character vector.
-</span>    <span class="n">color.ramp</span><span class="o">=</span><span class="n">heat.colors</span><span class="p">,</span>  <span class="c1"># The color ramp to use. Can also use colorRampPalette().
-</span>    <span class="n">hist.args</span><span class="o">=</span><span class="n">NULL</span><span class="p">,</span>  <span class="c1"># Named list of additional arguments to hist(), excluding `plot`.
-</span>    <span class="k">...</span>         <span class="c1"># Additional arguments to plot().
-</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">spa</span> <span class="o">&lt;-</span> <span class="n">na.omit</span><span class="p">(</span><span class="n">sp</span><span class="p">[[</span><span class="n">attrib</span><span class="p">]])</span>
-    <span class="c1"># Step 1 : compute price bins
-</span>    <span class="n">ha</span> <span class="o">&lt;-</span> <span class="n">list</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">spa</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
-    <span class="n">ha</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">ha</span><span class="p">,</span> <span class="n">hist.args</span><span class="p">)</span>
-    <span class="n">bins</span> <span class="o">&lt;-</span> <span class="n">do.call</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">ha</span><span class="p">)</span><span class="o">$</span><span class="n">breaks</span>
-    <span class="c1"># Step 2: assign data to bins
-</span>    <span class="n">bin</span> <span class="o">&lt;-</span> <span class="n">rep</span><span class="p">(</span><span class="n">NA</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">spa</span><span class="p">))</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">length</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="o">:</span><span class="m">1</span><span class="p">)</span> <span class="n">bin</span><span class="p">[</span><span class="n">spa</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="o">&amp;</span> <span class="n">spa</span> <span class="o">&lt;=</span> <span class="n">bins</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="n">i</span><span class="m">-1</span>
-    <span class="c1"># Step 3: rearrange color vector
-</span>    <span class="n">sp</span><span class="o">$</span><span class="n">bin</span> <span class="o">&lt;-</span> <span class="n">NA</span>
-    <span class="n">sp</span><span class="p">[[</span><span class="s1">'bin'</span><span class="p">]][</span><span class="o">!</span><span class="n">is.na</span><span class="p">(</span><span class="n">sp</span><span class="p">[[</span><span class="n">attrib</span><span class="p">]])]</span> <span class="o">&lt;-</span> <span class="n">bin</span>
-    <span class="n">customcolor</span> <span class="o">&lt;-</span> <span class="n">rev</span><span class="p">(</span><span class="n">color.ramp</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span><span class="m">-1</span><span class="p">))</span>
-    <span class="n">customcolor</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s2">"#FFFFFF"</span>
-    <span class="c1"># Step 4: plot
-</span>    <span class="n">plot</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">customcolor</span><span class="p">[</span><span class="n">sp</span><span class="o">$</span><span class="n">bin</span><span class="p">],</span> <span class="k">...</span><span class="p">)</span>
-    <span class="c1"># Step 5: return a vector to use for the legend
-</span>    <span class="n">low.bin</span> <span class="o">&lt;-</span> <span class="n">bins</span> <span class="o">+</span> <span class="m">1</span>
-    <span class="n">low.bin</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="m">0</span>
-    <span class="n">oldopts</span> <span class="o">&lt;-</span> <span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="o">=</span><span class="m">100000</span><span class="p">)</span>
-    <span class="n">on.exit</span><span class="p">(</span><span class="n">options</span><span class="p">(</span><span class="n">oldopts</span><span class="p">))</span>
-    <span class="n">invisible</span><span class="p">(</span><span class="n">paste</span><span class="p">(</span><span class="n">low.bin</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">low.bin</span><span class="p">)</span><span class="m">-1</span><span class="p">)],</span> <span class="s1">'-'</span><span class="p">,</span> <span class="n">bins</span><span class="p">[</span><span class="m">2</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">bins</span><span class="p">)]))</span>
-<span class="p">}</span>
+<pre><code class="language-r">choropleth &lt;- function(
+    sp,         # R object--any feature derived from package sp.
+    attrib,     # Attribute name in the table; length 1 character vector.
+    color.ramp=heat.colors,  # The color ramp to use. Can also use colorRampPalette().
+    hist.args=NULL,  # Named list of additional arguments to hist(), excluding `plot`.
+    ...         # Additional arguments to plot().
+) {
+    spa &lt;- na.omit(sp[[attrib]])
+    # Step 1 : compute price bins
+    ha &lt;- list(x=spa, plot=FALSE)
+    ha &lt;- c(ha, hist.args)
+    bins &lt;- do.call(hist, ha)$breaks
+    # Step 2: assign data to bins
+    bin &lt;- rep(NA, length(spa))
+    for(i in length(bins):1) bin[spa &gt; 0 &amp; spa &lt;= bins[i]] &lt;- i-1
+    # Step 3: rearrange color vector
+    sp$bin &lt;- NA
+    sp[['bin']][!is.na(sp[[attrib]])] &lt;- bin
+    customcolor &lt;- rev(color.ramp(length(bins)-1))
+    customcolor[1] &lt;- "#FFFFFF"
+    # Step 4: plot
+    plot(sp, col=customcolor[sp$bin], ...)
+    # Step 5: return a vector to use for the legend
+    low.bin &lt;- bins + 1
+    low.bin[1] &lt;- 0
+    oldopts &lt;- options(scipen=100000)
+    on.exit(options(oldopts))
+    invisible(paste(low.bin[1:(length(low.bin)-1)], '-', bins[2:length(bins)]))
+}
 </code></pre>
-</div>
 
-<p>Now the first test. I’m going to save a plot and put a legend on right away, just to see how it looks.</p>
+<p>Now the first test. I’m going to put a legend on right away, just to see how it looks.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> 
-    <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+<pre><code class="language-r">x &lt;- choropleth(price, 'price', 
+    main='Median home price in Vermont, by town', axes=TRUE)
     
-<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">rev</span><span class="p">(</span><span class="n">heat.colors</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> 
-    <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'$US'</span><span class="p">)</span>
+legend('bottomright', legend=x, fill=rev(heat.colors(length(x))), 
+    bty='n', title='$US')
     
-<span class="n">box</span><span class="p">()</span>
+box()
 </code></pre>
-</div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png" alt="plot of chunk unnamed-chunk-7" /></p>
 
-<p>This looks more-or-less OK, but I’ve plotted two yellows, two oranges, and three reds that I can’t distinguish. I think I would be better off with a white followed by some more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using <code class="highlighter-rouge">hist()</code> to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.</p>
+<p>This looks more-or-less OK, but I’ve plotted two oranges and three reds that I can’t distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using <code>hist()</code> to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using <code>hist</code>). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">fill.col</span> <span class="o">&lt;-</span> <span class="n">colorRampPalette</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'orange'</span><span class="p">,</span> <span class="s1">'lightgray'</span><span class="p">))</span>
+<pre><code class="language-r">fill.col &lt;- colorRampPalette(c('red', 'orange', 'lightgray'))
 
-<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="n">color.ramp</span><span class="o">=</span><span class="n">fill.col</span><span class="p">,</span> 
-   <span class="n">hist.args</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">seq</span><span class="p">(</span><span class="m">250000</span><span class="p">,</span> <span class="m">450000</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">100000</span><span class="p">),</span> <span class="m">1500000</span><span class="p">)),</span> 
-   <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+x &lt;- choropleth(price, 'price', color.ramp=fill.col, 
+   hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
+   main='Median home price in Vermont, by town', axes=TRUE)
 
-<span class="n">fill</span> <span class="o">&lt;-</span> <span class="n">rev</span><span class="p">(</span><span class="n">fill.col</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+fill &lt;- rev(fill.col(length(x)))
 
-<span class="n">fill</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'white'</span>
+fill[1] &lt;- 'white'
 
-<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> 
-   <span class="n">title</span><span class="o">=</span><span class="s1">'Asking Price ($US)'</span><span class="p">,</span> <span class="n">box.cex</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">))</span>
+legend('bottomright', legend=x, fill=fill, bty='n', 
+   title='Asking Price ($US)', box.cex=c(2, 0.8))
 
-<span class="n">box</span><span class="p">()</span>
+box()
 </code></pre>
-</div>
 
 <p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png" alt="plot of chunk unnamed-chunk-8" /></p>
 
-<p>Now some finishing touches that I’ll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale.</p>
+<p>Now some finishing touches that I’ll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale. Click on the map to see it larger.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">source</span><span class="p">(</span><span class="s1">'mapFunctions.R'</span><span class="p">)</span>
-<span class="n">source</span><span class="p">(</span><span class="s2">"http://www.math.mcmaster.ca/bolker/R/misc/legendx.R"</span><span class="p">)</span>
+<pre><code class="language-r">source('mapFunctions.R')
+source("http://www.math.mcmaster.ca/bolker/R/misc/legendx.R")
 
-<span class="n">fill.col</span> <span class="o">&lt;-</span> <span class="n">colorRampPalette</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'orange'</span><span class="p">,</span> <span class="s1">'lightgray'</span><span class="p">))</span>
+fill.col &lt;- colorRampPalette(c('red', 'orange', 'lightgray'))
 
-<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">choropleth</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="n">color.ramp</span><span class="o">=</span><span class="n">fill.col</span><span class="p">,</span> 
-    <span class="n">hist.args</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">breaks</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="n">seq</span><span class="p">(</span><span class="m">250000</span><span class="p">,</span> <span class="m">450000</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="m">100000</span><span class="p">),</span> <span class="m">1500000</span><span class="p">)),</span> 
-    <span class="n">main</span><span class="o">=</span><span class="s1">'Median home price in Vermont, by town'</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+x &lt;- choropleth(price, 'price', color.ramp=fill.col, 
+    hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), 
+    main='Median home price in Vermont, by town', axes=TRUE)
 
-<span class="n">fill</span> <span class="o">&lt;-</span> <span class="n">rev</span><span class="p">(</span><span class="n">fill.col</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+fill &lt;- rev(fill.col(length(x)))
 
-<span class="n">fill</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s1">'white'</span>
+fill[1] &lt;- 'white'
 
-<span class="n">legend</span><span class="p">(</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">fill</span><span class="p">,</span> <span class="n">bty</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Asking Price ($US)'</span><span class="p">,</span> 
-    <span class="n">box.cex</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">0.8</span><span class="p">),</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">.25</span><span class="p">))</span>
+legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', 
+    box.cex=c(2, 0.8), inset=c(0, .25))
 
-<span class="n">scalebarTanimura</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="m">0.3960193</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.52</span><span class="p">,</span> <span class="m">-0.75</span><span class="p">),</span> 
-    <span class="n">mapunit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">,</span> <span class="n">unit.lab</span><span class="o">=</span><span class="s2">"miles"</span><span class="p">)</span>
-<span class="n">northarrowTanimura</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">'bottomright'</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="m">0.4</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">),</span> <span class="n">mapunit</span><span class="o">=</span><span class="s1">'degrees'</span><span class="p">)</span>
+scalebarTanimura(loc='bottomright', length=0.3960193, inset=c(0.52, -0.75), 
+    mapunit='degrees', unit.lab="miles")
+northarrowTanimura(loc='bottomright', size=0.4, inset=c(0,0), mapunit='degrees')
 
-<span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">2</span><span class="p">],</span> 
-    <span class="n">labels</span><span class="o">=</span><span class="n">vt.twn</span><span class="o">$</span><span class="n">TOWNNAME</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">3</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="m">0.3</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.3</span><span class="p">)</span>
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
+    labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
 
-<span class="n">count</span> <span class="o">&lt;-</span> <span class="n">aggregate</span><span class="p">(</span><span class="n">z.spat</span><span class="p">[</span><span class="s1">'price'</span><span class="p">],</span> <span class="n">by</span><span class="o">=</span><span class="n">vt.twn</span><span class="p">[</span><span class="s1">'TOWNNAME'</span><span class="p">],</span> <span class="n">FUN</span><span class="o">=</span><span class="n">length</span><span class="p">)</span> 
+count &lt;- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=length) 
 
-<span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">1</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coordinates</span><span class="p">(</span><span class="n">vt.twn</span><span class="p">)[,</span><span class="m">2</span><span class="p">],</span> 
-    <span class="n">labels</span><span class="o">=</span><span class="n">count</span><span class="o">$</span><span class="n">price</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="m">0.6</span><span class="o">/</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">0.6</span><span class="p">)</span>
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], 
+    labels=count$price, pos=1, offset=0.6/2, cex=0.6)
 
-<span class="n">box</span><span class="p">()</span>
+box()
 </code></pre>
-</div>
 
-<p><img src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9" /></p>
+<!-- Trigger the modal-->
+<p><a href="#" data-toggle="modal" data-target="#myModal">
+    <img id="finalMapImg" style="width:50%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map" /> 
+</a>
+<!-- Modal --></p>
+<div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" style="width:1000px;">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <!-- <h4 class="modal-title">Modal Header</h4>-->
+      </div>
+      <div class="modal-body">
+        <div style="overflow:hidden;"> 
+          <img id="finalMapImgLg" style="width:950px;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map" />
+        </div>
+        <!-- <p>Some text in the modal.</p>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
     </div>
@@ -384,7 +479,7 @@ The following function will perform the above steps.</p>
 
   
     <ul class="tag_box inline">
-      <li><i class="icon-tags"></i></li>
+      <li><i class="glyphicon glyphicon-tags"></i></li>
       
       
 
@@ -407,35 +502,46 @@ The following function will perform the above steps.</p>
 
     </ul>
     
-
+  
     <hr>
-    <div class="pagination">
-      <ul>
-      
-        <li class="prev disabled"><a>&larr; Previous</a></li>
-      
-        <li><a href="nil">Archive</a></li>
-      
-        <li class="next disabled"><a>Next &rarr;</a>
-      
-      </ul>
-    </div>
+    <ul class="pagination">
+    
+      <li class="prev disabled"><a>&larr; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
     <hr>
     
   </div>
 </div>
 
 
-
-
-
       </div>
-
-      <hr>
 
     </div>
 
+<!--    <div id="footer">-->
+<!--      <div class="container">-->
+<!--        <p>&copy; 2016 Jon Katz-->
+<!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
+<!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+
     
+
+
+
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/themes//bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
 

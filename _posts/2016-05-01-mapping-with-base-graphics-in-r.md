@@ -306,47 +306,34 @@ text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2],
 box()
 ```
 
-<!--<a alt="The final map" href="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png">-->
-    <img id="finalMapImg" class="triggerModalImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png"> 
-<!--</a>-->
+<!-- Trigger the modal-->
+<a href="#" data-toggle="modal" data-target="#myModal">
+    <img id="finalMapImg" style="width:50%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map"> 
+</a>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" style="width:1000px;">
 
-<!-- The Modal -->
-<div id="finalMapModal" class="modal">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <!-- <h4 class="modal-title">Modal Header</h4>-->
+      </div>
+      <div class="modal-body">
+        <div style="overflow:hidden;"> 
+          <img id="finalMapImgLg" style="width:950px;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map">
+        </div>
+        <!-- <p>Some text in the modal.</p>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
 
-  <!-- The Close Button -->
-  <span class="close" onclick="document.getElementById('finalMapModal').style.display='none'">&times;</span>
-
-  <!-- Modal Content (The Image) -->
-  <img class="modal-content" id="finalMapImgLg">
-
-  <!-- Modal Caption (Image Text) -->
-<!--  <div id="caption" class="modalCaption"></div>-->
+  </div>
 </div>
 
-
-<script>
-// Get the modal
-var modal = document.getElementById('finalMapModal');
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('finalMapImg');
-var modalImg = document.getElementById("finalMapImgLg");
-//var captionText = document.getElementById("caption");
-img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    modalImg.alt = this.alt;
-    captionText.innerHTML = this.alt;
-}
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-</script>
 
 
 

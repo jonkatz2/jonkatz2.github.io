@@ -5,9 +5,9 @@ description: Jon Katz is a postdoctoral researcher at the University of Vermont'
 keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 ---
 
-<div class="navbar">
-  <div class="navbar-inner">
-      <ul class="nav">
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar navbar-collapse" style="margin-bottom:0px;">
+      <ul class="nav navbar-nav">
           <li><a href="{{ BASE_PATH }}/assets/blog/blog.html">blog</a></li>
           <li><a href="{{ BASE_PATH }}/assets/jkatzResume.pdf">resume</a></li>
           <li><a href="https://github.com/jonkatz2">github</a></li>
