@@ -7,3 +7,9 @@ body, html {
     width: 768px;
     max-width:768px;
 }
+
+@media (min-width: 800px) {
+    .container{
+        max-width: 768px;
+    }
+}
