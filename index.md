@@ -1,6 +1,4 @@
 ---
-theme :
-  name : bootstrap-3
 layout: default
 title: Jon Katz
 description: Jon Katz is a postdoctoral researcher at the University of Vermont's Cooperative Fish adn Wildlife Research Unit.
