@@ -236,7 +236,7 @@ choropleth <- function(
 }
 ```
 
-Now the first test. I'm going to save a plot and put a legend on right away, just to see how it looks.
+Now the first test. I'm going to put a legend on right away, just to see how it looks.
 
 ```r
 x <- choropleth(price, 'price', 
@@ -250,7 +250,7 @@ box()
 
 ![plot of chunk unnamed-chunk-7](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png) 
 
-This looks more-or-less OK, but I've plotted two yellows, two oranges, and three reds that I can't distinguish. I think I would be better off with a white followed by some more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I'll set up my color ramp to transition between three colors. Second, since I'm using `hist()` to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.  
+This looks more-or-less OK, but I've plotted two oranges and three reds that I can't distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I'll set up my color ramp to transition between three colors. Second, since I'm using `hist()` to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using `hist`). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.  
 
 ```r
 fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
@@ -271,7 +271,7 @@ box()
 
  ![plot of chunk unnamed-chunk-8](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png) 
 
-Now some finishing touches that I'll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale.
+Now some finishing touches that I'll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale. Click on the map to see it larger.
 
 
 ```r
@@ -306,16 +306,47 @@ text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2],
 box()
 ```
 
-![plot of chunk unnamed-chunk-9](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png) 
+<!--<a alt="The final map" href="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png">-->
+    <img id="finalMapImg" class="triggerModalImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png"> 
+<!--</a>-->
+
+<!-- The Modal -->
+<div id="finalMapModal" class="modal">
+
+  <!-- The Close Button -->
+  <span class="close" onclick="document.getElementById('finalMapModal').style.display='none'">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="modal-content" id="finalMapImgLg">
+
+  <!-- Modal Caption (Image Text) -->
+<!--  <div id="caption" class="modalCaption"></div>-->
+</div>
 
 
+<script>
+// Get the modal
+var modal = document.getElementById('finalMapModal');
 
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById('finalMapImg');
+var modalImg = document.getElementById("finalMapImgLg");
+//var captionText = document.getElementById("caption");
+img.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    modalImg.alt = this.alt;
+    captionText.innerHTML = this.alt;
+}
 
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
-
-
-
-
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script>
 
 
 
