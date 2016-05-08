@@ -308,7 +308,7 @@ box()
 
 <!-- Trigger the modal-->
 <a href="#" data-toggle="modal" data-target="#myModal">
-    <img id="finalMapImg" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map"> 
+    <img id="finalMapImg" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png" alt="The final map"> 
 </a>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
