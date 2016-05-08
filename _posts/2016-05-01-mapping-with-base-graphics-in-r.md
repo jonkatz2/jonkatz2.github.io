@@ -21,13 +21,13 @@ The two popular methods mentioned both have pros and cons:
     </tr>
     <tr>
         <td style="padding: 0em 1em;width:6%;"> <i class="fa fa-thumbs-up" aria-hidden="true"></i> </td>
-        <td style="width:42%;"> Fine control of overlays for a professionally finished look. </td>
-        <td style="width:42%;"> Fine control of overlays for a professionally finished look. </td>
+        <td style="padding: 0em 1em;width:42%;"> Fine control of overlays for a professionally finished look. </td>
+        <td style="padding: 0em 1em;width:42%;"> Fine control of overlays for a professionally finished look. </td>
     </tr>
     <tr>
         <td style="padding: 0em 1em;width:6%;"> <i class="fa fa-thumbs-down" aria-hidden="true"></i> </td>
-        <td style="width:42%;"> Uses lattice, an implementation of Trellis graphics for R. </td>
-        <td style="width:42%;"> ggplot is the grammar of graphics, which is also a whole different plotting language implemented in R. </td>
+        <td style="padding: 0em 1em;width:42%;"> Uses lattice, an implementation of Trellis graphics for R. </td>
+        <td style="padding: 0em 1em;width:42%;"> ggplot is the grammar of graphics, which is also a whole different plotting language implemented in R. </td>
     </tr>
 </table>
 <br/>
