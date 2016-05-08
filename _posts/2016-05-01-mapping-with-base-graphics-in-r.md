@@ -146,7 +146,7 @@ plot(z.spat, add=TRUE, pch=19)
 
 <!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) -->
 
-For a quick side-by-side comparison, here's our plot on the left and Zillow's map on it's home site this same day:  
+For a quick side-by-side comparison, here's our plot on the left and Zillow's map on it's home site grabbed the same day:  
 <div>
     <img style="width:47%;float:left;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png" alt="Our plot 20160501">
     <img style="width:52%;float:right;" src="/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501">
@@ -318,7 +318,7 @@ box()
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <!-- <h4 class="modal-title">Modal Header</h4>-->
+         <h4 class="modal-title"> </h4>
       </div>
       <div class="modal-body">
         <div style="overflow:hidden;"> 

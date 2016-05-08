@@ -4,7 +4,7 @@
  <title>Jon Katz</title>
  <link href="http://jonkatz2.github.ionil" rel="self"/>
  <link href="http://jonkatz2.github.io"/>
- <updated>2016-05-08T00:04:33-04:00</updated>
+ <updated>2016-05-08T00:11:32-04:00</updated>
  <id>http://jonkatz2.github.io</id>
  <author>
    <name>Jon Katz</name>
@@ -159,7 +159,7 @@ plot(z.spat, add=TRUE, pch=19)
 
 &lt;!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) --&gt;
 
-&lt;p&gt;For a quick side-by-side comparison, here’s our plot on the left and Zillow’s map on it’s home site this same day:&lt;/p&gt;
+&lt;p&gt;For a quick side-by-side comparison, here’s our plot on the left and Zillow’s map on it’s home site grabbed the same day:&lt;/p&gt;
 &lt;div&gt;
     &lt;img style=&quot;width:47%;float:left;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png&quot; alt=&quot;Our plot 20160501&quot; /&gt;
     &lt;img style=&quot;width:52%;float:right;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png&quot; alt=&quot;Zillow Screengrab 20160501&quot; /&gt;
@@ -315,7 +315,7 @@ box()
 
 &lt;!-- Trigger the modal--&gt;
 &lt;p&gt;&lt;a href=&quot;#&quot; data-toggle=&quot;modal&quot; data-target=&quot;#myModal&quot;&gt;
-    &lt;img id=&quot;finalMapImg&quot; style=&quot;width:50%;&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png&quot; alt=&quot;The final map&quot; /&gt; 
+    &lt;img id=&quot;finalMapImg&quot; src=&quot;/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png&quot; alt=&quot;The final map&quot; /&gt; 
 &lt;/a&gt;
 &lt;!-- Modal --&gt;&lt;/p&gt;
 &lt;div id=&quot;myModal&quot; class=&quot;modal fade&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot;&gt;
@@ -325,7 +325,7 @@ box()
     &lt;div class=&quot;modal-content&quot;&gt;
       &lt;div class=&quot;modal-header&quot;&gt;
         &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-        &lt;!-- &lt;h4 class=&quot;modal-title&quot;&gt;Modal Header&lt;/h4&gt;--&gt;
+         &lt;h4 class=&quot;modal-title&quot;&gt; &lt;/h4&gt;
       &lt;/div&gt;
       &lt;div class=&quot;modal-body&quot;&gt;
         &lt;div style=&quot;overflow:hidden;&quot;&gt; 
