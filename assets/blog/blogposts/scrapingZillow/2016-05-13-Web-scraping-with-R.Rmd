@@ -1,0 +1,414 @@
+---
+layout: post
+title: "Web scraping with R"
+date: 2016-05-13
+description: ""
+category: 
+tags: [R, Scraping]
+---
+{% include JB/setup %}
+
+I'm interested in what insights can be gleaned from real estate prices. Initially I was interested because I wanted to buy a home, and of course (believe it or not this was a surprise to me) there were more nuances than I had anticipated when choosing a location to spend the next $300,000. All of Vermont is beautiful, so at least that was not a consideration. What I do want is:
+
+  * To be close to my current office, and close to potential future employment too.
+  * To be within a 45 minute drive of my extended family. 
+  * My kids to have great pre-k through high-school educations.
+  * My wife to be close to her friends (not an issue for me, I've got R).
+  * To spend as little as possible on a turn-key home.
+  
+So that is how I decided I needed some real estate data. In this post I'll show you how I get the data; hopefully in a future post we'll do some analysis of it with regards to the above points, plus maybe see what relationships exist between sale values and factors such as school district ratings and maybe even recent political history. 
+
+I started with a quick visit to a well-known search bot, which led me to Hadley Wickham's `rvest` package (someday I'll get better at coming up with snappy package names!). There was even a github issue noted about scraping Zillow. Then I saw that the issue resolution was added as a demo in `rvest`, so most of the heavy lifting was done already! Great! Not a very interesting topic for a post I guess. Well, I've started already so lets keep going.
+
+The source for much of the code is here: <a href="https://github.com/notesofdabbler" target="_blank">https://github.com/notesofdabbler</a>, and you can see the demo by checking `help(package=rvest)`. I've not tried actually running the demo, but scraping a web page means reading the DOM and parsing the page nodes, the raw HTML, and the CSS for meaning; I assume that Zillow changes the structure of their page somewhat regularly and that the demo script will probably need to be updated to work as intended--so that's what I'll do here. I'm going to follow the others' leads here and adopt the special rvest `%>%` pipe operator in this script, even though I'm not 100% comfortable using pipes in my bash scripts.
+
+First we need a URL to parse. It's pretty easy to go to the main page, do a search for Vermont, and copy the resulting URL. I see that only 20 homes are displayed at a time, so I click to page 2, note how the query changes in the URL, and expand on it in my R code.
+
+```{r}
+library(rvest)
+
+url <- "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/"#2_p/"
+# I manually checked the source html to find the correct node to read
+more.urls <- read_html(url) %>%
+  html_nodes(".zsg-pagination a") %>%
+  html_attr("href") 
+# See how high the pagination goes
+more.urls <- more.urls[!is.na(more.urls)]
+more.urls <- strsplit(more.urls, '/')
+more.urls <- lapply(more.urls, function(x) x[length(x)])
+more.urls <- as.numeric(gsub('[_p]','', more.urls))
+more.urls <- max(more.urls)
+# Now paste together a url for each page
+urls <- c(url, paste0(url,2:more.urls,'_p/'))
+
+urls
+```
+
+Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping, then I run the function in an `lapply` loop.
+
+```{r}
+# The scraper function
+getZillow <- function(urls) {
+    # return a list of html <article></article> tags, one for each URL
+    lapply(urls, function(u) {
+        # call out the at-bat url in case there is an error
+        cat(u, '\n')
+        houses <- read_html(u) %>%
+          html_nodes("article")
+        houses
+    })
+}
+```
+
+To use this function I just need to give it the urls I made earlier:
+
+```{r eval=FALSE}
+zdata2 <- getZillow(urls)
+```
+
+The "thing" about `rvest` is that the returned values are stored with external pointers, which is a new concept for me. I tried saving the pointers with `save()` for later analysis but it only saved the pointer, not the value. I didn't try `saveRDS()`; instead I decided to parse them right now and save the parsed values for later analysis. To parse an article tag I need to know what's in it. I can read it by just coercing it to a character vector, copying it off the console into my text editor (I'm a gedit user in Ubuntu), and poring through it in a civilized way. get ready for some ugly:
+
+```{r eval=FALSE}
+as.character(zdata[[1]][1])
+```
+
+```
+<article statustype="1" latitude="44485389" id="zpid_12653346" class="property-listing zsg-media image-loaded image-controls-on-canvas" longitude="-73194252"
+  <figure class="photo zsg-image zsg-media-img" data-photourl="http://photos3.zillowstatic.com/p_g/IS5q7x8wtqnk381000000000.jpg"
+    <a href="/homedetails/271-Hildred-Dr-271-Burlington-VT-05401/12653346_zpid/" class="routable mask hdp-link"
+      <img rel="nofollow" alt="271 Hildred Dr # 271, Burlington, VT" src="http://photos3.zillowstatic.com/p_g/IS5q7x8wtqnk381000000000.jpg" class="image-loaded"/
+      <figcaption class="zsg-image-badge_black"
+12 photos</figcaption
+    </a
+    <div class="terse-list-card-actions"
+      <a href="/myzillow/UpdateFavorites.htm?zpid=12653346&amp;operation=add&amp;ajax=false" rel="nofollow" data-fm-zpid="12653346" data-fm-callback="windowReloadSuccessHandler" data-after-auth-action-type="Event" data-after-auth-global-event="favoriteManager:addFavoriteProperty" data-target-id="register" title="Save this home" data-show-home-owner-lightbox="false" data-za-label="Save Map:List" data-address="271 Hildred Dr # 271, Burlington, VT 05401" class="zsg-lightbox-show open-on-any-click" id="register_opener_0"
+        <span class="zsg-icon-heart-line"/
+        <span class="image-control sprite-heart-line"/
+      </a
+    </div
+  </figure
+  <div class="property-listing-data"
+    <div class="property-info"
+      <strong
+        <dt class="property-address"
+          <span itemscope="" itemtype="http://schema.org/SingleFamilyResidence"
+            <span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress"
+              <a href="/homedetails/271-Hildred-Dr-271-Burlington-VT-05401/12653346_zpid/" class="hdp-link routable" title="271 Hildred Dr # 271, Burlington, VT Real Estate"
+<span itemprop="streetAddress"
+271 Hildred Dr # 271</span
+, <span itemprop="addressLocality"
+Burlington</span
+, <span itemprop="addressRegion"
+VT</span
+<span itemprop="postalCode" class="hide"
+05401</span
+</a
+            </span
+            <span itemprop="geo" itemscope="" itemtype="http://schema.org/GeoCoordinates"
+              <meta itemprop="latitude" content="44.485389"/
+              <meta itemprop="longitude" content="-73.194252"/
+            </span
+          </span
+        </dt
+      </strong
+      <dt class="listing-type zsg-content_collapsed"
+<span class="zsg-icon-for-sale type-icon"/
+Condo For Sale</dt
+      <dt class="price-large zsg-h2 zsg-content_collapsed"
+$126,900</dt
+      <dt class="property-data"
+        <span class="beds-baths-sqft"
+1 bd • 1 ba • 688 sqft</span
+        <span class="built-year"
+ • Built 1992</span
+      </dt
+      <dt class="doz zsg-fineprint"
+2 days on Zillow</dt
+    </div
+  </div
+  <div class="terse-list-card-actions"
+    <a href="/myzillow/UpdateFavorites.htm?zpid=12653346&amp;operation=add&amp;ajax=false" rel="nofollow" data-fm-zpid="12653346" data-fm-callback="windowReloadSuccessHandler" data-after-auth-action-type="Event" data-after-auth-global-event="favoriteManager:addFavoriteProperty" data-target-id="register" title="Save this home" data-show-home-owner-lightbox="false" data-za-label="Save Map:List" data-address="271 Hildred Dr # 271, Burlington, VT 05401" class="zsg-lightbox-show open-on-any-click" id="register_opener_1"
+      <span class="zsg-icon-heart-line"/
+      <span class="image-control sprite-heart-line"/
+    </a
+  </div
+  <div class="minibubble template hide"
+    <!--{"bed":1,"miniBubbleType":1,"image":"http://photos3.zillowstatic.com/p_a/IS5q7x8wtqnk381000000000.jpg","sqft":688,"label":"$127K","isPropertyTypeVacantLand":false,"datasize":8,"title":"$127K","bath":1.0}--
+  </div
+</article
+```
+
+I'll spare you the trial and error, but I eventually learned there are two types of articles: property data and photo cards. I adapted the demo code into functions to parse each type of article, then I ran them through an intermediary function that would determine which parsing function to call. These functions are pretty ugly so I'll save them for last. They both required me to read the article, identify the node and attribute to read, shape the results into a data frame, and bind them to the rest of the data.
+
+
+Here are the functions. They include an argument to debug the script as it runs--this just means if you set `debugFun=cat` it will call out each node as it runs, and when it fails you can home in on the node that caused the crash.  
+
+The actual tables are pretty boring, so I'll save them for future plotting. I suspect there are more than a few homes listed multiple times, especially with the photo cards, so I'll have to weed those out later. In any case with these functions you can substitute in your own URLs and check out what the home prices in your area might tell you. Thanks for reading.
+
+```{r eval=FALSE}
+# Here's how I put it all together
+zdata3 <- parseSoldZillow(zdata2)
+zdata4 <- do.call(rbind.data.frame, zdata3)
+# Let numbers be numeric rather than factor
+for(i in c('lat', 'long', 'price', 'pricepersqft', 'beds','baths','sqft', 'acres', 'yr_built')) zdata4[i] <- as.numeric(as.character(zdata4[,i]))
+write.csv(zdata4, 'data/RS_2016May01.csv', row.names=FALSE)
+
+
+# Here are the parsers
+parseZillow <- function(zhouse.l, quiet=TRUE, debugFun=function(...) NULL) {
+    len.h <-1:length(zhouse.l)
+    lapply(1:length(zhouse.l), function(x) {
+        debugFun(x, '\n')
+        houses <- zhouse.l[[x]]
+        propdata <- tryCatch(houses %>% html_node(".property-data"), error=function(e) NULL)
+        if(!is.null(propdata)) {
+            parsePropData(houses, debugFun)
+        } else {
+            parsePhotoCard(houses, debugFun)
+        }
+    })
+}
+
+parsePropData <- function(houses, debugFun) {
+    debugFun(x, '\n')
+    z_id <- houses %>% html_attr("id")
+
+    debugFun('    address\n')
+    address <- houses %>%
+      html_node(".property-address a") %>%
+      html_attr("href") %>%
+      strsplit("/") %>%
+      pluck(3, character(1))
+      
+    debugFun('    geo\n')  
+    geo <- houses %>%
+      html_nodes(".property-address meta") %>%
+      html_attr("content") 
+    geo <- as.numeric(geo)
+    geo <- data.frame(lat=geo[seq(1,length(geo), by=2)], long=geo[seq(2,length(geo), by=2)])
+
+    debugFun('    price\n')  
+    price <- houses %>%
+      html_node(".price-large") %>%
+      html_text()
+
+
+    price <- gsub('[^0-9]', '', price)
+
+    params <- houses %>%
+      html_node(".property-data") %>%
+      html_text() %>%
+      strsplit(", ") 
+      
+    params.l <- lapply(params, function(x) {
+        if(length(x)) {
+            x <- gsub('Studio', '0.5 bds', x)
+            
+            debugFun('    beds\n')  
+            beds <- grepl('bds', x)
+            if(beds) {
+                beds <- x %>%
+                strsplit('bds')
+                beds <- beds[[1]][1]
+              } 
+            
+            debugFun('    baths\n')  
+            baths <- grepl('ba', x)
+            if(baths) {
+                baths <- x %>%
+                strsplit('ba')
+                baths <- strsplit(baths[[1]], ' ')[[1]]
+                baths <- baths[length(baths)]
+            } 
+            
+            debugFun('    house_area\n')  
+            house_area <- grepl('sqft [^a-z]+ ', x)
+            if(house_area) {
+                house_area <- x %>%
+                strsplit('sqft [^a-z]+ ')
+                house_area <- strsplit(house_area[[1]], ' ')[[1]]
+                house_area <- house_area[length(house_area)]
+            } 
+
+            debugFun('    lot_ac\n')  
+            lot_ac <- grepl('ac lot', x)
+            if(lot_ac) {
+                lot_ac <- x %>%
+                strsplit('ac lot')
+                lot_ac <- strsplit(lot_ac[[1]], ' ')[[1]]
+                lot_ac <- lot_ac[length(lot_ac)]
+            }
+            
+            lot_sqft <- grepl('sqft lot', x)
+            if(lot_sqft) {
+                lot_ac <- x %>%
+                strsplit('sqft lot')
+                lot_ac <- gsub('[^0-9.]', '', lot_ac) %>%
+                as.numeric() 
+                lot_ac <- lot_ac/43560
+            }
+            
+            debugFun('    year_built\n')  
+            year_built <- grepl('Built', x)
+            if(year_built) {
+                year_built <- x %>%
+                strsplit('Built')
+                year_built <- year_built[[1]][2]
+            } 
+            
+            out <- c(beds=beds, baths=baths, sqft=house_area, acres=lot_ac, yr_built=year_built)
+            out.vals <- gsub('[^0-9.]', '', out)
+            out.df <- data.frame(t(as.numeric(out.vals)))
+            names(out.df) <- names(out)
+            out.df
+        } else data.frame(beds=NA, baths=NA, sqft=NA, acres=NA, yr_built=NA)
+    })
+
+    params.df <- do.call(rbind.data.frame, params.l)
+
+    data.frame(z_id=z_id, address=address, geo, price=price, params.df)
+}
+
+
+parsePhotoCard <- function(houses, debugFun) {
+    z_id <- houses %>% html_attr("id")
+
+    debugFun('    address\n')
+    address <- houses %>%
+      html_node(".zsg-photo-card-spec a") %>%
+      html_attr("href") %>%
+      strsplit("/") %>%
+      pluck(3, character(1))
+      
+    debugFun('    geo\n')  
+    
+    lat <- houses %>% html_attr("data-latitude")
+    lon <- houses %>% html_attr("data-longitude")
+#    geo <- houses %>%
+#      html_nodes(".property-address meta") %>%
+#      html_attr("content") 
+
+    geo <- data.frame(lat=as.numeric(lat)*10e-7, long=as.numeric(lon)*10e-7)
+
+    debugFun('    price\n')  
+    price <- houses %>%
+      html_nodes(".zsg-photo-card-status")%>%
+      html_text()
+      
+    price <- price!='Auction'
+    for(i in 1:length(price)) {
+        if(price[i]) {
+            price[i] <- houses[i] %>%
+              html_nodes(".zsg-photo-card-spec") %>% 
+              html_nodes(".zsg-photo-card-price") %>%
+              html_text()
+        }
+    }
+
+    price <- gsub('[^0-9]', '', price)
+
+    params <- houses %>%
+      html_nodes(".zsg-photo-card-spec") %>% 
+      html_nodes(".zsg-photo-card-info") %>%
+      html_text() %>%
+      strsplit(", ")  
+      
+    params.l <- lapply(params, function(x) {
+        debugFun(x, '\n')
+        if(length(x)) {
+            x <- gsub('Studio', '0.5 bds', x)
+            x <- gsub('--', 'NA', x)
+            debugFun('    beds\n')  
+            beds <- grepl('bds', x)
+            if(beds) {
+                beds <- x %>%
+                strsplit('bds')
+                beds <- beds[[1]][1]
+              } 
+            
+            debugFun('    baths\n')  
+            baths <- grepl('ba', x)
+            if(baths) {
+                baths <- x %>%
+                strsplit('ba')
+                baths <- strsplit(baths[[1]], ' ')[[1]]
+                baths <- baths[length(baths)]
+            } 
+            
+            debugFun('    house_area\n')  
+            house_area <- grepl('sqft', x)
+            if(house_area && grepl('k sqft', x)) {
+                house_area <- x %>%
+                strsplit('k sqft')
+                house_area <- strsplit(house_area[[1]], ' ')[[1]]
+                house_area <- house_area[length(house_area)]
+                house_area <- gsub('[^0-9]', '', house_area)
+                house_area <- as.numeric(house_area) * 100
+            } else {
+                house_area <- x %>%
+                strsplit('sqft')
+                house_area <- strsplit(house_area[[1]], ' ')[[1]]
+                house_area <- house_area[length(house_area)]
+            }
+
+            debugFun('    lot_ac\n')  
+            lot_ac <- grepl('ac lot', x)
+            if(lot_ac) {
+                lot_ac <- x %>%
+                strsplit('ac lot')
+                lot_ac <- strsplit(lot_ac[[1]], ' ')[[1]]
+                lot_ac <- lot_ac[length(lot_ac)]
+            }
+            
+            lot_sqft <- grepl('sqft lot', x)
+            if(lot_sqft) {
+                lot_ac <- x %>%
+                strsplit('sqft lot')
+                lot_ac <- gsub('[^0-9.]', '', lot_ac) %>%
+                as.numeric() 
+                lot_ac <- lot_ac/43560
+            }
+            
+            debugFun('    year_built\n')  
+            year_built <- grepl('Built', x)
+            if(year_built) {
+                year_built <- x %>%
+                strsplit('Built')
+                year_built <- year_built[[1]][2]
+            } 
+            
+            out <- c(beds=beds, baths=baths, sqft=house_area, acres=lot_ac, yr_built=year_built)
+            out.vals <- gsub('[^0-9.]', '', out)
+            out.df <- data.frame(t(as.numeric(out.vals)))
+            names(out.df) <- names(out)
+            out.df
+        } else data.frame(beds=NA, baths=NA, sqft=NA, acres=NA, yr_built=NA)
+    })
+
+    params.df <- do.call(rbind.data.frame, params.l)
+
+    data.frame(z_id=z_id, address=address, geo, price=price, params.df)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

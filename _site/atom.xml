@@ -4,7 +4,7 @@
  <title>Jon Katz</title>
  <link href="http://jonkatz2.github.ionil" rel="self"/>
  <link href="http://jonkatz2.github.io"/>
- <updated>2016-05-08T11:33:33-04:00</updated>
+ <updated>2016-05-09T11:32:13-04:00</updated>
  <id>http://jonkatz2.github.io</id>
  <author>
    <name>Jon Katz</name>
@@ -31,14 +31,14 @@
         &lt;th style=&quot;text-align:center;width:42%;&quot;&gt; ggplot2::ggplot &lt;/th&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-        &lt;td style=&quot;padding: 0em 1em;width:6%;&quot;&gt; &lt;i class=&quot;fa fa-thumbs-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/td&gt;
-        &lt;td style=&quot;width:42%;&quot;&gt; Fine control of overlays for a professionally finished look. &lt;/td&gt;
-        &lt;td style=&quot;width:42%;&quot;&gt; Fine control of overlays for a professionally finished look. &lt;/td&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:6%;&quot;&gt; &lt;i class=&quot;fa fa-thumbs-up fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/td&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:42%;&quot;&gt; Fine control of overlays for a professionally finished look. &lt;/td&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:42%;&quot;&gt; Fine control of overlays for a professionally finished look. &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-        &lt;td style=&quot;padding: 0em 1em;width:6%;&quot;&gt; &lt;i class=&quot;fa fa-thumbs-down&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/td&gt;
-        &lt;td style=&quot;width:42%;&quot;&gt; Uses lattice, an implementation of Trellis graphics for R. &lt;/td&gt;
-        &lt;td style=&quot;width:42%;&quot;&gt; ggplot is the grammar of graphics, which is also a whole different plotting language implemented in R. &lt;/td&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:6%;&quot;&gt; &lt;i class=&quot;fa fa-thumbs-down fa-2x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &lt;/td&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:42%;&quot;&gt; Uses lattice, an implementation of Trellis graphics for R. &lt;/td&gt;
+        &lt;td style=&quot;padding: 0em 1em;width:42%;&quot;&gt; ggplot is the grammar of graphics, which is also a whole different plotting language implemented in R. &lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
