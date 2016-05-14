@@ -44,7 +44,7 @@ urls <- c(url, paste0(url,2:more.urls,'_p/'))
 urls
 ```
 
-Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping, then I run the function in an `lapply` loop.
+Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an `lapply` loop.
 
 ```{r}
 # The scraper function
@@ -141,7 +141,7 @@ $126,900</dt
 I'll spare you the trial and error, but I eventually learned there are two types of articles: property data and photo cards. I adapted the demo code into functions to parse each type of article, then I ran them through an intermediary function that would determine which parsing function to call. These functions are pretty ugly so I'll save them for last. They both required me to read the article, identify the node and attribute to read, shape the results into a data frame, and bind them to the rest of the data.
 
 
-Here are the functions. They include an argument to debug the script as it runs--this just means if you set `debugFun=cat` it will call out each node as it runs, and when it fails you can home in on the node that caused the crash.  
+Here are the functions. They include an argument to debug the script as it runs--this just means if you set `debugFun=cat` it will call out each node as it runs, and when it fails you can tease apart the node that caused the crash and get everything working again.  
 
 The actual tables are pretty boring, so I'll save them for future plotting. I suspect there are more than a few homes listed multiple times, especially with the photo cards, so I'll have to weed those out later. In any case with these functions you can substitute in your own URLs and check out what the home prices in your area might tell you. Thanks for reading.
 
@@ -155,7 +155,7 @@ write.csv(zdata4, 'data/RS_2016May01.csv', row.names=FALSE)
 
 
 # Here are the parsers
-parseZillow <- function(zhouse.l, quiet=TRUE, debugFun=function(...) NULL) {
+parseZillow <- function(zhouse.l, debugFun=function(...) NULL) {
     len.h <-1:length(zhouse.l)
     lapply(1:length(zhouse.l), function(x) {
         debugFun(x, '\n')

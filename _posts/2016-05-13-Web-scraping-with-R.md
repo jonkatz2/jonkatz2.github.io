@@ -68,7 +68,7 @@ urls
 ## [20] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/20_p/"
 ```
 
-Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping, then I run the function in an `lapply` loop.
+Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an `lapply` loop.
 
 
 ```r
@@ -183,7 +183,7 @@ write.csv(zdata4, 'data/RS_2016May01.csv', row.names=FALSE)
 
 
 # Here are the parsers
-parseZillow <- function(zhouse.l, quiet=TRUE, debugFun=function(...) NULL) {
+parseZillow <- function(zhouse.l, debugFun=function(...) NULL) {
     len.h <-1:length(zhouse.l)
     lapply(1:length(zhouse.l), function(x) {
         debugFun(x, '\n')

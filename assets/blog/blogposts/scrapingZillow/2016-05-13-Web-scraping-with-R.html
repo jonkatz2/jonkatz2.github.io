@@ -262,7 +262,7 @@ urls
 ## [20] &quot;http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/20_p/&quot;
 </code></pre>
 
-<p>Next I use a line from the demo script to scrape each of these URLs. Since I&#39;ve now got 20 urls I go ahead and define a quick function to do the scraping, then I run the function in an <code>lapply</code> loop.</p>
+<p>Next I use a line from the demo script to scrape each of these URLs. Since I&#39;ve now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an <code>lapply</code> loop.</p>
 
 <pre><code class="r"># The scraper function
 getZillow &lt;- function(urls) {
@@ -354,7 +354,7 @@ $126,900&lt;/dt
 
 <p>I&#39;ll spare you the trial and error, but I eventually learned there are two types of articles: property data and photo cards. I adapted the demo code into functions to parse each type of article, then I ran them through an intermediary function that would determine which parsing function to call. These functions are pretty ugly so I&#39;ll save them for last. They both required me to read the article, identify the node and attribute to read, shape the results into a data frame, and bind them to the rest of the data.</p>
 
-<p>Here are the functions. They include an argument to debug the script as it runs&ndash;this just means if you set <code>debugFun=cat</code> it will call out each node as it runs, and when it fails you can home in on the node that caused the crash.  </p>
+<p>Here are the functions. They include an argument to debug the script as it runs&ndash;this just means if you set <code>debugFun=cat</code> it will call out each node as it runs, and when it fails you can tease apart the node that caused the crash and get everything working again.  </p>
 
 <p>The actual tables are pretty boring, so I&#39;ll save them for future plotting. I suspect there are more than a few homes listed multiple times, especially with the photo cards, so I&#39;ll have to weed those out later. In any case with these functions you can substitute in your own URLs and check out what the home prices in your area might tell you. Thanks for reading.</p>
 
@@ -367,7 +367,7 @@ write.csv(zdata4, &#39;data/RS_2016May01.csv&#39;, row.names=FALSE)
 
 
 # Here are the parsers
-parseZillow &lt;- function(zhouse.l, quiet=TRUE, debugFun=function(...) NULL) {
+parseZillow &lt;- function(zhouse.l, debugFun=function(...) NULL) {
     len.h &lt;-1:length(zhouse.l)
     lapply(1:length(zhouse.l), function(x) {
         debugFun(x, &#39;\n&#39;)
