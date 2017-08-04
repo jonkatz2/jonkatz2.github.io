@@ -69,7 +69,7 @@ lines(0:(nrow(winds)-1), rMu(winds$avewind, wl=5), lty=3)
 
 ![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/OHLCPlots/figure/unnamed-chunk-3-1.png)
 
-Of course, if you want to split hairs, this chart only shows three values, and an OHLC chart shows 4. You could add a 4th easily by offsetting your tickmarks.  
+Of course, if you want to split hairs, this chart only shows three values, and an OHLC chart shows 4. You could add a 4th easily by offsetting another set of tickmarks in the other direction.  
 
 
 

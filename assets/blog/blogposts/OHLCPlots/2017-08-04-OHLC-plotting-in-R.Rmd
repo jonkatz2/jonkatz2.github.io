@@ -48,7 +48,7 @@ points(0:(nrow(winds)-1) + 0.08, winds$avewind, pch='_')
 lines(0:(nrow(winds)-1), rMu(winds$avewind, wl=5), lty=3)
 ```
 
-Of course, if you want to split hairs, this chart only shows three values, and an OHLC chart shows 4. You could add a 4th easily by offsetting your tickmarks.  
+Of course, if you want to split hairs, this chart only shows three values, and an OHLC chart shows 4. You could add a 4th easily by offsetting another set of tickmarks in the other direction.   
 
 
 ```{r}
