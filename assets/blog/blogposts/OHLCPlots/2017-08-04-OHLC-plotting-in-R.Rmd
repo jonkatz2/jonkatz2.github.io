@@ -23,6 +23,7 @@ Plotting this table as an OHLC chart is very simple --  I'll just open a blank p
 ```{r}
 plot(0,0, type='n', ylim=c(0, max(winds)), xlim=c(0, nrow(winds)-1), xlab='Day into the future', ylab='Wind speed (mph)')
 segments(0:(nrow(winds)-1), winds$minwind, 0:(nrow(winds)-1), winds$maxwind)
+points(0:(nrow(winds)-1)+0.08, winds$avewind, pch='_')
 ```
 
 If I want to get fancy, I can write a quick running-average function and draw a line on the plot. Surprisingly, this is not a function in R's base packages either. Of course, you can get this [in many packages](https://stackoverflow.com/questions/743812/calculating-moving-average) if you want to do that instead.  
