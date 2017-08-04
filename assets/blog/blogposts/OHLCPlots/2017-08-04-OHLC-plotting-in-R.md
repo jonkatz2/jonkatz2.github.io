@@ -33,13 +33,13 @@ For data I'll use some wind speed forecasts for a not so-random spot in the Colo
 ## 10      10       8       9
 ```
 
-Plotting this table as an OHLC chart is very simple --  I'll just open a blank plot, place my segments on it, then the mean points, and be done:  
+Plotting this table as an OHLC chart is very simple --  I'll just open a blank plot, place my segments on it, then the mean points with a tiny x-offset, and be done:  
 
 
 ```r
 plot(0,0, type='n', ylim=c(0, max(winds)), xlim=c(0, nrow(winds)-1), xlab='Day into the future', ylab='Wind speed (mph)')
 segments(0:(nrow(winds)-1), winds$minwind, 0:(nrow(winds)-1), winds$maxwind)
-points(0:(nrow(winds)-1)+0.08, winds$avewind, pch='_')
+points(0:(nrow(winds)-1) + 0.08, winds$avewind, pch='_')
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
@@ -63,7 +63,7 @@ rMu <- function(
 
 plot(0,0, type='n', ylim=c(0, max(winds)), xlim=c(0, nrow(winds)-1), xlab='Day into the future', ylab='Wind speed (mph)')
 segments(0:(nrow(winds)-1), winds$minwind, 0:(nrow(winds)-1), winds$maxwind)
-points(0:(nrow(winds)-1), winds$avewind, pch='_')
+points(0:(nrow(winds)-1) + 0.08, winds$avewind, pch='_')
 lines(0:(nrow(winds)-1), rMu(winds$avewind, wl=5), lty=3)
 ```
 
@@ -74,11 +74,11 @@ Of course, if you want to split hairs, this chart only shows three values, and a
 
 
 ```r
-randoffset <- runif(10, winds$minwind, winds$maxwind)
-plot(0,0, type='n', ylim=c(0, max(winds)), xlim=c(0, nrow(winds)-1), xlab='Day into the future', ylab='Wind speed (mph)')
+randval <- unlist(lapply(1:nrow(winds), function(x) runif(1, winds[x,'minwind'], winds[x,'maxwind'])))
+plot(0,0, type='n', ylim=c(0, max(winds)), xlim=c(0, nrow(winds)-1), xlab='Day in the future', ylab='Wind speed (mph)')
 segments(0:(nrow(winds)-1), winds$minwind, 0:(nrow(winds)-1), winds$maxwind)
-points(0:(nrow(winds)-1)-0.08, winds$avewind + randoffset, pch='_')
-points(0:(nrow(winds)-1)+0.08, winds$avewind, pch='_')
+points(0:(nrow(winds)-1) - 0.08, randval, pch='_')
+points(0:(nrow(winds)-1) + 0.08, winds$avewind, pch='_')
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
