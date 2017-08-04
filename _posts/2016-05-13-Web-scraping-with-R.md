@@ -28,7 +28,7 @@ First we need a URL to parse. It's pretty easy to go to the main page, do a sear
 ```r
 library(rvest)
 
-url <- "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/"#2_p/"
+url <- "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/"
 # I manually checked the source html to find the correct node to read
 more.urls <- read_html(url) %>%
   html_nodes(".zsg-pagination a") %>%

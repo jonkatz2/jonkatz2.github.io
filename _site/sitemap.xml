@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>/2016/05/13/Web-scraping-with-R</loc>
+<lastmod>2016-05-13T00:00:00-04:00</lastmod>
+</url>
+<url>
 <loc>/2016/05/01/mapping-with-base-graphics-in-r</loc>
 <lastmod>2016-05-01T00:00:00-04:00</lastmod>
 </url>
@@ -39,5 +43,9 @@
 <url>
 <loc>/assets/blog/blogposts/mappingZillow/recentlysoldArticle.html</loc>
 <lastmod>2016-04-28T11:30:44-04:00</lastmod>
+</url>
+<url>
+<loc>/assets/blog/blogposts/scrapingZillow/2016-05-13-Web-scraping-with-R.html</loc>
+<lastmod>2016-05-14T00:55:34-04:00</lastmod>
 </url>
 </urlset>

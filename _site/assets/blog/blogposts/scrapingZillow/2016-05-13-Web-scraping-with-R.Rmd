@@ -1,12 +1,147 @@
----
-layout: post
-title: "Web scraping with R"
-date: 2016-05-13
-description: ""
-category: 
-tags: [R, Scraping]
----
-{% include JB/setup %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Web scraping with R</title>
+    <meta name="description" content="">
+    <meta name="author" content="Jon Katz">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="/assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/assets/themes/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/assets/themes/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/assets/font-awesome-4.6.2/css/font-awesome.min.css">
+    <link href="/assets/themes/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/css/jonkatz2.css?body=1" rel="stylesheet" type="text/css" media="all">
+    
+    <!-- Include jQuery via CDN  -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    
+    <!-- Include a script highlighter via CDN  -->
+    <!-- see http://balupton.github.io/jquery-syntaxhighlighter/demo/ -->
+    <script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+    <script type="text/javascript">$.SyntaxHighlighter.init();</script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="nil" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="nil" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jon Katz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog">Blog</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/resume">Resume</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div class="container-fluid" style="max-width:768px;">
+        
+<div class="page-header">
+  <h1>Web scraping with R </h1>
+</div>
+
+<div class="row post-full">
+  <div class="col-xs-12">
+    <div class="date">
+      <span>13 May 2016</span>
+    </div>
+    <div class="content">
+      
 
 I'm interested in what insights can be gleaned from real estate prices. Initially I was interested because I wanted to buy a home, and of course (believe it or not this was a surprise to me) there were more nuances than I had anticipated when choosing a location to spend the next $300,000. All of Vermont is beautiful, so at least that was not a consideration. What I do want is:
 
@@ -69,7 +204,7 @@ zdata2 <- getZillow(urls)
 The "thing" about `rvest` is that the returned values are stored with external pointers, which is a new concept for me. I tried saving the pointers with `save()` for later analysis but it only saved the pointer, not the value. I didn't try `saveRDS()`; instead I decided to parse them right now and save the parsed values for later analysis. To parse an article tag I need to know what's in it. I can read it by just coercing it to a character vector, copying it off the console into my text editor (I'm a gedit user in Ubuntu), and poring through it in a civilized way. get ready for some ugly:
 
 ```{r eval=FALSE}
-as.character(zdata2[[1]][1])
+as.character(zdata[[1]][1])
 ```
 
 ```
@@ -411,4 +546,84 @@ parsePhotoCard <- function(houses, debugFun) {
 
 
 
+
+
+    </div>
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-open"></i></li>
+      
+      
+
+
+  
+    
+  
+
+
+    </ul>
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>2</span></a></li>
+     
+    	<li><a href="nil#Scraping-ref">Scraping <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev disabled"><a>&larr; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
+    <hr>
+    
+  </div>
+</div>
+
+
+      </div>
+
+    </div>
+
+<!--    <div id="footer">-->
+<!--      <div class="container">-->
+<!--        <p>&copy; 2016 Jon Katz-->
+<!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
+<!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    
+
+
+
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
 

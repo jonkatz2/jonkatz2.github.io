@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Web scraping with R</title>
+    <meta name="description" content="">
+    <meta name="author" content="Jon Katz">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="/assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/assets/themes/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/assets/themes/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/assets/font-awesome-4.6.2/css/font-awesome.min.css">
+    <link href="/assets/themes/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/css/jonkatz2.css?body=1" rel="stylesheet" type="text/css" media="all">
+    
+    <!-- Include jQuery via CDN  -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    
+    <!-- Include a script highlighter via CDN  -->
+    <!-- see http://balupton.github.io/jquery-syntaxhighlighter/demo/ -->
+    <script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+    <script type="text/javascript">$.SyntaxHighlighter.init();</script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="nil" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="nil" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jon Katz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog">Blog</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/resume">Resume</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div class="container-fluid" style="max-width:768px;">
+        
+<div class="page-header">
+  <h1>Web scraping with R </h1>
+</div>
+
+<div class="row post-full">
+  <div class="col-xs-12">
+    <div class="date">
+      <span>13 May 2016</span>
+    </div>
+    <div class="content">
+      
+<p>I’m interested in what insights can be gleaned from real estate prices. Initially I was interested because I wanted to buy a home, and of course (believe it or not this was a surprise to me) there were more nuances than I had anticipated when choosing a location to spend the next $300,000. All of Vermont is beautiful, so at least that was not a consideration. What I do want is:</p>
+
+<ul>
+  <li>To be close to my current office, and close to potential future employment too.</li>
+  <li>To be within a 45 minute drive of my extended family.</li>
+  <li>My kids to have great pre-k through high-school educations.</li>
+  <li>My wife to be close to her friends (not an issue for me, I’ve got R).</li>
+  <li>To spend as little as possible on a turn-key home.</li>
+</ul>
+
+<p>So that is how I decided I needed some real estate data. In this post I’ll show you how I get the data; hopefully in a future post we’ll do some analysis of it with regards to the above points, plus maybe see what relationships exist between sale values and factors such as school district ratings and maybe even recent political history.</p>
+
+<p>I started with a quick visit to a well-known search bot, which led me to Hadley Wickham’s <code class="highlighter-rouge">rvest</code> package (someday I’ll get better at coming up with snappy package names!). There was even a github issue noted about scraping Zillow. Then I saw that the issue resolution was added as a demo in <code class="highlighter-rouge">rvest</code>, so most of the heavy lifting was done already! Great! Not a very interesting topic for a post I guess. Well, I’ve started already so lets keep going.</p>
+
+<p>The source for much of the code is here: <a href="https://github.com/notesofdabbler" target="_blank">https://github.com/notesofdabbler</a>, and you can see the demo by checking <code class="highlighter-rouge">help(package=rvest)</code>. I’ve not tried actually running the demo, but scraping a web page means reading the DOM and parsing the page nodes, the raw HTML, and the CSS for meaning; I assume that Zillow changes the structure of their page somewhat regularly and that the demo script will probably need to be updated to work as intended–so that’s what I’ll do here. I’m going to follow the others’ leads here and adopt the special rvest <code class="highlighter-rouge">%&gt;%</code> pipe operator in this script, even though I’m not 100% comfortable using pipes in my bash scripts.</p>
+
+<p>First we need a URL to parse. It’s pretty easy to go to the main page, do a search for Vermont, and copy the resulting URL. I see that only 20 homes are displayed at a time, so I click to page 2, note how the query changes in the URL, and expand on it in my R code.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">&lt;-</span> <span class="s2">"http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/"</span>
+<span class="c1"># I manually checked the source html to find the correct node to read
+</span><span class="n">more.urls</span> <span class="o">&lt;-</span> <span class="n">read_html</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".zsg-pagination a"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="n">html_attr</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span> 
+<span class="c1"># See how high the pagination goes
+</span><span class="n">more.urls</span> <span class="o">&lt;-</span> <span class="n">more.urls</span><span class="p">[</span><span class="o">!</span><span class="n">is.na</span><span class="p">(</span><span class="n">more.urls</span><span class="p">)]</span>
+<span class="n">more.urls</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">more.urls</span><span class="p">,</span> <span class="s1">'/'</span><span class="p">)</span>
+<span class="n">more.urls</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">more.urls</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="n">more.urls</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">gsub</span><span class="p">(</span><span class="s1">'[_p]'</span><span class="p">,</span><span class="s1">''</span><span class="p">,</span> <span class="n">more.urls</span><span class="p">))</span>
+<span class="n">more.urls</span> <span class="o">&lt;-</span> <span class="n">max</span><span class="p">(</span><span class="n">more.urls</span><span class="p">)</span>
+<span class="c1"># Now paste together a url for each page
+</span><span class="n">urls</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">paste0</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="n">more.urls</span><span class="p">,</span><span class="s1">'_p/'</span><span class="p">))</span>
+
+<span class="n">urls</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##  [1] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/"     
+##  [2] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/2_p/" 
+##  [3] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/3_p/" 
+##  [4] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/4_p/" 
+##  [5] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/5_p/" 
+##  [6] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/6_p/" 
+##  [7] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/7_p/" 
+##  [8] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/8_p/" 
+##  [9] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/9_p/" 
+## [10] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/10_p/"
+## [11] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/11_p/"
+## [12] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/12_p/"
+## [13] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/13_p/"
+## [14] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/14_p/"
+## [15] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/15_p/"
+## [16] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/16_p/"
+## [17] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/17_p/"
+## [18] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/18_p/"
+## [19] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/19_p/"
+## [20] "http://www.zillow.com/homes/for_sale/VT/58_rid/any_days/45.537137,-69.062805,42.187829,-75.846863_rect/7_zm/20_p/"
+</code></pre>
+</div>
+
+<p>Next I use a line from the demo script to scrape each of these URLs. Since I’ve now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an <code class="highlighter-rouge">lapply</code> loop.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># The scraper function
+</span><span class="n">getZillow</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1"># return a list of html &lt;article&gt;&lt;/article&gt; tags, one for each URL
+</span>    <span class="n">lapply</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1"># call out the at-bat url in case there is an error
+</span>        <span class="n">cat</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s1">'\n'</span><span class="p">)</span>
+        <span class="n">houses</span> <span class="o">&lt;-</span> <span class="n">read_html</span><span class="p">(</span><span class="n">u</span><span class="p">)</span> <span class="o">%&gt;%</span>
+          <span class="n">html_nodes</span><span class="p">(</span><span class="s2">"article"</span><span class="p">)</span>
+        <span class="n">houses</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>To use this function I just need to give it the urls I made earlier:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">zdata2</span> <span class="o">&lt;-</span> <span class="n">getZillow</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The “thing” about <code class="highlighter-rouge">rvest</code> is that the returned values are stored with external pointers, which is a new concept for me. I tried saving the pointers with <code class="highlighter-rouge">save()</code> for later analysis but it only saved the pointer, not the value. I didn’t try <code class="highlighter-rouge">saveRDS()</code>; instead I decided to parse them right now and save the parsed values for later analysis. To parse an article tag I need to know what’s in it. I can read it by just coercing it to a character vector, copying it off the console into my text editor (I’m a gedit user in Ubuntu), and poring through it in a civilized way. get ready for some ugly:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">as.character</span><span class="p">(</span><span class="n">zdata</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="m">1</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;article statustype="1" latitude="44485389" id="zpid_12653346" class="property-listing zsg-media image-loaded image-controls-on-canvas" longitude="-73194252"
+  &lt;figure class="photo zsg-image zsg-media-img" data-photourl="http://photos3.zillowstatic.com/p_g/IS5q7x8wtqnk381000000000.jpg"
+    &lt;a href="/homedetails/271-Hildred-Dr-271-Burlington-VT-05401/12653346_zpid/" class="routable mask hdp-link"
+      &lt;img rel="nofollow" alt="271 Hildred Dr # 271, Burlington, VT" src="http://photos3.zillowstatic.com/p_g/IS5q7x8wtqnk381000000000.jpg" class="image-loaded"/
+      &lt;figcaption class="zsg-image-badge_black"
+12 photos&lt;/figcaption
+    &lt;/a
+    &lt;div class="terse-list-card-actions"
+      &lt;a href="/myzillow/UpdateFavorites.htm?zpid=12653346&amp;amp;operation=add&amp;amp;ajax=false" rel="nofollow" data-fm-zpid="12653346" data-fm-callback="windowReloadSuccessHandler" data-after-auth-action-type="Event" data-after-auth-global-event="favoriteManager:addFavoriteProperty" data-target-id="register" title="Save this home" data-show-home-owner-lightbox="false" data-za-label="Save Map:List" data-address="271 Hildred Dr # 271, Burlington, VT 05401" class="zsg-lightbox-show open-on-any-click" id="register_opener_0"
+        &lt;span class="zsg-icon-heart-line"/
+        &lt;span class="image-control sprite-heart-line"/
+      &lt;/a
+    &lt;/div
+  &lt;/figure
+  &lt;div class="property-listing-data"
+    &lt;div class="property-info"
+      &lt;strong
+        &lt;dt class="property-address"
+          &lt;span itemscope="" itemtype="http://schema.org/SingleFamilyResidence"
+            &lt;span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress"
+              &lt;a href="/homedetails/271-Hildred-Dr-271-Burlington-VT-05401/12653346_zpid/" class="hdp-link routable" title="271 Hildred Dr # 271, Burlington, VT Real Estate"
+&lt;span itemprop="streetAddress"
+271 Hildred Dr # 271&lt;/span
+, &lt;span itemprop="addressLocality"
+Burlington&lt;/span
+, &lt;span itemprop="addressRegion"
+VT&lt;/span
+&lt;span itemprop="postalCode" class="hide"
+05401&lt;/span
+&lt;/a
+            &lt;/span
+            &lt;span itemprop="geo" itemscope="" itemtype="http://schema.org/GeoCoordinates"
+              &lt;meta itemprop="latitude" content="44.485389"/
+              &lt;meta itemprop="longitude" content="-73.194252"/
+            &lt;/span
+          &lt;/span
+        &lt;/dt
+      &lt;/strong
+      &lt;dt class="listing-type zsg-content_collapsed"
+&lt;span class="zsg-icon-for-sale type-icon"/
+Condo For Sale&lt;/dt
+      &lt;dt class="price-large zsg-h2 zsg-content_collapsed"
+$126,900&lt;/dt
+      &lt;dt class="property-data"
+        &lt;span class="beds-baths-sqft"
+1 bd • 1 ba • 688 sqft&lt;/span
+        &lt;span class="built-year"
+ • Built 1992&lt;/span
+      &lt;/dt
+      &lt;dt class="doz zsg-fineprint"
+2 days on Zillow&lt;/dt
+    &lt;/div
+  &lt;/div
+  &lt;div class="terse-list-card-actions"
+    &lt;a href="/myzillow/UpdateFavorites.htm?zpid=12653346&amp;amp;operation=add&amp;amp;ajax=false" rel="nofollow" data-fm-zpid="12653346" data-fm-callback="windowReloadSuccessHandler" data-after-auth-action-type="Event" data-after-auth-global-event="favoriteManager:addFavoriteProperty" data-target-id="register" title="Save this home" data-show-home-owner-lightbox="false" data-za-label="Save Map:List" data-address="271 Hildred Dr # 271, Burlington, VT 05401" class="zsg-lightbox-show open-on-any-click" id="register_opener_1"
+      &lt;span class="zsg-icon-heart-line"/
+      &lt;span class="image-control sprite-heart-line"/
+    &lt;/a
+  &lt;/div
+  &lt;div class="minibubble template hide"
+    &lt;!--{"bed":1,"miniBubbleType":1,"image":"http://photos3.zillowstatic.com/p_a/IS5q7x8wtqnk381000000000.jpg","sqft":688,"label":"$127K","isPropertyTypeVacantLand":false,"datasize":8,"title":"$127K","bath":1.0}--
+  &lt;/div
+&lt;/article
+</code></pre>
+</div>
+
+<p>I’ll spare you the trial and error, but I eventually learned there are two types of articles: property data and photo cards. I adapted the demo code into functions to parse each type of article, then I ran them through an intermediary function that would determine which parsing function to call. These functions are pretty ugly so I’ll save them for last. They both required me to read the article, identify the node and attribute to read, shape the results into a data frame, and bind them to the rest of the data.</p>
+
+<p>Here are the functions. They include an argument to debug the script as it runs–this just means if you set <code class="highlighter-rouge">debugFun=cat</code> it will call out each node as it runs, and when it fails you can tease apart the node that caused the crash and get everything working again.</p>
+
+<p>The actual tables are pretty boring, so I’ll save them for future plotting. I suspect there are more than a few homes listed multiple times, especially with the photo cards, so I’ll have to weed those out later. In any case with these functions you can substitute in your own URLs and check out what the home prices in your area might tell you. Thanks for reading.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Here's how I put it all together
+</span><span class="n">zdata3</span> <span class="o">&lt;-</span> <span class="n">parseSoldZillow</span><span class="p">(</span><span class="n">zdata2</span><span class="p">)</span>
+<span class="n">zdata4</span> <span class="o">&lt;-</span> <span class="n">do.call</span><span class="p">(</span><span class="n">rbind.data.frame</span><span class="p">,</span> <span class="n">zdata3</span><span class="p">)</span>
+<span class="c1"># Let numbers be numeric rather than factor
+</span><span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="n">c</span><span class="p">(</span><span class="s1">'lat'</span><span class="p">,</span> <span class="s1">'long'</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">,</span> <span class="s1">'pricepersqft'</span><span class="p">,</span> <span class="s1">'beds'</span><span class="p">,</span><span class="s1">'baths'</span><span class="p">,</span><span class="s1">'sqft'</span><span class="p">,</span> <span class="s1">'acres'</span><span class="p">,</span> <span class="s1">'yr_built'</span><span class="p">))</span> <span class="n">zdata4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">as.character</span><span class="p">(</span><span class="n">zdata4</span><span class="p">[,</span><span class="n">i</span><span class="p">]))</span>
+<span class="n">write.csv</span><span class="p">(</span><span class="n">zdata4</span><span class="p">,</span> <span class="s1">'data/RS_2016May01.csv'</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
+
+
+<span class="c1"># Here are the parsers
+</span><span class="n">parseZillow</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">zhouse.l</span><span class="p">,</span> <span class="n">debugFun</span><span class="o">=</span><span class="k">function</span><span class="p">(</span><span class="k">...</span><span class="p">)</span> <span class="n">NULL</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">len.h</span> <span class="o">&lt;</span><span class="m">-1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">zhouse.l</span><span class="p">)</span>
+    <span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">zhouse.l</span><span class="p">),</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">debugFun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">'\n'</span><span class="p">)</span>
+        <span class="n">houses</span> <span class="o">&lt;-</span> <span class="n">zhouse.l</span><span class="p">[[</span><span class="n">x</span><span class="p">]]</span>
+        <span class="n">propdata</span> <span class="o">&lt;-</span> <span class="n">tryCatch</span><span class="p">(</span><span class="n">houses</span> <span class="o">%&gt;%</span> <span class="n">html_node</span><span class="p">(</span><span class="s2">".property-data"</span><span class="p">),</span> <span class="n">error</span><span class="o">=</span><span class="k">function</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="n">NULL</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">is.null</span><span class="p">(</span><span class="n">propdata</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">parsePropData</span><span class="p">(</span><span class="n">houses</span><span class="p">,</span> <span class="n">debugFun</span><span class="p">)</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">parsePhotoCard</span><span class="p">(</span><span class="n">houses</span><span class="p">,</span> <span class="n">debugFun</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="n">parsePropData</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">houses</span><span class="p">,</span> <span class="n">debugFun</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">debugFun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">'\n'</span><span class="p">)</span>
+    <span class="n">z_id</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span> <span class="n">html_attr</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
+
+    <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    address\n'</span><span class="p">)</span>
+    <span class="n">address</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_node</span><span class="p">(</span><span class="s2">".property-address a"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">html_attr</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">strsplit</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">pluck</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="n">character</span><span class="p">(</span><span class="m">1</span><span class="p">))</span>
+      
+    <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    geo\n'</span><span class="p">)</span>  
+    <span class="n">geo</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".property-address meta"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">html_attr</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span> 
+    <span class="n">geo</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+    <span class="n">geo</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">geo</span><span class="p">[</span><span class="n">seq</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">geo</span><span class="p">),</span> <span class="n">by</span><span class="o">=</span><span class="m">2</span><span class="p">)],</span> <span class="n">long</span><span class="o">=</span><span class="n">geo</span><span class="p">[</span><span class="n">seq</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">geo</span><span class="p">),</span> <span class="n">by</span><span class="o">=</span><span class="m">2</span><span class="p">)])</span>
+
+    <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    price\n'</span><span class="p">)</span>  
+    <span class="n">price</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_node</span><span class="p">(</span><span class="s2">".price-large"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">html_text</span><span class="p">()</span>
+
+    <span class="n">price</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_node</span><span class="p">(</span><span class="s2">".property-data"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">html_text</span><span class="p">()</span> <span class="o">%&gt;%</span>
+      <span class="n">strsplit</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span> 
+      
+    <span class="n">params.l</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'Studio'</span><span class="p">,</span> <span class="s1">'0.5 bds'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    beds\n'</span><span class="p">)</span>  
+            <span class="n">beds</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'bds'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">beds</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">beds</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'bds'</span><span class="p">)</span>
+                <span class="n">beds</span> <span class="o">&lt;-</span> <span class="n">beds</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="m">1</span><span class="p">]</span>
+              <span class="p">}</span> 
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    baths\n'</span><span class="p">)</span>  
+            <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'ba'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">baths</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'ba'</span><span class="p">)</span>
+                <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">baths</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">baths</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">baths</span><span class="p">)]</span>
+            <span class="p">}</span> 
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    house_area\n'</span><span class="p">)</span>  
+            <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'sqft [^a-z]+ '</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">house_area</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'sqft [^a-z]+ '</span><span class="p">)</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">house_area</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">house_area</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">house_area</span><span class="p">)]</span>
+            <span class="p">}</span> 
+
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    lot_ac\n'</span><span class="p">)</span>  
+            <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'ac lot'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">lot_ac</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'ac lot'</span><span class="p">)</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">lot_ac</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">lot_ac</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">lot_ac</span><span class="p">)]</span>
+            <span class="p">}</span>
+            
+            <span class="n">lot_sqft</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'sqft lot'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">lot_sqft</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'sqft lot'</span><span class="p">)</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9.]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">lot_ac</span><span class="p">)</span> <span class="o">%&gt;%</span>
+                <span class="n">as.numeric</span><span class="p">()</span> 
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">lot_ac</span><span class="o">/</span><span class="m">43560</span>
+            <span class="p">}</span>
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    year_built\n'</span><span class="p">)</span>  
+            <span class="n">year_built</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'Built'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">year_built</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">year_built</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'Built'</span><span class="p">)</span>
+                <span class="n">year_built</span> <span class="o">&lt;-</span> <span class="n">year_built</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="m">2</span><span class="p">]</span>
+            <span class="p">}</span> 
+            
+            <span class="n">out</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">beds</span><span class="o">=</span><span class="n">beds</span><span class="p">,</span> <span class="n">baths</span><span class="o">=</span><span class="n">baths</span><span class="p">,</span> <span class="n">sqft</span><span class="o">=</span><span class="n">house_area</span><span class="p">,</span> <span class="n">acres</span><span class="o">=</span><span class="n">lot_ac</span><span class="p">,</span> <span class="n">yr_built</span><span class="o">=</span><span class="n">year_built</span><span class="p">)</span>
+            <span class="n">out.vals</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9.]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+            <span class="n">out.df</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">as.numeric</span><span class="p">(</span><span class="n">out.vals</span><span class="p">)))</span>
+            <span class="n">names</span><span class="p">(</span><span class="n">out.df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+            <span class="n">out.df</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">beds</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">baths</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">sqft</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">acres</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">yr_built</span><span class="o">=</span><span class="n">NA</span><span class="p">)</span>
+    <span class="p">})</span>
+
+    <span class="n">params.df</span> <span class="o">&lt;-</span> <span class="n">do.call</span><span class="p">(</span><span class="n">rbind.data.frame</span><span class="p">,</span> <span class="n">params.l</span><span class="p">)</span>
+
+    <span class="n">data.frame</span><span class="p">(</span><span class="n">z_id</span><span class="o">=</span><span class="n">z_id</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">address</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span> <span class="n">params.df</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="n">parsePhotoCard</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">houses</span><span class="p">,</span> <span class="n">debugFun</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">z_id</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span> <span class="n">html_attr</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
+
+    <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    address\n'</span><span class="p">)</span>
+    <span class="n">address</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_node</span><span class="p">(</span><span class="s2">".zsg-photo-card-spec a"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">html_attr</span><span class="p">(</span><span class="s2">"href"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">strsplit</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">pluck</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="n">character</span><span class="p">(</span><span class="m">1</span><span class="p">))</span>
+      
+    <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    geo\n'</span><span class="p">)</span>  
+    
+    <span class="n">lat</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span> <span class="n">html_attr</span><span class="p">(</span><span class="s2">"data-latitude"</span><span class="p">)</span>
+    <span class="n">lon</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span> <span class="n">html_attr</span><span class="p">(</span><span class="s2">"data-longitude"</span><span class="p">)</span>
+<span class="c1">#    geo &lt;- houses %&gt;%
+#      html_nodes(".property-address meta") %&gt;%
+#      html_attr("content") 
+</span>
+    <span class="n">geo</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="n">as.numeric</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">*</span><span class="m">10e-7</span><span class="p">,</span> <span class="n">long</span><span class="o">=</span><span class="n">as.numeric</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span><span class="o">*</span><span class="m">10e-7</span><span class="p">)</span>
+
+    <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    price\n'</span><span class="p">)</span>  
+    <span class="n">price</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".zsg-photo-card-status"</span><span class="p">)</span><span class="o">%&gt;%</span>
+      <span class="n">html_text</span><span class="p">()</span>
+      
+    <span class="n">price</span> <span class="o">&lt;-</span> <span class="n">price</span><span class="o">!=</span><span class="s1">'Auction'</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">price</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">price</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">price</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">houses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%&gt;%</span>
+              <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".zsg-photo-card-spec"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+              <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".zsg-photo-card-price"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+              <span class="n">html_text</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">price</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">price</span><span class="p">)</span>
+
+    <span class="n">params</span> <span class="o">&lt;-</span> <span class="n">houses</span> <span class="o">%&gt;%</span>
+      <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".zsg-photo-card-spec"</span><span class="p">)</span> <span class="o">%&gt;%</span> 
+      <span class="n">html_nodes</span><span class="p">(</span><span class="s2">".zsg-photo-card-info"</span><span class="p">)</span> <span class="o">%&gt;%</span>
+      <span class="n">html_text</span><span class="p">()</span> <span class="o">%&gt;%</span>
+      <span class="n">strsplit</span><span class="p">(</span><span class="s2">", "</span><span class="p">)</span>  
+      
+    <span class="n">params.l</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">debugFun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">'\n'</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'Studio'</span><span class="p">,</span> <span class="s1">'0.5 bds'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'--'</span><span class="p">,</span> <span class="s1">'NA'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    beds\n'</span><span class="p">)</span>  
+            <span class="n">beds</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'bds'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">beds</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">beds</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'bds'</span><span class="p">)</span>
+                <span class="n">beds</span> <span class="o">&lt;-</span> <span class="n">beds</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="m">1</span><span class="p">]</span>
+              <span class="p">}</span> 
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    baths\n'</span><span class="p">)</span>  
+            <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'ba'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">baths</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'ba'</span><span class="p">)</span>
+                <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">baths</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">baths</span> <span class="o">&lt;-</span> <span class="n">baths</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">baths</span><span class="p">)]</span>
+            <span class="p">}</span> 
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    house_area\n'</span><span class="p">)</span>  
+            <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'sqft'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">house_area</span> <span class="o">&amp;&amp;</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'k sqft'</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'k sqft'</span><span class="p">)</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">house_area</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">house_area</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">house_area</span><span class="p">)]</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">house_area</span><span class="p">)</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">as.numeric</span><span class="p">(</span><span class="n">house_area</span><span class="p">)</span> <span class="o">*</span> <span class="m">100</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'sqft'</span><span class="p">)</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">house_area</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">house_area</span> <span class="o">&lt;-</span> <span class="n">house_area</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">house_area</span><span class="p">)]</span>
+            <span class="p">}</span>
+
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    lot_ac\n'</span><span class="p">)</span>  
+            <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'ac lot'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">lot_ac</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'ac lot'</span><span class="p">)</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">strsplit</span><span class="p">(</span><span class="n">lot_ac</span><span class="p">[[</span><span class="m">1</span><span class="p">]],</span> <span class="s1">' '</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">lot_ac</span><span class="p">[</span><span class="n">length</span><span class="p">(</span><span class="n">lot_ac</span><span class="p">)]</span>
+            <span class="p">}</span>
+            
+            <span class="n">lot_sqft</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'sqft lot'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">lot_sqft</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'sqft lot'</span><span class="p">)</span>
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9.]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">lot_ac</span><span class="p">)</span> <span class="o">%&gt;%</span>
+                <span class="n">as.numeric</span><span class="p">()</span> 
+                <span class="n">lot_ac</span> <span class="o">&lt;-</span> <span class="n">lot_ac</span><span class="o">/</span><span class="m">43560</span>
+            <span class="p">}</span>
+            
+            <span class="n">debugFun</span><span class="p">(</span><span class="s1">'    year_built\n'</span><span class="p">)</span>  
+            <span class="n">year_built</span> <span class="o">&lt;-</span> <span class="n">grepl</span><span class="p">(</span><span class="s1">'Built'</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">year_built</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">year_built</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%&gt;%</span>
+                <span class="n">strsplit</span><span class="p">(</span><span class="s1">'Built'</span><span class="p">)</span>
+                <span class="n">year_built</span> <span class="o">&lt;-</span> <span class="n">year_built</span><span class="p">[[</span><span class="m">1</span><span class="p">]][</span><span class="m">2</span><span class="p">]</span>
+            <span class="p">}</span> 
+            
+            <span class="n">out</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="n">beds</span><span class="o">=</span><span class="n">beds</span><span class="p">,</span> <span class="n">baths</span><span class="o">=</span><span class="n">baths</span><span class="p">,</span> <span class="n">sqft</span><span class="o">=</span><span class="n">house_area</span><span class="p">,</span> <span class="n">acres</span><span class="o">=</span><span class="n">lot_ac</span><span class="p">,</span> <span class="n">yr_built</span><span class="o">=</span><span class="n">year_built</span><span class="p">)</span>
+            <span class="n">out.vals</span> <span class="o">&lt;-</span> <span class="n">gsub</span><span class="p">(</span><span class="s1">'[^0-9.]'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+            <span class="n">out.df</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">as.numeric</span><span class="p">(</span><span class="n">out.vals</span><span class="p">)))</span>
+            <span class="n">names</span><span class="p">(</span><span class="n">out.df</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">names</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+            <span class="n">out.df</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">beds</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">baths</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">sqft</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">acres</span><span class="o">=</span><span class="n">NA</span><span class="p">,</span> <span class="n">yr_built</span><span class="o">=</span><span class="n">NA</span><span class="p">)</span>
+    <span class="p">})</span>
+
+    <span class="n">params.df</span> <span class="o">&lt;-</span> <span class="n">do.call</span><span class="p">(</span><span class="n">rbind.data.frame</span><span class="p">,</span> <span class="n">params.l</span><span class="p">)</span>
+
+    <span class="n">data.frame</span><span class="p">(</span><span class="n">z_id</span><span class="o">=</span><span class="n">z_id</span><span class="p">,</span> <span class="n">address</span><span class="o">=</span><span class="n">address</span><span class="p">,</span> <span class="n">geo</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span> <span class="n">params.df</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+
+    </div>
+
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>2</span></a></li>
+     
+    	<li><a href="nil#Scraping-ref">Scraping <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev"><a href="/2016/05/01/mapping-with-base-graphics-in-r" title="Mapping vector data with base graphics in R">&laquo; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
+    <hr>
+    
+  </div>
+</div>
+
+
+      </div>
+
+    </div>
+
+<!--    <div id="footer">-->
+<!--      <div class="container">-->
+<!--        <p>&copy; 2016 Jon Katz-->
+<!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
+<!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+
+    
+
+
+
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
