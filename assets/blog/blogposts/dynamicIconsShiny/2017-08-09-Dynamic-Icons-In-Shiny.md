@@ -24,7 +24,7 @@ I've initialized the menu links with a default icon "fa fa-caret-right", and a s
 actionLink(inputId="showcountries", label="Countries", icon("caret-right"))
 ```
 
-This is easy R code to write, but because shiny won't let us add an id to the inline icon element referencing the icon directly with jquery is not possible. Sure, we could locate it with a few extra portions of jquery selection, but for the beginner (I'm a jquery beginner) I think it is easier to just write raw HTML and include an id for the icon:  
+This is easy R code to write, but referencing the icon directly with jquery is not possible because shiny won't let us add an id to the inline icon element. Sure, we could locate it with a few extra portions of jquery selection, but for the beginner (I'm a jquery beginner) I think it is easier to just write raw HTML and include an id for the icon:  
 
 
 ```r
@@ -58,8 +58,9 @@ observeEvent(
   ignoreInit=TRUE
 )
 ```
+The message is straighforward; first, we send the id of the HTML object we want to locate, and second we send a logical message of whether anything is checked.  
 
-Now we need to write the `togglecaret` message handler and place it at `www/js/togglecaret.js` within the app directory. Here's what it looks like:
+Now we write the `togglecaret` message handler and place it at `www/js/togglecaret.js` within the app directory. Here's what it looks like:
 
 ```
 Shiny.addCustomMessageHandler("togglecaret",
