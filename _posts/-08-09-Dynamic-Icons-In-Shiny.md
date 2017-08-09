@@ -15,7 +15,7 @@ In any case, I make money by building apps for clients, and I'm sure lots of oth
 The issue is that shiny links to the Font-Awesome icon library and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
 
 Here's the menu I have embedded in the sidebar of a "shinydashboard":  
-![](img/beforefilter.png)
+![](/assets/blog/blogposts/dynamicIconsShiny/img/beforefilter.png)
 
 I've initialized the menu links with a default icon "fa fa-caret-right", and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
 
@@ -86,11 +86,23 @@ Shiny.addCustomMessageHandler("togglecaret",
 
 Our logic here is simple; when called, change the icon to a new one. The new one might be caret-down if the icon is currently caret-right, or if the checkbox group has a value and the icon is currently caret-down change it to filter. If there is no value and the icon is caret-down change to caret-right. We could have rotated it instead of replacing it, but I'm not sure there is a functional difference.  
 
+<div style="float:left;padding-right:1em;">
+<p>Here’s how it looks when the link is clicked:<br>
+<img src="/assets/blog/blogposts/dynamicIconsShiny/img/expandedfilters.png" alt="">
+</p>
+</div>
+
+<div style="float:left;padding-left:1em;">
+<p>And here's how it looks when the menu is collapsed and some boxes are checked:<br>
+<img src="/assets/blog/blogposts/dynamicIconsShiny/img/collapsedfilters.png" alt="">
+</p>
+</div>
+
 Here's how it looks when the link is clicked:  
-![](img/expandedfilters.png)
+![](/assets/blog/blogposts/dynamicIconsShiny/img/expandedfilters.png)
 
 And here's how it looks when the menu is collapsed and some boxes are checked:  
-![](img/collapsedfilters.png)
+![](/assets/blog/blogposts/dynamicIconsShiny/img/collapsedfilters.png)
 
 Pretty easy, and it is the little things that make the entire app more professional.  
 
