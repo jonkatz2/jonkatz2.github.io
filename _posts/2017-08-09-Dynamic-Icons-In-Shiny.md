@@ -4,7 +4,7 @@ title: "Dynamic Icons In Shiny Applications"
 date: 2017-08-09
 description: ""
 category: 
-tags: [R, plotting]
+tags: [R, shiny, jquery]
 ---
 {% include JB/setup %}
 
@@ -17,7 +17,7 @@ The issue is that shiny links to the [Font-Awesome icon library](http://fontawes
 Here's the menu I have embedded in the sidebar of a "shinydashboard":  
 ![](/assets/blog/dynamicIconsShiny/img/beforefilter.png)
 
-I've initialized the menu links with a default icon "fa fa-caret-right", and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
+I've initialized the menu links with a default icon "fa fa-caret-right" <i class="fa fa-caret-right"></i>, and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
 
 
 ```r
@@ -41,7 +41,7 @@ conditionalPanel('input.showcountries % 2 == 1',
 )
 ```
 
-And below the link is our `conditionalPanel()`, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The icon says to the user "click to expand",  so we don't have to explicitly write that. What we also want is for the icon to change its message and say "click to collapse" when the `conditionalPanel()` is displayed, and as an added feature we'll set it to remind the user if they have filters applied in a hidden filter (the message is "you have filters set here"). These are valuable "non-verbal communication" features of the UI, and while shiny doesn't do it automagically they do provide an way for R to send messages to the javascript in the website with `session$sendCustomMessage()` function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this `checkboxGroupInput()` are selected. We could certainly get that information in javascript as well, but this is just as easy. Here is the observer placed in the server.R file:    
+And below the link is our `conditionalPanel()`, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The <i class="fa fa-caret-right"></i> icon says to the user "click to expand",  so we don't have to explicitly write that. What we also want is for the icon to change its message and say "click to collapse" (<i class="fa fa-caret-down"></i>) when the `conditionalPanel()` is displayed, and as an added feature we'll set it to remind the user if they have filters applied in a hidden filter (the message is "you have filters set here": <i class="fa fa-filter"></i>). These are valuable "non-verbal communication" features of the UI, and while shiny doesn't do it automagically they do provide an way for R to send messages to the javascript in the website with `session$sendCustomMessage()` function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this `checkboxGroupInput()` are selected. We could certainly get that information in javascript as well, but this is just as easy. Here is the observer placed in the server.R file:    
 
 
 ```r
