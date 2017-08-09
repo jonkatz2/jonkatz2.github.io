@@ -10,7 +10,7 @@ tags: [R, plotting]
 
 
 RStudio's Shiny package hit the CRAN repository in December of 2012, and it has proven to be completely amazing. Proven is a subjective term. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won't that be roughly on par with the expected lifetime of other web technology?   
-In any case, I make money by building apps for clients, and I'm sure lots of other folks do to, so let's get on looking at a simple way to make 21st century menus in your shiny applications.
+In any case, I make money by building apps for clients, and I'm sure lots of other folks do too, so let's look at a simple way to make 21st century menus in your shiny applications.
 
 The issue is that shiny links to the Font-Awesome icon library and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
 
