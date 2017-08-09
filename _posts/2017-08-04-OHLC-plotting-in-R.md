@@ -8,8 +8,6 @@ tags: [R, plotting]
 ---
 {% include JB/setup %}
 
-
-# OHLC Plots With Base Graphics In R
 I think OHLC plots are kind of neat, but it seems R caters mostly to scientific data and these are more for financial data. Even so, there are plenty of times that I want to display high-low-mean data, but a boxplot isn't quite right. There are a number of packages that you can download to gain this feature, but oftentimes it is more trouble than it is worth to install a package so you can use one function from it (although [the version from plotly](https://plot.ly/r/ohlc-charts/) looks very cool). Here's a short workaround, using only the base plotting capabilities.  
 
 For data I'll use some wind speed forecasts for a not so-random spot in the Colorado desert. These are based on a 10-day forecast from weatherunderground.com (maybe more on that in the future), so it is 10 rows of predicted min, max, and mean wind speeds.   
