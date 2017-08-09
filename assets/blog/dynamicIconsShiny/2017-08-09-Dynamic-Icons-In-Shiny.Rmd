@@ -9,13 +9,13 @@ tags: [R, plotting]
 {% include JB/setup %}
 
 
-RStudio's Shiny package hit the CRAN repository in December of 2012, and it has proven to be completely amazing. Proven is a subjective term. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won't that be roughly on par with the expected lifetime of other web technology?   
-In any case, I make money by building apps for clients, and I'm sure lots of other folks do to, so let's get on looking at a simple way to make 21st century menus in your shiny applications.
+[RStudio's Shiny package](http://shiny.rstudio.com/) hit the [CRAN repository](https://cran.r-project.org/) in December of 2012, and it has proven to be completely amazing. Proven is a strong, subjective term typically banished from science. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won't that be roughly on par with the expected lifetime of other web technology?   
+In any case, I make money by building apps for clients, and I'm sure lots of other folks do too, so let's look at a simple way to make 21st century menus in your shiny applications.
 
-The issue is that shiny links to the Font-Awesome icon library and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
+The issue is that shiny links to the [Font-Awesome icon library](http://fontawesome.io/) and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
 
 Here's the menu I have embedded in the sidebar of a "shinydashboard":  
-![](img/beforefilter.png)
+![](/assets/blog/dynamicIconsShiny/img/beforefilter.png)
 
 I've initialized the menu links with a default icon "fa fa-caret-right", and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
 
@@ -23,7 +23,7 @@ I've initialized the menu links with a default icon "fa fa-caret-right", and a s
 actionLink(inputId="showcountries", label="Countries", icon("caret-right"))
 ``` 
 
-This is easy R code to write, but because shiny won't let us add an id to the inline icon element referencing the icon directly with jquery is not possible. Sure, we could locate it with a few extra portions of jquery selection, but for the beginner (I'm a jquery beginner) I think it is easier to just write raw HTML and include an id for the icon:  
+This is easy R code to write, but shiny won't let us add an id to the inline icon element so referencing the icon directly with jquery is impossible. Sure, we could locate it with a few extra portions of jquery selection, but for the beginner (I'm a jquery beginner) I think it is easier to just write raw HTML and include an id for the icon (I'm pretty sure there's [no damage done](https://stackoverflow.com/questions/9193293/does-too-many-ids-hurt-performace) doing this):  
 
 ```{r, eval=FALSE}
 HTML('
@@ -83,11 +83,18 @@ Shiny.addCustomMessageHandler("togglecaret",
 
 Our logic here is simple; when called, change the icon to a new one. The new one might be caret-down if the icon is currently caret-right, or if the checkbox group has a value and the icon is currently caret-down change it to filter. If there is no value and the icon is caret-down change to caret-right. We could have rotated it instead of replacing it, but I'm not sure there is a functional difference.  
 
+Of course we also need to source that into `shinydashboard::dashboardBody()`:  
+```{r, eval=FALSE}
+tags$head(
+  tags$script(src="js/togglecaret.js")
+)
+```
+
 Here's how it looks when the link is clicked:  
-![](img/expandedfilters.png)
+![](/assets/blog/dynamicIconsShiny/img/expandedfilters.png)
 
 And here's how it looks when the menu is collapsed and some boxes are checked:  
-![](img/collapsedfilters.png)
+![](/assets/blog/dynamicIconsShiny/img/collapsedfilters.png)
 
 Pretty easy, and it is the little things that make the entire app more professional.  
 

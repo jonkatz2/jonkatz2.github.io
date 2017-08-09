@@ -40,7 +40,7 @@ segments(0:(nrow(winds)-1), winds$minwind, 0:(nrow(winds)-1), winds$maxwind)
 points(0:(nrow(winds)-1)+0.08, winds$avewind, pch='_')
 ```
 
-![plot of chunk unnamed-chunk-2](/assets/blog/blogposts/OHLCPlots/figure/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-2](/assets/blog/OHLCPlots/figure/unnamed-chunk-2-1.png)
 
 If I want to get fancy, I can write a quick running-average function and draw a line on the plot. Surprisingly, this is not a function in R's base packages either. Of course, you can get this [in many packages](https://stackoverflow.com/questions/743812/calculating-moving-average) if you want to do that instead.  
 
@@ -65,7 +65,7 @@ points(0:(nrow(winds)-1), winds$avewind, pch='_')
 lines(0:(nrow(winds)-1), rMu(winds$avewind, wl=5), lty=3)
 ```
 
-![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/OHLCPlots/figure/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-3](/assets/blog/OHLCPlots/figure/unnamed-chunk-3-1.png)
 
 Of course, if you want to split hairs, this chart only shows three values, and an OHLC chart shows 4. You could add a 4th easily by offsetting another set of tickmarks in the other direction.  
 
@@ -79,7 +79,7 @@ points(0:(nrow(winds)-1) - 0.08, randval, pch='_')
 points(0:(nrow(winds)-1) + 0.08, winds$avewind, pch='_')
 ```
 
-![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/OHLCPlots/figure/unnamed-chunk-4-1.png)
+![plot of chunk unnamed-chunk-4](/assets/blog/OHLCPlots/figure/unnamed-chunk-4-1.png)
 
 
 
