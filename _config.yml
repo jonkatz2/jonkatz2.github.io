@@ -113,14 +113,14 @@ JB :
   #   
   
   analytics :
-    provider : false   
+    provider : true   
       
 #  analytics :
-#    provider : google
+    provider : google
 #    gauges :
 #        site_id : 'SITE ID'
-#    google : 
-#        tracking_id : 'UA-123-12'
+    google : 
+        tracking_id : 'UA-104441725-1'
 #    getclicky :
  #     site_id : 
  #   mixpanel :
