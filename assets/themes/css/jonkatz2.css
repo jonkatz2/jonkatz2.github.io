@@ -13,7 +13,7 @@ body, html {
 /*    max-width:768px;*/
 /*}*/
 
-@media (min-width: 800px) {
+@media (max-width: 800px) {
     .container-fluid{
         max-width: 768px;
     }
