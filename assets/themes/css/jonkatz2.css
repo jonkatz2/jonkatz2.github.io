@@ -3,6 +3,11 @@ body, html {
     margin: auto;
 }
 
+.container-fluid {
+    width: 1000px;
+    max-width:1000px;
+}
+
 /*.container {*/
 /*    width: 768px;*/
 /*    max-width:768px;*/
