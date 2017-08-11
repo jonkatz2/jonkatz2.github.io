@@ -2,10 +2,11 @@ body, html {
     max-width: 1000px;
     margin: auto;
 }
-
-.container-fluid {
-    width: 1000px;
-    max-width:1000px;
+@media (min-width: 801px) {
+    .container-fluid {
+        width: 1000px;
+        max-width:1000px;
+    }
 }
 
 /*.container {*/
