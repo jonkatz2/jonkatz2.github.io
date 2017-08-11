@@ -44,23 +44,25 @@ body, html {
     float:right;
     width:500px;
     text-align:center;
+    padding:1em;
 }
 
 #stationsm {
     float:right;
     width:500px;
     text-align:center;
+    padding:1em;
 }
 
 #leowsm {
     float:left;
     width:500px;
     text-align:center;
+    padding:1em;
 }
 
 .fullimg {
     width:100%;
     height:auto;
-    margin:17px;
 }
 
