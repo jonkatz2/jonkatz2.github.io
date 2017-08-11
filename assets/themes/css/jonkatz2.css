@@ -46,5 +46,8 @@ body, html {
     text-align:center;
 }
 
-
+.fullimg {
+    width:100%;
+    height:auto;
+}
 
