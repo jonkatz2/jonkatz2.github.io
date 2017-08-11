@@ -46,6 +46,18 @@ body, html {
     text-align:center;
 }
 
+#stationsm {
+    float:right;
+    width:500px;
+    text-align:center;
+}
+
+#leowsm {
+    float:left;
+    width:500px;
+    text-align:center;
+}
+
 .fullimg {
     width:100%;
     height:auto;
