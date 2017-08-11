@@ -26,6 +26,9 @@
 <loc>/assets/blog/dynamicIconsShiny/2017-08-09-Dynamic-Icons-In-Shiny</loc>
 </url>
 <url>
+<loc>/about</loc>
+</url>
+<url>
 <loc>/blog</loc>
 </url>
 <url>
@@ -68,9 +71,5 @@
 <url>
 <loc>/assets/blog/scrapingZillow/2016-05-13-Web-scraping-with-R.html</loc>
 <lastmod>2016-05-14T00:55:34-04:00</lastmod>
-</url>
-<url>
-<loc>/oldindex.html</loc>
-<lastmod>2017-08-11T15:32:31-04:00</lastmod>
 </url>
 </urlset>
