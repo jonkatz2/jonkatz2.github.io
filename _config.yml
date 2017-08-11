@@ -112,8 +112,8 @@ JB :
   # Set 'provider' to false to turn analytics off globally.
   #   
   
-  analytics :
-    provider : true   
+#  analytics :
+#    provider : true   
       
 #  analytics :
     provider : google
