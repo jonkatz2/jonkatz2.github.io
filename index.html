@@ -1,0 +1,41 @@
+---
+layout: default
+title: Jon Katz
+description: Jon Katz is a freelance data analyst.
+keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
+---
+
+<div>
+    <div style="font-size:1.25em;font-weight:bold;text-align:center;">
+        <a style="color:black;" href="{{ BASE_PATH }}/assets/blog/blog.html">Recent posts</a>
+    </div>
+
+    {% for post in site.posts %}
+        <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
