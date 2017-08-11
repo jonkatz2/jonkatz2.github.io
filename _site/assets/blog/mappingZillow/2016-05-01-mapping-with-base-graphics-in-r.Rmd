@@ -1,0 +1,470 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Mapping with base graphics in R</title>
+    <meta name="description" content="">
+    <meta name="author" content="Jon Katz">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="/assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/assets/themes/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/assets/themes/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/assets/font-awesome-4.6.2/css/font-awesome.min.css">
+    <link href="/assets/themes/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/css/jonkatz2.css?body=1" rel="stylesheet" type="text/css" media="all">
+    
+    <!-- Include jQuery via CDN  -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    
+    <!-- Include a script highlighter via CDN  -->
+    <!-- see http://balupton.github.io/jquery-syntaxhighlighter/demo/ -->
+    <script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+    <script type="text/javascript">$.SyntaxHighlighter.init();</script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="nil" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="nil" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jon Katz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog">Blog</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/resume">Resume</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div class="container-fluid" style="max-width:768px;">
+        
+
+<div class="page-header">
+  <h1>Mapping with base graphics in R </h1>
+</div>
+
+<div class="row post-full">
+  <div class="col-xs-12">
+    <div class="date">
+      <span>01 May 2016</span>
+    </div>
+    <div class="content">
+      
+
+
+# Mapping with R's base graphics
+
+There must be a half-dozen ways to make maps in R. Let's not conflate spatial analysis with making maps; there is typically only one - maybe two - ways to do any given spatial analysis. Reading and writing vector files: use package rgdal. Spatial analysis with vector files: use packages sp and rgeos. Use package raster (and occasionally gstat) to work with rasters.  
+
+When it comes to plotting the output, you can take your pick of methods. If you are reading this post, you've probably already seen a few other more popular posts. I'll single out this one because I refer to it regularly, plus it links to many other excellent pages:  
+[https://pakillo.github.io/R-GIS-tutorial/]()  
+
+### Here are my feelings towards what I believe are the two most popular mapping methods.
+  * **sp::spplot**  
+     + Pros: Offers fine control for overlays for a professionally finished look.  
+     + Cons: Uses lattice, which is an implementation of Trellis graphics for R. This is which basically a whole different plotting language--users familar with R base graphics will need to read many help files and do a lot of web searching to figure this out the first time. Complexity of the code increase dramatically with each new feature plotted including text overlays, scale bars, north arrows--and we haven't even added additional overlays. Each feature is a list of lists, possibly nested even deeper.  
+  * **ggplot2**  
+     + Pros: Offers fine control for overlays for a professionally finished look. Map has the smooth appearance of a ggplot.  
+     + Cons: ggplot is the *grammar of graphics*, which is also a whole different plotting language. I'm not a ggplot user, although I agree the plots look fantastic.  
+
+The handicap that both of these share is that neither plays well with R's base graphics. I might be in the minority on this one, but I happen to really like the austerity of plots produced by the base graphics. The trend-following part of me wants to learn ggplot because the plots are slick and colorful, but the swim-against-the-current part of me prefers a good old-fashioned black-and-white line graph.  
+
+For mapping I am usually in a small hurry, so oftentimes I prefer to use the base graphics because they are so easy--read in a layer, then send the plot command, and be done.   
+Let's run through a quick example.
+
+### Getting help with plot methods
+First off, finding help for S4 methods takes a little getting used to. What I need to re-learn every month or so is that the `methods` package extends functionality of the `'?'` function, so as you might get help for an S3 plot method with `?plot` or `?plot.data.frame`, you get help for an S4 method with something like `method?plot('SpatialPoints')`. A little more cumbersome, but a must know to get anything done with an S4 package.
+
+### Quick choropleth mapping with base graphics
+The general outline of tasks is:
+  1. Get the homes for sale data.
+  2. Aggregate the data by town.
+  3. Plot the aggregated data.
+  4. See what can be done to make ourselves more proud of the plot.
+
+#### 1. Get the data
+To keep this simple I'll just read in some data rather than finding it right now. Our sample data today will be the subject of a future post: homes for sale in Vermont, scraped from Zillow's website. I'll read in a snapshot of homes for sale on May 1, 2016.
+
+```{r}
+zdata <- read.csv('data/FS_2016May01.csv')
+# Get a random preview of the table
+zdata[sample(1:nrow(zdata), 20),]
+```
+
+Data scraped from a web page is bound to be missing a fair number of values, and that seems to be true here. As far as I can tell the `lat` and `long` fields are intact though.
+
+I'm going to limit this post to vector data so I can keep the packages to a minimum. Now I can convert our zillow data to a Spatial object and read in a shapefile with Vermont town boundaries:
+
+```{r}
+library(rgdal)
+library(sp)
+library(raster) # for its summary print method
+
+# Convert zillow data to a SpatialPointsDataFrame using the International Association 
+# of Oil & Gas Producers EPSG code for WGS84 projection:
+z.spat <- SpatialPointsDataFrame(zdata[,c('long', 'lat')], data=zdata, proj4string=CRS("+init=epsg:4326"))
+
+# Read in town boundaries
+vt.twn <- readOGR(dsn='data/Boundary_TWNBNDS', layer='Boundary_TWNBNDS_poly')
+vt.twn
+# transform town boundary projection to match the points
+vt.twn <- spTransform(vt.twn, CRSobj=proj4string(z.spat))
+```
+To see how quickly the base graphics get us up and running with a visual, lets plot the points.
+```{r fig.height=11}
+plot(vt.twn)
+plot(z.spat, add=TRUE, pch=19)
+```
+
+For a quick comparison, here's what the map looks like on it's home site:  
+<div style='text-align:center;'>
+<img src="img/vtZillow20160501.png" alt="Zillow Screengrab 20160501">
+</div>
+
+
+#### 2. Aggregate the data by town.
+Now that everything appears to be in order, I'd like to shade the map according to one or more of the attributes in the data. I'll begin with home median home price by town.
+
+```{r fig.width=11}
+# sp has a great spatial aggregation tool, no need to actually do any overlay
+price <- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=median, na.rm=TRUE) 
+price
+
+# see what values price has
+hist(price$price, main='Median home price by Vermont town', xlab='Price in US Dollars')
+```
+Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but more than one are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected.  
+I'll start with a simple linear shading scheme, using the built-in `heat.colors` function for the `col` argument.
+
+```{r fig.height=11}
+plot(price['price'], col=heat.colors(255), main='Median home price in Vermont, by town', axes=TRUE)
+box()
+```
+
+OK, it is clear from the plot that the base plot method just colors towns based on plot order rather than on the underlying value in the attribute table. Maybe this is not as simple as I initially expected.  
+
+I tested various options for a solid hour, and here's what I came up with. I can't change the plot order, but I can change the coloration. I need to rearrange the colors in `heat.colors()` and take them from a simple ramp to a vector arranged according to the median home price per town. The steps I'd like to perform are:
+  1. Use the `hist` function to compute price bins.
+  2. Assign the prices to bins.
+  3. Use the assigned bins to rarrange the color vector.
+  4. Plot the map.
+  5. Return an invisible vector of bins to use in the legend.
+  
+I'm going to do this by defining a quick custom function. The "quick" part is that I'm not including any argument checking that would make a more finished function in a package. The following function will perform the above steps.
+```{r}
+choropleth <- function(
+    sp,         # the feature to plot as an R object; any feature derived from package sp.
+    attrib,     # the attribute name in the table; length 1 character vector.
+    color.ramp=heat.colors,  # The color ramp to use. Can also use colorRampPalette().
+    hist.args=NULL,  # Named list of additional arguments to hist(), excluding `plot`.
+    ...         # Additional arguments to plot().
+) {
+    spa <- na.omit(sp[[attrib]])
+    # Step 1
+    ha <- list(x=spa, plot=FALSE)
+    ha <- c(ha, hist.args)
+    bins <- do.call(hist, ha)$breaks
+    # Step 2
+    bin <- rep(NA, length(spa))
+    for(i in length(bins):1) bin[spa > 0 & spa <= bins[i]] <- i-1
+    # Step 3
+    sp$bin <- NA
+    sp[['bin']][!is.na(sp[[attrib]])] <- bin
+    customcolor <- rev(color.ramp(length(bins)-1))
+    customcolor[1] <- "#FFFFFF"
+    plot(sp, col=customcolor[sp$bin], ...)
+    # Step 4
+    low.bin <- bins + 1
+    low.bin[1] <- 0
+    oldopts <- options(scipen=100000)
+    on.exit(options(oldopts))
+    invisible(paste(low.bin[1:(length(low.bin)-1)], '-', bins[2:length(bins)]))
+}
+```
+
+Now the first test. I'm going to put a legend on to see how it looks.
+```{r fig.height=11}
+x <- choropleth(price, 'price', main='Median home price in Vermont, by town', axes=TRUE)
+legend('bottomright', legend=x, fill=rev(heat.colors(length(x))), bty='n', title='$US')
+box()
+```
+
+This looks more-or-less OK, but I've plotted two yellows, two oranges, and three reds that I can't distinguish. I think I would be better off with a white, then some distinct colors. I will solve this with a one-two puch top improve my odds of success. First I'll set up my color ramp to transition between three colors. Second, since I'm using `hist()` to compute breaks, I can pass breaks into the above function manually. I want finely divided breaks between 1 and $450,000 and then one category for higher than $450,000.
+ ```{r fig.height=11}
+fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
+x <- choropleth(price, 'price', color.ramp=fill.col, hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), main='Median home price in Vermont, by town', axes=TRUE)
+fill <- rev(fill.col(length(x)))
+fill[1] <- 'white'
+legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)')
+box()
+```
+
+Now some finishing touches that I'll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale.
+
+```{r fig.width=10, fig.height=13}
+source('mapFunctions.R')
+source("http://www.math.mcmaster.ca/bolker/R/misc/legendx.R")
+
+fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
+x <- choropleth(price, 'price', color.ramp=fill.col, hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), main='Median home price in Vermont, by town', axes=TRUE)
+fill <- rev(fill.col(length(x)))
+fill[1] <- 'white'
+legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', box.cex=c(2, 0.8), inset=c(0, .25))
+scalebarTanimura(loc='bottomright', length=0.3960193, inset=c(0.52, -0.75), mapunit='degrees', unit.lab="miles")
+northarrowTanimura(loc='bottomright', size=0.4, inset=c(0,0), mapunit='degrees')
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
+count <- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=length) 
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], labels=count$price, pos=1, offset=0.6/2, cex=0.6)
+box()
+```
+
+
+```{r fig.width=20, fig.height=26, dev.args=list(pointsize=24), include=FALSE}
+source('mapFunctions.R')
+source("http://www.math.mcmaster.ca/bolker/R/misc/legendx.R")
+
+fill.col <- colorRampPalette(c('red', 'orange', 'lightgray'))
+x <- choropleth(price, 'price', color.ramp=fill.col, hist.args=list(breaks=c(0, 0, seq(250000, 450000, by=100000), 1500000)), main='Median home price in Vermont, by town', axes=TRUE)
+fill <- rev(fill.col(length(x)))
+fill[1] <- 'white'
+legend('bottomright', legend=x, fill=fill, bty='n', title='Asking Price ($US)', box.cex=c(2, 0.8), inset=c(0, .25))
+scalebarTanimura(loc='bottomright', length=0.3960193, inset=c(0.52, -0.75), mapunit='degrees', unit.lab="miles")
+northarrowTanimura(loc='bottomright', size=0.4, inset=c(0,0), mapunit='degrees')
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], labels=vt.twn$TOWNNAME, pos=3, offset=0.3/2, cex=0.3)
+count <- aggregate(z.spat['price'], by=vt.twn['TOWNNAME'], FUN=length) 
+text(x=coordinates(vt.twn)[,1], y=coordinates(vt.twn)[,2], labels=count$price, pos=1, offset=0.6/2, cex=0.6)
+box()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-open"></i></li>
+      
+      
+
+
+  
+    
+  
+
+
+    </ul>
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>4</span></a></li>
+     
+    	<li><a href="nil#Spatial analysis-ref">Spatial analysis <span>1</span></a></li>
+     
+    	<li><a href="nil#map-ref">map <span></span></a></li>
+     
+    	<li><a href="nil#GIS-ref">GIS <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev disabled"><a>&larr; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
+    <hr>
+    
+
+
+
+
+  </div>
+</div>
+
+
+      </div>
+
+    </div>
+
+<!--    <div id="footer">-->
+<!--      <div class="container">-->
+<!--        <p>&copy; 2017 Jon Katz-->
+<!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
+<!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104441725-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!--    
+
+
+-->
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

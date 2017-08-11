@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Dynamic Icons In Shiny Applications</title>
+    <meta name="description" content="">
+    <meta name="author" content="Jon Katz">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="/assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/assets/themes/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/assets/themes/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/assets/font-awesome-4.6.2/css/font-awesome.min.css">
+    <link href="/assets/themes/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/css/jonkatz2.css?body=1" rel="stylesheet" type="text/css" media="all">
+    
+    <!-- Include jQuery via CDN  -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    
+    <!-- Include a script highlighter via CDN  -->
+    <!-- see http://balupton.github.io/jquery-syntaxhighlighter/demo/ -->
+    <script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+    <script type="text/javascript">$.SyntaxHighlighter.init();</script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="nil" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="nil" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jon Katz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog">Blog</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/resume">Resume</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div class="container-fluid" style="max-width:768px;">
+        
+
+<div class="page-header">
+  <h1>Dynamic Icons In Shiny Applications </h1>
+</div>
+
+<div class="row post-full">
+  <div class="col-xs-12">
+    <div class="date">
+      <span>09 August 2017</span>
+    </div>
+    <div class="content">
+      
+
+
+
+[RStudio's Shiny package](http://shiny.rstudio.com/) hit the [CRAN repository](https://cran.r-project.org/) in December of 2012, and it has proven to be completely amazing. Proven is a strong, subjective term typically banished from science. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won't that be roughly on par with the expected lifetime of other web technology?   
+In any case, I make money by building apps for clients, and I'm sure lots of other folks do too, so let's look at a simple way to make 21st century menus in your shiny applications.
+
+The issue is that shiny links to the [Font-Awesome icon library](http://fontawesome.io/) and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond displaying a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
+
+Here's the menu I have embedded in the sidebar of a "shinydashboard":  
+![](/assets/blog/dynamicIconsShiny/img/beforefilter.png)
+
+I've initialized the menu links with a default icon "fa fa-caret-right" <i class="fa fa-caret-right"></i>, and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
+
+```{r, eval=FALSE}
+actionLink(inputId="showcountries", label="Countries", icon("caret-right"))
+``` 
+
+This is easy R code to write, but shiny won't let us add an id to the inline icon element so referencing the icon directly with jquery is impossible. Sure, we could locate it with a few extra portions of jquery selection, but for the beginner (I'm a jquery beginner) I think it is easier to just write raw HTML and include an id for the icon (I'm pretty sure there's [no damage done](https://stackoverflow.com/questions/9193293/does-too-many-ids-hurt-performace) doing this):  
+
+```{r, eval=FALSE}
+HTML('
+  <a id="showcountries" href="#" class="action-button" style="padding-left:1em;" width="100%">
+    <i id="showcountriesicon" style="padding-right:0.5em;" class="fa fa-caret-right"></i>
+    Countries
+  </a>'
+),
+conditionalPanel('input.showcountries % 2 == 1',
+  div(style='padding-left:1em', 
+    checkboxGroupInput('countries', 'Select one or more', choices=NULL)
+  )
+)
+```
+
+And below the link is our `conditionalPanel()`, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The <i class="fa fa-caret-right"></i> icon says to the user "click to expand",  so we don't have to explicitly write that. What we also want is for the icon to change its message and say "click to collapse" (<i class="fa fa-caret-down"></i>) when the `conditionalPanel()` is displayed, and as an added feature we'll set it to remind the user if they have filters applied in a hidden filter (the message is "you have filters set here": <i class="fa fa-filter"></i>). These are valuable "non-verbal communication" features of the UI, and while shiny doesn't do it automagically they do provide an way for R to send messages to the javascript in the website with `session$sendCustomMessage()` function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this `checkboxGroupInput()` are selected. We could certainly get that information in javascript as well, but this is just as easy. Here is the observer placed in the server.R file:    
+
+```{r, eval=FALSE}
+# Toggle menu carets
+observeEvent(
+  eventExpr=input$showcountries, 
+  handlerExpr=session$sendCustomMessage(
+    type = 'togglecaret', 
+    message = list(
+      id='showcountriesicon', 
+      val=!is.null(input$countries)
+    )
+  ),
+  ignoreInit=TRUE
+)
+```
+
+Now we need to write the `togglecaret` message handler and place it at `www/js/togglecaret.js` within the app directory. Here's what it looks like:
+
+```
+Shiny.addCustomMessageHandler("togglecaret",
+  function(message) {
+    var el = document.getElementById(message.id);
+    if ($(el).hasClass('fa-caret-down')) {
+        if (message.val) 
+            $(el).removeClass('fa-caret-down').addClass('fa-filter');
+        else 
+            $(el).removeClass('fa-caret-down').addClass('fa-caret-right');
+    }
+    else 
+    if ($(el).hasClass('fa-filter')) {
+        $(el).removeClass('fa-filter').addClass('fa-caret-down');
+    }
+    else
+    if ($(el).hasClass('fa-caret-right')) {
+        $(el).removeClass('fa-caret-right').addClass('fa-caret-down');
+    }
+  }
+);
+
+```
+
+Our logic here is simple; when called, change the icon to a new one. The new one might be caret-down if the icon is currently caret-right, or if the checkbox group has a value and the icon is currently caret-down change it to filter. If there is no value and the icon is caret-down change to caret-right. We could have rotated it instead of replacing it, but I'm not sure there is a functional difference.  
+
+Of course we also need to source that into `shinydashboard::dashboardBody()`:  
+```{r, eval=FALSE}
+tags$head(
+  tags$script(src="js/togglecaret.js")
+)
+```
+
+Here's how it looks when the link is clicked:  
+![](/assets/blog/dynamicIconsShiny/img/expandedfilters.png)
+
+And here's how it looks when the menu is collapsed and some boxes are checked:  
+![](/assets/blog/dynamicIconsShiny/img/collapsedfilters.png)
+
+Pretty easy, and it is the little things that make the entire app more professional.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-open"></i></li>
+      
+      
+
+
+  
+    
+  
+
+
+    </ul>
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>4</span></a></li>
+     
+    	<li><a href="nil#shiny-ref">shiny <span>1</span></a></li>
+     
+    	<li><a href="nil#jquery-ref">jquery <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev disabled"><a>&larr; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
+    <hr>
+    
+
+
+
+
+  </div>
+</div>
+
+
+      </div>
+
+    </div>
+
+<!--    <div id="footer">-->
+<!--      <div class="container">-->
+<!--        <p>&copy; 2017 Jon Katz-->
+<!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
+<!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104441725-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!--    
+
+
+-->
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

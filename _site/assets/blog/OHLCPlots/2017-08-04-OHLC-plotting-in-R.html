@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>OHLC plots with base graphics in R</title>
+    <meta name="description" content="">
+    <meta name="author" content="Jon Katz">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="/assets/themes/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="/assets/themes/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- Sticky Footer -->
+    <link href="/assets/themes/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/assets/font-awesome-4.6.2/css/font-awesome.min.css">
+    <link href="/assets/themes/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/css/jonkatz2.css?body=1" rel="stylesheet" type="text/css" media="all">
+    
+    <!-- Include jQuery via CDN  -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    
+    <!-- Include a script highlighter via CDN  -->
+    <!-- see http://balupton.github.io/jquery-syntaxhighlighter/demo/ -->
+    <script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+    <script type="text/javascript">$.SyntaxHighlighter.init();</script>
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="nil" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="nil" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>
+    <div id="wrap">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#jb-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Jon Katz</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="jb-navbar-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog">Blog</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/resume">Resume</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+
+
+
+          </ul>
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div class="container-fluid" style="max-width:768px;">
+        
+
+<div class="page-header">
+  <h1>OHLC plots with base graphics in R </h1>
+</div>
+
+<div class="row post-full">
+  <div class="col-xs-12">
+    <div class="date">
+      <span>04 August 2017</span>
+    </div>
+    <div class="content">
+      
+<h1 id="ohlc-plots-with-base-graphics-in-r">OHLC Plots With Base Graphics In R</h1>
+<p>I think OHLC plots are kind of neat, but it seems R caters mostly to scientific data and these are more for financial data. Even so, there are plenty of times that I want to display high-low-mean data, but a boxplot isn’t quite right. There are a number of packages that you can download to gain this feature, but oftentimes it is more trouble than it is worth to install a package so you can use one function from it (although <a href="https://plot.ly/r/ohlc-charts/">the version from plotly</a> looks very cool). Here’s a short workaround, using only the base plotting capabilities.</p>
+
+<p>For data I’ll use some wind speed forecasts for a not so-random spot in the Colorado desert. These are based on a 10-day forecast from weatherunderground.com (maybe more on that in the future), so it is 10 rows of predicted min, max, and mean wind speeds.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">(</span><span class="n">winds</span> <span class="o">&lt;-</span> <span class="n">read.csv</span><span class="p">(</span><span class="s1">'winds.csv'</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>##    maxwind minwind avewind
+## 1       15       5      10
+## 2       20       6      13
+## 3       15       7      11
+## 4       15       5      10
+## 5       10       6       8
+## 6       10       4       7
+## 7       15       7      11
+## 8       20       6      13
+## 9       15       5      10
+## 10      10       8       9
+</code></pre>
+</div>
+
+<p>Plotting this table as an OHLC chart is very simple –  I’ll just open a blank plot, place my segments on it, then the mean points with a tiny x-offset, and be done:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">plot</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">winds</span><span class="p">)),</span> <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s1">'Day into the future'</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s1">'Wind speed (mph)'</span><span class="p">)</span>
+<span class="n">segments</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">winds</span><span class="o">$</span><span class="n">minwind</span><span class="p">,</span> <span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">winds</span><span class="o">$</span><span class="n">maxwind</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span> <span class="o">+</span> <span class="m">0.08</span><span class="p">,</span> <span class="n">winds</span><span class="o">$</span><span class="n">avewind</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="s1">'_'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><img src="figure/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2" /></p>
+
+<p>If I want to get fancy, I can write a quick running-average function and draw a line on the plot. Surprisingly, this is not a function in R’s base packages either. Of course, you can get this <a href="https://stackoverflow.com/questions/743812/calculating-moving-average">in many packages</a> if you want to do that instead.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">rMu</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>        <span class="c1"># Vector of values to average
+</span>    <span class="n">wl</span> <span class="o">=</span> <span class="m">3</span>   <span class="c1"># Window length: number of frames to average
+</span><span class="p">){</span>
+    <span class="n">trail</span> <span class="o">&lt;-</span> <span class="n">wl</span> <span class="o">%/%</span> <span class="m">2</span>
+    <span class="n">lead</span> <span class="o">&lt;-</span> <span class="n">wl</span> <span class="o">%/%</span> <span class="m">2</span>  <span class="o">-</span> <span class="p">(</span><span class="n">wl</span> <span class="o">+</span> <span class="m">1</span><span class="p">)</span> <span class="o">%%</span> <span class="m">2</span> <span class="c1"># When wl is even, extra value is behind center
+</span>    <span class="n">sapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="k">function</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">thiswin</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">trail</span><span class="p">)</span><span class="o">:</span><span class="p">(</span><span class="n">y</span><span class="o">+</span><span class="n">lead</span><span class="p">)</span>
+        <span class="n">vals</span> <span class="o">&lt;-</span> <span class="n">na.omit</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">thiswin</span><span class="p">[</span><span class="n">thiswin</span> <span class="o">&gt;</span> <span class="m">0</span><span class="p">]])</span>
+        <span class="n">sum</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">winds</span><span class="p">)),</span> <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s1">'Day into the future'</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s1">'Wind speed (mph)'</span><span class="p">)</span>
+<span class="n">segments</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">winds</span><span class="o">$</span><span class="n">minwind</span><span class="p">,</span> <span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">winds</span><span class="o">$</span><span class="n">maxwind</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span> <span class="o">+</span> <span class="m">0.08</span><span class="p">,</span> <span class="n">winds</span><span class="o">$</span><span class="n">avewind</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="s1">'_'</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">rMu</span><span class="p">(</span><span class="n">winds</span><span class="o">$</span><span class="n">avewind</span><span class="p">,</span> <span class="n">wl</span><span class="o">=</span><span class="m">5</span><span class="p">),</span> <span class="n">lty</span><span class="o">=</span><span class="m">3</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><img src="figure/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3" /></p>
+
+<p>Of course, if you want to split hairs, this chart only shows three values, and an OHLC chart shows 4. You could add a 4th easily by offsetting your tickmarks.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">randval</span> <span class="o">&lt;-</span> <span class="n">unlist</span><span class="p">(</span><span class="n">lapply</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">),</span> <span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">runif</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">winds</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="s1">'minwind'</span><span class="p">],</span> <span class="n">winds</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="s1">'maxwind'</span><span class="p">])))</span>
+<span class="n">plot</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s1">'n'</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">winds</span><span class="p">)),</span> <span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">xlab</span><span class="o">=</span><span class="s1">'Day in the future'</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s1">'Wind speed (mph)'</span><span class="p">)</span>
+<span class="n">segments</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">winds</span><span class="o">$</span><span class="n">minwind</span><span class="p">,</span> <span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">),</span> <span class="n">winds</span><span class="o">$</span><span class="n">maxwind</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span> <span class="o">-</span> <span class="m">0.08</span><span class="p">,</span> <span class="n">randval</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="s1">'_'</span><span class="p">)</span>
+<span class="n">points</span><span class="p">(</span><span class="m">0</span><span class="o">:</span><span class="p">(</span><span class="n">nrow</span><span class="p">(</span><span class="n">winds</span><span class="p">)</span><span class="m">-1</span><span class="p">)</span> <span class="o">+</span> <span class="m">0.08</span><span class="p">,</span> <span class="n">winds</span><span class="o">$</span><span class="n">avewind</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="s1">'_'</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><img src="figure/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4" /></p>
+
+
+    </div>
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-open"></i></li>
+      
+      
+
+
+  
+    
+  
+
+
+    </ul>
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>4</span></a></li>
+     
+    	<li><a href="nil#plotting-ref">plotting <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev disabled"><a>&larr; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
+    <hr>
+    
+
+
+
+
+  </div>
+</div>
+
+
+      </div>
+
+    </div>
+
+<!--    <div id="footer">-->
+<!--      <div class="container">-->
+<!--        <p>&copy; 2017 Jon Katz-->
+<!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
+<!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
+<!--        </p>-->
+<!--      </div>-->
+<!--    </div>-->
+    
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104441725-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!--    
+
+
+-->
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

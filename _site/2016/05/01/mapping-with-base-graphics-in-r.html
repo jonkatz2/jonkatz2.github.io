@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -94,6 +95,22 @@
   
     
       
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
       	
       	<li><a href="/blog">Blog</a></li>
       	
@@ -131,6 +148,7 @@
 
       <div class="container-fluid" style="max-width:768px;">
         
+
 <div class="page-header">
   <h1>Mapping vector data with base graphics in R </h1>
 </div>
@@ -294,12 +312,12 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 </code></pre>
 </div>
 
-<!--![plot of chunk unnamed-chunk-3](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png) -->
+<!--![plot of chunk unnamed-chunk-3](/assets/blog/mappingZillow/figure/unnamed-chunk-3-1.png) -->
 
 <p>For a quick side-by-side comparison, here’s our plot on the left and Zillow’s map on it’s home site grabbed the same day:</p>
 <div>
-    <img style="width:47%;float:left;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-3-1.png" alt="Our plot 20160501" />
-    <img style="width:52%;float:right;" src="/assets/blog/blogposts/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501" />
+    <img style="width:47%;float:left;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-3-1.png" alt="Our plot 20160501" />
+    <img style="width:52%;float:right;" src="/assets/blog/mappingZillow/img/vtZillow20160501.png" alt="Zillow Screengrab 20160501" />
 </div>
 <div style="clear:both;"></div>
 
@@ -327,8 +345,8 @@ Now I can convert our zillow data to a Spatial object and read in a shapefile wi
 </code></pre>
 </div>
 
-<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png" alt="The final map" /> 
-<!--![plot of chunk unnamed-chunk-4](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-4-1.png) --></p>
+<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-4-1.png" alt="The final map" /> 
+<!--![plot of chunk unnamed-chunk-4](/assets/blog/mappingZillow/figure/unnamed-chunk-4-1.png) --></p>
 
 <p>Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.<br />
 I’ll start with a simple linear shading scheme, using the built-in <code class="highlighter-rouge">heat.colors</code> gradient for the <code class="highlighter-rouge">col</code> argument.</p>
@@ -338,8 +356,8 @@ I’ll start with a simple linear shading scheme, using the built-in <code class
 <span class="n">box</span><span class="p">()</span>
 </code></pre>
 </div>
-<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png" alt="The final map" /> 
-<!--![plot of chunk unnamed-chunk-5](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-5-1.png) --></p>
+<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-5-1.png" alt="The final map" /> 
+<!--![plot of chunk unnamed-chunk-5](/assets/blog/mappingZillow/figure/unnamed-chunk-5-1.png) --></p>
 
 <p>OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.</p>
 
@@ -401,8 +419,8 @@ The following function will perform the above steps.</p>
 <span class="n">box</span><span class="p">()</span>
 </code></pre>
 </div>
-<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png" alt="The final map" /> 
-<!--![plot of chunk unnamed-chunk-7](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-7-1.png) --></p>
+<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-7-1.png" alt="The final map" /> 
+<!--![plot of chunk unnamed-chunk-7](/assets/blog/mappingZillow/figure/unnamed-chunk-7-1.png) --></p>
 
 <p>This looks more-or-less OK, but I’ve plotted two oranges and three reds that I can’t distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I’ll set up my color ramp to transition between three colors. Second, since I’m using <code class="highlighter-rouge">hist()</code> to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using <code class="highlighter-rouge">hist</code>). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.</p>
 
@@ -422,8 +440,8 @@ The following function will perform the above steps.</p>
 <span class="n">box</span><span class="p">()</span>
 </code></pre>
 </div>
-<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png" alt="The final map" /> 
-<!-- ![plot of chunk unnamed-chunk-8](/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-8-1.png) --></p>
+<p><img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-8-1.png" alt="The final map" /> 
+<!-- ![plot of chunk unnamed-chunk-8](/assets/blog/mappingZillow/figure/unnamed-chunk-8-1.png) --></p>
 
 <p>Now some finishing touches that I’ll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale. Click on the map to see it larger.</p>
 
@@ -461,7 +479,7 @@ The following function will perform the above steps.</p>
 
 <!-- Trigger the modal-->
 <p><a href="#" data-toggle="modal" data-target="#myModal">
-    <img id="finalMapImg" style="width:100%;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-9-1.png" alt="The final map" /> 
+    <img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-9-1.png" alt="The final map" /> 
 </a>
 <!-- Modal --></p>
 <div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
@@ -475,7 +493,7 @@ The following function will perform the above steps.</p>
       </div>
       <div class="modal-body">
         <div style="overflow:hidden;"> 
-          <img id="finalMapImgLg" style="width:950px;" src="/assets/blog/blogposts/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map" />
+          <img id="finalMapImgLg" style="width:950px;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-10-1.png" alt="The final map" />
         </div>
         <!-- <p>Some text in the modal.</p>-->
       </div>
@@ -501,7 +519,7 @@ The following function will perform the above steps.</p>
 
   
      
-    	<li><a href="nil#R-ref">R <span>2</span></a></li>
+    	<li><a href="nil#R-ref">R <span>4</span></a></li>
      
     	<li><a href="nil#Spatial analysis-ref">Spatial analysis <span>1</span></a></li>
      
@@ -530,6 +548,10 @@ The following function will perform the above steps.</p>
     </ul>
     <hr>
     
+
+
+
+
   </div>
 </div>
 
@@ -540,17 +562,28 @@ The following function will perform the above steps.</p>
 
 <!--    <div id="footer">-->
 <!--      <div class="container">-->
-<!--        <p>&copy; 2016 Jon Katz-->
+<!--        <p>&copy; 2017 Jon Katz-->
 <!--          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>-->
 <!--          and <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>-->
 <!--        </p>-->
 <!--      </div>-->
 <!--    </div>-->
-
     
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-104441725-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!--    
 
 
-
+-->
 
 
     <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
