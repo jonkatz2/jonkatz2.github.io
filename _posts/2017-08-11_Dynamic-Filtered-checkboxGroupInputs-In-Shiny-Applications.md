@@ -1,0 +1,101 @@
+---
+layout: post
+title: "Dynamic Filtered checkboxGroupInputs In Shiny Applications"
+date: 2017-08-11
+description: ""
+category: 
+tags: [R, shiny, javascript, tips]
+---
+{% include JB/setup %}
+
+
+In the last post I showed how to toggle icons on the UI based on an R variable, and how to pass that variable to javascript using `session$sendCustomMessage()`. The client also requested that the checkboxes dynamically indicate whether a given value is present in the data. In other words, if the user selects an item from category 1 in the list of filters, it is possible that not all choices from category will be present in the data, and it would be nice for the UI to make that clear. 
+  
+The first thing I tried was to use `updateCheckboxGroupInput()` to remove the choices that were no longer present in the data. This turned out to be unacceptable because it was difficult, if not impossible, to select more than one choice from any given category. I tried a number of possibilities here; triggering the choice removal with the filter `reactive()` element was the worst, as it would change the choices as soon as the first one was selected. Triggering removal with any choice not from the current category was ok, but it still had issues. Ultimately I conceded that this task could not be done in shiny alone; I would need to look to jquery or javascript to help, again by sending a custom message.  
+
+First, here is what I settled on.  
+
+The category that choices are being actively selected from is "frozen"; visibility of these choices is not adjusted until a choice is selected from a different category. This is accomplished by having the observer triggered by any category except the current one. Absolute visibility is not toggled; instead, I change the text color to "gray", but allow the box to still be checked. This is important because the coloration is not 100% accurate; sometimes if a user chooses filters in one category-order, but de-selects some in a different category-order, the coloration may lag the actual filter. It's a little hard to describe.  
+
+<div class="col-sm-4">
+<p>Anyway, here is the menu with the first two categories expanded.  </p>
+<img src="/assets/blog/dynamicListsShiny/img/menu1.png">
+</div>
+
+<div class="col-sm-4">
+<p>When a country is selected, no changes are made to the *countries* checkboxes, but the *institutions* are updated to indicate which ones are in the now-filtered data.</p>
+<img src="/assets/blog/dynamicListsShiny/img/menu2.png">
+</div>
+
+<div class="col-sm-4">
+<p>Moving on to select from the second category, now no changes are made to *institutions* while the *countries* are updated.</p>
+<img src="/assets/blog/dynamicListsShiny/img/menu3.png">
+</div>
+
+And here's the code that does it. First the observer in **server.R**:  
+
+```r
+# Filter country checkboxes
+observe({
+    # invalidate when any other category is adjusted (filters is a global vector of inputIds)
+    filters <- filters[-which(filters == 'countries')]
+    sapply(filters, function(x) input[[x]])
+    isolate({
+        # selectData() is the reactive element that does the actual subsetting in the data.frame
+        dat <- selectData()
+        if(!is.null(dat)) {
+            if(nrow(dat)) {
+                # grab global var that contains the choices for input$countries
+                countries <- countries[!countries %in% unique(na.omit(dat$country))]
+                if(sum(is.na(dat$country)) || sum(dat$country == '')) countries <- countries[-which(countries == 'missing')]
+                session$sendCustomMessage(type='togglegroup', message = list(
+                    id='countries',
+                    red=unname(countries) # red was my first test, forgot to update the component name
+                ))                        
+             }
+         }
+    })
+})
+```
+
+And then the javascript handler. I couldn't get jquery to work for me here, I'm not sure why.
+```
+// gray out filter values not in the filtered data
+// message is 'id' and 'red', even though the color changes to gray (started with red)
+Shiny.addCustomMessageHandler("togglegroup",
+  function(message) { 
+    // Select all input and span elements inside the grouping div's id
+    var $cb = document.getElementById(message.id).getElementsByTagName('INPUT');
+    var $sp = document.getElementById(message.id).getElementsByTagName('SPAN');
+    for (var i = 0; i < $cb.length; i ++) {
+      // evaluate whether the name should turn gray
+      if (message.red.indexOf($cb[i].value) > -1) {
+        $sp[i].className = 'graytext';
+      }
+      else
+      {
+        $sp[i].className = '';
+      }
+    }
+  }
+);
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

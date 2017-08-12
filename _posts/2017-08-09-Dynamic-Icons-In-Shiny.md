@@ -4,12 +4,12 @@ title: "Dynamic Icons In Shiny Applications"
 date: 2017-08-09
 description: ""
 category: 
-tags: [R, shiny, jquery]
+tags: [R, shiny, jquery, tips]
 ---
 {% include JB/setup %}
 
 
-[RStudio's Shiny package](http://shiny.rstudio.com/) hit the [CRAN repository](https://cran.r-project.org/) in December of 2012, and it has proven to be completely amazing. Proven is a strong, subjective term typically banished from science. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won't that be roughly on par with the expected lifetime of other web technology?   
+[RStudio's Shiny package](http://shiny.rstudio.com/) hit the [CRAN repository](https://cran.r-project.org/) in December of 2012, and it has proven to be completely amazing. Proven is a strong, subjective term typically banished from science. Amazing is also a strong word. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won't that be roughly on par with the expected lifetime of other web technology?   
 In any case, I make money by building apps for clients, and I'm sure lots of other folks do too, so let's look at a simple way to make 21st century menus in your shiny applications.
 
 The issue is that shiny links to the [Font-Awesome icon library](http://fontawesome.io/) and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond displaying a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
@@ -41,7 +41,7 @@ conditionalPanel('input.showcountries % 2 == 1',
 )
 ```
 
-And below the link is our `conditionalPanel()`, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The <i class="fa fa-caret-right"></i> icon says to the user "click to expand",  so we don't have to explicitly write that. What we also want is for the icon to change its message and say "click to collapse" (<i class="fa fa-caret-down"></i>) when the `conditionalPanel()` is displayed, and as an added feature we'll set it to remind the user if they have filters applied in a hidden filter (the message is "you have filters set here": <i class="fa fa-filter"></i>). These are valuable "non-verbal communication" features of the UI, and while shiny doesn't do it automagically they do provide an way for R to send messages to the javascript in the website with `session$sendCustomMessage()` function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this `checkboxGroupInput()` are selected. We could certainly get that information in javascript as well, but this is just as easy. Here is the observer placed in the server.R file:    
+And below the link is our `conditionalPanel()`, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The <i class="fa fa-caret-right"></i> icon says to the user "click to expand",  so we don't have to explicitly write that. What we also want is for the icon to change its message and say "click to collapse" (<i class="fa fa-caret-down"></i>) when the `conditionalPanel()` is displayed, and as an added feature we'll set it to remind the user if they have filters applied in a hidden filter (the message is "you have filters set here": <i class="fa fa-filter"></i>). These are valuable "non-verbal communication" features of the UI, and while shiny doesn't do it automagically it does have a built-in way for R to pass variables to the javascript in the website with `session$sendCustomMessage()` function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this `checkboxGroupInput()` are selected. We could certainly just use an "on-click" routine and get that information soley with javascript, but this is just as easy. Here is the observer placed in the server.R file:    
 
 
 ```r
