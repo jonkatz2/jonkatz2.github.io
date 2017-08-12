@@ -14,8 +14,12 @@ In any case, I make money by building apps for clients, and I'm sure lots of oth
 
 The issue is that shiny links to the [Font-Awesome icon library](http://fontawesome.io/) and offers a function to add those icons to your app (`shiny::icon()`), but what you do with those icons beyond displaying a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We're going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.  
 
-Here's the menu I have embedded in the sidebar of a "shinydashboard":  
-![](/assets/blog/dynamicIconsShiny/img/beforefilter.png)
+<div class="col-sm-4">
+<p>Here's the menu I have embedded in the sidebar of a "shinydashboard":</p>
+</div>
+<div style="clear:both;" class="col-sm-4">
+<img src="/assets/blog/dynamicIconsShiny/img/beforefilter.png">
+</div>
 
 I've initialized the menu links with a default icon "fa fa-caret-right" <i class="fa fa-caret-right"></i>, and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
 
@@ -93,15 +97,19 @@ tags$head(
   tags$script(src="js/togglecaret.js")
 )
 ```
-
+<div class="col-sm-6">
 Here's how it looks when the link is clicked:  
-![](/assets/blog/dynamicIconsShiny/img/expandedfilters.png)
+<img src="/assets/blog/dynamicIconsShiny/img/expandedfilters.png">
+</div>
 
+<div class="col-sm-6">
 And here's how it looks when the menu is collapsed and some boxes are checked:  
-![](/assets/blog/dynamicIconsShiny/img/collapsedfilters.png)
+<img src="/assets/blog/dynamicIconsShiny/img/collapsedfilters.png">
+</div>
 
-Pretty easy, and it is the little things that make the entire app more professional.  
-
+<div style="padding-top:1em;">
+<p>Pretty easy, and it is the little things that make the entire app more professional.</p>  
+</div>
 
 
 
