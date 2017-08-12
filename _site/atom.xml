@@ -4,13 +4,95 @@
  <title>Jon Katz</title>
  <link href="http://jonkatz2.github.ionil" rel="self"/>
  <link href="http://jonkatz2.github.io"/>
- <updated>2017-08-11T23:09:58-04:00</updated>
+ <updated>2017-08-11T23:12:24-04:00</updated>
  <id>http://jonkatz2.github.io</id>
  <author>
    <name>Jon Katz</name>
    <email>jonkatz2@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Dynamic Filtered checkboxGroupInputs In Shiny Applications</title>
+   <link href="http://jonkatz2.github.io/2017/08/11/Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications"/>
+   <updated>2017-08-11T00:00:00-04:00</updated>
+   <id>http://jonkatz2.github.io/2017/08/11/Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications</id>
+   <content type="html">
+&lt;p&gt;In the last post I showed how to toggle icons on the UI based on an R variable, and how to pass that variable to javascript using &lt;code class=&quot;highlighter-rouge&quot;&gt;session$sendCustomMessage()&lt;/code&gt;. The client also requested that the checkboxes dynamically indicate whether a given value is present in the data. In other words, if the user selects an item from category 1 in the list of filters, it is possible that not all choices from category will be present in the data, and it would be nice for the UI to make that clear.&lt;/p&gt;
+
+&lt;p&gt;The first thing I tried was to use &lt;code class=&quot;highlighter-rouge&quot;&gt;updateCheckboxGroupInput()&lt;/code&gt; to remove the choices that were no longer present in the data. This turned out to be unacceptable because it was difficult, if not impossible, to select more than one choice from any given category. I tried a number of possibilities here; triggering the choice removal with the filter &lt;code class=&quot;highlighter-rouge&quot;&gt;reactive()&lt;/code&gt; element was the worst, as it would change the choices as soon as the first one was selected. Triggering removal with any choice not from the current category was ok, but it still had issues. Ultimately I conceded that this task could not be done in shiny alone; I would need to look to jquery or javascript to help, again by sending a custom message.&lt;/p&gt;
+
+&lt;p&gt;First, here is what I settled on.&lt;/p&gt;
+
+&lt;p&gt;The category that choices are being actively selected from is “frozen”; visibility of these choices is not adjusted until a choice is selected from a different category. This is accomplished by having the observer triggered by any category except the current one. Absolute visibility is not toggled; instead, I change the text color to “gray”, but allow the box to still be checked. This is important because the coloration is not 100% accurate; sometimes if a user chooses filters in one category-order, but de-selects some in a different category-order, the coloration may lag the actual filter. It’s a little hard to describe.&lt;/p&gt;
+
+&lt;div class=&quot;col-sm-4&quot;&gt;
+&lt;p&gt;Anyway, here is the menu with the first two categories expanded.  &lt;/p&gt;
+&lt;img src=&quot;/assets/blog/dynamicListsShiny/img/menu1.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;col-sm-4&quot;&gt;
+&lt;p&gt;When a country is selected, no changes are made to the *countries* checkboxes, but the *institutions* are updated to indicate which ones are in the now-filtered data.&lt;/p&gt;
+&lt;img src=&quot;/assets/blog/dynamicListsShiny/img/menu2.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;col-sm-4&quot;&gt;
+&lt;p&gt;Moving on to select from the second category, now no changes are made to *institutions* while the *countries* are updated.&lt;/p&gt;
+&lt;img src=&quot;/assets/blog/dynamicListsShiny/img/menu3.png&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And here’s the code that does it. First the observer in &lt;strong&gt;server.R&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Filter country checkboxes
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;observe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# invalidate when any other category is adjusted (filters is a global vector of inputIds)
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;which&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;countries&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;isolate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# selectData() is the reactive element that does the actual subsetting in the data.frame
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is.null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;# grab global var that contains the choices for input$countries
+&lt;/span&gt;                &lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;unique&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;na.omit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))]&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is.na&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dat&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;which&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;missing&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;session&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendCustomMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;togglegroup&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;countries&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;countries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# red was my first test, forgot to update the component name
+&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;                        
+             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And then the javascript handler. I couldn’t get jquery to work for me here, I’m not sure why.
+```
+// gray out filter values not in the filtered data
+// message is ‘id’ and ‘red’, even though the color changes to gray (started with red)
+Shiny.addCustomMessageHandler(“togglegroup”,
+  function(message) { 
+    // Select all input and span elements inside the grouping div’s id
+    var $cb = document.getElementById(message.id).getElementsByTagName(‘INPUT’);
+    var $sp = document.getElementById(message.id).getElementsByTagName(‘SPAN’);
+    for (var i = 0; i &amp;lt; $cb.length; i ++) {
+      // evaluate whether the name should turn gray
+      if (message.red.indexOf($cb[i].value) &amp;gt; -1) {
+        $sp[i].className = ‘graytext’;
+      }
+      else
+      {
+        $sp[i].className = ‘’;
+      }
+    }
+  }
+);&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Dynamic Icons In Shiny Applications</title>

@@ -317,9 +317,9 @@ Pretty easy, and it is the little things that make the entire app more professio
 
   
      
-    	<li><a href="nil#R-ref">R <span>4</span></a></li>
+    	<li><a href="nil#R-ref">R <span>5</span></a></li>
      
-    	<li><a href="nil#shiny-ref">shiny <span>1</span></a></li>
+    	<li><a href="nil#shiny-ref">shiny <span>2</span></a></li>
      
     	<li><a href="nil#jquery-ref">jquery <span>1</span></a></li>
     

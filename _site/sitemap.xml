@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>/2017/08/11/Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications</loc>
+<lastmod>2017-08-11T00:00:00-04:00</lastmod>
+</url>
+<url>
 <loc>/2017/08/09/Dynamic-Icons-In-Shiny</loc>
 <lastmod>2017-08-09T00:00:00-04:00</lastmod>
 </url>
@@ -26,7 +30,7 @@
 <loc>/assets/blog/dynamicIconsShiny/2017-08-09-Dynamic-Icons-In-Shiny</loc>
 </url>
 <url>
-<loc>/assets/blog/dynamicListsShiny/2017-08-11_Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications</loc>
+<loc>/assets/blog/dynamicListsShiny/2017-08-11-Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications</loc>
 </url>
 <url>
 <loc>/about</loc>
