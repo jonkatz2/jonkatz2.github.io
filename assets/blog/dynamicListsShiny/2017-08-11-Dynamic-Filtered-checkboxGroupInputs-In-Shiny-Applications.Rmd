@@ -42,7 +42,9 @@ The category that choices are being actively selected from is "frozen"; visibili
 <img src="/assets/blog/dynamicListsShiny/img/menu3.png">
 </div>
 </div>
-And here's the code that does it. First the observer in **server.R**:  
+
+
+And here's the code that does it. First the observer in **server.R**:   
 ```{r, eval=FALSE}
 # Filter country checkboxes
 observe({
