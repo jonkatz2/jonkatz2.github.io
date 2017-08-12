@@ -22,11 +22,11 @@ The category that choices are being actively selected from is "frozen"; visibili
 </div>
 
 <div class="col-sm-4">
-<p>When a country is selected, no changes are made to the *countries* checkboxes, but the *institutions* are updated to indicate which ones are in the now-filtered data.</p>
+<p>When a country is selected, no changes are made to the countries checkboxes, but the institutions are updated to indicate which ones are in the now-filtered data.</p>
 </div>
 
 <div class="col-sm-4">
-<p>Moving on to select from the second category, now no changes are made to *institutions* while the *countries* are updated.</p>
+<p>Moving on to select from the second category, now no changes are made to institutions while the countries are updated.</p>
 </div>
 
 <div style="clear:both;">
@@ -43,6 +43,7 @@ The category that choices are being actively selected from is "frozen"; visibili
 </div>
 </div>
 
+<div style="clear:both;"></div>
 
 And here's the code that does it. First the observer in **server.R**:   
 
