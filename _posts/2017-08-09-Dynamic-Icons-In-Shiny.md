@@ -21,7 +21,7 @@ The issue is that shiny links to the [Font-Awesome icon library](http://fontawes
 <p>Here's how it looks when the link is clicked:</p>  
 </div>
 <div class="col-sm-4">
-<p>And here's how it looks when the menu is collapsed and some boxes are checked:</p>  
+<p>And here's how it looks when some boxes are checked and the menu is collapsed:</p>  
 </div>
 
 <div style="clear:both;" class="col-sm-4">
