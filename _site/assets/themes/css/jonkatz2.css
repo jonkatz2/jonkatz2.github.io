@@ -21,8 +21,8 @@ body, html {
 }
 
 .image-cropper {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -34,3 +34,35 @@ body, html {
     height: 100%;
     width: auto;
 }
+
+#myhead {
+    margin: auto;
+    width: 200px;
+}
+
+#savssm {
+    float:right;
+    width:500px;
+    text-align:center;
+    padding:1em;
+}
+
+#stationsm {
+    float:right;
+    width:500px;
+    text-align:center;
+    padding:1em;
+}
+
+#leowsm {
+    float:left;
+    width:500px;
+    text-align:center;
+    padding:1em;
+}
+
+.fullimg {
+    width:100%;
+    height:auto;
+}
+

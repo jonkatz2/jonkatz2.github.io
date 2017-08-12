@@ -109,6 +109,14 @@
   
     
       
+    
+  
+    
+      
+    
+  
+    
+      
       	
       	<li><a href="/about">About Me</a></li>
       	
@@ -178,7 +186,7 @@
     </div>
     <div class="content">
       
-<p><a href="http://shiny.rstudio.com/">RStudio’s Shiny package</a> hit the <a href="https://cran.r-project.org/">CRAN repository</a> in December of 2012, and it has proven to be completely amazing. Proven is a strong, subjective term typically banished from science. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won’t that be roughly on par with the expected lifetime of other web technology? <br />
+<p><a href="http://shiny.rstudio.com/">RStudio’s Shiny package</a> hit the <a href="https://cran.r-project.org/">CRAN repository</a> in December of 2012, and it has proven to be completely amazing. Proven is a strong, subjective term typically banished from science. Amazing is also a strong word. Some would say shiny apps are not enterprise web solutions, but if apps made today last three years, won’t that be roughly on par with the expected lifetime of other web technology? <br />
 In any case, I make money by building apps for clients, and I’m sure lots of other folks do too, so let’s look at a simple way to make 21st century menus in your shiny applications.</p>
 
 <p>The issue is that shiny links to the <a href="http://fontawesome.io/">Font-Awesome icon library</a> and offers a function to add those icons to your app (<code class="highlighter-rouge">shiny::icon()</code>), but what you do with those icons beyond displaying a static image is up to you. This icon library is ubiquitous across the web, and no doubt we are all aware of how they can signal to a user that you can click a menu to expand or collapse it. This is a low-key but critical piece of the user experience. We’re going to do exactly that right here with a deep set of filters embedded within collapsible menus, as well as offer information about the state of the each filter while it is hidden.</p>
@@ -208,7 +216,7 @@ In any case, I make money by building apps for clients, and I’m sure lots of o
 </code></pre>
 </div>
 
-<p>And below the link is our <code class="highlighter-rouge">conditionalPanel()</code>, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The <i class="fa fa-caret-right"></i> icon says to the user “click to expand”,  so we don’t have to explicitly write that. What we also want is for the icon to change its message and say “click to collapse” (<i class="fa fa-caret-down"></i>) when the <code class="highlighter-rouge">conditionalPanel()</code> is displayed, and as an added feature we’ll set it to remind the user if they have filters applied in a hidden filter (the message is “you have filters set here”: <i class="fa fa-filter"></i>). These are valuable “non-verbal communication” features of the UI, and while shiny doesn’t do it automagically they do provide an way for R to send messages to the javascript in the website with <code class="highlighter-rouge">session$sendCustomMessage()</code> function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this <code class="highlighter-rouge">checkboxGroupInput()</code> are selected. We could certainly get that information in javascript as well, but this is just as easy. Here is the observer placed in the server.R file:</p>
+<p>And below the link is our <code class="highlighter-rouge">conditionalPanel()</code>, set to open on the odd-numbered clicks and to close on the even-numbered clicks. The <i class="fa fa-caret-right"></i> icon says to the user “click to expand”,  so we don’t have to explicitly write that. What we also want is for the icon to change its message and say “click to collapse” (<i class="fa fa-caret-down"></i>) when the <code class="highlighter-rouge">conditionalPanel()</code> is displayed, and as an added feature we’ll set it to remind the user if they have filters applied in a hidden filter (the message is “you have filters set here”: <i class="fa fa-filter"></i>). These are valuable “non-verbal communication” features of the UI, and while shiny doesn’t do it automagically it does have a built-in way for R to pass variables to the javascript in the website with <code class="highlighter-rouge">session$sendCustomMessage()</code> function. We can use this to both call a javascript function as well as pass values to that function. The value we need is whether any of the boxes in this <code class="highlighter-rouge">checkboxGroupInput()</code> are selected. We could certainly just use an “on-click” routine and get that information soley with javascript, but this is just as easy. Here is the observer placed in the server.R file:</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Toggle menu carets
 </span><span class="n">observeEvent</span><span class="p">(</span>
@@ -287,6 +295,8 @@ In any case, I make money by building apps for clients, and I’m sure lots of o
     	<li><a href="nil#shiny-ref">shiny <span>1</span></a></li>
      
     	<li><a href="nil#jquery-ref">jquery <span>1</span></a></li>
+     
+    	<li><a href="nil#tips-ref">tips <span>1</span></a></li>
     
   
 

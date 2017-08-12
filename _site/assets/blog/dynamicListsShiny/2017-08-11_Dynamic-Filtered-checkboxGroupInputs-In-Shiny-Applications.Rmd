@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>About Me</title>
-    
+    <title>Dynamic Filtered checkboxGroupInputs In Shiny Applications</title>
+    <meta name="description" content="">
     <meta name="author" content="Jon Katz">
 
     <!-- Enable responsive viewport -->
@@ -118,7 +118,7 @@
     
       
       	
-      	<li class="active"><a href="/about" class="active">About Me</a></li>
+      	<li><a href="/about">About Me</a></li>
       	
       
     
@@ -173,37 +173,170 @@
       </nav>
   
       <div class="container-fluid">
-        <div id="myhead" class="image-cropper">
-<img class="rounded centered" src="/assets/about/jkatz.JPG" >
+        
+
+<div class="page-header">
+  <h1>Dynamic Filtered checkboxGroupInputs In Shiny Applications </h1>
 </div>
 
-<div style="clear:both;">
-    <p>
-    I am a freelance data analyst in the greater Burlington, Vermont area. I'm trained as a quantitative ecologist. What does that mean? To me it means that my past work leaned heavily on statistics, large datasets, and the tools necessary to unite the two. I specialize in R, database design and interaction, and lately I've been going deep with Shiny, a package that lets me unite those two in a web application. I spent a large part of the last three years building a single monstrous shiny application, plus another half-dozen small ones. My first apps were fairly generic, but lately I've been improving the experience with small javascript and jquery enhancements.
-    </p>
-    <p>
-    Most of the apps I build are for specific uses by small groups. As such, my clients typically control access to the final apps. If you are interested in seeing one or two, send me a message and I'll show some you. You can find my email address at the top of my resume.
-    </p>
-    <p>
-    I put this site together for a couple of reasons. First, I'm an R enthusiast, and I enjoy sharing what I know and offering tips for solving problems in R. Second, I've been involved in a couple of projects (such as the <a href="https://cran.r-project.org/package=monitoR">R package monitoR</a>) that I hope to showcase here. Last, but not least, I'm not a social media enthusiast so of course I need a platform to show off what I can do to prospective clients.
-    </p>
-    <div id="savssm">
-        <img class="fullimg" src="https://dl.dropboxusercontent.com/s/moyt5h9ljpd7ulg/SavannahSparrow_small.JPG?raw=1" >
-        <p style="font-size:small;">Savannah Sparrow, somewhere along the CA coast</p>
+<div class="row post-full">
+  <div class="col-xs-12">
+    <div class="date">
+      <span>11 August 2017</span>
     </div>
-    <p>
-    I used to take a lot of photos and chase a lot of birds and take photos while chasing birds. I don't do that very often anymore, and have mostly lost touch with my best birding buddy, but I see myself doing it again someday. I really mastered the "bird on a stick" photo.
-    </p>
-    <p>These photos are just a few I took  years ago. I put them here for fun.</p>
-    <div id="leowsm">
-        <img class="fullimg" src="https://dl.dropboxusercontent.com/s/hxri1spotjellzd/LEOW3_sm.jpg?raw=1" >
-        <p style="font-size:small;">Long-eared Owl, Mercy Hot Springs CA</p>
+    <div class="content">
+      
+
+
+
+In the last post I showed how to toggle icons on the UI based on an R variable, and how to pass that variable to javascript using `session$sendCustomMessage()`. The client also requested that the checkboxes dynamically indicate whether a given value is present in the data. In other words, if the user selects an item from category 1 in the list of filters, it is possible that not all choices from category will be present in the data, and it would be nice for the UI to make that clear. 
+  
+The first thing I tried was to use `updateCheckboxGroupInput()` to remove the choices that were no longer present in the data. This turned out to be unacceptable because it was difficult, if not impossible, to select more than one choice from any given category. I tried a number of possibilities here; triggering the choice removal with the filter `reactive()` element was the worst, as it would change the choices as soon as the first one was selected. Triggering removal with any choice not from the current category was ok, but it still had issues. Ultimately I conceded that this task could not be done in shiny alone; I would need to look to jquery or javascript to help, again by sending a custom message.  
+
+First, here is what I settled on.  
+
+The category that choices are being actively selected from is "frozen"; visibility of these choices is not adjusted until a choice is selected from a different category. This is accomplished by having the observer triggered by any category except the current one. Absolute visibility is not toggled; instead, I change the text color to "gray", but allow the box to still be checked. This is important because the coloration is not 100% accurate; sometimes if a user chooses filters in one category-order, but de-selects some in a different category-order, the coloration may lag the actual filter. It's a little hard to describe.  
+
+<div class="col-sm-4">
+<p>Anyway, here is the menu with the first two categories expanded.  </p>
+<img src="/assets/blog/dynamicListsShiny/img/menu1.png">
+</div>
+
+<div class="col-sm-4">
+<p>When a country is selected, no changes are made to the *countries* checkboxes, but the *institutions* are updated to indicate which ones are in the now-filtered data.</p>
+<img src="/assets/blog/dynamicListsShiny/img/menu2.png">
+</div>
+
+<div class="col-sm-4">
+<p>Moving on to select from the second category, now no changes are made to *institutions* while the *countries* are updated.</p>
+<img src="/assets/blog/dynamicListsShiny/img/menu3.png">
+</div>
+
+And here's the code that does it. First the observer in **server.R**:  
+```{r, eval=FALSE}
+# Filter country checkboxes
+observe({
+    # invalidate when any other category is adjusted (filters is a global vector of inputIds)
+    filters <- filters[-which(filters == 'countries')]
+    sapply(filters, function(x) input[[x]])
+    isolate({
+        # selectData() is the reactive element that does the actual subsetting in the data.frame
+        dat <- selectData()
+        if(!is.null(dat)) {
+            if(nrow(dat)) {
+                # grab global var that contains the choices for input$countries
+                countries <- countries[!countries %in% unique(na.omit(dat$country))]
+                if(sum(is.na(dat$country)) || sum(dat$country == '')) countries <- countries[-which(countries == 'missing')]
+                session$sendCustomMessage(type='togglegroup', message = list(
+                    id='countries',
+                    red=unname(countries) # red was my first test, forgot to update the component name
+                ))                        
+             }
+         }
+    })
+})
+```
+
+And then the javascript handler. I couldn't get jquery to work for me here, I'm not sure why.
+```
+// gray out filter values not in the filtered data
+// message is 'id' and 'red', even though the color changes to gray (started with red)
+Shiny.addCustomMessageHandler("togglegroup",
+  function(message) { 
+    // Select all input and span elements inside the grouping div's id
+    var $cb = document.getElementById(message.id).getElementsByTagName('INPUT');
+    var $sp = document.getElementById(message.id).getElementsByTagName('SPAN');
+    for (var i = 0; i < $cb.length; i ++) {
+      // evaluate whether the name should turn gray
+      if (message.red.indexOf($cb[i].value) > -1) {
+        $sp[i].className = 'graytext';
+      }
+      else
+      {
+        $sp[i].className = '';
+      }
+    }
+  }
+);
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-open"></i></li>
+      
+      
+
+
+  
     
-    <div id="stationsm">
-        <img class="fullimg" src="https://dl.dropboxusercontent.com/s/g7o8y1tswtxzf64/station2_sm.jpg?raw=1>
-        <p style="font-size:small;">Hoffman's 76, Davis CA</p>
-    </div>
+  
+
+
+    </ul>
+    
+
+  
+    <ul class="tag_box inline">
+      <li><i class="glyphicon glyphicon-tags"></i></li>
+      
+      
+
+
+  
+     
+    	<li><a href="nil#R-ref">R <span>4</span></a></li>
+     
+    	<li><a href="nil#shiny-ref">shiny <span>1</span></a></li>
+     
+    	<li><a href="nil#javascript-ref">javascript <span></span></a></li>
+     
+    	<li><a href="nil#tips-ref">tips <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  
+    <hr>
+    <ul class="pagination">
+    
+      <li class="prev disabled"><a>&larr; Previous</a></li>
+    
+      <li><a href="nil">Archive</a></li>
+    
+      <li class="next disabled"><a>Next &rarr;</a>
+    
+    </ul>
+    <hr>
+    
+
+
+
+
+  </div>
 </div>
 
 
