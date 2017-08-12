@@ -17,9 +17,24 @@ The issue is that shiny links to the [Font-Awesome icon library](http://fontawes
 <div class="col-sm-4">
 <p>Here's the menu I have embedded in the sidebar of a "shinydashboard":</p>
 </div>
+<div class="col-sm-4">
+<p>Here's how it looks when the link is clicked:</p>  
+</div>
+<div class="col-sm-4">
+<p>And here's how it looks when the menu is collapsed and some boxes are checked:</p>  
+</div>
+
 <div style="clear:both;" class="col-sm-4">
 <img src="/assets/blog/dynamicIconsShiny/img/beforefilter.png">
 </div>
+<div class="col-sm-4">
+<img src="/assets/blog/dynamicIconsShiny/img/expandedfilters.png">
+</div>
+<div class="col-sm-4">
+<img src="/assets/blog/dynamicIconsShiny/img/collapsedfilters.png">
+</div>
+
+<div style="clear:both;padding-top:1em;"> </div>
 
 I've initialized the menu links with a default icon "fa fa-caret-right" <i class="fa fa-caret-right"></i>, and a series of conditionalPanels that expand when the link is clicked. A typical way to do this would be to use the `shiny::actionLink()` function in the ui.R file:  
 
@@ -97,19 +112,9 @@ tags$head(
   tags$script(src="js/togglecaret.js")
 )
 ```
-<div class="col-sm-6">
-Here's how it looks when the link is clicked:  
-<img src="/assets/blog/dynamicIconsShiny/img/expandedfilters.png">
-</div>
 
-<div class="col-sm-6">
-And here's how it looks when the menu is collapsed and some boxes are checked:  
-<img src="/assets/blog/dynamicIconsShiny/img/collapsedfilters.png">
-</div>
+Pretty easy, and it is the little things that make the entire app more professional.  
 
-<div style="padding-top:1em;">
-<p>Pretty easy, and it is the little things that make the entire app more professional.</p>  
-</div>
 
 
 
