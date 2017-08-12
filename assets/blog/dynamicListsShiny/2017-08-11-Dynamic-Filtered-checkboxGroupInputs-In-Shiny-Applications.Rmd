@@ -43,7 +43,7 @@ The category that choices are being actively selected from is "frozen"; visibili
 </div>
 </div>
 
-<div style="clear:both;"></div>
+<div style="clear:both;padding-top:1em;"></div>
 
 And here's the code that does it. First the observer in **server.R**:   
 ```{r, eval=FALSE}
