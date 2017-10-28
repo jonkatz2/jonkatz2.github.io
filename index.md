@@ -13,7 +13,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <p>Lately I have been writing lots of shiny applications. The value of a shiny application is it can easily make a dataset not only public, but publicly explorable, and they are easy to build, easy to host, and easy to maintain.</p>
     
     <p>Here are a few public applications I recently completed.</p>
-    <p>You might also want to <a href="http://jonkatz2.github.io/resume/" target="_blank">check out my resume</a>, or I have a couple of blog posts <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" target="_blank">illustrating some simple R functions I wrote.</a></p>
+    <p>You might also want to <a href="http://jonkatz2.github.io/resume" target="_blank">check out my resume</a>, or I have a couple of blog posts <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" target="_blank">illustrating some simple R functions I wrote.</a></p>
     
     
     <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
