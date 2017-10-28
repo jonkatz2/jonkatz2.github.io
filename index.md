@@ -17,7 +17,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     
     
     <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
-    <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
+    <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img style="width:1000px;" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
     <p><strong>To browse this app as a guest, login with the username "guest."</strong></p>
     <p>This is an interactive survey to gather expert opinion on species occurrence at a number of points. This app is currently shared by three projects, so experts log in to connect their responses to the project in which they are participating</p>
     
@@ -34,7 +34,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <p>The survey parameters and expert responses are stored in a mongoDB database hosted at mlab.com. Projects upload locations as a shapefile containing either polygons or points; persistent file storage for the shapefile is via an AWS S3 storage bucket. I have also used AWS RDS as a relational database back-end for some apps.</p>
     
     <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">An MCDA Visualization</a>
-    <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
+    <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img style="width:1000px;" src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
     <p>This app is designed for a multiple-criteria decision analysis, particularly the decision for how to restore natural tidal flows to an estuary on Cape Cod, Massachussets, while minimizing negative impacts to surrounding landowners and businesses. The app is driven by a series of csv files uploaded at the start of the process. Sample csv files can be downloaded in using the menu in the upper right. The full analysis can be saved and downloaded so that it may be re-visited in the future without re-parameterizing the entire app. Logging in for this app allows the analysis to be saved to a server; persistent file storage is on Google Drive, which is free and convenient due to the web-editing capability. </p>
 
     <p>To ensure you can see the final graphs, here are brief instructions for use:</p>
@@ -50,12 +50,12 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <p>I am self-hosting this app during development, but it will be hosted by the client on completion. If it doesn't load I may have run out of time on my free shinyapps.io account. Drop me an email and I'll send you an active link to a functional app.</p>
     
     <a href="https://jkatz.shinyapps.io/demo1/" target="_blank">An Explorable Dataset</a>
-    <a href="https://jkatz.shinyapps.io/demo1/" target="_blank"><img src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
+    <a href="https://jkatz.shinyapps.io/demo1/" target="_blank"><img style="width:1000px;" src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
     <p>This app fills the need for a researcher to make the data from a project publicly accessible. I'm most happy with how well the data subsetting for this app works. Data subsetting is day-1 stuff in R, but somehow it was not intuitive to display the relative contents of the subset compared to the entire dataset in an interactive setting. I posted a few notes about this in my short blog.</p>
     
     
     <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank">The Online Biogas Calculator</a> 
-    <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
+    <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img style="width:1000px;" src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
     <p>This app is a calculator for computing the volume of methane biogas produced by controlled digesters. It is essentially a web interface for the R package <a href="https://cran.r-project.org/package=biogas" target="_blank">biogas</a> by Sasha Hafner et al. This is an early app, but still completely functional. </p>
     
     
