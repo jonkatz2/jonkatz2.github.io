@@ -190,7 +190,7 @@ price
 hist(price$price, main='Median home price by Vermont town', xlab='Price in US Dollars')
 ```
 
-<img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-4-1.png" alt="The final map"> 
+<img id="histofprice" style="width:75%;margin:auto;display:block;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-4-1.png" alt="histogram of price"> 
 <!--![plot of chunk unnamed-chunk-4](/assets/blog/mappingZillow/figure/unnamed-chunk-4-1.png) -->
 
 Judging from the histogram, most homes for sale in Vermont are asking less than $400,000, but several are asking more than $1.2M. This is going to make shading this map a little harder than I initially expected, and it is going to bump up the complexity of the code we write.  
@@ -202,7 +202,7 @@ plot(price['price'], col=heat.colors(255),
     main='Median home price in Vermont, by town', axes=TRUE)
 box()
 ```
-<img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-5-1.png" alt="The final map"> 
+<img id="initialMapImg" style="width:50%;margin:auto;display:block;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-5-1.png" alt="initial map"> 
 <!--![plot of chunk unnamed-chunk-5](/assets/blog/mappingZillow/figure/unnamed-chunk-5-1.png) -->
 
 OK, it is clear from this plot that the method just colors towns by plot order rather than by the underlying value in the attribute table. Another complication; maybe this is not as simple as I initially expected.  
@@ -261,7 +261,7 @@ legend('bottomright', legend=x, fill=rev(heat.colors(length(x))),
     
 box()
 ```
-<img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-7-1.png" alt="The final map"> 
+<img id="secondImg" style="width:50%;margin:auto;display:block;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-7-1.png" alt="The second map"> 
 <!--![plot of chunk unnamed-chunk-7](/assets/blog/mappingZillow/figure/unnamed-chunk-7-1.png) -->
 
 This looks more-or-less OK, but I've plotted two oranges and three reds that I can't distinguish, and my legend shows two yellows but the lighter one is probably white in the map. I need to fix the white, and follow it up with more distinct colors. I will solve this with a one-two punch to improve my odds of success. First I'll set up my color ramp to transition between three colors. Second, since I'm using `hist()` to compute breaks, I can pass breaks into the above function manually (which almost defeats the purpose of using `hist`). I want finely divided breaks between 1 and $450,000 and then one category for all prices higher than $450,000.  
@@ -282,7 +282,7 @@ legend('bottomright', legend=x, fill=fill, bty='n',
 
 box()
 ```
-<img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-8-1.png" alt="The final map"> 
+<img id="thirdMapImg" style="width:50%;margin:auto;display:block;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-8-1.png" alt="The third map"> 
 <!-- ![plot of chunk unnamed-chunk-8](/assets/blog/mappingZillow/figure/unnamed-chunk-8-1.png) -->
 
 Now some finishing touches that I'll discuss more in a future post: a scale bar, a north arrow, larger fill-boxes in the legend, and labels for both town name and count of homes for sale. Click on the map to see it larger.
@@ -322,7 +322,7 @@ box()
 
 <!-- Trigger the modal-->
 <a href="#" data-toggle="modal" data-target="#myModal">
-    <img id="finalMapImg" style="width:100%;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-9-1.png" alt="The final map"> 
+    <img id="finalMapImg" style="width:50%;margin:auto;display:block;" src="/assets/blog/mappingZillow/figure/unnamed-chunk-9-1.png" alt="The final map"> 
 </a>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog" aria-hidden="true">
