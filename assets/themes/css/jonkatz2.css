@@ -67,6 +67,10 @@ body, html {
     height:auto;
 }
 
+.imgcontainer {
+    position: relative;
+}
+
 .imgcontainer:hover .imglink {
   opacity: 0.3;
   background-color: #00008B;
