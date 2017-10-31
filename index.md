@@ -18,7 +18,12 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     
     <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
         <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
-        <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img style="width:984px;" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
+        <div class="imgcontainer">
+            <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
+            <div class="middle">
+                <div class="imglinktext">Click to open app</div>
+            </div>
+        </div>
         
         <p style="padding-top:17px;"><strong>To browse this app as a guest, login with the username "guest."</strong></p>
         <p>This is an interactive survey to gather expert opinion on species occurrence at a number of points. This app is currently shared by three projects, so experts log in to connect their responses to the project in which they are participating</p>
