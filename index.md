@@ -21,7 +21,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
         <div class="imgcontainer">
             <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
             <div class="middle">
-                <div class="imglinktext"><a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a></div>
+                <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
         </div>
         
@@ -53,7 +53,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
         <div class="imgcontainer">
             <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img class="imglink"  style="width:984px;" src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
             <div class="middle">
-                <div class="imglinktext"><a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a></div>
+                <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
         </div>
         <p style="padding-top:17px;">This app is designed for a multiple-criteria decision analysis, particularly the decision for how to restore natural tidal flows to an estuary on Cape Cod, Massachussets, while minimizing negative impacts to surrounding landowners and businesses. The app is driven by a series of csv files uploaded at the start of the process. Sample csv files can be downloaded in using the menu in the upper right. The full analysis can be saved and downloaded so that it may be re-visited in the future without re-parameterizing the entire app. Logging in for this app allows the analysis to be saved to a server; persistent file storage is on Google Drive, which is free and convenient due to the web-editing capability. </p>
@@ -76,7 +76,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
         <div class="imgcontainer">
             <a href="https://jkatz.shinyapps.io/demo1/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
             <div class="middle">
-                <div class="imglinktext"><a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a></div>
+                <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
         </div>
         <p style="padding-top:17px;">The researchers who commissioned this app were required by their grant to make the data publicly accessible; this app does that with more style than linking to an enormous spreadsheet. I'm most happy with how well the data subsetting is presented on-screen. Data subsetting is day-one stuff in R, but somehow it was not intuitive to display the relative contents of the subset compared to the entire dataset in an interactive setting. I posted <a href="http://jonkatz2.github.io/2017/08/11/Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications" target="_blank">a few notes about this</a> in my short blog. I'm self-hosting this demo version with permission, I'll update the link when the official version is public.</p>
@@ -86,7 +86,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
         <div class="imgcontainer">
             <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
             <div class="middle">
-                <div class="imglinktext"><a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a></div>
+                <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
         </div>
         <p style="padding-top:17px;">This app is a calculator for computing the volume of methane biogas produced by controlled digesters. It is essentially a web interface for the R package <a href="https://cran.r-project.org/package=biogas" target="_blank">biogas</a> by Sasha Hafner et al. This is an early app, but still completely functional. </p>
