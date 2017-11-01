@@ -10,6 +10,10 @@ body, html {
         max-width:1000px;
     }
     
+    .imglink {
+        width:984px;
+    }
+
     #savssm {
         float:right;
         width:500px;
@@ -125,10 +129,6 @@ body, html {
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%)
-}
-
-.imglink {
-    width:984px;
 }
 
 
