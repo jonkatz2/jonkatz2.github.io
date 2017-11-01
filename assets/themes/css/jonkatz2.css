@@ -19,6 +19,29 @@ body, html {
         max-width: 768px;
         padding: 0em 1em;
     }
+    
+    .imglink {
+        width:784px;
+    }
+    
+    #savssm {
+        width:500px;
+        text-align:center;
+        padding:1em;
+    }
+
+    #stationsm {
+        width:500px;
+        text-align:center;
+        padding:1em;
+    }
+
+    #leowsm {
+        width:500px;
+        text-align:center;
+        padding:1em;
+    }
+
 }
 
 .image-cropper {
@@ -100,8 +123,9 @@ body, html {
   -ms-transform: translate(-50%, -50%)
 }
 
-
-
+.imglink {
+    width:984px;
+}
 
 
 

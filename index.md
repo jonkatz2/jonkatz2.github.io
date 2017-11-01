@@ -19,7 +19,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
         <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
         <div class="imgcontainer">
-            <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
+            <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
             <div class="middle">
                 <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
@@ -51,7 +51,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
         <a style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">An MCDA Visualization</a>
         <div class="imgcontainer">
-            <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img class="imglink"  style="width:984px;" src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
+            <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img class="imglink"  src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
             <div class="middle">
                 <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
@@ -74,7 +74,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
         <a style="font-size:large;" href="https://jkatz.shinyapps.io/demo1/" target="_blank">An Explorable Dataset</a>
         <div class="imgcontainer">
-            <a href="https://jkatz.shinyapps.io/demo1/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
+            <a href="https://jkatz.shinyapps.io/demo1/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
             <div class="middle">
                 <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
@@ -84,7 +84,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
         <a style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">The Online Biogas Calculator</a> 
         <div class="imgcontainer">
-            <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img class="imglink" style="width:984px;" src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
+            <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
             <div class="middle">
                 <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
             </div>
