@@ -2,6 +2,8 @@ body, html {
     max-width: 1000px;
     margin: auto;
 }
+
+/* computer-specific layout */
 @media (min-width: 801px) {
     .container-fluid {
         width: 1000px;
@@ -14,6 +16,8 @@ body, html {
 /*    max-width:768px;*/
 /*}*/
 
+
+/* Mobile-specific layout */
 @media (max-width: 800px) {
     .container-fluid{
         max-width: 768px;
@@ -21,23 +25,23 @@ body, html {
     }
     
     .imglink {
-        width:784px;
+        width:95%;
     }
     
     #savssm {
-        width:500px;
+        width:95%;
         text-align:center;
         padding:1em;
     }
 
     #stationsm {
-        width:500px;
+        width:95%;
         text-align:center;
         padding:1em;
     }
 
     #leowsm {
-        width:500px;
+        width:95%;
         text-align:center;
         padding:1em;
     }
