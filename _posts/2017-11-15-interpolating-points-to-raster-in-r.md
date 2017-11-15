@@ -155,10 +155,10 @@ I'll start by interpolating the max temperature data, then later I'll repeat the
 
 
 ```r
-#fitmax <- gstat::gstat(formula = Max ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
-#maxint <- raster::interpolate(dem, model=fitmax, ext=vt)
-#plot(maxint, col=rev(heat.colors(255)), ext=vt)
-#plot(vt, add=TRUE)
+fitmax <- gstat::gstat(formula = Max ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
+maxint <- raster::interpolate(dem, model=fitmax, ext=vt)
+plot(maxint, col=rev(heat.colors(255)), ext=vt)
+plot(vt, add=TRUE)
 ```
 
 ![plot of chunk unnamed-chunk-6](/assets/blog/pointsToRaster/figure/unnamed-chunk-6-1.png)
@@ -167,12 +167,12 @@ My map now looks like it was made by a cubist robot. This is a good start, but i
 
 
 ```r
-## smooth with a local average that automatically removes NA values
-#fmean <- function(x) mean(x, na.rm=TRUE)
-## pad allows the function to run all of the way to the edges
-#vtmaxsm <- raster::focal(maxint, w=matrix(1, 101, 101), fmean, pad=TRUE)
-#plot(vtmaxsm, col=rev(heat.colors(255)), ext=vt)
-#plot(vt, add=TRUE)
+# smooth with a local average that automatically removes NA values
+fmean <- function(x) mean(x, na.rm=TRUE)
+# pad allows the function to run all of the way to the edges
+vtmaxsm <- raster::focal(maxint, w=matrix(1, 101, 101), fmean, pad=TRUE)
+plot(vtmaxsm, col=rev(heat.colors(255)), ext=vt)
+plot(vt, add=TRUE)
 ```
 
 ![plot of chunk unnamed-chunk-7](/assets/blog/pointsToRaster/figure/unnamed-chunk-7-1.png)
@@ -181,10 +181,10 @@ This looks much better, so I'll mask to the state boundary and go for the finish
 
 
 ```r
-## mask to state boundary
-#vtmaxsm_m <- raster::mask(vtmaxsm, vt)
-#plot(vtmaxsm_m, col=rev(heat.colors(255)), ext=vt, box=FALSE, axes=FALSE)
-#plot(vt, add=TRUE)
+# mask to state boundary
+vtmaxsm_m <- raster::mask(vtmaxsm, vt)
+plot(vtmaxsm_m, col=rev(heat.colors(255)), ext=vt, box=FALSE, axes=FALSE)
+plot(vt, add=TRUE)
 ```
 
 ![plot of chunk unnamed-chunk-8](/assets/blog/pointsToRaster/figure/unnamed-chunk-8-1.png)
@@ -194,23 +194,23 @@ Once the data are in place the fun can begin. When working with maps, this is wh
 
 
 ```r
-## determine the range of temps
-#max_minval <- floor(cellStats(vtmaxsm_m, stat='min'))
-#max_maxval <- ceiling(cellStats(vtmaxsm_m, stat='max'))
-#max_temprange <- max_minval:max_maxval
-#maxcolgrad <- rev(heat.colors(length(max_temprange)))
+# determine the range of temps
+max_minval <- floor(cellStats(vtmaxsm_m, stat='min'))
+max_maxval <- ceiling(cellStats(vtmaxsm_m, stat='max'))
+max_temprange <- max_minval:max_maxval
+maxcolgrad <- rev(heat.colors(length(max_temprange)))
 ```
 
 And the final plot I add the boundaries one at a time so I can better control the border color.  
 
 
 ```r
-#plot(vtmaxsm_m, ext=vt, col=maxcolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Maximum Temperature')
-#for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
-#plot(vt, add=TRUE)
-#legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', title=expression(paste("\t   ", degree,"C")),  box.cex=c(2, 1), inset=c(0, .25))
-## I set the legend location with a call to locator()
-#northarrowTanimura(loc=c(599037.5, 58730), size=60000, cex=0.8)
+plot(vtmaxsm_m, ext=vt, col=maxcolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Maximum Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', title=expression(paste("\t   ", degree,"C")),  box.cex=c(2, 1), inset=c(0, .25))
+# I set the legend location with a call to locator()
+northarrowTanimura(loc=c(599037.5, 58730), size=60000, cex=0.8)
 ```
 
 ![plot of chunk unnamed-chunk-10](/assets/blog/pointsToRaster/figure/unnamed-chunk-10-1.png)
