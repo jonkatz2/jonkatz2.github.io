@@ -10,7 +10,7 @@ tags: [R, Spatial analysis, map, GIS]
 
 I was recently asked to put together a quick local weather summary for 2016. Temperature was a contributing component to the weather that year, so I'm planning to say a few words about it. The tricky thing is that I have temperatures recorded at about 25 weather stations in Vermont, and if I want to present that visually I'll need to either present the data in a table or fill in the space between the points -- interpolate between them.  
 
-![plot of chunk unnamed-chunk-10](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](assets/blog/pointsToRaster/figure/unnamed-chunk-10-1.png)
 
 Interpolation can be done using linear modeling and a handful of spatial covariates, or it can be done using the inverse distance method. Us wildlife guys are used spatial interpolation using the MacKenzie-Royle occupancy model structure (see package unmarked), but I think for this I'm going to go straight inverse distance, no complex models or spatial covariates.  
 
@@ -112,7 +112,7 @@ plot(vt, add=TRUE)
 plot(spdat, add=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-5](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-5](assets/blog/pointsToRaster/figure/unnamed-chunk-5-1.png)
 
 I'll start by interpolating the max temperature data, then later I'll repeat for min and mean. I'm going to use the gstat package and specify the intercept model. The helpfile for interpolate suggests that I should be using lm since the lat and long are implicit (rather than explicit) components of the model, but that didn't work for me and this did.  
 
@@ -120,18 +120,11 @@ I'll start by interpolating the max temperature data, then later I'll repeat for
 ```r
 fitmax <- gstat::gstat(formula = Max ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
 maxint <- raster::interpolate(dem, model=fitmax, ext=vt)
-```
-
-```
-## [inverse distance weighted interpolation]
-```
-
-```r
 plot(maxint, col=rev(heat.colors(255)), ext=vt)
 plot(vt, add=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-6](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-6](assets/blog/pointsToRaster/figure/unnamed-chunk-6-1.png)
 
 I spent several minutes trying to figure out why my map looks like it was made by a cubist robot. I think it just needs to be smoothed for better contouring. I'm smoothing it here by using a moving window average function. The window here is about 1.26 miles wide and 1.78 miles tall.  
 
@@ -145,7 +138,7 @@ plot(vtmaxsm, col=rev(heat.colors(255)), ext=vt)
 plot(vt, add=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-7](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-7](assets/blog/pointsToRaster/figure/unnamed-chunk-7-1.png)
 
 This looks much better, so I'll mask to the state boundary and go for the finishing touches.  
 
@@ -153,19 +146,11 @@ This looks much better, so I'll mask to the state boundary and go for the finish
 ```r
 # mask to state boundary
 vtmaxsm_m <- raster::mask(vtmaxsm, vt)
-```
-
-```
-## Warning in `[<-`(`*tmp*`, cnt, value = p@polygons[[i]]@Polygons[[j]]):
-## implicit list embedding of S4 objects is deprecated
-```
-
-```r
 plot(vtmaxsm_m, ext=vt)
 plot(vt, add=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-8](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-8](assets/blog/pointsToRaster/figure/unnamed-chunk-8-1.png)
 
 Here is a part that is tough to automate: the legend. I look at the range of temperatures and decide I can just use steps of 1 degree.  
 
@@ -190,7 +175,7 @@ legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', 
 northarrowTanimura(loc=c(599037.5, 58730), size=60000, cex=0.8)
 ```
 
-![plot of chunk unnamed-chunk-10](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-10-1.png)
+![plot of chunk unnamed-chunk-10](assets/blog/pointsToRaster/figure/unnamed-chunk-10-1.png)
 
 Then I repeat for the min and mean temperatures, and I can plot them all on the same image.  
 
@@ -199,25 +184,10 @@ Then I repeat for the min and mean temperatures, and I can plot them all on the 
 ## MIN
 fitmin <- gstat(formula = Min ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
 minint <- interpolate(dem, model=fitmin, ext=vt)
-```
-
-```
-## [inverse distance weighted interpolation]
-```
-
-```r
 # smooth with a local average
 vtminsm <- focal(minint, w=matrix(1, 101, 101), fmean, pad=TRUE)
 # mask to state boundary
 vtminsm_m <- mask(vtminsm, vt)
-```
-
-```
-## Warning in `[<-`(`*tmp*`, cnt, value = p@polygons[[i]]@Polygons[[j]]):
-## implicit list embedding of S4 objects is deprecated
-```
-
-```r
 # determine the range of temps
 min_minval <- floor(cellStats(vtminsm_m, stat='min'))
 min_maxval <- ceiling(cellStats(vtminsm_m, stat='max'))
@@ -228,25 +198,10 @@ mincolgrad <- coolramp(length(min_temprange))
 ## MEAN
 fitmean <- gstat(formula = Mean ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
 meanint <- interpolate(dem, model=fitmean, ext=vt)
-```
-
-```
-## [inverse distance weighted interpolation]
-```
-
-```r
 # smooth with a local average
 vtmeansm <- focal(meanint, w=matrix(1, 101, 101), fmean, pad=TRUE)
 # mask to state boundary
 vtmeansm_m <- mask(vtmeansm, vt)
-```
-
-```
-## Warning in `[<-`(`*tmp*`, cnt, value = p@polygons[[i]]@Polygons[[j]]):
-## implicit list embedding of S4 objects is deprecated
-```
-
-```r
 # determine the range of temps
 mean_minval <- floor(cellStats(vtmeansm_m, stat='min'))
 mean_maxval <- ceiling(cellStats(vtmeansm_m, stat='max'))
@@ -277,7 +232,7 @@ plot(vt, add=TRUE)
 legend('bottomright', legend=rev(mean_temprange), fill=rev(meancolgrad), bty='n', title=expression(paste("\t   ", degree, "C")), box.cex=c(2, 1), inset=c(0, .25)) 
 ```
 
-![plot of chunk unnamed-chunk-11](/home/jon/Documents/personalWeassets/blog/pointsToRaster/figure/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-11](assets/blog/pointsToRaster/figure/unnamed-chunk-11-1.png)
 
 
 
