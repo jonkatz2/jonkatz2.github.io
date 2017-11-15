@@ -190,7 +190,7 @@ plot(vt, add=TRUE)
 ![plot of chunk unnamed-chunk-8](/assets/blog/pointsToRaster/figure/unnamed-chunk-8-1.png)
 
 ### Plotting
-Once the data are in place the fun can begin. When working with maps, this is where data analysis becomes cartography. Since much of mapping is based on aesthetic decisions to make the data pleasant to look at and easier to interpret it is tough to automate. At a minimum we need a legend, a north arrow, and a scale bar (I actually don't plan to put a scale bar on it). After taking a look at the range of temperatures a legend with 1 degree C divisions seems easier to view than one that uses smooth gradients like the prototype maps above.  
+When working with spatial data, once the data are in place the process of creating a visual becomes a subset of cartography. Much of mapping is based on aesthetic decisions to make the data pleasant to look at and easier to interpret; it is therefore difficult to automate. At a minimum we need a legend, a north arrow, and a scale bar (I actually don't plan to put a scale bar on it). After taking a look at the range of temperatures in the legend of the maps above, I prefer looking at 1 degree C isotherm boundaries rather than the smooth gradients.  
 
 
 ```r
