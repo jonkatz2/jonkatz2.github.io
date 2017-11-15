@@ -73,6 +73,7 @@ body, html {
 
 }
 
+/* Screen-agnostic layout */
 .image-cropper {
     width: 200px;
     height: 200px;

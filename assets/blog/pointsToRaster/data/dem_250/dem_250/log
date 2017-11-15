@@ -1,0 +1,4 @@
+199807141159   2    36  3465ericp vtdem = int(vtdem2 * 3.280839895 + 0.5)
+199807141207   7    15   197ericp projectdefine grid vtdem
+199807141230   1     2  3650ericp copy vtdem /j/none/dem/dem250
+199807221631   0     0    10steves rename dem250 dem_250

@@ -1,0 +1,251 @@
+Identification_Information:
+  Citation:
+    Citation_Information:
+      Originator: Eric Pyle
+      Publication_Date: 19980723
+      Publication_Time: unknown
+      Title: ElevationDEM_DEM250
+      Edition: 1998
+      Geospatial_Data_Presentation_Form: map
+      Series_Information:
+        Series_Name: USGS 1 degree Digital Elevation Model data  single file
+        Issue_Identification: 1998
+      Publication_Information:
+        Publication_Place: Burlington, VT 05405-0106
+        Publisher: Eric Pyle
+      Other_Citation_Details: ElevationDEM_DEM250
+      Online_Linkage: http://www.vcgi.org/
+      Online_Linkage: http://www.vcgi.org/dataware/default.cfm?layer=ElevationDEM_DEM250
+      Online_Linkage: http://www.vcgi.org/dataware/default.cfm?layer=ElevationDEM_DEM250&mapit=yes
+      Online_Linkage: ogc:WMS-1.0.0-http-get-map http://maps.vcgi.org:8080/servlet/com.esri.wms.Esrimap?servicename=WMS_VCGI_OGC&WMTVER=1.0.0&request=map&BBOX=-73.45416,42.72279,-71.46528,45.018356&SRS=EPSG:4326&LAYERS=ELEVATIONDEM_DEM250&WIDTH=300&HEIGHT=400&FORMAT=GIF [USGS 1 degree Digital Elevation Model data  single file]
+      Online_Linkage: http://maps.vcgi.org:8080/servlet/com.esri.wms.Esrimap?servicename=WMS_VCGI_OGC&WMTVER=1.0.0&request=map&BBOX=-73.45416,42.72279,-71.46528,45.018356&SRS=EPSG:4326&LAYERS=ELEVATIONDEM_DEM250&WIDTH=300&HEIGHT=400&FORMAT=GIF
+  Description:
+    Abstract:
+      USGS RF 250,000 scale Digital Elevation Models are
+      provided by the US Geological Survey.
+    Purpose: USGS 1 degree Digital Elevation Model data - single file
+  Time_Period_of_Content:
+    Time_Period_Information:
+      Single_Date/Time:
+        Calendar_Date: 19980723
+        Time_of_Day: Unknown
+    Currentness_Reference: Publication Date
+  Status:
+    Progress: Complete
+    Maintenance_and_Update_Frequency: None
+  Spatial_Domain:
+    Bounding_Coordinates:
+      West_Bounding_Coordinate: -73.454162
+      East_Bounding_Coordinate: -71.465281
+      North_Bounding_Coordinate: 45.018361
+      South_Bounding_Coordinate: 42.722789
+  Keywords:
+    Theme:
+      Theme_Keyword_Thesaurus: None
+      Theme_Keyword: USGS 1 degree Digital Elevation Model data - single file
+      Theme_Keyword: DEM
+      Theme_Keyword: elevation
+      Theme_Keyword: terrain
+      Theme_Keyword: topography
+      Theme_Keyword: topographic
+    Place:
+      Place_Keyword_Thesaurus: None
+      Place_Keyword: Lake Champlain Watershed and all of Vermont
+      Place_Keyword: Vermont
+    Stratum:
+      Stratum_Keyword_Thesaurus: None
+      Stratum_Keyword: Stratum_Keyword
+    Temporal:
+      Temporal_Keyword_Thesaurus: None
+      Temporal_Keyword: Temporal_Keyword
+  Access_Constraints: VCGI and the State of VT make no representations of any kind, including but not limited to the warranties of merchantability or fitness for a particular use, nor are any such warranties to be implied with respect to the data.
+  Use_Constraints: No assessment of the accuracy of DEM data or data products has been made by VCGI.  Data users should assess DEM data products for appropriate use in a given project.
+  Point_of_Contact:
+    Contact_Information:
+      Contact_Person_Primary:
+        Contact_Person: Eric Pyle
+        Contact_Organization: VT Center for Geographic Information
+      Contact_Position: Project Manager
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 58 South Main Street, Suite 2
+        City: Waterbury
+        State_or_Province: VT
+        Postal_Code: 05676
+        Country: USA
+      Contact_Voice_Telephone: 802/882-3000
+      Contact_TDD/TTY_Telephone: None
+      Contact_Facsimile_Telephone: 802/882-3001
+      Contact_Electronic_Mail_Address: geowiz@vcgi.org
+      Hours_of_Service: 9am - 5pm, M-F
+  Browse_Graphic:
+    Browse_Graphic_File_Name: http://maps.vcgi.org:8080/servlet/com.esri.wms.Esrimap?servicename=WMS_VCGI_OGC&WMTVER=1.0.0&request=map&BBOX=-73.45416,42.72279,-71.46528,45.018356&SRS=EPSG:4326&LAYERS=ELEVATIONDEM_DEM250&WIDTH=300&HEIGHT=400&FORMAT=GIF
+    Browse_Graphic_File_Description: GIF
+    Browse_Graphic_File_Type: GIF
+  Data_Set_Credit: Eric Pyle
+  Security_Information:
+    Security_Classification_System: N/A
+    Security_Classification: Unclassified
+    Security_Handling_Description: No Security Considerations
+  Native_Data_Set_Environment: A/I GRID
+  Cross_Reference:
+    Citation_Information:
+      Originator: Eric Pyle
+      Publication_Date: 19980723
+      Publication_Time: unknown
+      Title: ElevationDEM_DEM250
+      Edition: 1998
+      Geospatial_Data_Presentation_Form: map
+      Series_Information:
+        Series_Name: USGS 1 degree Digital Elevation Model data - single file
+        Issue_Identification: 1998
+      Publication_Information:
+        Publication_Place: Burlington, VT 05405-0106
+        Publisher: Eric Pyle
+      Other_Citation_Details: ElevationDEM_DEM250
+      Online_Linkage: http://www.vcgi.org/
+Data_Quality_Information:
+  Attribute_Accuracy:
+    Attribute_Accuracy_Report:
+      Refer to USGS 1 degree (RF 250,000 scale) DEM
+      documentation for more information.
+      VCGI has "visually" QA/QCed this data layer.
+  Logical_Consistency_Report: No assessment of the accuracy of DEM data or data products has been made by VCGI.  Data users should assess DEM data products for appropriate use in a given project.
+  Completeness_Report: Last Update Was: 07/23/98
+  Lineage:
+    Source_Information:
+      Source_Citation:
+        Citation_Information:
+          Originator: Eric Pyle
+          Publication_Date: 19980723
+          Publication_Time: unknown
+          Title: ElevationDEM_DEM250
+          Edition: 1998
+          Geospatial_Data_Presentation_Form: map
+          Series_Information:
+            Series_Name: USGS 1 degree Digital Elevation Model data - single file
+            Issue_Identification: 1998
+          Publication_Information:
+            Publication_Place: Waterbury VT 05676
+            Publisher: Eric Pyle
+          Other_Citation_Details: ElevationDEM_DEM250
+      Source_Scale_Denominator: 250,000
+      Type_of_Source_Media: disc
+      Source_Time_Period_of_Content:
+        Time_Period_Information:
+          Single_Date/Time:
+            Calendar_Date: 19980723
+            Time_of_Day: Unknown
+        Source_Currentness_Reference: Publication Date
+      Source_Citation_Abbreviation: ElevationDEM_DEM250
+      Source_Contribution: VCGI
+    Process_Step:
+      Process_Description: Eric Pyle created GRID.  Steve Sharp prepared documentation and made available on website. - Operator = Steve Sharp, VCGI
+      Process_Date: 19980723
+Spatial_Data_Organization_Information:
+  Indirect_Spatial_Reference: GRID
+  Direct_Spatial_Reference_Method: GRID
+Spatial_Reference_Information:
+  Horizontal_Coordinate_System_Definition:
+    Planar:
+      Grid_Coordinate_System:
+        Grid_Coordinate_System_Name: State Plane Coordinate System
+        State_Plane_Coordinate_System:
+          SPCS_Zone_Identifier: 4400 (USGS), 5526 (ESRI)
+          Transverse_Mercator:
+            Scale_Factor_at_Central_Meridian: 0.99996
+            Longitude_of_Central_Meridian: -072.500000
+            Latitude_of_Projection_Origin: +42.500000
+            False_Easting: 500000
+            False_Northing: 0
+      Planar_Coordinate_Information:
+        Planar_Coordinate_Encoding_Method: coordinate pair
+        Coordinate_Representation:
+          Abscissa_Resolution: 0.001
+          Ordinate_Resolution: 0.001
+        Planar_Distance_Units: Meters
+    Geodetic_Model:
+      Horizontal_Datum_Name: North American Datum of 1983
+      Ellipsoid_Name: Geodetic Reference System 80
+      Semi-major_Axis: 6378137
+      Denominator_of_Flattening_Ratio: 1 / 298.25722210
+Distribution_Information:
+  Distributor:
+    Contact_Information:
+      Contact_Organization_Primary:
+        Contact_Organization: VT Center for Geographic Information
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 58 South Main Street, Suite 2
+        City: Waterbury
+        State_or_Province: VT
+        Postal_Code: 05676
+        Country: USA
+      Contact_Voice_Telephone: 802/882-3000
+      Contact_TDD/TTY_Telephone: None
+      Contact_Facsimile_Telephone: 802/882-3001
+      Contact_Electronic_Mail_Address: geowiz@vcgi.org
+      Hours_of_Service: 9am - 5pm, M-F
+  Resource_Description: ElevationDEM_DEM250
+  Distribution_Liability: VCGI and the State of Vermont make no representations of any kind, including but not limited to the warranties of merchantability or fitness for a particular use, nor are any such warranties to be implied with respect to the data.
+  Standard_Order_Process:
+    Digital_Form:
+      Digital_Transfer_Information:
+        Format_Name: ARCE
+        Format_Specification: ArcInfo Export file
+        Format_Information_Content: ArcInfo Export File (WinZip self extracting format)
+        File_Decompression_Technique: WinZIP
+      Digital_Transfer_Option:
+        Online_Option:
+          Computer_Contact_Information:
+            Network_Address:
+              Network_Resource_Name: http://www.vcgi.org/dataware/default.cfm?layer=ElevationDEM_DEM250
+          Access_Instructions: Download from web site.
+        Offline_Option:
+          Offline_Media: CD-ROM
+        Offline_Option:
+          Offline_Media: 3-1/2 inch floppy disk
+        Offline_Option:
+          Offline_Media: 4 mm cartridge tape
+        Offline_Option:
+          Offline_Media: 8 mm cartridge tape
+    Fees: No charge when downloading from the internet, and when no custom processing is required.
+    Ordering_Instructions:
+      Download from web site or mail-fax a copy of the VCGI 'Data Request Form' which
+      is available from the VGIS web site http://www.vcgi.org/dataware/order_forms
+    Turnaround: About 5 days.
+  Custom_Order_Process: Mail or Fax a copy of the VCGI 'Data Request Form' which is available from http://www.vcgi.org/dataware/order_forms
+  Technical_Prerequisites: ESRI Arc/Info, ArcView, or ArcExplorer software.
+  Available_Time_Period:
+    Time_Period_Information:
+      Single_Date/Time:
+        Calendar_Date: 20001023
+        Time_of_Day: 00000000
+Metadata_Reference_Information:
+  Metadata_Date: 19990126
+  Metadata_Contact:
+    Contact_Information:
+      Contact_Person_Primary:
+        Contact_Person: GIS Database Administrator
+        Contact_Organization: VT Center for Geographic Information
+      Contact_Position: Manager
+      Contact_Address:
+        Address_Type: Mailing and Physical Address
+        Address: 58 South Main Street, Suite 2
+        City: Waterbury
+        State_or_Province: VT
+        Postal_Code: 05676
+        Country: USA
+      Contact_Voice_Telephone: 802/882-3000
+      Contact_TDD/TTY_Telephone: None
+      Contact_Facsimile_Telephone: 802/882-3001
+      Hours_of_Service: 9am - 5pm, M-F
+  Metadata_Standard_Name: FGDC Content Standards for Digital Metadata
+  Metadata_Standard_Version: FGDC-STD-001-1998
+  Metadata_Time_Convention: Local time
+  Metadata_Access_Constraints: None
+  Metadata_Use_Constraints: None
+  Metadata_Security_Information:
+    Metadata_Security_Classification_System: N/A
+    Metadata_Security_Classification: Unclassified
+    Metadata_Security_Handling_Description: No security considerations
