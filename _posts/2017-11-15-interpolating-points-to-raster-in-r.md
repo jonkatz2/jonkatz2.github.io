@@ -27,7 +27,7 @@ The steps I'll complete here will be:
   3. Interpolate!  
   4. Plot (with base graphics).   
   
-I'm getting the data from the NRCC website ([](http://climod2.nrcc.cornell.edu/)). This website doesn't support html queries, so I had to get the data manually. I grabbed Max, Min, and Average temperatures in three separate downloads.  
+I'm getting the data from the NRCC website ([http://climod2.nrcc.cornell.edu/](http://climod2.nrcc.cornell.edu/)). This website doesn't support html queries, so I had to get the data manually. I grabbed Max, Min, and Average temperatures in three separate downloads.  
 
 ### Getting started: prepare the temperature data
 Step one is load the standard spatial data packages. In addition to the packages I'm also going to source in a few of my favorite helper scripts; one that makes a north arrow and another that allows me to customize filled boxes in the legend.   
