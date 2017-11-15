@@ -1,0 +1,24 @@
+```{r fig.height=20, fig.width=6.75, dev.args=list(pointsize=18)}
+
+par(mfrow=c(3,1))
+par(mar=c(5.1,0,4.1,0))
+plot(vtmaxsm_m, ext=vt, col=maxcolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Maximum Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', title=expression(paste("\t   ", degree,"C")),  box.cex=c(2, 1), inset=c(0, .25)) 
+northarrowTanimura(loc=c(625000, 58730), size=60000, cex=0.8)
+
+
+par(mar=c(5.1,0,4.1,0))
+plot(vtminsm_m, ext=vt, col=mincolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Minimum Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(min_temprange), fill=rev(mincolgrad), bty='n', title=expression(paste("\t   ", degree, "C")), box.cex=c(2, 1), inset=c(0, .25)) 
+
+par(mar=c(5.1,0,4.1,0))
+plot(vtmeansm_m, ext=vt, col=meancolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Average Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(mean_temprange), fill=rev(meancolgrad), bty='n', title=expression(paste("\t   ", degree, "C")), box.cex=c(2, 1), inset=c(0, .25)) 
+```
+

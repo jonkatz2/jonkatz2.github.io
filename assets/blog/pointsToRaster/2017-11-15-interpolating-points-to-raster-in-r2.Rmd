@@ -43,14 +43,18 @@ source('mapFunctions.R') # Adapted from from http://www.jstatsoft.org/v19/c01/pa
 source('http://www.math.mcmaster.ca/bolker/R/misc/legendx.R')
 ```
 
-Next I'll read in the three tables, combine them by weather station name, and convert all of the Farenheit values to Celsius.  
+Next I'll read in the three tables. Some of the weather stations are missing many days of observations. If a station does not record data for the entire summer, it will appear to be in an exceptionally cold area and will disrupt the results. The opposite appearance will occur if it is missing the entire winter, with the same general effect. I'm arbitrarily setting the cutoff for quality data at a maximum of 14 or fewer missing days per station. Once the unreliable stations are removed, I'll combine the tables by weather station name and convert all of the Farenheit values to Celsius.  
 
 ```{r}
 options(stringsAsFactors=FALSE)
 ma <- read.csv('data/max.csv')
 mi <- read.csv('data/min.csv')
 me <- read.csv('data/mean.csv')
-
+# Remove stations with more than 14 missing days
+ma <- ma[ma$mcnt <= 14,]
+mi <- mi[mi$mcnt <= 14,]
+me <- me[me$mcnt <= 14,]
+# merge all tables
 dat <- merge(ma[1:2], mi[1:2], by='Name', all=TRUE, sort=FALSE)
 dat <- merge(dat, me[1:2], by='Name', all=TRUE, sort=FALSE)
 names(dat) <- c('Name', 'Max', 'Min', 'Mean')
@@ -63,8 +67,8 @@ I forgot that I also grabbed the locations separately -- but also from the NRCC 
 locations <- read.csv('data/locations.csv')
 dat <- merge(locations, dat, by='Name', all=TRUE, sort=FALSE)
 dat <- na.omit(dat)
-# remove 'burlington area'
-dat <- dat[-10,]
+# remove 'Burlington Area'
+dat <- dat[-which(dat$Name == 'Burlington Area'),]
 rownames(dat) <- 1:nrow(dat)
 for(i in 2:3) dat[i] <- as.numeric(dat[,i])
 dat
@@ -99,56 +103,106 @@ plot(spdat, add=TRUE)
 I'll start by interpolating the max temperature data, then later I'll repeat the exact same steps for min and mean temperature. I'm going to use the gstat package and specify the intercept model. The helpfile for raster::interpolate suggests that I should be using stats::lm since the lat and long are implicit (rather than explicit) components of the model, but that didn't work for me -- and this did.  
 
 ```{r}
-#fitmax <- gstat::gstat(formula = Max ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
-#maxint <- raster::interpolate(dem, model=fitmax, ext=vt)
-#plot(maxint, col=rev(heat.colors(255)), ext=vt)
-#plot(vt, add=TRUE)
+fitmax <- gstat::gstat(formula = Max ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
+maxint <- raster::interpolate(dem, model=fitmax, ext=vt)
+plot(maxint, col=rev(heat.colors(255)), ext=vt)
+plot(vt, add=TRUE)
 ```
 
 My map now looks like it was made by a cubist robot. This is a good start, but it is far from finished -- it needs to be smoothed for better contouring. I'm smoothing it here using what ArcMappers call focal statistics; this means I will use a moving window function that centers over every cell in the raster in succession. The window here is a matrix 101 x 101 pixels (the odd number creates a single center cell), which translates to about 1.26 miles wide and 1.78 miles tall, and the function it applies is an average across the entire matrix.  
 
 ```{r}
-## smooth with a local average that automatically removes NA values
-#fmean <- function(x) mean(x, na.rm=TRUE)
-## pad allows the function to run all of the way to the edges
-#vtmaxsm <- raster::focal(maxint, w=matrix(1, 101, 101), fmean, pad=TRUE)
-#plot(vtmaxsm, col=rev(heat.colors(255)), ext=vt)
-#plot(vt, add=TRUE)
+# smooth with a local average that automatically removes NA values
+fmean <- function(x) mean(x, na.rm=TRUE)
+# pad allows the function to run all of the way to the edges
+vtmaxsm <- raster::focal(maxint, w=matrix(1, 101, 101), fmean, pad=TRUE)
+plot(vtmaxsm, col=rev(heat.colors(255)), ext=vt)
+plot(vt, add=TRUE)
 ```
 
 This looks much better, so I'll mask to the state boundary and go for the finishing touches.  
 
 ```{r}
-## mask to state boundary
-#vtmaxsm_m <- raster::mask(vtmaxsm, vt)
-#plot(vtmaxsm_m, col=rev(heat.colors(255)), ext=vt, box=FALSE, axes=FALSE)
-#plot(vt, add=TRUE)
+# mask to state boundary
+vtmaxsm_m <- raster::mask(vtmaxsm, vt)
+plot(vtmaxsm_m, col=rev(heat.colors(255)), ext=vt, box=FALSE, axes=FALSE)
+plot(vt, add=TRUE)
 ```
 
 ### Plotting
 Once the data are in place the fun can begin. When working with maps, this is where data analysis becomes cartography. Since much of mapping is based on aesthetic decisions to make the data pleasant to look at and easier to interpret it is tough to automate. At a minimum we need a legend, a north arrow, and a scale bar (I actually don't plan to put a scale bar on it). After taking a look at the range of temperatures a legend with 1 degree C divisions seems easier to view than one that uses smooth gradients like the prototype maps above.  
 
 ```{r}
-## determine the range of temps
-#max_minval <- floor(cellStats(vtmaxsm_m, stat='min'))
-#max_maxval <- ceiling(cellStats(vtmaxsm_m, stat='max'))
-#max_temprange <- max_minval:max_maxval
-#maxcolgrad <- rev(heat.colors(length(max_temprange)))
+# determine the range of temps
+max_minval <- floor(cellStats(vtmaxsm_m, stat='min'))
+max_maxval <- ceiling(cellStats(vtmaxsm_m, stat='max'))
+max_temprange <- max_minval:max_maxval
+maxcolgrad <- rev(heat.colors(length(max_temprange)))
 ```
 
 And the final plot I add the boundaries one at a time so I can better control the border color.  
 
 ```{r}
-#plot(vtmaxsm_m, ext=vt, col=maxcolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Maximum Temperature')
-#for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
-#plot(vt, add=TRUE)
-#legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', title=expression(paste("\t   ", degree,"C")),  box.cex=c(2, 1), inset=c(0, .25))
-## I set the legend location with a call to locator()
-#northarrowTanimura(loc=c(599037.5, 58730), size=60000, cex=0.8)
+plot(vtmaxsm_m, ext=vt, col=maxcolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Maximum Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', title=expression(paste("\t   ", degree,"C")),  box.cex=c(2, 1), inset=c(0, .25))
+# I set the legend location with a call to locator()
+northarrowTanimura(loc=c(599037.5, 58730), size=60000, cex=0.8)
 ```
 
 Then I repeat for the min and mean temperatures, and I can plot them all on the same image.  
 
+```{r fig.height=20, fig.width=6.75, dev.args=list(pointsize=18)}
+## MIN
+fitmin <- gstat(formula = Min ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
+minint <- interpolate(dem, model=fitmin, ext=vt)
+# smooth with a local average
+vtminsm <- focal(minint, w=matrix(1, 101, 101), fmean, pad=TRUE)
+# mask to state boundary
+vtminsm_m <- mask(vtminsm, vt)
+# determine the range of temps
+min_minval <- floor(cellStats(vtminsm_m, stat='min'))
+min_maxval <- ceiling(cellStats(vtminsm_m, stat='max'))
+min_temprange <- min_minval:min_maxval
+coolramp <- colorRampPalette(c('#007db7', '#bfe4e5'))
+mincolgrad <- coolramp(length(min_temprange))
+
+## MEAN
+fitmean <- gstat(formula = Mean ~ 1, data = spdat, nmax = 4, set = list(idp = .5))
+meanint <- interpolate(dem, model=fitmean, ext=vt)
+# smooth with a local average
+vtmeansm <- focal(meanint, w=matrix(1, 101, 101), fmean, pad=TRUE)
+# mask to state boundary
+vtmeansm_m <- mask(vtmeansm, vt)
+# determine the range of temps
+mean_minval <- floor(cellStats(vtmeansm_m, stat='min'))
+mean_maxval <- ceiling(cellStats(vtmeansm_m, stat='max'))
+mean_temprange <- mean_minval:mean_maxval
+meanramp <- colorRampPalette(c('#f1f4d8', '#8dc63f'))#008080
+meancolgrad <- meanramp(length(mean_temprange))
+
+par(mfrow=c(3,1))
+par(mar=c(5.1,0,4.1,0))
+plot(vtmaxsm_m, ext=vt, col=maxcolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Maximum Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(max_temprange), fill=rev(maxcolgrad), bty='n', title=expression(paste("\t   ", degree,"C")),  box.cex=c(2, 1), inset=c(0, .25)) 
+northarrowTanimura(loc=c(625000, 58730), size=60000, cex=0.8)
+
+
+par(mar=c(5.1,0,4.1,0))
+plot(vtminsm_m, ext=vt, col=mincolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Minimum Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(min_temprange), fill=rev(mincolgrad), bty='n', title=expression(paste("\t   ", degree, "C")), box.cex=c(2, 1), inset=c(0, .25)) 
+
+par(mar=c(5.1,0,4.1,0))
+plot(vtmeansm_m, ext=vt, col=meancolgrad, axes=FALSE, box=FALSE, legend=FALSE, main='2016 Average Temperature')
+for(i in 1:nrow(counties)) plot(counties[i,], border=rgb(0,0,0,alpha=0.12), lwd=2, add=TRUE)
+plot(vt, add=TRUE)
+legend('bottomright', legend=rev(mean_temprange), fill=rev(meancolgrad), bty='n', title=expression(paste("\t   ", degree, "C")), box.cex=c(2, 1), inset=c(0, .25)) 
+```
 
 
 ```{r echo=FALSE}
