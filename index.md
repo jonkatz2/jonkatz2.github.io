@@ -4,6 +4,24 @@ title: Jon Katz
 description: Jon Katz is a freelance data analyst.
 keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 ---
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+    <header class="inner">
+      
+
+      <a style="color:#fff;" href="https://jonkatz2.github.io/"><h1 id="project_title">Jonathan Katz</h1></a>
+      <h2 id="project_tagline">Computer programmer, data analyst, wildlife biologist</h2>
+
+<!--          {% if site.show_downloads %}-->
+<!--            <section id="downloads">-->
+<!--              <a class="zip_download_link" href="{{ site.github.zip_url }}">Download this project as a .zip file</a>-->
+<!--              <a class="tar_download_link" href="{{ site.github.tar_url }}">Download this project as a tar.gz file</a>-->
+<!--            </section>-->
+<!--          {% endif %}-->
+    </header>
+</div>
+
+
 
 <div>
     <div style="font-size:1.25em;font-weight:bold;text-align:center;">
