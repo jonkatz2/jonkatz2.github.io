@@ -11,10 +11,15 @@
 
 /* computer-specific layout */
 @media (min-width: 801px) {
-/*    .container-fluid {*/
+    #navheader {
+        position: fixed;
+    }
+    
+    .container-fluid {
+        padding: 0px 34px;
 /*        width: 1000px;*/
 /*        max-width:1000px;*/
-/*    }*/
+    }
     
     .imglink {
         width:984px;
