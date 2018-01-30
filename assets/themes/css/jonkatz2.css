@@ -13,11 +13,11 @@
 @media (min-width: 801px) {
     #navheader {
         position: fixed;
+        width:100%
     }
     
     .container-fluid {
-        padding: 0px 34px;
-        width:100%
+        padding: 25px 34px;
 /*        width: 1000px;*/
 /*        max-width:1000px;*/
     }
