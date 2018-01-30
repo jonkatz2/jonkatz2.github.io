@@ -11,10 +11,10 @@
 
 /* computer-specific layout */
 @media (min-width: 801px) {
-    .container-fluid {
-        width: 1000px;
-        max-width:1000px;
-    }
+/*    .container-fluid {*/
+/*        width: 1000px;*/
+/*        max-width:1000px;*/
+/*    }*/
     
     .imglink {
         width:984px;
