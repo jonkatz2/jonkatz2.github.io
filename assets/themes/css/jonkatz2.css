@@ -17,6 +17,7 @@
     
     .container-fluid {
         padding: 0px 34px;
+        width:100%
 /*        width: 1000px;*/
 /*        max-width:1000px;*/
     }
