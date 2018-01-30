@@ -14,10 +14,11 @@
     #navheader {
         position: fixed;
         width:100%
+        z-index: 3000;
     }
     
     .container-fluid {
-        padding: 25px 34px;
+        padding: 60px 34px;
 /*        width: 1000px;*/
 /*        max-width:1000px;*/
     }
