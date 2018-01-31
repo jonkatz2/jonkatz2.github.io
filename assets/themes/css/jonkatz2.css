@@ -8,10 +8,8 @@
 /*    padding-right: 0px;*/
 /*}*/
 
-
-
-#myheadimg {
-    padding:0px;
+#aboutmeheader{
+    background: #212121;
 }
 
 .topelement {
@@ -114,8 +112,13 @@
 #myhead {
     margin: auto;
     width: 200px;
-/*    margin: 60px 0px 0px 0px;*/
+    border: 2px solid #fff;
 }
+
+#myheadimg {
+    padding:0px;
+}
+
 
 .fullimg {
     width:100%;
