@@ -33,13 +33,14 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     
     <p>You might also want to <a href="http://jonkatz2.github.io/resume" target="_blank">check out my resume</a>, or I have a couple of blog posts <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" target="_blank">illustrating some simple R functions I wrote.</a></p>
     
-    <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
+    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
       <div class="col-sm-6">
         <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
         <div class="imgcontainer">
           <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
-          <div class="middle">
-            <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
+            <div class="middle">
+              <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
+            </div>
           </div>
         </div>
       </div>
@@ -69,7 +70,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
         <p>The survey parameters and expert responses are stored in a mongoDB (no-SQL) database hosted at mlab.com. Projects upload locations as a shapefile containing either polygons or points; persistent file storage for the shapefile is via an AWS S3 storage bucket. I have also used AWS RDS as a relational database back-end for other apps.</p>
     </div> 
     
-    <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
+    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
       <div class="col-sm-6">
         <a style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">An MCDA Visualization</a>
         <div class="imgcontainer">
@@ -97,7 +98,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
         <p>I am self-hosting this app during development, but it will be hosted by the client on completion. If it doesn't load I may have run out of time on my free shinyapps.io account. Drop me an email and I'll send you an active link to a functional app.</p>
     </div>
     
-    <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
+    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
       <div class="col-sm-6">
         <a style="font-size:large;" href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank">An Explorable Dataset</a>
         <div class="imgcontainer">
@@ -113,7 +114,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       <p style="padding-top:17px;">The researchers who commissioned this app were required by their grant to make the data publicly accessible; this app does that with more style than linking to an enormous spreadsheet. I like how the data subsetting is presented on-screen. Data subsetting is day-one stuff in R, but somehow it was not intuitive to display the relative contents of the subset compared to the entire dataset in an interactive setting. I posted <a href="http://jonkatz2.github.io/2017/08/11/Dynamic-Filtered-checkboxGroupInputs-In-Shiny-Applications" target="_blank">a few notes about this</a> in my short blog.</p>
     </div>
     
-    <div style="border:1px solid gray;margin:8px 0px;padding:8px;">
+    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
       <div class="col-sm-6">
         <a style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">The Online Biogas Calculator</a> 
         <div class="imgcontainer">
@@ -122,8 +123,10 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
               <a class="imglinktext" style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">Open App</a>
           </div>
         </div>
-        <p style="padding-top:17px;">This app is a calculator for computing the volume of methane biogas produced by controlled digesters. It is essentially a web interface for the R package <a href="https://cran.r-project.org/package=biogas" target="_blank">biogas</a> by Sasha Hafner et al. This is an early app, but still completely functional. </p>
       </div>
+    </div>
+    <div class="col-sm-6">
+        <p style="padding-top:17px;">This app is a calculator for computing the volume of methane biogas produced by controlled digesters. It is essentially a web interface for the R package <a href="https://cran.r-project.org/package=biogas" target="_blank">biogas</a> by Sasha Hafner et al. This is an early app, but still completely functional. </p>
     </div>
     
 </div>
