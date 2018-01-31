@@ -63,10 +63,10 @@
     -moz-box-shadow: 0 0 7px 0 #ddd;
     box-shadow: 0 0 7px 0 #ddd;
     border: 1px solid #ccc;
-    height: 500px;
+    height: 400px;
     line-height: 1.3em;
     max-width: 400px;
-    max-height: 500px;
+    max-height: 400px;
     margin: 14px;
     overflow: hidden;
     padding: 0;
@@ -89,7 +89,7 @@
     padding: 20px 0px;
     color:#fff;
     font-weight:300;
-    text-shadow: 1px 1px #000;
+    text-shadow: black 0.1em 0.1em 0.2em
     position:absolute;
     width:100%;
     margin: 20px auto;
