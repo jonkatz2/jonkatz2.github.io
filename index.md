@@ -25,39 +25,36 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3">
+<!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
         <img src="{{ BASE_PATH }}/assets/images_sm/grab1.png" alt="Go to shiny gallery">
         <p>Shiny Gallery</p>
       </a>
-    </div>
-    <div class="col-sm-3">
+<!--    </div>-->
+<!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
         <img src="{{ BASE_PATH }}/assets/images_sm/flowpart.png" alt="Application planning">
         <p>Application planning</p>
       </a>
-      
-    </div>
-    <div class="col-sm-3">
+<!--    </div>-->
+<!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
         <img src="{{ BASE_PATH }}/assets/images_sm/stratifiedParams.png" alt="Statistical analysis">
         <p>Statistical Analysis</p>
       </a>
-      
-    </div>
-    <div class="col-sm-3">
+<!--    </div>-->
+<!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
         <img src="{{ BASE_PATH }}/assets/images_sm/vectormap.png" alt="Spatial analysis">
         <p>Spatial Analysis</p>
       </a>
-      
-    </div>
-    <div class="col-sm-3">
+<!--    </div>-->
+<!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
         <img src="{{ BASE_PATH }}/assets/images_sm/grab1.png" alt="Data analysis">
         <p>Data Analysis</p>
       </a>
-    </div>
+<!--    </div>-->
   </div>
 </div>
 
