@@ -17,6 +17,10 @@
     padding: 60px 0px 40px 0px;
 }
 
+
+.imglink {
+    width:95%;
+}
 /* computer-specific layout */
 @media (min-width: 801px) {
     #navheader {
@@ -31,9 +35,9 @@
 /*        max-width:1000px;*/
     }
     
-    .imglink {
-        width:984px;
-    }
+/*    .imglink {*/
+/*        width:984px;*/
+/*    }*/
 
     #savssm {
 /*        float:right;*/
@@ -69,11 +73,7 @@
         max-width: 768px;
         padding: 0em 1em;
     }
-    
-    .imglink {
-        width:95%;
-    }
-    
+        
     #savssm {
         width:95%;
         text-align:center;
