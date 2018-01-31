@@ -5,7 +5,7 @@ description: Jon Katz is a freelance data analyst.
 keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 ---
 <!-- HEADER -->
-<div id="header_wrap" class="outer">
+<div id="header_wrap" class="outer topelement">
     <header class="inner">
       
 
@@ -23,7 +23,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 
 
 
-<div>
+<div class="container-fluid">
     <div style="font-size:1.25em;font-weight:bold;text-align:center;">
         <p>Freelance R Programming, Data Analysis, and Shiny Engineer</p>
     </div>

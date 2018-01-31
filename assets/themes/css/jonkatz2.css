@@ -12,6 +12,10 @@
     padding:0px;
 }
 
+.topelement {
+    padding: 60px 0px;
+}
+
 /* computer-specific layout */
 @media (min-width: 801px) {
     #navheader {
@@ -21,7 +25,7 @@
     }
     
     .container-fluid {
-        padding: 60px 34px;
+        padding: 0px 34px;
 /*        width: 1000px;*/
 /*        max-width:1000px;*/
     }
