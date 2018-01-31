@@ -5,15 +5,17 @@ subtitle: The data playground
 group: navigation
 ---
 <div class="container-fluid">
-    <img class="fullimg topelement" src="https://dl.dropboxusercontent.com/s/bt9zth35fmds0g3/coyotesm.jpg?raw=1">
+    <div class="topelement">
+        <img class="fullimg" src="https://dl.dropboxusercontent.com/s/bt9zth35fmds0g3/coyotesm.jpg?raw=1">
 
-    <h1>{{ page.subtitle }}</h1>
-    <div id="blogback">
-        <ul class="posts">
+        <h1>{{ page.subtitle }}</h1>
+        <div id="blogback">
+            <ul class="posts">
 
-          {% for post in site.posts %}
-            <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-          {% endfor %}
-        </ul>
+              {% for post in site.posts %}
+                <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+              {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
