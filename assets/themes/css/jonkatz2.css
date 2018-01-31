@@ -50,6 +50,34 @@
     width:100%;
     max-width: 1300px;
 }
+
+.mygrid {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    -webkit-box-shadow: 0 0 7px 0 #ddd;
+    -moz-box-shadow: 0 0 7px 0 #ddd;
+    box-shadow: 0 0 7px 0 #ddd;
+    border: 1px solid #ccc;
+    height: 290px;
+    line-height: 1.3em;
+    max-width: 300px;
+    max-height: 290px;
+    margin: 4px 0 12px 8px;
+        margin-left: 8px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    width: 300px;
+    white-space: normal;
+    vertical-align: top;
+}
+
+
 /* computer-specific layout */
 @media (min-width: 801px) {
     #navheader {
