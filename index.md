@@ -8,10 +8,10 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 <div id="header_wrap" class="outer topelement">
     <div class="row">
         <div class="col-sm-4">
-            <img src="{{ BASE_PATH }}/assets/images_sm/plot.png">
+            <img id="headerimg" src="{{ BASE_PATH }}/assets/images_sm/plot.png">
         </div>
         <div class="col-sm-8">
-            <header class="inner">
+            <header id="index_inner" class="inner">
                 <a style="color:#fff;" href="https://jonkatz2.github.io/"><h1 id="project_title">Jonathan Katz</h1></a>
                 <h2 id="project_tagline">Programmer, Data Analyst, Wildlife Biologist</h2>
             </header>
