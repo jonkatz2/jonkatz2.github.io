@@ -1,21 +1,21 @@
 ---
 layout: default
-title: Shiny Applications
+title: JK:Shiny
 description: A few applications I've built
 keywords: data visualization, shiny, R, CRAN, statistics
 ---
 
 <div id="shinyheader" class="outer">
-    <h3 id="shiny_title">Shiny applications</h3>
+    <h3 class="page_title">Shiny Applications</h3>
 </div>
 
 <div class="container-fluid">
     
-    <p>R does not run natively in a web browser, but it has many native and user-contributed entry points to exchange objects with other languages. The <a href="http://shiny.rstudio.com/" target="_blank">Shiny</a> package from <a href="https://www.rstudio.com/" target="_blank">RStudio</a> allows R and javascript to exchange information, along with a host of R functions to build HTML inputs. Shiny makes it easy to create web forms that run sophisticated server-side code to create visuals or perform complex analyses. There are also options to create custom client-side code to customize messages from the server to the UI, or <emph>vice-versa</emph>.</p>
+    <p>R does not run natively in a web browser, but it has many native and user-contributed entry points to exchange objects with other languages. The <a href="http://shiny.rstudio.com/" target="_blank">Shiny</a> package from <a href="https://www.rstudio.com/" target="_blank">RStudio</a> allows R and javascript to exchange objects, which, along with a host of R functions to build HTML inputs, is enough to create web forms that run sophisticated server-side code to create visuals or perform complex analyses. There are also options to create custom client-side code to customize messages from the server to the UI, or <em>vice-versa</em>.</p>
     
     <p>Here are a few public applications I've recently completed. The titles and images link to live applications; if I am self-hosting them and they do not load, I am probably out of time in my account. Send me a note and I'll make sure you can explore them.</p>
     
-    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;overflow:hidden;">
+    <div class="shinybox">
         <div class="col-sm-6">
             <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
             <div class="imgcontainer">
@@ -30,7 +30,7 @@ keywords: data visualization, shiny, R, CRAN, statistics
             <p style="padding-top:17px;"><strong>An interactive survey to gather expert opinion on species occurrence at a number of points. </strong></p>
             <p>Experts log in, respond to questions about their expertise, then offer opinions on species presence at a number of locations.</p>
             
-            <p><emph>To browse this app as a guest, login with the username "guest."</emph></p>
+            <p><em>To browse this app as a guest, login with the username "guest."</em></p>
             
             
             <p>This app is shared by three projects, so there is a separate private app that allows each project's principal investigator to customize the survey and download responses. Customization includes the ability to:</p>
@@ -53,11 +53,11 @@ keywords: data visualization, shiny, R, CRAN, statistics
             
             <p>The survey parameters and expert responses are stored in a mongoDB (no-SQL) database hosted at <a href="https://mlab.com/" target="_blank">mlab.com*</a>. Project PIs upload locations as a shapefile containing either polygons or points; persistent file storage for the shapefile is via an AWS S3 storage bucket.</p>
             
-            <p><emph>*I have also used AWS RDS as a relational database back-end for other apps.</emph></p>
+            <p><em>*I have also used AWS RDS as a relational database back-end for other apps.</em></p>
         </div> 
     </div>
     
-    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;overflow:hidden;">
+    <div class="shinybox">
         <div class="col-sm-6">
             <a style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">An MCDA Visualization</a>
             <div class="imgcontainer">
@@ -86,7 +86,7 @@ keywords: data visualization, shiny, R, CRAN, statistics
         </div>
     </div>
     
-    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;overflow:hidden;">
+    <div class="shinybox">
         <div class="col-sm-6">
             <a style="font-size:large;" href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank">An Explorable Dataset</a>
             <div class="imgcontainer">
@@ -102,7 +102,7 @@ keywords: data visualization, shiny, R, CRAN, statistics
         </div>
     </div>
         
-    <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;overflow:hidden;">
+    <div class="shinybox">
         <div class="col-sm-6">
             <a style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">The Online Biogas Calculator</a> 
             <div class="imgcontainer">

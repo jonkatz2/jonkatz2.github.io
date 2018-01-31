@@ -10,7 +10,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       
 
       <a style="color:#fff;" href="https://jonkatz2.github.io/"><h1 id="project_title">Jonathan Katz</h1></a>
-      <h2 id="project_tagline">Computer programmer, data analyst, wildlife biologist</h2>
+      <h2 id="project_tagline">Programmer, Data Analyst, Wildlife Biologist</h2>
 
 <!--          {% if site.show_downloads %}-->
 <!--            <section id="downloads">-->
@@ -92,8 +92,8 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
             <p>To ensure you can see the final graphs, here are brief instructions for use:</p>
             <ol>
                 <li>Download and extract the sample data using the menu at the top right.</li>
-                <li>Upload the "Policies.csv" as the policy file. Under "Group/Name Policies" down below, enter a 1 in the "Group" row for both the right-most columns ("P_Sed1" and "P_Sed11") to indicate they are members of a group. Leave all other fields in the "Group" row blank. Enter a 1 in the "Allocation" row under P_Sed1, and 11 in the "Allocation" row under P_Sed11. Leave all other fields in the "Allocation" row blank.</li>
-                <li>Upload the "Attributes_JK.csv" as the attribute file.</li>
+                <li>Upload "Policies.csv" as the policy file. Under "Group/Name Policies" down below, enter a 1 in the "Group" row for both the right-most columns ("P_Sed1" and "P_Sed11") to indicate they are members of a group. Leave all other fields in the "Group" row blank. Enter a 1 in the "Allocation" row under P_Sed1, and 11 in the "Allocation" row under P_Sed11. Leave all other fields in the "Allocation" row blank.</li>
+                <li>Upload "Attributes.csv" as the attribute file.</li>
                 <li>Upload one or both "EE_Predictions_Tim.csv" and "EE_Predictions_Eric.csv" as expert prediction files.</li>
                 <li>Upload "models_LOOKUP.csv" and "models_INTERP.csv" as model prediction files.</li>
                 <li>View the "Group Objectives" tab (no need to change anything, but it must be viewed)</li>
