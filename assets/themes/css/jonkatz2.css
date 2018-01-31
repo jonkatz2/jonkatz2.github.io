@@ -88,6 +88,16 @@
         text-align:center;
         padding:1em;
     }
+    #aboutme_name{
+        text-align:right;
+        padding-top:55px;
+    }
+
+    #aboutme_blurb{
+        text-align:left;
+        padding-top:55px;
+    }
+
 }
 
 /*.container {*/
