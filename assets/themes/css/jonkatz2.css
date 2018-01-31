@@ -28,7 +28,7 @@
 }
 
 
-#blogheader{
+#myblogheader{
     background: #212121; /*#34495e*/   /*#212-121*/
     padding: 70px 0px 10px 34px;
 }
@@ -86,6 +86,11 @@
     max-width: 400px;
     height: auto;
     margin:0px;
+}
+
+.gridimg:hover {
+  opacity: 0.3;
+  background-color: #00008B;
 }
 
 .gridtitle{
