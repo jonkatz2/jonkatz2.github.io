@@ -34,16 +34,15 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     <p>You might also want to <a href="http://jonkatz2.github.io/resume" target="_blank">check out my resume</a>, or I have a couple of blog posts <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" target="_blank">illustrating some simple R functions I wrote.</a></p>
     
     <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
-      <div class="col-sm-6">
-        <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
-        <div class="imgcontainer">
-          <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
-            <div class="middle">
-              <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
+        <div class="col-sm-6">
+            <a style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">An Interactive Expert Elicitation Tool</a>
+            <div class="imgcontainer">
+                <a href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/3i1ryww2j2meh9l/website_elicit2.png?raw=1" alt=""></a>
+                <div class="middle">
+                  <a class="imglinktext" style="font-size:large;" href="https://vtcfwru-am.shinyapps.io/AMExpertModeler/" target="_blank">Open App</a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
      </div>
        
      <div class="col-sm-6">   
@@ -71,18 +70,18 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     </div> 
     
     <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
-      <div class="col-sm-6">
-        <a style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">An MCDA Visualization</a>
-        <div class="imgcontainer">
-            <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img class="imglink"  src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
-            <div class="middle">
-              <a class="imglinktext" style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">Open App</a>
+        <div class="col-sm-6">
+            <a style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">An MCDA Visualization</a>
+            <div class="imgcontainer">
+                  <a href="https://jkatz.shinyapps.io/tradeoff/" target="_blank"><img class="imglink"  src="https://www.dropbox.com/s/hv88ybgyl4atxvm/website_tradeoff.png?raw=1" alt=""></a>
+                  <div class="middle">
+                    <a class="imglinktext" style="font-size:large;" href="https://jkatz.shinyapps.io/tradeoff/" target="_blank">Open App</a>
+                  </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
       
-      <div class="col-sm-6">
+    <div class="col-sm-6">
         <p style="padding-top:17px;">This app is designed for a multiple-criteria decision analysis, particularly the decision for how to restore natural tidal flows to an estuary on Cape Cod, Massachussets, while minimizing negative impacts to surrounding landowners and businesses. The app is driven by a series of csv files uploaded at the start of the process. Sample csv files can be downloaded in using the menu in the upper right. The full analysis can be saved and downloaded so that it may be re-visited in the future without re-parameterizing the entire app. Logging in for this app allows the analysis to be saved to a server; persistent file storage is on Google Drive, which is free and convenient due to the web-editing capability. </p>
 
         <p>To ensure you can see the final graphs, here are brief instructions for use:</p>
@@ -99,15 +98,15 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     </div>
     
     <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
-      <div class="col-sm-6">
-        <a style="font-size:large;" href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank">An Explorable Dataset</a>
-        <div class="imgcontainer">
-          <a href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
-          <div class="middle">
-              <a class="imglinktext" style="font-size:large;" href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank">Open App</a>
-          </div>
+        <div class="col-sm-6">
+            <a style="font-size:large;" href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank">An Explorable Dataset</a>
+            <div class="imgcontainer">
+                <a href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/eoq35cgs1x43u9v/website_alfam2.png?raw=1" alt=""></a>
+                <div class="middle">
+                    <a class="imglinktext" style="font-size:large;" href="https://biotransformers.shinyapps.io/ALFAM2/" target="_blank">Open App</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
       
     <div class="col-sm-6">
@@ -115,15 +114,15 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
     </div>
     
     <div style="clear:both;border:1px solid gray;margin:8px 0px;padding:8px;">
-      <div class="col-sm-6">
-        <a style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">The Online Biogas Calculator</a> 
-        <div class="imgcontainer">
-          <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
-          <div class="middle">
-              <a class="imglinktext" style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">Open App</a>
-          </div>
+        <div class="col-sm-6">
+            <a style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">The Online Biogas Calculator</a> 
+            <div class="imgcontainer">
+                <a href="https://biotransformers.shinyapps.io/oba1/" target="_blank"><img class="imglink" src="https://www.dropbox.com/s/5o246v7qmf6wexd/website_biogas.png?raw=1" alt=""></a> 
+                <div class="middle">
+                    <a class="imglinktext" style="font-size:large;" href="https://biotransformers.shinyapps.io/oba1/" target="_blank">Open App</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <div class="col-sm-6">
         <p style="padding-top:17px;">This app is a calculator for computing the volume of methane biogas produced by controlled digesters. It is essentially a web interface for the R package <a href="https://cran.r-project.org/package=biogas" target="_blank">biogas</a> by Sasha Hafner et al. This is an early app, but still completely functional. </p>
