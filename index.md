@@ -6,19 +6,23 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 ---
 <!-- HEADER -->
 <div id="header_wrap" class="outer topelement">
-    <header class="inner">
-      
-
-      <a style="color:#fff;" href="https://jonkatz2.github.io/"><h1 id="project_title">Jonathan Katz</h1></a>
-      <h2 id="project_tagline">Programmer, Data Analyst, Wildlife Biologist</h2>
-
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="{{ BASE_PATH }}/assets/images_sm/plot.png">
+        </div>
+        <div class="col-sm-8">
+            <header class="inner">
+                <a style="color:#fff;" href="https://jonkatz2.github.io/"><h1 id="project_title">Jonathan Katz</h1></a>
+                <h2 id="project_tagline">Programmer, Data Analyst, Wildlife Biologist</h2>
+            </header>
+        </div>
+    </div>  
 <!--          {% if site.show_downloads %}-->
 <!--            <section id="downloads">-->
 <!--              <a class="zip_download_link" href="{{ site.github.zip_url }}">Download this project as a .zip file</a>-->
 <!--              <a class="tar_download_link" href="{{ site.github.tar_url }}">Download this project as a tar.gz file</a>-->
 <!--            </section>-->
 <!--          {% endif %}-->
-    </header>
 </div>
 
 
