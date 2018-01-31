@@ -63,16 +63,16 @@
     -moz-box-shadow: 0 0 7px 0 #ddd;
     box-shadow: 0 0 7px 0 #ddd;
     border: 1px solid #ccc;
-    height: 290px;
+    height: 500px;
     line-height: 1.3em;
-    max-width: 300px;
-    max-height: 290px;
+    max-width: 400px;
+    max-height: 500px;
     margin: 4px 0 12px 8px;
         margin-left: 8px;
     overflow: hidden;
     padding: 0;
     position: relative;
-    width: 300px;
+    width: 400px;
     white-space: normal;
     vertical-align: top;
 }
