@@ -8,9 +8,7 @@
 /*    padding-right: 0px;*/
 /*}*/
 
-#myhead {
-    padding: 60px 0px 0px 0px;
-}
+
 
 #myheadimg {
     padding:0px;
@@ -116,6 +114,7 @@
 #myhead {
     margin: auto;
     width: 200px;
+    margin: 60px 0px 0px 0px;
 }
 
 .fullimg {
