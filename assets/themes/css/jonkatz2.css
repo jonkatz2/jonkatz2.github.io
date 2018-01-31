@@ -71,9 +71,10 @@
     overflow: hidden;
     padding: 0;
     position: relative;
-    width: 400px;
+/*    width: 400px;*/
     white-space: normal;
     vertical-align: top;
+    margin:auto;
 }
 
 .gridimg{
