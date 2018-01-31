@@ -27,32 +27,32 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
   <div class="row">
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
+        <p>Shiny Web Apps</p>
         <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/grab1_sq.png" alt="Go to shiny gallery">
-        <p>Shiny Gallery</p>
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/flowpart_sq.png" alt="Application planning">
         <p>Application planning</p>
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/flowpart_sq.png" alt="Application planning">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/stratifiedParams_sq.png" alt="Statistical analysis">
         <p>Statistical Analysis</p>
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/stratifiedParams_sq.png" alt="Statistical analysis">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/vectormap_sq.png" alt="Spatial analysis">
         <p>Spatial Analysis</p>
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/vectormap_sq.png" alt="Spatial analysis">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/grab1_sq.png" alt="Data analysis">
         <p>Data Analysis</p>
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/grab1_sq.png" alt="Data analysis">
       </a>
 <!--    </div>-->
   </div>
