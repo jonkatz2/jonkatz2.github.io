@@ -32,10 +32,10 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
-      <a href="/shiny" class="mygrid">
-        <p class="gridtitle">Server-side Coding</p>
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/flowpart_sq.png" alt="Application planning">
-      </a>
+<!--      <a href="/shiny" class="mygrid">-->
+<!--        <p class="gridtitle">Server-side Coding</p>-->
+<!--        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/flowpart_sq.png" alt="Application planning">-->
+<!--      </a>-->
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
@@ -46,7 +46,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 <!--    <div class="col-sm-3">-->
       <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" class="mygrid">
         <p class="gridtitle">Spatial Analysis</p>
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/vectormap_sq.png" alt="Spatial analysis">
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/rastermap_sq.png" alt="Spatial analysis">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
