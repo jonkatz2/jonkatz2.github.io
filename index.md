@@ -27,13 +27,13 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
   <div class="row">
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
-        <p class="gridtitle">Shiny Web Apps</p>
+        <p class="gridtitle">Shiny Applications</p>
         <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/grab1_sq.png" alt="Go to shiny gallery">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
-        <p class="gridtitle">Application planning</p>
+        <p class="gridtitle">Server-side Coding</p>
         <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/flowpart_sq.png" alt="Application planning">
       </a>
 <!--    </div>-->
@@ -44,15 +44,15 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
-      <a href="/shiny" class="mygrid">
+      <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" class="mygrid">
         <p class="gridtitle">Spatial Analysis</p>
         <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/vectormap_sq.png" alt="Spatial analysis">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
-      <a href="/shiny" class="mygrid">
-        <p class="gridtitle">Data Analysis</p>
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/grab1_sq.png" alt="Data analysis">
+      <a href="http://jonkatz2.github.io/monitoR" class="mygrid">
+        <p class="gridtitle">R Packages</p>
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/monitor_sq.png" alt="R packages">
       </a>
 <!--    </div>-->
   </div>

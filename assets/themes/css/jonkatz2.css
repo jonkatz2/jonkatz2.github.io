@@ -85,10 +85,11 @@
 .gridtitle{
     z-index: 1000;
     text-align: center;
-    background-color: rgba(52,73,94, 0.4);
+    background-color: rgba(52,73,94, 0.7);
     padding: 20px 0px;
     color:#fff;
-    font-weight:300;
+    font-weight:500;
+    font-size: 24px;
     text-shadow: black 0.1em 0.1em 0.2em;
     position:absolute;
     width:100%;
