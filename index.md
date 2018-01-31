@@ -44,7 +44,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
-      <a href="http://jonkatz2.github.io/2016/05/01/mapping-with-base-graphics-in-r" class="mygrid">
+      <a href="https://jonkatz2.github.io/2017/11/15/interpolating-points-to-raster-in-r" class="mygrid">
         <p class="gridtitle">Spatial Analysis</p>
         <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/rastermap_sq.png" alt="Spatial analysis">
       </a>

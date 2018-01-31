@@ -8,7 +8,9 @@
       <span>{{ page.date | date_to_long_string }}</span>
     </div>
     <div class="content">
-      {{ content }}
+        <div style="margin-top:60px;" class="container-fluid">
+            {{ content }}
+        </div>
     </div>
 
   {% unless page.categories == empty %}
