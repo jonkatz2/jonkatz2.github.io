@@ -8,6 +8,10 @@
 /*    padding-right: 0px;*/
 /*}*/
 
+#myhead {
+    padding: 60px 0px 0px 0px;
+}
+
 #myheadimg {
     padding:0px;
 }
@@ -35,22 +39,22 @@
     }
 
     #savssm {
-        float:right;
-        width:500px;
+/*        float:right;*/
+/*        width:500px;*/
         text-align:center;
         padding:1em;
     }
 
     #stationsm {
-        float:right;
-        width:500px;
+/*        float:right;*/
+/*        width:500px;*/
         text-align:center;
         padding:1em;
     }
 
     #leowsm {
-        float:left;
-        width:500px;
+/*        float:left;*/
+/*        width:500px;*/
         text-align:center;
         padding:1em;
     }
