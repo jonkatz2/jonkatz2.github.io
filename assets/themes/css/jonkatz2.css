@@ -78,6 +78,11 @@
 }
 
 
+.gridimg{
+    max-width: 400px;
+    height: auto;
+}
+
 /* computer-specific layout */
 @media (min-width: 801px) {
     #navheader {
