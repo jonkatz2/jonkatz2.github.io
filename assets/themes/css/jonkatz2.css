@@ -8,6 +8,12 @@
 /*    padding-right: 0px;*/
 /*}*/
 
+#shinyheader{
+    background: #212121; /*#34495e*/   /*#212-121*/
+    padding: 70px 0px 20px 0px;
+    min-height: 100px;
+}
+
 #aboutmeheader{
     background: #212121; /*#34495e*/   /*#212-121*/
     padding: 70px 0px 20px 0px;

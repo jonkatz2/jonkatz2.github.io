@@ -48,7 +48,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
             <p style="padding-top:17px;"><strong>An interactive survey to gather expert opinion on species occurrence at a number of points. </strong></p>
             <p>Experts log in, respond to questions about their expertise, then offer opinions on species presence at a number of locations.</p>
             
-            <p><i>To browse this app as a guest, login with the username "guest."</i></p>
+            <p><emph>To browse this app as a guest, login with the username "guest."</emph></p>
             
             
             <p>This app is shared by three projects, so there is a separate private app that allows each project's principal investigator to customize the survey and download responses. Customization includes the ability to:</p>
@@ -58,7 +58,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
                 <li>Change the number/type/content of each survey question</li> 
                 <li>Rename variables</li> 
                 <li>Add/remove experts</li> 
-                <li>Add/remove features. Some features include:</li> 
+                <li>Add/remove features. Some features include:
                     <ul>
                         <li>Fixed or random starting values</li>
                         <li>Ordered or random point presentation</li>
@@ -71,7 +71,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
             
             <p>The survey parameters and expert responses are stored in a mongoDB (no-SQL) database hosted at <a href="https://mlab.com/" target="_blank">mlab.com*</a>. Project PIs upload locations as a shapefile containing either polygons or points; persistent file storage for the shapefile is via an AWS S3 storage bucket.</p>
             
-            <p><i>*I have also used AWS RDS as a relational database back-end for other apps.</i></p>
+            <p><emph>*I have also used AWS RDS as a relational database back-end for other apps.</emph></p>
         </div> 
     </div>
     
