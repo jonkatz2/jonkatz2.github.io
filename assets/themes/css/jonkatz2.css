@@ -27,6 +27,7 @@
 
 .imglink {
     width:100%;
+    max-width: 1300px;
 }
 /* computer-specific layout */
 @media (min-width: 801px) {

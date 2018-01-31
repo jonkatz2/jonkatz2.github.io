@@ -44,6 +44,8 @@
 .navbar{
     position:relative;
     min-height:50px;
+    border:none;
+    border-radius:0px;
 /*    margin-bottom:20px;*/
 /*    border:1px solid transparent*/
 }
@@ -357,7 +359,8 @@
     }
 }
 .navbar-default{
-    background-color:#f8f8f8;
+    background-color:rgba(248, 248, 248, 0.4);
+/*    background-color:#f8f8f8;*/
     border-color:#e7e7e7
 }
 .navbar-default .navbar-brand{
