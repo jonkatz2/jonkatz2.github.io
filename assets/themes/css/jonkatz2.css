@@ -8,6 +8,9 @@
 /*    padding-right: 0px;*/
 /*}*/
 
+.rounded .centered {
+    padding:0px;
+}
 
 /* computer-specific layout */
 @media (min-width: 801px) {
