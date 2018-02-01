@@ -44,7 +44,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
 <!--    <div class="col-sm-3">-->
       <a href="/shiny" class="mygrid">
         <p class="gridtitle">Statistical Analysis</p>
-        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/stratifiedParams_sq.png" alt="Statistical analysis">
+        <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/stratifiedParams_closed_sq.png" alt="Statistical analysis">
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
