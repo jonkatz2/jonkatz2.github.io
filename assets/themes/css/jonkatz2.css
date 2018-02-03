@@ -8,8 +8,8 @@
 /*    padding-right: 0px;*/
 /*}*/
 
-.outer {
-  min-width: 400px;
+html, body {
+  min-width: 428px;
 }
 
 
