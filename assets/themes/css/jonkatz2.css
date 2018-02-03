@@ -18,6 +18,12 @@ html, body {
 }
 
 #headerimg{
+    border: 1px solid #ebebeb;
+    box-shadow: 0 0 0px #ebebeb;
+    -webkit-box-shadow: 0 0 0px #ebebeb;
+    -moz-box-shadow: 0 0 0px #ebebeb;
+    -o-box-shadow: 0 0 0px #ebebeb;
+    -ms-box-shadow: 0 0 0px #ebebeb;
     border: none;
     padding: 34px 0px 0px 48px;
 }
