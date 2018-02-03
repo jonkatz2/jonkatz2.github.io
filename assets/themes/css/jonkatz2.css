@@ -8,6 +8,11 @@
 /*    padding-right: 0px;*/
 /*}*/
 
+.outer {
+  min-width: 400px;
+}
+
+
 #index_inner{
     margin:0px
 }
@@ -47,7 +52,7 @@
 
 
 #shinyheader{
-    background: #212121; /*#34495e*/   /*#212-121*/
+    background: #212121; /*#34495e (cadet blue)*/   /*#212-121*/ /*#444750 (slate gray)*/ /*#7f95a4 (light slate gray)*/
     padding: 70px 0px 20px 0px;
     min-height: 100px;
 }

@@ -231,7 +231,7 @@
         width:auto;
         margin-top:0;
         background-color:transparent;
-        border:0;
+        border:1px solid gray;
         box-shadow:none
     }
     .navbar-nav .open .dropdown-menu>li>a,.navbar-nav .open .dropdown-menu .dropdown-header{
