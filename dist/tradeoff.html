@@ -238,49 +238,65 @@ div.tocify {
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>Tradeoff analysis is the process of evaluating which of several potential courses of action offers the the best possible outcome, and in the process of this evaluation it can also offer insight into where deficiencies exist – or what must be done to increase the final return. Tradeoff analysis is typically performed before any action is taken, and it therefore depends on predictions of how a given action will affect one or more objectives. Accurate predictions are therefore a foundation of quantitative decision analysis, and among the goals of tradeoff analysis is to base a decision on the best information available. In some cases, quantitative models can predict consequences with known accuracy. In cases where models have not been developed predictions may be generated through expert elicitation. For complex decisions with many objectives, it is likely that models will exist for some objectives but not others, and expert opinion will be used where modeled effects are unavailable.</p>
-<p>Tradeoff analysis can be framed as a multiple-criteria decision analysis; to do so, it is first necessary to list all realistic courses of action (here we refer to them as policies, or alternatives) as well as all relevant objectives that must be satisfied to some extent by all actions. To evaluate the effect of each policy on each objective, two attributes are outlined a priori: a method for quantifying the extent that each action satisfies each objective, and a scale for specifying the desired quantity. To facilitate comparison of evaluations of each objective it is common to normalize the scale in some way, often by transforming it to a 0 to 1 scale in which 1 represents the most desirable outcome. It is also common to incorporate a weighting scheme that allows different stakeholders to emphasize the objectives viewed as most important, while marginalizing those viewed as less important.</p>
-<p>This application is designed to facilitate tradeoff analyses by performing the comparative scoring automatically and presenting the results in a flexible and informative manner. This is just a fraction of the work that goes into a proper tradeoff analysis, but it may be one of the more confusing parts of the process.</p>
-<p>Users of the app will still need to outline their alternative policies, list all relevant objectives, identify how each objective will be scored and what scores will represent success before opening the app. Here we describe how to format inputs to the app, how to manipulate the subjective components, and how interpret the output. For illustrative purposes we use as an example a decision to return natural tidal flow to the 1,100 acre Herring River estuary in the towns of Wellfleet and Truro, Massachusetts. The Herring River estuary has been isolated from the natural tides from Wellfleet Harbor since 1908 by several dams and dikes placed to expand agricultural land and provide a substrate for local roads. The Cape Cod National Seashore and Herring River Restoration Committee propose to restore tidal exchange and natural communities to the ecologically degraded system by opening gates in dikes and converting dams with roads over them to bridges. A remaining factor to decide is the rate at which flow will be restored, which acknowledges a variable effect of increased tidal action on the multiple stakeholders.</p>
-<p>Stakeholders identified include adjacent landowners as well as local, state, and federal government. Adjacent landowners include many private residences and several local businesses that rely on terrestrial and aquatic resources. Government stakeholders include the towns of Wellfleet and Truro, the Massachussets Department of Fish and Game, the National Park Service, the United States Geological Survey, and the United States Fish and Wildlife Service. A decision framework has been agreed upon to help decision makers and stakeholders characterize risk tolerances and community values, and formally evaluate trade-offs among competing objectives (<em>e.g.</em> restoring hydrography and ecological function while avoiding adverse impacts and minimizing cost). The outcomes of different management strategies will be predicted by a combination of numerical ecological models and expert knowledge where needed. The decision-making process is far from complete, so the information provided here is presented only for want of an example and is not intended to be accurate for the project it portrays.</p>
+<p>Tradeoff analysis can be framed as a multiple-criteria decision analysis (MCDA); to do so, it is first necessary to list all realistic courses of action, or alternatives. The MCDA process also requires us to list in advance all relevant objectives that should be satisfied to some extent by all actions. To evaluate the effect of each alternative on each objective, two attributes of each objective are outlined a priori: a method for quantifying (measuring) the effect of that each action on each objective, and the preferred outcome for each objective (minimize vs maximize measurements). To facilitate comparison of evaluations of each objective it is normal to map the measurement scales between objectives to a common scale, often a 0 to 1 scale in which 1 represents the most desirable outcome. It is also common to incorporate a weighting scheme that allows different stakeholders to emphasize the objectives they perceive as most important and marginalize those viewed as less important. The outcome can then be evaluated under multiple weighting schemes to explore the extent to which each stakeholder may be satisfied by which alternatives.</p>
+<p>This goal of this application is to facilitate tradeoff analyses by performing the comparative scoring automatically and present the results in a flexible and informative manner. Although this is just a fraction of the work that goes into a proper tradeoff analysis it may be one of the more cognitively difficult components due to the need to track outcomes for numerous objectives, alternatives, and weighting schemes.</p>
+<p>Users of the app will need to use a spreadsheet program to outline alternatives, list all relevant objectives, and identify how each objective will be measured and what measurements will represent success before opening the app. Here we describe how to format these files as inputs to the app, how to manipulate the subjective settings within the app, and how use the output to interpret the results.</p>
+<p>We use as a case study a decision in the project to return natural tidal flow to the 1,100 acre Herring River estuary in the towns of Wellfleet and Truro, Massachusetts (Figure 1). The Herring River estuary has been isolated from the natural tides from Wellfleet Harbor since 1908 by several dams and dikes placed to expand agricultural land and provide a substrate for local roads. Wellfleet Harbor is a state designated Area of Critical Environmental Concern due to high nutrient inputs from adjacent watersheds, of which the Herring River estuary has the largest area. After decades of hydrologic and ecological research the Cape Cod National Seashore and Herring River Restoration Committee proposed to restore tidal exchange and natural communities to the ecologically degraded system by installing flow control gates in dikes and converting dams with roads over them to bridges. The decision remaining to be made is the rate at which flow will be restored. The alternative options include multiple gate opening policies that are designed to delay the time until full gate opening. The various policies yield different tidal flow restriction, and each policy has the potential for unique ramifications on each of the multiple stakeholders.</p>
+<p>Stakeholders identified include aquaculture and shellfish farmers in the harbor as well as landowners within and adjacent to the estuary. Landowners include many private residences, a golf course, and several local businesses. Partnerships have been established between the towns of Wellfleet and Truro, the Massachussets Department of Fish and Game, the National Park Service, the United States Geological Survey, and the United States Fish and Wildlife Service to develop a plan and initiate action. To date, a decision framework has been agreed upon that helps decision makers and stakeholders characterize risk tolerances and community values and formally evaluate trade-offs among competing objectives (<em>e.g.</em> restoring hydrography and ecological function while avoiding adverse impacts and minimizing cost). The outcomes of different management strategies will be predicted by a combination of numerical ecological models and expert knowledge where needed. The decision-making process is far from complete, so the information provided here is presented only for example and is not intended to be an accurate representation of the project.</p>
+<div>
+<img src="img/map.png">
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 1.</b> The Herring River estuary occupies portions of the towns of Wellfleet and Truro on Cape Cod, Massachussets and flows into Wellfleet Harbor.
+</p>
 </div>
-<div id="workflow" class="section level1">
-<h1>Workflow</h1>
-<p>The following flowchart traces evaluation from uploaded parameter files (rounded rectangles) and prediction files (rectangles) to a cumulative utility value per policy and weighting scheme. The process begins when parameter and the prediction files are uploaded. Default column names of the attribute table are noted, and the arrows indicate the fate of each column’s contents. The structure of the policy table is much more flexible: the cumulative utility is informed by the contents of the table and also the column names and the row count; labels to the right of each arrow indicate the fate of each component.</p>
-<p>After the parameter and the prediction files are uploaded there is one user-mediated process (circles) for which default values are not supplied: the prediction source selector. There are also five user-mediated processes for which default values are supplied: the group editor, the utility editor, the uncertainty editor, the value weighting editor, and the discount editor. Because it has no default value the prediction source selector <strong>must</strong> be viewed the app to advance. It is possible, although not recommended, to skip all other user-mediated processes and advance directly to the graphical or tabular output.</p>
-<p>The group editor is used to collapse subobjectives under a single heading. This is useful with spatially implicit subobjectives, which may be collapsed under a single objective heading to more easily digest the resulting scores. The default behavior is to collapse all subobjectives under a single objective wherever possible. The utility editor allows the utility function for each subobjective to be parameterized within the app. The two parameters of the utility function include the risk attitude (e.g. “riskSeeking” vs “riskAdverse”) and goal (minimize vs maximize measured values). The default values for these parameters are set in the attribute table using the columns “Utility” and “Direction”.</p>
-<p>There are two points at which the user may inspect values without altering the cumulative utility: the prediction and utility previews. In the prediction preview the predictions for all subobjectives is displayed as a panel of line plots using the native measurement scale over time. In the utility preview the annual utility are displayed as a panel of line plots using the utility scale (0 to 1) over time.</p>
-<p>There are five points at which values are transformed (ovals). First, expert elicited four-point predictions are immediately converted to a continuous distribution on upload. Second, these expert predictions, and some model predictions, are interpolated to fill in temporal gaps. Third, all predictions are converted to utilities, a process that maps the predicted value to a uniform scale based on default values for risk attitude and direction defined in the attribute table. Fourth, the utilities are value weighted (default valuation is equal-weighting by objective), and lastly the weighted utilities are discounted (default discount factor is 1).</p>
-<p>The cumulative utility is the time-aggregated weighted, discounted utility for each weighting scheme and policy combination.</p>
-<p><div id="htmlwidget-5a1ad0ac1d526d22530c" style="width:800px;height:1100px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5a1ad0ac1d526d22530c">{"x":{"diagram":"digraph \"Tradeoff Workflow\" {\n    {\n        rank=same;\n        att [label=\"{<f0> &nbsp; &nbsp; -Attribute table- &nbsp; &nbsp;|<f5> \\nCol: Objective\\n\\n|<f4> \\nCol: Weights\\n(optional)|<f3> \\nCol: Risk attitude\\nCol: Direction\\n\\n|<f2> \\nCol: Model\\n\\n|<f1> \\nCol: Distribution\\n\\n}\" shape=Mrecord];\n        \n        policy [label=\"{<f0>-Policy table-|<f1> \\n &nbsp; Columns=policies &nbsp; \\nRows=time\\nContent=action\\n\\n}\" shape=Mrecord];\n    }\n//    \"Expert\\n &nbsp; predictions &nbsp;\\n\\n\" [shape=box];\n//    \"Model\\n predictions \\n &nbsp;(interpolate) &nbsp;\" [shape=box];\n//    \"Model\\n &nbsp; predictions &nbsp; \\n(lookup)\" [shape=box];\n    {\n        rank=same; \n        \"Expert\\n &nbsp; predictions &nbsp;\\n\\n\" [shape=box]; \n        \"Model\\n predictions \\n &nbsp;(interpolate) &nbsp;\" [shape=box]; \n        \"Model\\n &nbsp; predictions &nbsp; \\n(lookup)\"[shape=box];\n    }\n    {\n        rank=same;\n        \"Prediction\\nsource\\nselector\" [shape=circle];\n        \"Utility\\neditor\" [shape=circle];\n    }\n    \"Annual utility\" [shape=polygon sides=6];\n    {\n        rank=same;\n        \"Value\\nweight\" [shape=circle];\n        Group [shape=circle];\n    }\n    \"Utility function\";\n    \"Weighting function\";\n    \"Discount function\";\n    Discount [shape=circle];\n    \"Prediction\\nPreview\" [shape=circle];\n    \"Utility\\nPreview\" [shape=circle];\n    \"Uncertainty\\n(elicited)\" [shape=circle];\n    \"Cumulative utility\" [shape=polygon sides=6];\n    att:f5 -> Group\n    policy:f1 -> \"Model\\n &nbsp; predictions &nbsp; \\n(lookup)\"[label=\" &nbsp; Content\", weight=10];\n    \"Expert\\n &nbsp; predictions &nbsp;\\n\\n\" -> Distribution;\n    Distribution -> Interpolation; //-> Distribution;\n    att:f1 -> Distribution [weight=10];\n    \"Model\\n predictions \\n &nbsp;(interpolate) &nbsp;\" -> Interpolation;\n    \"Model\\n &nbsp; predictions &nbsp; \\n(lookup)\" -> \"Prediction\\nsource\\nselector\";\n    \"Prediction\\nsource\\nselector\" -> \"Uncertainty\\n(elicited)\";\n    \"Uncertainty\\n(elicited)\" -> \"Utility function\";\n    \"Prediction\\nsource\\nselector\" -> \"Prediction\\nPreview\" [style=dashed;];\n    \"Annual utility\" -> \"Utility\\nPreview\" [style=dashed;];\n    \"Weighting function\" -> \"Utility\\nPreview\" [style=dashed;];\n    att:f2 -> \"Prediction\\nsource\\nselector\";// [weight=10];\n//    \"Utility\\neditor\" [shape=circle];\n    \"Utility\\neditor\" -> \"Utility function\";\n    Interpolation -> \"Prediction\\nsource\\nselector\";\n    \"Prediction\\nsource\\nselector\" -> \"Utility function\";\n    \"Utility function\" -> \"Annual utility\";\n    policy:f1 -> Interpolation [label=\" &nbsp; Rows\", weight=10];\n    policy:f1 -> \"Utility function\" [label=\" &nbsp; Columns\", weight=10];\n    att:f3 -> \"Utility\\neditor\";\n//    att:f3 -> \"Utility function\";\n    \"Annual utility\" -> \"Value\\nweight\";\n    att:f4 -> \"Value\\nweight\" [style=dashed;];//, weight=10];\n    \"Value\\nweight\" -> \"Weighting function\";\n    \"Weighting function\" -> Discount;\n    Discount -> \"Discount function\";\n    \"Discount function\" -> \"Utility\\nPreview\" [style=dashed;];\n    \"Discount function\" -> \"Cumulative utility\";\n    Group -> \"Cumulative utility\";\n}\n\n\n\n//http://www.graphviz.org/pdf/dotguide.pdf\n//http://tonyballantyne.com/graphs.html\n\n\n\n\n\n\n\n\n\n\n\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-7aa66d6da53e413934a1" style="width:800px;height:150px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7aa66d6da53e413934a1">{"x":{"diagram":"digraph key {\n    subgraph cluster_key{\n        label=Key;\n        \"Raw output\" [shape=polygon sides=6];\n        \"User\\nmediated\\nprocess\" [shape=circle];\n        Calculation;\n        \"&nbsp;Prediction &nbsp;\\ntable\\n\\n\" [shape=box];\n        ptab [label=\"{<f0> &nbsp; &nbsp; -Parameter table- &nbsp; &nbsp;|<f1> Columns\\n\\n}\" shape=Mrecord];\n    }\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
+</div>
+<p>This example introduces several elements that are specific to the project and are not generally part of MCDA evaluations. First, the alternative actions of this project consist of gate policies, which are sequences of flow control gate settings over multiple years. For this reason the term alternatives is replaced by the term policies when describing the app. Second, this project is adaptively managed but the initial policy decision is not intended to be evaluated after one year. Instead, when choosing the initial policy to enact the effects are predicted to 25 years from the present, and the policies are evaluated after effects accumulate for those 25 years. Although this application was created specifically for the Herring River Tidal Restoration Project, we expect that it could be adapted for other projects with minimal effort.</p>
 </div>
 <div id="user-interface" class="section level1">
 <h1>User Interface</h1>
 <div id="overview" class="section level2">
 <h2>Overview</h2>
-<p>There are infinite ways to work through the app. At a minimum you must upload the policy and attribute tables and at least one prediction table and then view the prediction sources before moving to the outputs. A more considered approach includes reviewing the utility preferences (in <em>Options &gt; Adjust Utilities</em>), setting or reviewing the weights (in <em>Options &gt; Weight Objectives</em>). A handful of possible routes through the app are diagrammed below.</p>
-<p><div id="htmlwidget-81efbf27788966bbb27c" style="width:800px;height:700px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-81efbf27788966bbb27c">{"x":{"diagram":"digraph \"Tradeoff Interface\" { \n    inputs [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"5\" WIDTH=\"90\"> <B>Inputs<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" BGCOLOR=\"DarkSeaGreen\" WIDTH=\"180\">Policies<\/TD><\/TR>\n            <TR><TD PORT=\"f2\" BGCOLOR=\"DarkSeaGreen\">Attributes<\/TD><\/TR>\n            <TR><TD PORT=\"f3\" BGCOLOR=\"MediumTurquoise\">Expert Predictions<\/TD><\/TR>\n            <TR><TD PORT=\"f4\" BGCOLOR=\"MediumTurquoise\">Model Predictions<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    group [label=\"Group Objectives\", shape=box, width=2];\n    predsource [label=\"Prediction Sources\", shape=box, style=filled, fillcolor=\"DarkSeaGreen\", width=2];\n    \n   \n    options [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"7\" WIDTH=\"100\"> <B>Options<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" WIDTH=\"250\">Preview Predictions<\/TD><\/TR>\n            <TR><TD PORT=\"f2\" BGCOLOR=\"NavajoWhite\">Adjust Utilities<\/TD><\/TR>\n            <TR><TD PORT=\"f3\" BGCOLOR=\"NavajoWhite\">Set Uncertainty<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">Set Discount<\/TD><\/TR>\n            <TR><TD PORT=\"f5\" BGCOLOR=\"NavajoWhite\">Weight Objectives<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">Preview Subobjective Utility<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    \n    tables [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"4\" WIDTH=\"90\"> <B>Tables<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" WIDTH=\"190\">Consequence Table<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">Scores<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">Ranks<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n        \n    plots [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"7\" WIDTH=\"90\"> <B>Plots<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" WIDTH=\"200\">Line<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">Polygon<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">Grid<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">Performance<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">Cumulative Utility<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">Tornado<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    inputs:f0 -> predsource -> options:f0 -> tables:f0:nw [style=dashed];\n    predsource -> tables:f0:ne [style=dashed];\n    options:f0 -> plots:f0:nw [style=dashed];\n    \n    inputs:f0 -> group -> predsource -> options:f2:ne [penwidth=3];\n    options:f2:se -> options:f5:ne [penwidth=3];\n    options:f5:se -> tables:f0:n [penwidth=3];\n    tables:f0:s -> plots:f0 [penwidth=3];\n }   \n    \n\n    \n    \n    \n    \n    \n    \n    ","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-cd34aa5b13c2bc1b8095" style="width:800px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-cd34aa5b13c2bc1b8095">{"x":{"diagram":"digraph \"Key\" {\n    subgraph cluster_key{\n        label=Key;\n        {\n            rank=same;\n            \"Sensitivity Analysis\" [shape=rect, style=filled, fillcolor=\"NavajoWhite\", width=2];\n            Optional [shape=rect, width=2];\n            \"One or Both\" [shape=rect, style=filled, fillcolor=\"MediumTurquoise\", width=2];\n            Mandatory [shape=rect, style=filled, fillcolor=\"DarkSeaGreen\", width=2];\n        }\n        {\n            rank=same;\n            a [shape=none, fontcolor=\"White\"];\n            b [shape=none, fontcolor=\"White\"];\n            c [shape=none, fontcolor=\"White\"];\n            d [shape=none, fontcolor=\"White\"];\n            a -> b [label=\"&nbsp; Optional Path\", style=dashed, width=0];\n            c -> d [label=\"&nbsp; Recommended Path\", penwidth=3, width=0];\n        }\n        a -> Mandatory [arrowhead=none, color=\"White\"];\n    }\n}\n\n\n\n//http://www.graphviz.org/pdf/dotguide.pdf\n//http://tonyballantyne.com/graphs.html\n\n// command line\n//dot -Tpng appflowchart.dot > testme.png\n\n\n\n\n\n\n\n\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
+<p>The app consists of a website with numerous tabbed displays. There may be infinite ways to work through the tabs from start to finish, so we will focus on the most efficient paths. At a minimum you must upload the policy and attribute tables and at least one prediction table and then view the prediction sources before moving to the outputs. A more considered approach includes reviewing the utility preferences (in <em>Options &gt; Adjust Utilities</em>), setting or reviewing the weights (in <em>Options &gt; Weight Objectives</em>). A handful of possible routes through the app are diagrammed in Figure 2 below.</p>
+<p><div id="htmlwidget-a202c10d0b34695045c4" style="width:800px;height:700px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a202c10d0b34695045c4">{"x":{"diagram":"digraph \"Tradeoff Interface\" { \n    inputs [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"5\" WIDTH=\"90\"> <B>Inputs<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" BGCOLOR=\"DarkSeaGreen\" WIDTH=\"180\">Policies<\/TD><\/TR>\n            <TR><TD PORT=\"f2\" BGCOLOR=\"DarkSeaGreen\">Attributes<\/TD><\/TR>\n            <TR><TD PORT=\"f3\" BGCOLOR=\"MediumTurquoise\">Expert Predictions<\/TD><\/TR>\n            <TR><TD PORT=\"f4\" BGCOLOR=\"MediumTurquoise\">Model Predictions<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    group [label=\"Group Objectives\", shape=box, width=2];\n    predsource [label=\"Prediction Sources\", shape=box, style=filled, fillcolor=\"DarkSeaGreen\", width=2];\n    \n   \n    options [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"7\" WIDTH=\"100\"> <B>Options<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" WIDTH=\"250\">Preview Predictions<\/TD><\/TR>\n            <TR><TD PORT=\"f2\" BGCOLOR=\"NavajoWhite\">Adjust Utilities<\/TD><\/TR>\n            <TR><TD PORT=\"f3\" BGCOLOR=\"NavajoWhite\">Set Uncertainty<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">Set Discount<\/TD><\/TR>\n            <TR><TD PORT=\"f5\" BGCOLOR=\"NavajoWhite\">Weight Objectives<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">Preview Subobjective Utility<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    \n    tables [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"4\" WIDTH=\"90\"> <B>Tables<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" WIDTH=\"190\">Consequence Table<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">Scores<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">Ranks<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n        \n    plots [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" ROWSPAN=\"7\" WIDTH=\"90\"> <B>Plots<\/B><\/TD><\/TR>\n            <TR><TD PORT=\"f1\" WIDTH=\"200\">Line<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">Polygon<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">Grid<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">Performance<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">Cumulative Utility<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">Tornado<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    inputs:f0 -> predsource -> options:f0 -> tables:f0:nw [style=dashed];\n    predsource -> tables:f0:ne [style=dashed];\n    options:f0 -> plots:f0:nw [style=dashed];\n    \n    inputs:f0 -> group -> predsource -> options:f2:ne [penwidth=3];\n    options:f2:se -> options:f5:ne [penwidth=3];\n    options:f5:se -> tables:f0:n [penwidth=3];\n    tables:f0:s -> plots:f0 [penwidth=3];\n }   \n    \n\n    \n    \n    \n    \n    \n    \n    ","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-d885aa964225a438c01c" style="width:800px;height:200px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d885aa964225a438c01c">{"x":{"diagram":"digraph \"Key\" {\n    subgraph cluster_key{\n        label=Key;\n        {\n            rank=same;\n            \"Sensitivity Analysis\" [shape=rect, style=filled, fillcolor=\"NavajoWhite\", width=2];\n            Optional [shape=rect, width=2];\n            \"One or Both\" [shape=rect, style=filled, fillcolor=\"MediumTurquoise\", width=2];\n            Mandatory [shape=rect, style=filled, fillcolor=\"DarkSeaGreen\", width=2];\n        }\n        {\n            rank=same;\n            a [shape=none, fontcolor=\"White\"];\n            b [shape=none, fontcolor=\"White\"];\n            c [shape=none, fontcolor=\"White\"];\n            d [shape=none, fontcolor=\"White\"];\n            a -> b [label=\"&nbsp; Optional Path\", style=dashed, width=0];\n            c -> d [label=\"&nbsp; Recommended Path\", penwidth=3, width=0];\n        }\n        a -> Mandatory [arrowhead=none, color=\"White\"];\n    }\n}\n\n\n\n//http://www.graphviz.org/pdf/dotguide.pdf\n//http://tonyballantyne.com/graphs.html\n\n// command line\n//dot -Tpng appflowchart.dot > testme.png\n\n\n\n\n\n\n\n\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 2.</b> Direct and considered pathways through the application user interface.
+</p>
+</div>
 </div>
 <div id="distribution-format" class="section level2">
 <h2>Distribution Format</h2>
 <p>The app is distributed as a Windows executable. Once installed, the app opens in the computer’s default web browser. The app was developed in Firefox (version 58.0.1) but has passed testing in Internet Explorer (version XXX) and Safari (version XXX). The server that does all dynamic UI generation, data manipulation, analysis, and plot generation runs R portable (version 3.4.2) through the Shiny package (version 1.0.5). The user interface consists of a navigation menu embedded in a collapsible sidebar on the left, and a main page body containing interactive forms, tables, and plots. The sidebar and forms are designed to be viewed on screen size of 1366x768 or higher; smaller screens and mobile devices may clip content without warning. On smaller screens it may be possible to adjust the browser zoom level to see all content (typically “Control -” to zoom out and “Control Shift +” to zoom in).</p>
 </div>
-<div id="server-disconnection-gray-screen" class="section level2">
-<h2>Server Disconnection (gray screen)</h2>
-<p>It is intended that users progress through the navigation menu from top-to-bottom, uploading files in the same order they are presented on-screen. At the bottom of each form “forward” and “back” navigation buttons facilitate orderly progression through the app. Once the tables have been uploaded most parameters can be adjusted in any order to allow the user to explore any number of “what-if” scenarios without resetting the app. Some combinations of adjustments may cause disconnection from the server, which disables all forms and turns the screen gray. In these cases it is necessary to refresh your browser and re-upload all tables. If the user encounters persistent server disconnections, a bug report to the developers may be sent from within the app using the menu at the top-right of the screen.</p>
-</div>
 <div id="privacy" class="section level2">
 <h2>Privacy</h2>
-<p>The app operates by parsing tables uploaded by the user, manipulating and merging their contents, and presenting the results in tabular and graphical formats. User content must therefore be uploaded to the app using the on-screen widgets, however, because the app is run through an assigned localhost server the file contents never leave the user’s computer and there is no chance they may be intercepted between the web forms and the localhost server. No data are stored on the server beyond the session duration and no information about the user, the user’s web browser, or the user’s operating system are collected by the app. When the user closes the browser (or the host browser tab) all traces of the user’s session are removed from the server and can not be retrieved.</p>
-<p>There is an option for the user to download a snapshot of their session as a .RDS file and restore the session in the future by uploading the file. RDS files are data-serialization files for the R computer language and these files may be opened and their contents inspected in R, although it is recommended that if users open this file they do not save changes as doing so may corrupt the ability to restore the analysis at a later date. The RDS file contains all data uploaded by the user and if privacy is a concern they access to them should be controlled as if they were the original files.</p>
+<p>The app operates by parsing tables uploaded by the user, manipulating and merging their contents, and presenting the results in tabular and graphical formats. User content must therefore be uploaded to the app using the on-screen widgets, however, because the app is run through an assigned localhost server the file contents never leave the user’s computer and there is no chance they may be intercepted between the web forms and the localhost server. No data are stored on the localhost server beyond the session duration and no information about the user, the user’s web browser, or the user’s operating system are collected by the app or transmitted beyond the user’s computer. When the user closes the browser (or the host browser tab) all traces of the user’s session are removed from the server and can not be retrieved.</p>
+<p>There is an option for the user to download a snapshot of their session as a .RDS file and restore the session in the future by uploading the file. RDS files are data-serialization files for the R computer language and these files may be opened and their contents inspected in R, although it is recommended that if users open this file they do not save changes as doing so may corrupt the ability to faithfully restore the analysis at a later date. The RDS file contains all data uploaded by the user and if privacy is a concern access to these files should be controlled as if they were the original files.</p>
 </div>
 </div>
-<div id="parameterization" class="section level1">
-<h1>Parameterization</h1>
-<p>This application is parameterized via a series of tables uploaded as comma-separated values (csv) files. There are as many as four types of tables, and each is saved to a separate csv file. The table types include a single policy table, a single attribute table, any number of expert prediction tables, and any number of model prediction tables. The contents of each table should match the following examples as closely as possible, including adhering to case-sensitive column headings where indicated (Table 1).</p>
+<div id="workflow" class="section level1">
+<h1>Workflow</h1>
+<p>Figure 3 traces evaluation from uploaded parameter and prediction files (rectangles) to a cumulative utility value per policy and weighting scheme. The process begins when parameter and the prediction files are uploaded. Default column names of the attribute table are noted, and the arrows indicate the fate of each column’s contents. The structure of the policy table is much more flexible: the cumulative utility is informed by the contents of the table and also the column names and the row count; labels to the right of each arrow indicate the fate of each component.</p>
+<p>After the parameter and the prediction files are uploaded there is one user-mediated process (circle) for which default values are not supplied: the prediction source selector. There are also five user-mediated processes for which default values are supplied: the group editor, the utility editor, the uncertainty editor, the value weighting editor, and the discount editor. Because it has no default value the prediction source selector <strong>must</strong> be viewed the app to advance. It is possible, although not recommended, to skip all other user-mediated processes and advance directly to the graphical or tabular output.</p>
+<p>The group editor is used to collapse subobjectives under a single heading. This is useful with spatially implicit subobjectives, which may be collapsed under a single objective heading to more easily digest the resulting scores. The default behavior is to collapse all subobjectives under a single objective wherever possible. The utility editor allows the utility function for each subobjective to be parameterized within the app. The two parameters of the utility function include the risk attitude (e.g. “riskSeeking” vs “riskAdverse”) and goal (minimize vs maximize measured values). The default values for these parameters are set in the attribute table using the columns “Utility” and “Direction”.</p>
+<p>There are five points at which the user may inspect values without altering the cumulative utility: the prediction and utility previews, the consequence table, the score and rank tables, and the plots. In the prediction preview the predictions for all subobjectives is displayed as a panel of line plots using the native measurement scale over time. In the utility preview the annual utility are displayed as a panel of line plots using the utility scale (0 to 1) over time.</p>
+<p>There are a number of points at which values are transformed (ovals). First, expert elicited four-point predictions are converted to a statistical distribution on upload and all predictions are reshaped to a series of time x policy tables, interpolating as necessary to fill in temporal gaps. Then all predictions are converted to utilities, a process that maps the predicted value to a uniform scale based on default values for risk attitude and direction defined in the attribute table. The utilities are value weighted (default valuation is equal-weighting by objective), and lastly the weighted utilities are discounted (default discount factor is 1).</p>
+<p>The final score is the time-aggregated weighted, discounted utility for each weighting scheme and policy combination.</p>
+<p><div id="htmlwidget-c7a9f610484cd0c023d2" style="width:900px;height:1600px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c7a9f610484cd0c023d2">{"x":{"diagram":"digraph \"Tradeoff Workflow\" {\n//    {\n//        rank=same;\n        att [\n            label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"10\">\n                <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" WIDTH=\"175\"> <B>Attribute table &nbsp; &nbsp;<\/B><\/TD><\/TR>\n                <TR><TD PORT=\"f5\" ALIGN=\"center\">Col: Objective &nbsp;<\/TD><\/TR>\n                <TR><TD PORT=\"f4\">Col: Weights<BR/>(optional) &nbsp;<\/TD><\/TR>\n                <TR><TD PORT=\"f2\">Col: Model &nbsp;<\/TD><\/TR>\n                <TR><TD PORT=\"f1\">Col: Distribution &nbsp;<\/TD><\/TR>\n                <TR><TD PORT=\"f3\">Col: Risk attitude &nbsp;<BR/>Col: Direction &nbsp;<\/TD><\/TR>\n            <\/TABLE>> \n            shape = \"none\"\n            tooltip=\"Table has subobjectives in rows, attributes in columns.\"\n        ];\n        \n        policy [\n            label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"10\">\n                <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" WIDTH=\"215\"> <B>Policy table &nbsp;<\/B><\/TD><\/TR>\n                <TR><TD PORT=\"f1\">Specifies action per  &nbsp;<BR/>time (rows) and  &nbsp;<BR/>policy (columns) &nbsp;<\/TD><\/TR>\n            <\/TABLE>> \n            shape = \"none\"\n            tooltip=\"Table has actions in rows, policies in columns.\"\n        ];\n        \n        predictions [\n            label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"10\">\n                <TR><TD PORT=\"f0\" BGCOLOR=\"Gray\" COLSPAN=\"3\"> <B>Predictions &nbsp;<\/B><\/TD><\/TR>\n                <TR>\n                    <TD PORT=\"f3\" WIDTH=\"175\">Modeled by action &nbsp;<BR/>per subobjective &nbsp;<\/TD>\n                    <TD PORT=\"f2\" WIDTH=\"210\">Modeled by time per &nbsp; &nbsp;<BR/>subobjective per policy &nbsp; &nbsp; &nbsp;<\/TD>\n                    <TD PORT=\"f1\" WIDTH=\"225\">Expert elicited by time &nbsp; &nbsp;<BR/>per subobjective per policy &nbsp; &nbsp; &nbsp; &nbsp;<\/TD>\n                <\/TR>\n            <\/TABLE>> \n            shape = \"none\"\n            tooltip=\"Upload each type in a separate file.\"\n        ];\n//    }\n    lookuppreds [label=\"Lookup predictions for each action\\nin policy table, interpolate if necessary\", tooltip=\"Predictions are assembled by looking up predictions\\nfor the action sequence for each policy.\"];\n    shapepreds [label=\"Shape predictions:\\nprediction per time per policy,\\ninterpolate if necessary\", tooltip=\"Missing times are filled in by interpolation, missing policies will cause an error.\"];\n    predsource [label=\"Prediction\\nsources\", shape=circle, height=1.7, tooltip=\"Prediction source selector\"];\n    utilUI [label=\"Adjust\\nutilities\", shape=circle, height=1.7, tooltip=\"Adjust utilities\"];\n    utilRisk [label=\"Risk attitude\", shape=hexagon, width=2.5, tooltip=\"Risk attitude is converted\\nfrom keyword to numeric 0-1\"];\n    utilDir [label=\"Utility direction\", shape=hexagon, width=2.5, tooltip=\"Which is more desirable:\\nmin or max measurement\"];\n    \"Annual utility\" [shape=hexagon, width=2.5, tooltip=\"Utility per subobjective per year\"];\n    preds [label=\"Predictions\", shape=hexagon, width=2.5, tooltip=\"Predictions per subobjective per year\"];\n    \"Weight\\nobjectives\" [shape=circle, height=1.7, tooltip=\"Value weight each level of the objective hierarchy\"];\n    group [label=\"Group\\nobjectives\", shape=circle, height=1.7, tooltip=\"Create arbitrary objective groups to simplify consequence table and plots\"];\n    \"Utility function\" [tooltip=\"Scales all predicted measurements to a 0-1 range, where 1 is best\"];\n    \"Weighting function\" [tooltip=\"Applies value weight to each subobjective\"];\n    \"Discount function\" [tooltip=\"Applies discount factor to each year\"];\n    Discount [shape=circle, height=1.7, tooltip=\"Select a discount factor\"];\n    \"Preview\\nPredictions\" [shape=circle, height=1.7, tooltip=\"Predictions for each subobjective can be previewed as time by measurement\"];\n    \"Preview\\nscores\" [shape=circle, height=1.7, tooltip=\"Subobjective utility per year can be viewed weighted/unweighted and discounted/undiscounted\"];\n    CT [label=\"Consequence\\ntable\", shape=circle, height=1.7, tooltip=\"Consequence table is unweighted final subobjective utilities.\"];\n    \"Uncertainty\\nrange\" [shape=circle, height=1.7, tooltip=\"Uncertainty ranges from max\\nof 0.5 to min of 0\"];\n    \"Cumulative utility\" [shape=hexagon, width=2.5, tooltip=\"Summed utilities yield a range between 0 and N years\"];\n    aggTime [label=\"Aggregate annual\\nsubobjective utilities\", tooltip=\"Sum utility for all years for each subobjective\"];\n    aggObj [label=\"Aggregate objective\\nutilities\", tooltip=\"Sum time-aggregated utility for all subobjectives\"];\n    score [label=\"Final score\", shape=hexagon, width=2.5, tooltip=\"Final scores after N time steps\"];\n    \"Weighted utility\" [shape=hexagon, width=2.5];\n    \"Discounted utility\" [shape=hexagon, width=2.5];\n    scorerank [label=\"Score, Rank\\ntables\", shape=circle, height=1.7, tooltip=\"Final score and rank for best, worst, and most likely cases as well as each weighting scenario and uncertainty level\"];\n    Plots [shape=circle, height=1.7, tooltip=\"For informing management decisions and conveying decision rationale to stakeholders\"];\n    distr [label=\"Convert 4-pt elicitation to\\nstatistical distribution\", tooltip=\"Convert four-point elicitation to statistical distribution\"];\n    \n    att:f5 -> group\n    att:f2 -> lookuppreds;\n//    att:f2 -> shapepreds;\n    predictions:f3 -> lookuppreds;\n    policy:f1:s -> lookuppreds;\n    policy:f1 -> shapepreds;\n    lookuppreds -> preds;\n    shapepreds -> preds;\n    predictions:f1:s -> distr;\n    distr -> shapepreds; \n    att:f1 -> distr;// [weight=10];\n    predictions:f2 -> shapepreds;\n    predsource -> preds;\n    preds -> \"Utility function\";\n    \"Uncertainty\\nrange\" -> \"Utility function\";\n    preds -> \"Preview\\nPredictions\" [style=dashed];\n    \"Annual utility\" -> \"Preview\\nscores\" [style=dashed];\n    \"Weighting function\" -> \"Preview\\nscores\" [style=dashed];\n    att:f2 -> predsource;\n    utilUI -> utilRisk;\n    utilRisk -> \"Utility function\";\n    utilUI -> utilDir;\n    utilDir -> \"Utility function\";\n    \"Utility function\" -> \"Annual utility\";\n    att:f3 -> utilUI;\n    \"Annual utility\" -> aggTime;\n    aggTime -> \"Cumulative utility\";\n    \"Cumulative utility\" -> \"Weighting function\"; \n    \"Cumulative utility\" -> CT;\n    \"Cumulative utility\" -> \"Preview\\nscores\" [style=dashed];\n    \"Cumulative utility\" -> Plots;\n    att:f4 -> \"Weight\\nobjectives\" [style=dashed];\n    \"Weight\\nobjectives\" -> \"Weighting function\";\n    \"Weighting function\" -> \"Weighted utility\";\n    \"Weighted utility\" -> \"Discount function\";\n    Discount -> \"Discount function\";\n    \"Discount function\" -> \"Preview\\nscores\" [style=dashed];\n    \"Discount function\" -> \"Discounted utility\";\n    \"Discounted utility\" -> aggObj;\n    aggObj -> score;\n    group -> CT;\n    group -> Plots;\n    score -> scorerank;\n    score -> Plots;\n}\n\n\n\n// http://www.graphviz.org/pdf/dotguide.pdf\n// http://tonyballantyne.com/graphs.html\n\n// http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html\n\n\n\n\n\n\n\n\n\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div id="htmlwidget-0cdb3a15f72250790da8" style="width:800px;height:125px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0cdb3a15f72250790da8">{"x":{"diagram":"digraph key {\n    subgraph cluster_key{\n        label=Key;\n        \"User\\ninterface\" [shape=circle, tooltip=\"User interface\"];\n        \"Input/output\" [shape=hexagon];\n        Calculation;\n        uploads [\n            label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\" CELLPADDING=\"10\">\n                <TR>\n                    <TD BGCOLOR=\"Gray\" COLSPAN=\"3\"> <B>Upload<\/B><\/TD>\n                <\/TR>\n                <TR>\n                    <TD WIDTH=\"100\" ROWSPAN=\"2\">Table<\/TD>\n                    <TD WIDTH=\"100\" ROWSPAN=\"2\">Table<\/TD>\n                    <TD WIDTH=\"100\">Column<\/TD>\n                <\/TR>\n                <TR>\n                    <TD WIDTH=\"100\">Column<\/TD>\n                <\/TR>\n            <\/TABLE>> \n            shape = \"none\"\n        ];\n    }\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 3.</b> Flowchart tracing evaluation from prediction and parameter upload to score/rank tables and plots.
+</p>
+</div>
+</div>
+<div id="using-the-app" class="section level1">
+<h1>Using The App</h1>
+<p>This application is parameterized via a series of tables uploaded as comma-separated values (csv) files. There are as many as four types of tables - not all are required for all analyses - and each is saved to a separate csv file. The table types include a single policy table, a single attribute table, any number of expert prediction tables, and any number of model prediction tables. The contents of each table should match the following examples as closely as possible, including adhering to case-sensitive column headings where indicated in Table 1.</p>
 <table>
 <caption>Table 1. Input table types.</caption>
 <thead>
@@ -299,7 +315,7 @@ div.tocify {
 <tr class="even">
 <td align="left">Attribute</td>
 <td align="left">Yes</td>
-<td align="left"><em>Default values preferred (see text)</em></td>
+<td align="left"><strong>Obj.lbl, Objective, Model, Prediction, Direction, Utility, Distr</strong>†<strong>, GlobalHigh</strong>†<strong>, GlobalLow</strong>†</td>
 </tr>
 <tr class="odd">
 <td align="left">Elicitation Predictions</td>
@@ -318,10 +334,12 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-<p>*A minimum of one of these three prediction types must be supplied.</p>
+<p>†These columns only used when expert predictions are included.<br />
+*A minimum of one of these three prediction types must be supplied.</p>
 <div id="the-policy-table" class="section level2">
 <h2>The Policy Table</h2>
-<p>Policies, or alternative actions being considered, specify the actions for one or more time periods into the future. The table structure thus has distinct policies in columns and time in rows. For each policy and time an action is coded into the table using any key-value of your choice. The column headings name policies and should be free of spaces and special characters, but are otherwise unconstrained.</p>
+<p>Policies, or alternative actions being considered, specify the actions for one or more time periods into the future. In the Herring River Tidal Restoration Project the alternative policies consist of different flood gate settings set on the first day of the year. For most policies the gate settings remain static for the duration of the year, although see <em>“Single vs Multiple-Vector Policies”</em> for an exception. The gate settings are coded with two integers: the first is the number of gates open, the second is the height to which all gates are opened. For example, in Table 2 below, all five policies (columns) use the same gate setting the first year (row): one gate open to eight feet, coded 1_8. After the first year the policies differ in either the number of gates open, the height of the opening, or both number and height.</p>
+<p>The table structure thus has distinct policies in columns and time in rows. For each policy and time, an action is coded into the table using any value of your choice. The column headings name the policies and should be free of spaces and special characters, but are otherwise unconstrained.</p>
 <table>
 <caption>Table 2. Example policy table with five policies occurring over five years.</caption>
 <thead>
@@ -377,8 +395,8 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-<p>In Table 2 above, each column names a policy, and each row represents a year in the future. In the Herring River example a policy is defined by which dams or gates will be opened and the amount of flow allowed, since most gates are adjustable. We can see that several policies consists of a different action each year, as indicated by a different code value. Elsewhere the decisionmakers can identify the specific action represented by each code; the importance of keeping the coded notation brief will be clear as we begin to look up the predicted effect of the policy. The number of rows in the table is important; although we will be able to inspect the utility value for each policy, objective, and year, we will also be able to view a final score representing the cumulative utility at the end of the decision timeframe.</p>
-<p>Some decisions may not employ different actions each year, but might consist of a single action for which the consequences are evaluated. In these cases the policy table can be constructed with a single row, or time period.</p>
+<p>The specific action represented by each code value in the policy table can be recorded elsewhere in the project. Ideally the coded notation will be brief because for some predictions the app will take the order of gate configurations from the policy table and look up the predicted effect on the objectives in a prediction table. The number of rows in the table is important because it identifies the timeframe at which policies are compared. Although we will be able to inspect the utility value for each policy, objective, and year, for this project we are specifically interested in a final score representing the cumulative utility at the end of the decision timeframe.</p>
+<p>Some decisions may not employ different actions each year, but might consist of a single action for which the consequences are evaluated. In these cases the policy table can be constructed with a single row, or time period, as in Table 3 below.</p>
 <table>
 <caption>Table 3. Example policy table with five policies, in which the entire action is complete after one year.</caption>
 <thead>
@@ -402,36 +420,47 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-Upload the policy table by selecting “Upload Files” at the top of the sidebar at left, then selecting “Policies”. Then click the “Browse” button and select your policy file. The file name will appear on screen twice: once above the status bar and again below the uploader. The duplication is intentional; if you are restoring a saved analysis the uploader is not used, but the file name will still be reported below the uploader.<br />
-
+<p>Upload the policy table by selecting “Upload Files” at the top of the sidebar at left, then selecting “Policies”. Then click the “Browse” button and select your policy file (Figure 4). The file name will appear on screen twice: once above the status bar and again below the uploader. The duplication is intentional; if you are restoring a saved analysis the uploader is not used, but the file name will still be reported below the uploader.</p>
 <div>
-<p><img style="width:50%;" src="img/uploadPolicies.png"></p>
+<p><img src="img/uploadPolicies.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 4.</b> Screen capture of the policy uploading tab. The navigation bar is on the left, the uploader is at top-center, and the policy group/temporal allocation table is at the bottom. Blank groups (top row of boxes in table) are implicitly identified as single policy vectors.
+</p>
 </div>
 <div id="single-vs.multiple-policy-vectors" class="section level3">
 <h3>Single vs. Multiple Policy Vectors</h3>
-<p>In the example policy table in Tables 2 and 3, all policies are coded as “single policy vectors”, which means that each policy consists of a single action per year for one or more years. It is conceivable that a policy may be more complex than this — a policy may consist of multiple actions per year, which can be coded with multiple action codes for each year. We can accomodate this with “multiple policy vectors”, effectively allowing two or more columns in the policy table to specify one policy. For example, instead of opening a gate a fixed amount for the entire year, a gate may be opened halfway for one month and then set to wide-open for the remaining 11 months. In addition to joining multiple columns as a single policy we also need to identify the proportion of the time each action will be applied.</p>
-<p>After a policy table is uploaded a table will appear on the page; at the top of the table we can indicate that a single policy will be the result of a combination of the last two columns by assigning them the same number in the “Group” fields, and we can also indicate the time allocated to each action in the “Allocation” fields.</p>
-<div>
-<p><img src="img/groupPolicies1.png"></p>
-</div>
-<p>Typically the time allocation numbers indicate months of the year, so the sum of all allocations in a single group should be 12. In practice these values are marginalized before use, so these fields can take any values that adequately summarize the action.<br />
-Leaving the “Group” fields blank for the single policy vectors is treated the same as assigning them to unique groups. The settings in the above screenshot are thus equivalent those in the following screenshot.</p>
+<p>In the example policy tables (Tables 2 and 3), all policies are coded as “single policy vectors”, which means that each policy consists of a single action per year for one or more years. It is conceivable that a policy may be more complex than this — a policy may consist of multiple actions per year, which can be coded with multiple action codes for each year. Doing so can simplify the prediction process if the gate setting predictions already exist. The app can accomodate this with “multiple policy vectors”, which allow two or more columns in the policy table to specify one policy. For example, instead of opening a gate a fixed amount for the entire year, a gate may be opened halfway for one month and then set to wide-open for the remaining 11 months. In addition to joining multiple columns as a single policy we also need to identify the proportion of the time each action will be applied.</p>
+<p>After a policy table is uploaded a table will appear on the page; at the top of the table we can indicate that a single policy will be the result of a combination of the last two columns by assigning them the same number in the “Group” fields, and we can also indicate the time allocated to each action in the “Allocation” fields (see Figure 5 above).</p>
+<p>Typically the time allocation units are months of the year, so the sum of all allocations in a single group should be 12. In practice these values are marginalized before use, so these fields can take any values that adequately summarize the action.<br />
+The app will treat blank “Group” fields for single policy vectors as if they were assigned to unique groups. The settings in Figure 5 above are thus equivalent those in Figure 5 below.</p>
 <div>
 <p><img src="img/groupPolicies2.png"></p>
 </div>
-<p>The app currently requires at least one single policy vector and not more than one multiple policy vector in the policy table.</p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 5.</b> Alternate but functionally equivalent grouping to that in Figure 4, using unique integers to indicate single policy vectors rather than leaving the boxes blank.
+</p>
+</div>
+<p>The app currently requires at least one single policy vector and will accept not more than one multiple policy vector in the policy table.</p>
 </div>
 </div>
 <div id="the-attribute-table" class="section level2">
 <h2>The Attribute Table</h2>
-<p>In a multiple-criteria decision analysis objectives are often hierarchical. For example, an objective may be to preserve natural hydrography, and for each objective there may be multiple subobjectives, and each of those may even specify additional subobjectives. Our objectives may include the following hierarchy:</p>
-<div id="htmlwidget-aba34e77fc4359bc6085" style="width:800px;height:200px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-aba34e77fc4359bc6085">{"x":{"diagram":"digraph \"Objective Hierarchy\" {\n    graph [overlap=true, fontsize=10, rankdir=LR]\n    \n    node[shape=box, fontname=Helvetica]\n    Hydrography; Hydroperiod; \"Marsh Surface Drainage\"; FloodingFreq; FloodingDuration; Ponding\n    \n    Hydrography->Hydroperiod Hydrography->\"Marsh Surface Drainage\" Hydroperiod->FloodingFreq Hydroperiod->FloodingDuration \"Marsh Surface Drainage\"->Ponding\n    \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-<p>The attribute table is where we can specify the hierarchy of objectives, along with additional attributes about the objective – hence the name.</p>
+<p>In a multiple-criteria decision analysis objectives are often hierarchical. A fundamental objective may encompass multiple objectives, which in turn may encompass multiple subobjectives. One of the six fundamental objectives of the Herring River Tidal Restoration Project is to achieve a more natural hydrography. Hydrography is divided into seven objectives, three of which are tide range, marsh surface drainage, and marsh surface elevation. These three objectives are further divided into subobjectives and all risk evaluation, predictions, and measurement are done at this subobjective level. A subset of the hydrography objective hierarchy is diagrammed in Figure 6.</p>
+<div id="htmlwidget-5257c83bdd92882ba4c6" style="width:500px;height:900px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5257c83bdd92882ba4c6">{"x":{"diagram":"digraph \"Objective Hierarchy\" {\n    graph [layout=dot, overlap=false, fontsize=16, rankdir=LR];\n\n    node[shape=circle, width=2, style = filled, color = grey, fontsize=16];\n\n    Hydrography [fillcolor = DeepSkyBlue];\n    \n//    Hydroperiod;\n    \"Tide Range\";\n    \"Marsh Surface Drainage\" [label=\"Marsh Surface\\nDrainage\"];\n    \"Marsh Surface Elevation\" [label=\"Marsh Surface\\nElevation\"];\n\n    subgraph cluster_mlw {\n        label=\"Mean Low Water\";\n        node[fillcolor = red];\n        \"MLW-LHR\" [label=\"Mean Low\\nWater-LHR\"];\n//        \"MLW-MC\";\n//        \"MLW-MHR\";\n//        \"MLW-LPDC\";\n//        \"MLW-DH\";\n//        \"MLW-LBB\";\n        \"MLW-UHR\" [label=\"Mean Low\\nWater-UHR\"];\n//        \"MLW-UPDC\";\n//        \"MLW-UBB\";\n    };\n    \n    subgraph cluster_mhw {\n        label=\"Mean High Water\";\n        node[fillcolor = orange];\n        \"MHW-LHR\" [label=\"Mean High\\nWater-LHR\"];\n//        \"MHW-MC\";\n//        \"MHW-MHR\";\n//        \"MHW-LPDC\";\n//        \"MHW-DH\";\n//        \"MHW-LBB\";\n        \"MHW-UHR\" [label=\"Mean High\\nWater-UHR\"];\n//        \"MHW-UPDC\";\n//        \"MHW-UBB\";\n    };\n    \n//    subgraph cluster_FloodingExtent {\n//        label=\"Flooding Extent\";\n//        \"FloodingExtent-LHR\" [label=\"Flooding\\nExtent-LHR\"];\n////        \"FloodingExtent-MC\";\n////        \"FloodingExtent-MHR\";\n////        \"FloodingExtent-LPDC\";\n////        \"FloodingExtent-DH\";\n////        \"FloodingExtent-LBB\";\n//        \"FloodingExtent-UHR\" [label=\"Flooding\\nExtent-UHR\"];\n////        \"FloodingExtent-UPDC\";\n////        \"FloodingExtent-UBB\";\n//    };\n//    \n//    subgraph cluster_FloodingDuration {\n//        label=\"Flooding Duration\";\n//        \"FloodingDuration-LHR\" [label=\"Flooding\\nDurationt-LHR\"];\n////        \"FloodingDuration-MC\";\n////        \"FloodingDuration-MHR\";\n////        \"FloodingDuration-LPDC\";\n////        \"FloodingDuration-DH\";\n////        \"FloodingDuration-LBB\";\n//        \"FloodingDuration-UHR\" [label=\"Flooding\\nDuration-UHR\"];\n////        \"FloodingDuration-UPDC\";\n////        \"FloodingDuration-UBB\";\n//    };\n    \n    subgraph cluster_Ponding {\n        label=\"Ponding\";\n        node[fillcolor = yellow];\n        \"Ponding-LHR\";\n//        \"Ponding-MC\";\n//        \"Ponding-MHR\";\n//        \"Ponding-LPDC\";\n//        \"Ponding-DH\";\n//        \"Ponding-LBB\";\n        \"Ponding-UHR\";\n//        \"Ponding-UPDC\";\n//        \"Ponding-UBB\";\n    };\n    \n    subgraph cluster_Deposition {\n        label=\"Deposition\";\n        node[fillcolor = green];\n        \"Deposition-LHR\";\n//        \"Deposition-MC\";\n//        \"Deposition-MHR\";\n//        \"Deposition-LPDC\";\n//        \"Deposition-DH\";\n//        \"Deposition-LBB\";\n        \"Deposition-UHR\";\n//        \"Deposition-UPDC\";\n//        \"Deposition-UBB\";\n    };\n    \n    subgraph cluster_Accretion {\n        label=\"Accretion\";\n        Accretion [fillcolor = violet];\n    }\n    \n    Hydrography -> \"Tide Range\";\n//    Hydrography -> Hydroperiod;\n    Hydrography -> \"Marsh Surface Drainage\";\n    Hydrography -> \"Marsh Surface Elevation\";\n    \n    \"Tide Range\" -> \"MLW-LHR\";\n//    \"Tide Range\" -> \"MLW-MC\";\n//    \"Tide Range\" -> \"MLW-MHR\";\n//    \"Tide Range\" -> \"MLW-LPDC\";\n//    \"Tide Range\" -> \"MLW-DH\";\n//    \"Tide Range\" -> \"MLW-LBB\";\n    \"Tide Range\" -> \"MLW-UHR\";\n//    \"Tide Range\" -> \"MLW-UPDC\";\n//    \"Tide Range\" -> \"MLW-UBB\";\n\n    \"Tide Range\" -> \"MHW-LHR\";\n//    \"Tide Range\" -> \"MHW-MC\";\n//    \"Tide Range\" -> \"MHW-MHR\";\n//    \"Tide Range\" -> \"MHW-LPDC\";\n//    \"Tide Range\" -> \"MHW-DH\";\n//    \"Tide Range\" -> \"MHW-LBB\";\n    \"Tide Range\" -> \"MHW-UHR\";\n//    \"Tide Range\" -> \"MHW-UPDC\";\n//    \"Tide Range\" -> \"MHW-UBB\";\n//        \n//    Hydroperiod -> \"FloodingExtent-LHR\";\n////    Hydroperiod -> \"FloodingExtent-MC\";\n////    Hydroperiod -> \"FloodingExtent-MHR\";\n////    Hydroperiod -> \"FloodingExtent-LPDC\";\n////    Hydroperiod -> \"FloodingExtent-DH\";\n////    Hydroperiod -> \"FloodingExtent-LBB\";\n//    Hydroperiod -> \"FloodingExtent-UHR\";\n////    Hydroperiod -> \"FloodingExtent-UPDC\";\n////    Hydroperiod -> \"FloodingExtent-UBB\";\n////    \n//    Hydroperiod -> \"FloodingDuration-LHR\";\n////    Hydroperiod -> \"FloodingDuration-MC\";\n////    Hydroperiod -> \"FloodingDuration-MHR\";\n////    Hydroperiod -> \"FloodingDuration-LPDC\";\n////    Hydroperiod -> \"FloodingDuration-DH\";\n////    Hydroperiod -> \"FloodingDuration-LBB\";\n//    Hydroperiod -> \"FloodingDuration-UHR\";\n////    Hydroperiod -> \"FloodingDuration-UPDC\";\n////    Hydroperiod -> \"FloodingDuration-UBB\";\n////        \n    \"Marsh Surface Drainage\" -> \"Ponding-LHR\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-MC\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-MHR\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-LPDC\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-DH\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-LBB\";\n    \"Marsh Surface Drainage\" -> \"Ponding-UHR\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-UPDC\";\n//    \"Marsh Surface Drainage\" -> \"Ponding-UBB\";\n//    \n    \"Marsh Surface Elevation\" -> \"Deposition-LHR\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-MC\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-MHR\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-LPDC\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-DH\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-LBB\";\n    \"Marsh Surface Elevation\" -> \"Deposition-UHR\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-UPDC\";\n//    \"Marsh Surface Elevation\" -> \"Deposition-UBB\";\n        \n    \"Marsh Surface Elevation\" -> Accretion;\n}\n\n\n\n//neato -Tpng -testme.png hydrography_complete.dot \n//dot -Tpng appflowchart.dot -ofile testme.png\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 6.</b> Subset from the objective hierarchy with hydrography, the fundamental objective, at left, a subset of objectives in the middle, and a subset of subobjectives on the right. The hierarchy chain to each subobjective is listed in a single cell of the attribute table, with a dot (.) delimiter between levels. Subobjectives may be grouped (boxes) by specifying the objective group name in a seperate column in the attribute table.
+</p>
+</div>
+<p>The attribute table is where we specify the hierarchy of objectives, along with additional attributes about the objective – hence the name.</p>
 <p>To cut visual clutter when presenting scored objectives, the application can group objectives at two levels. The first is by organizing subobjectives under their parent objective and visually indicating which subobjectives are related. The second is by collapsing multiple subobjectives under a single pseudo-subjobjective and presenting only the pseudo-subobjective for display.</p>
 <div id="organizing-subobjectives" class="section level3">
 <h3>Organizing Subobjectives</h3>
-<p>In Table 4 the first column, “Obj.lbl”, contains the hierarchy of objectives beginning with the most general level and ending with the most specific objective name. The value in the first column and first row is “Hydrography.Hydroperiod.FloodingFreq”, which represents three levels of objective separated by a single period. It is acceptable for levels of the objective label to contain spaces, but it is important that the most specific subobjectives be unique.</p>
+<p>In Table 4 the first column, “Obj.lbl”, contains the hierarchy of objectives from most general to most specifice. Each entry thus lists the fundamental objective, then the objective, and ends with the subobjective. The value in the first column and first row is “Hydrography.Hydroperiod.FloodingFreq”, which represents three levels of objective separated by a single period, which is the default delimiter. It is acceptable for levels of the objective label to contain spaces, but it is important that the most specific subobjectives be unique, and no level should contain periods since they will be interpreted as delimiters.</p>
 <table>
 <caption>Table 4. Example attribute table.</caption>
 <thead>
@@ -443,71 +472,109 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <th align="left">Direction</th>
 <th align="left">Distr</th>
 <th align="left">Utility</th>
+<th align="left">GlobalLow</th>
+<th align="left">GlobalHigh</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Hydrography.Hydroperiod.FloodingFreq</td>
-<td align="left">FloodingFreq</td>
-<td align="left">EFDC</td>
+<td align="left">Hydrography.Hydroperiod. FloodingExtent</td>
+<td align="left">FloodingExtent</td>
+<td align="left">INTERP</td>
 <td align="left">Snap</td>
 <td align="left">Max</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="left">0</td>
+<td align="left">86</td>
 </tr>
 <tr class="even">
-<td align="left">Hydrography.Hydroperiod.FloodingDuration</td>
+<td align="left">Hydrography.Hydroperiod. FloodingDuration</td>
 <td align="left">FloodingDuration</td>
-<td align="left">EFDC</td>
+<td align="left">INTERP</td>
 <td align="left">Snap</td>
 <td align="left">Max</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="left">0</td>
+<td align="left">3.44</td>
 </tr>
 <tr class="odd">
 <td align="left">Hydrography.Marsh Surface Drainage.Ponding</td>
 <td align="left">Ponding</td>
-<td align="left">EFDC</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
 <td align="left">Min</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="left">2.8</td>
+<td align="left">28.7</td>
 </tr>
 <tr class="even">
 <td align="left">Ecological Function/Integrity.Area Restored.Salinity</td>
 <td align="left">Salinity</td>
-<td align="left">EFDC</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
-<td align="left">Max</td>
+<td align="left">Min</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="left">0</td>
+<td align="left">1040</td>
 </tr>
 <tr class="odd">
 <td align="left">Ecological Function/Integrity.Area Restored.Vegetation</td>
 <td align="left">Vegetation</td>
-<td align="left">Elicit</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
 <td align="left">Max</td>
 <td align="left">beta</td>
 <td align="left">RiskAdverse</td>
+<td align="left">0</td>
+<td align="left">100</td>
 </tr>
 <tr class="even">
 <td align="left">Ecological Function/Integrity.Surface WQ.pH</td>
 <td align="left">pH</td>
-<td align="left">Elicit</td>
+<td align="left">INTERP</td>
 <td align="left">Snap</td>
 <td align="left">Min</td>
 <td align="left">NULL</td>
 <td align="left">Linear</td>
+<td align="left">0</td>
+<td align="left">100</td>
 </tr>
 <tr class="odd">
 <td align="left">Ecological Function/Integrity.Surface WQ.DO</td>
 <td align="left">DO</td>
-<td align="left">Elicit</td>
+<td align="left">INTERP</td>
 <td align="left">Snap</td>
 <td align="left">Min</td>
 <td align="left">NULL</td>
 <td align="left">Linear</td>
+<td align="left">0</td>
+<td align="left">100</td>
+</tr>
+<tr class="even">
+<td align="left">Adverse Impacts.Public Safety.RiskElsewhere</td>
+<td align="left">RiskElsewhere</td>
+<td align="left">INTERP</td>
+<td align="left">Snap</td>
+<td align="left">Min</td>
+<td align="left">NULL</td>
+<td align="left">RiskSeeking</td>
+<td align="left">0</td>
+<td align="left">22</td>
+</tr>
+<tr class="odd">
+<td align="left">Adverse Impacts.Harbor Shellfish Beds.Ammonium</td>
+<td align="left">Ammonium</td>
+<td align="left">Elicit</td>
+<td align="left">Snap</td>
+<td align="left">Min</td>
+<td align="left">beta</td>
+<td align="left">RiskSeeking</td>
+<td align="left">0</td>
+<td align="left">100</td>
 </tr>
 <tr class="even">
 <td align="left">Adverse Impacts.Harbor Shellfish Beds.Fecal</td>
@@ -517,41 +584,25 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <td align="left">Min</td>
 <td align="left">beta</td>
 <td align="left">RiskSeeking</td>
-</tr>
-<tr class="odd">
-<td align="left">Adverse Impacts.Harbor Shellfish Beds.Sediment</td>
-<td align="left">Sediment</td>
-<td align="left">Elicit</td>
-<td align="left">Snap</td>
-<td align="left">Min</td>
-<td align="left">beta</td>
-<td align="left">RiskSeeking</td>
-</tr>
-<tr class="even">
-<td align="left">Adverse Impacts.Public Satisfaction.Privacy</td>
-<td align="left">Privacy</td>
-<td align="left">Elicit</td>
-<td align="left">Delta</td>
-<td align="left">Min</td>
-<td align="left">pois</td>
-<td align="left">RiskSeeking</td>
+<td align="left">0</td>
+<td align="left">100</td>
 </tr>
 </tbody>
 </table>
 <p>The second column of the above table, “Objective”, appears to duplicate the most specific subobjective level, but there are cases where the two will deviate. The “Objective” column values are multifunctional. They:</p>
 <ul>
-<li>name the subobjectives as we wish to see them in the output tables and graphics<br />
+<li>Name the subobjectives as we wish to see them in the output tables and graphics<br />
 </li>
-<li>share the name of the utility scale the app uses for scoring<br />
+<li>Share the name of the utility scale the app uses for scoring<br />
 </li>
-<li>indicate which subobjectives can be collapsed under a pseudo-subobjective</li>
+<li>Indicate which subobjectives can be collapsed under a pseudo-subobjective</li>
 </ul>
 <p>Unlike the most specific subobjective in the “Obj.lbl” column, the “Objective” column values do not need to be unique. By repeating an objective in the “Objective” column we indicate that those objectives may be arbitrarily grouped and collapsed under a pseudo-subobjective. This is desirable for decisions that use the objective hierarchy to evaluate spatially implicit subobjectives.</p>
 </div>
 <div id="spatially-implicit-subobjectives" class="section level3">
 <h3>Spatially Implicit Subobjectives</h3>
 <p>There will be decisions for which some objectives apply only to specific regions, rather than to the global decision area. For decisions involving land use the regions may be hydrologic subbasins, towns, or any other distinct geographical subset. For non-geographical decisions the terms “region” and “global” can be interpreted metaphorically and remain meaningful.</p>
-<p>In Table 5 the subobjective “Salinity” is evaluated in different hydrologic subbasins, but when we compare alternative policies we are not immediately interested in the how each policy scores in the specific subbasins – instead, we are more interested in how each policy scores for salinity measurements across all subbasins. We do this by indicating the region in the most specific component of the objective hierarchy, but apply the same “Salinity” label to all output. The app will recognize the duplication and allow us to manually create arbitrary groups of pseudo-subobjectives that can be collapsed to summarize the score across all subbasins or expanded to inspect the scores in each specific subbasin.</p>
+<p>In Table 5 the subobjectives “MLW”, “MHW”, “Ponding”, and “Deposition” are evaluated in two different hydrologic subbasins, but when we compare alternative policies we are not immediately interested in the how each policy scores in the specific subbasins – instead, we are more interested in how each policy scores for measurements across all subbasins. We do this by indicating the region in the most specific component of the objective hierarchy, but apply the same “Objective” column label to all output. The app will recognize the duplication and allow us to manually create arbitrary groups of pseudo-subobjectives that can be collapsed to summarize the score across all subbasins or expanded to inspect the scores in each specific subbasin.</p>
 <table>
 <caption>Table 5. Attribute table with a spatial subobjective.</caption>
 <thead>
@@ -563,142 +614,117 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <th align="left">Direction</th>
 <th align="left">Distr</th>
 <th align="left">Utility</th>
+<th align="right">GlobalLow</th>
+<th align="right">GlobalHigh</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">Hydrography.Hydroperiod.FloodingFreq</td>
-<td align="left">FloodingFreq</td>
-<td align="left">EFDC</td>
+<td align="left">Hydrography.Tide Range.MLW-LHR</td>
+<td align="left">MLW</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
-<td align="left">Max</td>
+<td align="left">Min</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="right">-3.50</td>
+<td align="right">-1.88</td>
 </tr>
 <tr class="even">
-<td align="left">Hydrography.Hydroperiod.FloodingDuration</td>
-<td align="left">FloodingDuration</td>
-<td align="left">EFDC</td>
+<td align="left">Hydrography.Tide Range.MLW-UHR</td>
+<td align="left">MLW</td>
+<td align="left">LOOKUP</td>
+<td align="left">Snap</td>
+<td align="left">Min</td>
+<td align="left">NULL</td>
+<td align="left">RiskAdverse</td>
+<td align="right">-3.50</td>
+<td align="right">-1.88</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrography.Tide Range.MHW-LHR</td>
+<td align="left">MHW</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
 <td align="left">Max</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="right">-0.96</td>
+<td align="right">4.30</td>
+</tr>
+<tr class="even">
+<td align="left">Hydrography.Tide Range.MHW-UHR</td>
+<td align="left">MHW</td>
+<td align="left">LOOKUP</td>
+<td align="left">Snap</td>
+<td align="left">Max</td>
+<td align="left">NULL</td>
+<td align="left">RiskAdverse</td>
+<td align="right">-0.96</td>
+<td align="right">4.30</td>
 </tr>
 <tr class="odd">
-<td align="left">Hydrography.Marsh Surface Drainage.Ponding</td>
+<td align="left">Hydrography.Marsh Surface Drainage.Ponding-LHR</td>
 <td align="left">Ponding</td>
-<td align="left">EFDC</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
 <td align="left">Min</td>
 <td align="left">NULL</td>
 <td align="left">RiskAdverse</td>
+<td align="right">2.80</td>
+<td align="right">28.70</td>
 </tr>
 <tr class="even">
-<td align="left">Ecological Function/Integrity.Area Restored.SalinityMillCreek</td>
-<td align="left">Salinity</td>
-<td align="left">EFDC</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">NULL</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="odd">
-<td align="left">Ecological Function/Integrity.Area Restored.SalinityCheqNeck</td>
-<td align="left">Salinity</td>
-<td align="left">EFDC</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">NULL</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="even">
-<td align="left">Ecological Function/Integrity.Area Restored.SalinityUpperPoleDike</td>
-<td align="left">Salinity</td>
-<td align="left">EFDC</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">NULL</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="odd">
-<td align="left">Ecological Function/Integrity.Area Restored.SalinityLowerPoleDike</td>
-<td align="left">Salinity</td>
-<td align="left">EFDC</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">NULL</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="even">
-<td align="left">Ecological Function/Integrity.Area Restored.SalinityBoundBrook</td>
-<td align="left">Salinity</td>
-<td align="left">EFDC</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">NULL</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="odd">
-<td align="left">Ecological Function/Integrity.Area Restored.SalinityDuckHarbor</td>
-<td align="left">Salinity</td>
-<td align="left">EFDC</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">NULL</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="even">
-<td align="left">Ecological Function/Integrity.Area Restored.Vegetation</td>
-<td align="left">Vegetation</td>
-<td align="left">Elicit</td>
-<td align="left">Snap</td>
-<td align="left">Max</td>
-<td align="left">beta</td>
-<td align="left">RiskAdverse</td>
-</tr>
-<tr class="odd">
-<td align="left">Ecological Function/Integrity.Surface WQ.pH</td>
-<td align="left">pH</td>
-<td align="left">Elicit</td>
+<td align="left">Hydrography.Marsh Surface Drainage.Ponding-UHR</td>
+<td align="left">Ponding</td>
+<td align="left">LOOKUP</td>
 <td align="left">Snap</td>
 <td align="left">Min</td>
 <td align="left">NULL</td>
-<td align="left">Linear</td>
-</tr>
-<tr class="even">
-<td align="left">Ecological Function/Integrity.Surface WQ.DO</td>
-<td align="left">DO</td>
-<td align="left">Elicit</td>
-<td align="left">Snap</td>
-<td align="left">Min</td>
-<td align="left">NULL</td>
-<td align="left">Linear</td>
+<td align="left">RiskAdverse</td>
+<td align="right">2.80</td>
+<td align="right">28.70</td>
 </tr>
 <tr class="odd">
-<td align="left">Ecological Function/Integrity.Habitat Quality Native Estuarine Animals.Invertebrate</td>
-<td align="left">Invertebrate</td>
+<td align="left">Hydrography.Marsh Surface Elevation.Deposition-LHR</td>
+<td align="left">Deposition</td>
 <td align="left">Elicit</td>
-<td align="left">Snap</td>
+<td align="left">Delta</td>
 <td align="left">Max</td>
-<td align="left">beta</td>
-<td align="left">Linear</td>
+<td align="left">lnorm</td>
+<td align="left">RiskAdverse</td>
+<td align="right">0.00</td>
+<td align="right">2258.00</td>
 </tr>
 <tr class="even">
-<td align="left">Ecological Function/Integrity.Connectivity Diadronmous Fish.Fish</td>
-<td align="left">Fish</td>
+<td align="left">Hydrography.Marsh Surface Elevation.Deposition-UHR</td>
+<td align="left">Deposition</td>
 <td align="left">Elicit</td>
-<td align="left">Snap</td>
+<td align="left">Delta</td>
 <td align="left">Max</td>
-<td align="left">pois</td>
-<td align="left">Linear</td>
+<td align="left">lnorm</td>
+<td align="left">RiskAdverse</td>
+<td align="right">0.00</td>
+<td align="right">2258.00</td>
+</tr>
+<tr class="odd">
+<td align="left">Hydrography.Marsh Surface Elevation.Accretion</td>
+<td align="left">Accretion</td>
+<td align="left">Elicit</td>
+<td align="left">Delta</td>
+<td align="left">Max</td>
+<td align="left">norm</td>
+<td align="left">RiskAdverse</td>
+<td align="right">0.00</td>
+<td align="right">2258.00</td>
 </tr>
 </tbody>
 </table>
-<p>Related subobjectives will all use the same “Salinity” utility lookup and should share the same model type (for modeled objectives), prediction type and distribution (for elicited objectives), and desired measurement direction and utility-risk characterization.</p>
+<p>Related subobjectives will use individual utility function parameters and may use different model types (for modeled objectives), prediction types and distributions (for elicited objectives), and desired measurement directions and utility-risk characterizations.</p>
 </div>
 <div id="attribute-table-columns" class="section level3">
 <h3>Attribute Table Columns</h3>
-<p>The column names in Tables 4 and 5 are default names which the app looks for when the attribute table file is uploaded, but it is possible to use your own names for these same columns. When you upload your attribute table, if the default column names are not found you will be presented with a form that will allow you to specify which of your columns contain the expected values.</p>
+<p>The column names in Tables 5 and 6 are default names which the app looks for when the attribute table file is uploaded, but it is possible to use your own names for these same columns. When you upload your attribute table, if the default column names are not found you will be presented with a form that will allow you to specify which of your columns contain the expected values.</p>
 <table>
 <caption>Table 6. Attribute table column definitions for required columns.</caption>
 <thead>
@@ -735,14 +761,24 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <td align="left">Identifies whether we prefer the smallest measured values (Min) or the largest (Max).</td>
 </tr>
 <tr class="even">
+<td align="left">Utility</td>
+<td align="left">Risk attitude</td>
+<td align="left">Five default risk attitudes are built-in: “ExtremeRiskAdverse”, “RiskAdverse”, “Linear”, “RiskSeeking”, and “ExtremeRiskSeeking”.</td>
+</tr>
+<tr class="odd">
 <td align="left">Distr</td>
 <td align="left">Probability distribution</td>
 <td align="left">The distribution to which four-point elicitation values are converted. Must be a valid R distribution with a density function such as: “lnorm”, “norm”, “beta”, “pois”, or “NULL”. NULL will use the MostLikely value with no confidence estimate.</td>
 </tr>
+<tr class="even">
+<td align="left">GlobalLow</td>
+<td align="left">Lower prediction boundary</td>
+<td align="left">Lower boundary for elicited prediction values, used to create appropriate lookup tables and for displaying range in plots.</td>
+</tr>
 <tr class="odd">
-<td align="left">Utility</td>
-<td align="left">Risk attitude</td>
-<td align="left">Five default risk attitudes are built-in: “ExtremeRiskAdverse”, “RiskAdverse”, “Linear”, “RiskSeeking”, and “ExtremeRiskSeeking”.</td>
+<td align="left">GlobalHigh</td>
+<td align="left">Upper prediction boundary</td>
+<td align="left">Upper boundary for elicited prediction values, used to create appropriate lookup tables and for displaying range in plots.</td>
 </tr>
 </tbody>
 </table>
@@ -756,16 +792,21 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <div id="value-weights" class="section level4">
 <h4>Value Weights</h4>
 <p>Value weights may be included directly in the attribute table. To include weight columns use a spreadsheet program to add one or more columns to your table and populate the column with weights, then select those columns as <em>Weight Columns</em>. It is not necessary to normalize the weights on a 0-1 scale in each column, but be aware that weights in a column are valued relative to all others in the column. This contrasts with how the app presents weights. In the app weights are isolated and specified using a three-tier hierarchy: fundamental objective weights are presented on a 0-1 scale relative to other fundamental objectives, then objective weights are presented on a 0-1 scale relative to other objectives within the same fundamental objective, and finally subobjective weights are presented on a 0-1 scale relative to other subobjectives within the same objective. <strong>To value-weight a subobjective score, the product of the objective weight and the subobjective weight is marginalized by dividing by the sum of the weights, and the final weight is then applied to the score.</strong> Weights uploaded in the table are similarly marginalized, both for display and before being applied, and some rounding error may accumulate in the process. Weights included in the attribute table are presented in the value-weight editor and may be corrected or altered in the app if desired.</p>
-<p>Optional weight columns can use any names that do not overlap with the default names, but spaces will be removed from the names during processing. After you upload a table that contains weight columns you must indicate the name of the column to the app by selecting one or more columns in the “Default Weight Columns” selector.</p>
+<p>Optional weight columns can use any names that do not overlap with the default names, but spaces will be removed from the names during processing. After you upload a table that contains weight columns you must indicate the name of the column to the app by selecting one or more columns in the “Default Weight Columns” selector (Figure 7).</p>
 <div>
-<p><img style="width:70%;" src="img/specifyWeight.png"></p>
+<p><img src="img/specifyWeight.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 7.</b> After the attribute table is uploaded, you may optionally select default subobjective weights (top selector “Subbasin Proportion Column”) and/or indicate which column(s) contain weights (lower selector “Weight Columns”). Subbasin proportions must be selected before weight columns to be applied correctly.
+</p>
 </div>
 </div>
 </div>
 </div>
 <div id="expert-predictions" class="section level2">
 <h2>Expert Predictions</h2>
-<p>In the absence of quantitative models, predictions of future effects of current actions can be obtained through expert elicitation. This app accepts tables summarizing four-point elicitation methods for which experts predict a high value, a low value, a most likely value, and then quantify confidence in their prediction. The expert elicted prediction table contains each of those four values for each objective, policy, and time, listed long-form.</p>
+<p>In the absence of quantitative models, predictions of future effects of current actions can be obtained through expert elicitation. This app accepts tables summarizing four-point elicitation methods for which experts predict a high value, a low value, a most likely value, and then quantify confidence in their prediction. The expert elicted prediction table contains each of those four values for each objective, policy, and time, listed long-form. Table 7 contains expert predictions for a single objective, “Accretion”, for six policies at years 1, 3, and 5. The elicitation process grows more laborious as the number of objectives, policies, and time points grow larger, so it is assumed the predictions will be for discrete times separated by intervals greater than one. The app will convert the predictions to the probability distribution specified in the attribute table (if not “NULL”), and will fill times between predictions using a linear interpolation algorithm.</p>
 <table>
 <caption>Table 7. Four-point expert prediction table.</caption>
 <thead>
@@ -953,8 +994,7 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 </tr>
 </tbody>
 </table>
-<p>Table 7 contains expert predictions for a single objective, “Accretion”, for six policies at years 1, 3, and 5. The elicitation process grows more laborious as the number of objectives, policies, and time points grow larger, so it is assumed the predictions will be for discrete times separated by intervals greater than one. The app will convert the predictions to the probability distribution specified in the attribute table (if not “NULL”), and will fill times between predictions using a linear interpolation algorithm.</p>
-<p>Column names in the expert elicitation tables are fixed and case sensitive. The columns should match those in Table 7:</p>
+<p>Column names in the expert elicitation tables are fixed and case sensitive. The columns should match those in Table 7 and described below:</p>
 <ul>
 <li><strong>Objective</strong>: must match the most specific level of the objective hierarchy in the attribute table.<br />
 </li>
@@ -971,31 +1011,51 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <li><strong>Time</strong>: usually specified as integer years, but units are not critical.</li>
 </ul>
 <p>For decisions with only a single prediction time the “Time” column should contain a single value. Confidence values may be on a 0-1 scale or a 0-100 scale; all confidence values will be transformed to a 0-1 scale internally before use.</p>
-<p>A decision may rely on predictions from multiple experts for a single objective to obtain “second opinion” distributions, or the objectives may present a broad cross-section of expertise unattainable from a single expert. Any number of expert prediction tables may therefore be uploaded by holding down the “Shift” or “Control” button on the keyboard while using the mouse to select individual files in the file-browser pop-up.</p>
+<p>A decision may rely on predictions from multiple experts for a single objective to obtain “second opinion” distributions, or the objectives may present a broad cross-section of expertise unattainable from a single expert. Any number of expert prediction tables may therefore be uploaded by holding down the “Shift” or “Control” button on the keyboard while using the mouse to select individual files in the file-browser pop-up. The upload process should look similar to Figure 8.</p>
 <div>
 <p><img src="img/expert_multiUpload.png"></p>
 </div>
-<p>The file names should contain the keyword “Elicit”, as illustrated in the images above and below. This will assist the app to find the correct tables to apply to each subobjective. Immediately after the files have been uploaded the app will attempt to convert all four-point elicitation tables to distributions, and when it is complete the file names are displayed to the right of the uploader in a table with a checked checkbox next to each name. The checkbox permits individual experts to be quickly “knocked out” of the prediction process without re-uploading all of the tables. The knock-out process can help identify experts with more extreme predictions than others, and may be useful during sensitivity analysis.</p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 8.</b> Upload one or more expert prediction tables. Hold the ‘Shift’ key and click to select multiple contiguous files for upload, or hold the ‘Control’ key and click to select multiple individual files.
+</p>
+</div>
+<p>The file names should contain the keyword “Elicit”, as illustrated in the figures above and below. This will assist the app to find the correct tables to apply to each subobjective. Immediately after the files have been uploaded the app will attempt to convert all four-point elicitation tables to distributions, and when it is complete the file names are displayed to the right of the uploader in a table with a checked checkbox next to each name (Figure 9). The checkbox permits individual experts to be quickly “knocked out” of the prediction process without re-uploading all of the tables. The knock-out process can help identify experts with more extreme predictions than others, and may be useful during sensitivity analysis.</p>
 <div>
 <p><img src="img/expert_afterUpload.png"></p>
 </div>
-<p>The policy names table lists the column names in the policy table above the unique values from the “Policy” column in each expert prediction table. The first row of expert table policies (row 2 in the table) displays a red asterisk after each policy name. The asterisk indicates that the policy names from this file will be used in all tables and figures; this avoids requiring the user to specify a name for multiple vector policies. In the screenshot above, the two right-most columns are labeled “P_Sed1” and “P_Sed11” in the policy table, but they are a multiple vector policy that will be presented with the name “P_Sed” as labeled in the first expert table and matched using fuzzy-matching.</p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 9.</b> The table of eliciation file names and knockout checkboxes (top) and the policy names table (bottom). The policy table may contain multiple vector policies, so policy names used in the app are taken from the expert prediction tables if possible.
+</p>
+</div>
+<p>The policy names table (Figure 9) lists the column names in the policy table above the unique values from the “Policy” column in each expert prediction table. The first row of expert table policies (row 2 in the table) displays a red asterisk after each policy name. The asterisk indicates that the policy names from this file will be used in all tables and figures; this avoids requiring the user to specify a name for multiple vector policies. In the screenshot above, the two right-most columns are labeled “P_Sed1” and “P_Sed11” in the policy table, but they are a multiple vector policy that will be presented with the name “P_Sed” as labeled in the first expert table and matched using fuzzy-matching.</p>
 </div>
 <div id="model-predictions" class="section level2">
 <h2>Model Predictions</h2>
-<p>There two types of model prediction tables: those that report results as a function of a policy configuration (lookup) and those that report results as a function of time (interpolated). Lookup models assume the action occurs once and the effect remains static for the duration of the decision process (<em>i.e.</em> the number of rows in the policy table), while interpolated models assume the action occurs once but the effect changes over time and must be predicted at multiple time intervals. Both types may be uploaded in a single action by clicking the “Browse” button and holding down “Shift” or “Command” while selecting multiple files. The file names should contain a keyword from the attribute table to assist the app to find the correct table in which to look up predictions.</p>
+<p>There two types of model prediction tables: those that report results as a function of a policy configuration (lookup) and those that report results as a function of time (interpolated). Lookup models assume the action occurs once and the effect remains static for the duration of the decision process (<em>i.e.</em> the number of rows in the policy table), while interpolated models assume the action occurs once but the effect changes over time and must be predicted at multiple time intervals. Both types may be uploaded in a single action by clicking the “Browse” button and holding down “Shift” or “Command” while selecting multiple files (Figure 10). The file names should contain a keyword from the attribute table to assist the app to find the correct table in which to look up predictions.</p>
 <div>
 <p><img src="img/model_multiUpload.png"></p>
 </div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 10.</b> Upload one or more model prediction tables. Hold the ‘Shift’ key and click to select multiple contiguous files for upload, or hold the ‘Control’ key and click to select multiple individual files.
+</p>
+</div>
 <p>The file names will be displayed as links to the right of the uploader. Clicking a name brings up a modal window that displays the contents of the uploaded file.</p>
-<p>The files are automatically sorted into lookup model predictions and interpolated model predictions. The app makes this distinction by first looking for a “Time” column, which is only present in interpolated models. All tables with no “Time” column are then compared to the policy table; if they contain coded actions, they are lookup predictions because the policy actions are reconstructed by pulling codes from the policy file and looking up predictions in the model file. Tables that contain no “Time” column and no coded actions are listed as unrecognizable and are presented on screen with an appropriate error message.</p>
+<p>The files are automatically sorted into lookup model predictions and interpolated model predictions (Figure 11). The app makes this distinction by first looking for a “Time” column, which is only present in interpolated models. All tables with no “Time” column are then compared to the policy table; if they contain coded actions, they are lookup predictions because the policy actions are reconstructed by pulling codes from the policy file and looking up predictions in the model file. Tables that contain no “Time” column and no coded actions are listed as unrecognizable and are presented on screen with an appropriate error message.</p>
 <div>
 <p><img src="img/model_afterUpload.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 11.</b> After uploading model prediction tables the policy names in each table are compared to those in the policy table. The policy table may contain multiple vector policies, so policy names used in the app are taken from the expert prediction tables if any are uploaded or from the model prediction tables if no expert predictions are uploaded.
+</p>
 </div>
 <p>Policy names from all interpolated model prediction tables are added to the table of policy names at the bottom of the screen. If no expert predictions are uploaded, the policy names from the first time dependent model will be used in all tabular and graphical output, as indicated by a red asterisk. When expert predictions are uploaded those policy names will take precedent over names supplied in the model files.</p>
 <div id="lookup-predictions" class="section level3">
 <h3>Lookup Predictions</h3>
-<p>In the lookup model predict tables the coded value in the policy table should appear in the first column of the lookup model table; this column may take any name. All subobjectives for which an effect is predicted should occur in subsequent columns, with the predicted effect of each action listed in the appropriate row. The units of each predicted effect should remain constant in each column but may differ between columns. The column names of the subobjective columns must exactly match the subobjective name listed as the most specific level of the objective hierarchy in the attribute table.</p>
+<p>In the lookup model predict tables the coded value in the policy table should appear in the first column of the lookup model table; this column may take any name. In this case the column is named “Gate”, because it identifies the gate opening that yields the modeled values (Figure 12). All subobjectives for which an effect is predicted should occur in subsequent columns, with the predicted effect of each action listed in the appropriate row. The units of each predicted effect should remain constant in each column but may differ between columns. The column names of the subobjective columns must exactly match the subobjective name listed as the most specific level of the objective hierarchy in the attribute table.</p>
 <table>
 <caption>Table 8. Lookup model predictions.</caption>
 <thead>
@@ -1151,7 +1211,7 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 </div>
 <div id="interpolated-predictions" class="section level3">
 <h3>Interpolated Predictions</h3>
-<p>Interpolated model predictions have a structure similar to expert elicited predictions. For each objective, policy, and time interval, a predicted effect and confidence are listed in a long-form table. Like the expert prediction table, the column names of this table are fixed and case-sensitive.</p>
+<p>Interpolated model predictions have a structure similar to expert elicited predictions. For each objective, policy, and time interval, a predicted effect and confidence are listed in a long-form table (Table 9). Like the expert prediction table, the column names of this table are fixed and case-sensitive.</p>
 <table>
 <caption>Table 9. Interpolated predictions.</caption>
 <thead>
@@ -1298,21 +1358,28 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 </div>
 <div id="grouping-subobjectives" class="section level1">
 <h1>Grouping Subobjectives</h1>
-<p>To cut visual clutter when presenting scored objectives, the application can collapse multiple subobjectives under a single pseudo-subjobjective and present only the pseudo-subobjective for display. Some of set-up to determine which subobjectives can be collapsed is done in the attribute table: subobjectives are given unique names in the hierarchy column, but can be given non-unique names in the objective column. Subobjectives that share a name in the objective column are candidates for grouping. The groups are arbitrarily designated by the user within the grids of radio buttons presented in the “Group Objectives” tab. Within a single objective-row, a grid of radio buttons contains as many numbered groups as members of that group. The default arrangement assigns each subobjective to a unique group, which means the final score for each subobjective will be presented in all output. By assigning multiple subobjectives to the same group number results for the group will be collapsed in all output, and a weighted average of the scores will be presented with a pseudo-subobjective. Groups are assigned per objective-row; group 1 for any objective will be assigned membership independently of all other objectives.</p>
+<p>To cut visual clutter when presenting scored objectives, the application can collapse multiple subobjectives under a single pseudo-subjobjective and present only the pseudo-subobjective for display. Some of set-up to determine which subobjectives can be collapsed is done in the attribute table: subobjectives are given unique names in the hierarchy column, but can be given non-unique names in the objective column. Subobjectives that share a name in the objective column are candidates for grouping. The groups are arbitrarily designated by the user within the grids of radio buttons presented in the “Group Objectives” tab (Figure 12). Within a single objective-row, a grid of radio buttons contains as many numbered groups as members of that group. The default arrangement assigns each subobjective to a unique group, which means the final score for each subobjective will be presented in all output. By assigning multiple subobjectives to the same group number results for the group will be collapsed in all output, and a weighted average of the scores will be presented with a pseudo-subobjective. Groups are assigned per objective-row; group 1 for any objective will be assigned membership independently of all other objectives.</p>
 <div>
 <p><img src="img/groupObjectives.png"></p>
 </div>
-<p>In the consequence table, the grouped subobjectives will appear with the objective name and the suffix “_groupX“, where X is the assigned number.</p>
-<div>
-<p><img src="img/consequenceTableExpanded.png"></p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 12.</b> Subobjectives that may be grouped are indicated in the attribute table with a common objective name in the “Objective” column. Subobjectives with common objective names can be divided into arbitrary groups by assigning them to the same group number within each shaded or unshaded row.
+</p>
 </div>
+<p>In the consequence table, the grouped subobjectives will appear with the objective name and the suffix “_groupX“, where X is the assigned number.</p>
 </div>
 <div id="specify-prediction-sources" class="section level1">
 <h1>Specify Prediction Sources</h1>
-<p>The app requires the user to verify the source of predictions for each subobjective before utility can be scored. This is for three reasons: first, the prediction source is specified in the “model” column of the attribute table with a keyword (e.g. INTERP, LOOKUP, or ELICIT) and then matched to a file containing that keyword, and the matching should be checked for errors. Blanks in the prediction sources table are usually caused by missing prediction files, and can be rectified by uploading the correct file or verifying the correct keyword is present in both the attribute table and the file name. Second, it is expected that predictions may initially be elicited from experts but as models are created or adapted the prediction source will shift from elicited to modeled. This is accomplished by adding the predictions to the proper table, then using a spreadsheet program to change the keyword in the attribute table. The prediction sources table should then be reviewed to verify that the sources are up to date with the latest predictions. Third, the prediction sources table can be used to isolate predictions from a single expert for each subobjective.</p>
+<p>The app requires the user to verify the source of predictions for each subobjective before utility can be scored. This is for three reasons: first, the prediction source is specified in the “model” column of the attribute table with a keyword (e.g. INTERP, LOOKUP, or ELICIT) and then matched to a file containing that keyword, and the matching should be checked for errors. Blanks in the prediction sources table are usually caused by missing prediction files, and can be rectified by uploading the correct file or verifying the correct keyword is present in both the attribute table and the file name. Second, it is expected that predictions may initially be elicited from experts but as models are created or adapted the prediction source will shift from elicited to modeled. This is accomplished by adding the predictions to the proper table, then using a spreadsheet program to change the keyword in the attribute table. The prediction sources table should then be reviewed to verify that the sources are up to date with the latest predictions (Figure 13). Third, the prediction sources table can be used to isolate predictions from a single expert for each subobjective.</p>
 <p>The default bahavior in the prediction sources table is to match keywords for all model files and merge all expert elicitation files. The selector for expert elicited attributes will initially read “Merge Experts” whenever more than one expert prediction table is uploaded. This means that expert predictions will be merged whenever possible, and will be left alone wherever merging is not possible. Merging is done by averaging the elicited parameters, computing the distribution mean, and then recalculating variance using an unbiased variance estimator.</p>
 <div>
 <p><img src="img/selectPredictionSource.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 13.</b> The app uses keyword matching between the attribute table and the uploaded file names to guess the prediction source for each subobjective. Where multiple expert prediction tables are uploaded the default is to merge the predictions from expert elicited sources if possible. Individual sources may designated for subobjectives if desired.
+</p>
 </div>
 </div>
 <div id="adjust-utility" class="section level1">
@@ -1327,7 +1394,7 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 </div>
 <div id="risk-and-utility-in-the-app" class="section level2">
 <h2>Risk And Utility In The App</h2>
-<p>The utility editor allows the utility function for each subobjective to be parameterized within the app. The two parameters of the utility function include the risk attitude (e.g. “riskSeeking” vs “riskAdverse”) and goal (minimize vs maximize measured values). The default values for these parameters are set in the attribute table using the columns “Utility” and “Direction”.</p>
+<p>The utility editor allows the utility function for each subobjective to be parameterized within the app. The two parameters of the utility function include the risk attitude (e.g. “riskSeeking” vs “riskAdverse”) and goal (minimize vs maximize measured values). The default values for these parameters are set in the attribute table using the columns “Utility” and “Direction” (Table 10).</p>
 <table>
 <caption>Table 10. Risk attitudes (attribute table column “Utility”) and their corresponding risk value.</caption>
 <thead>
@@ -1359,20 +1426,47 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 </tr>
 </tbody>
 </table>
-<p>The utility editor uses a slider below the plot to set the risk value continuously from -1 to +1, but in most cases the slider offers more granularity than necessary. To permanently change the risk in the attribute table use a spreadsheet editor to change the values in the table to one of the following five attitude keywords. The slider and the goal checkbox are disabled until the “Use default utility” checkbox is unchecked. To return to the default value at any time after editing check this box and the value from the attribute table will be applied.</p>
+<p>The utility editor uses a slider below the plot to set the risk value continuously from -1 to +1, which in most cases the should offer more granularity than necessary (Figure 14). To permanently change the risk in the attribute table use a spreadsheet editor to change the values in the table to one of the following five attitude keywords. The slider and the goal checkbox are disabled until the “Use default utility” checkbox is unchecked. To return to the default value at any time after editing check this box and the value from the attribute table will be applied.</p>
 <div>
 <p><img src="img/utility_adjust.png"></p>
 </div>
-<p>The response direction is reversed by checking or unchecking the “Minim.” box. When checked the goal is set to minimize, which means lower measured values will yield higher utility. When unchecked the goal is set to maximize and higher measured values will yield higer utility.</p>
-<div style="overflow:hidden;">
-<p><img style="width:50%;float:left;padding:0px;" src="img/utility_default.png"> <!-- <img style="width:50%;float:right;padding:0px;" src="img/utility_complexMin.png">--> <!-- <img style="width:50%;clear:both;float:left;padding:0px;" src="img/utility_linearMin.png">--> <!-- <img style="width:50%;float:right;padding:0px;" src="img/utility_linearMax.png">--></p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 14.</b> Default utility function parameters for individual subobjectives are derived from two columns in the attribute table; “Utility” and “Direction”. Parameters may be adjusted on-the-fly in the “Adjust Utilities” tab.
+</p>
 </div>
+<p>The response direction is reversed by checking or unchecking the “Minim.” box. When checked the goal is set to minimize, which means lower measured values will yield higher utility. When unchecked the goal is set to maximize and higher measured values will yield higer utility.</p>
+<p>The x-axis labels are pre-loaded in the app by the project leader and read in as a table of subobjective-label value pairs when the app launches.</p>
 </div>
 </div>
 <div id="discounting-the-future" class="section level1">
 <h1>Discounting The Future</h1>
+<p>The Herring River estuary project is designed to assess predicted utility at 25 years into the future, but we expect that users will also be interested in evaluating utility at arbitrary points between project start and the official assessment point. One way to do this is to view the cumulative line plot; another is to employ discounting.</p>
+<p>Discounting is a mechanism to estimate the current utility of utility earned in future years. Setting a discount rate less than 1 under <em>“Options &gt; Uncertainty and Discount”</em> indicates that we value utility earned in the future less than we value utility earned in more proximal time frames (Figure 15).</p>
 <div style="overflow:hidden;">
 <p><img style="width:50%;float:left;padding:0px;" src="img/discountNone.png"> <img style="width:50%;float:right;padding:0px;" src="img/discountSome.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 15.</b> Two discounting scenarios: no discounting (discount factor of 1.0) at left, and fairly extreme discounting (discount factor of 0.97) at right. A discount factor of 0.97 yields approximately half the utility of a discount factor of 1.0 after 25 years.
+</p>
+</div>
+<p>For some plots, such as the performance plot, the results at the end of 25 years are explicitly compared to the highest performance scenario by setting the y-axis of the plot to the maximum possible utility score. When employing discounting it may appear as though lower performance was achieved.</p>
+<div>
+<p><img src="img/undiscounted.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 16.</b> Performance plot with the default discount value of 1.
+</p>
+</div>
+<div>
+<p><img src="img/discounted.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 17.</b> Performance plot with the a discount value of 0.97. Compared to Figure 16 above it appears that none of the policies delivered maximum utility for any subobjectives (pale bars on lower half of plot). Consequently, the spread between best and worst performing policies was narrower (dark bars on top half of plot).
+</p>
 </div>
 </div>
 <div id="sensitivity-analysis" class="section level1">
@@ -1382,82 +1476,147 @@ Leaving the “Group” fields blank for the single policy vectors is treated th
 <div id="evaluating-expert-uncertainty" class="section level2">
 <h2>Evaluating Expert Uncertainty</h2>
 <p>Only the predictions that are elicited from experts can be used to estimate a range of possible outcomes. Although it is possible to offer the same range for model predictions, the models currently in use for this project only report a point estimate, they do not report a range or a confidence value.</p>
-<p>Expert predictions come in with four values: low, most likely, high, and confidence. These four values allow a distribution to be constructed which is used to estimate the outcome in alternative cases, including worst, best, and most likely scenarios. These case scenarios are designed to offer best estimates of realistic boundaries for the final outcome assuming for the worst case that all subobjectives are affected as negatively as they could be, or for the best case that all subobjectives are affected as positively as they could be. During the elicitation process each expert may also indicate how confident they are that the value will fall within their predicted range. The confidence estimate is reflected in the “Alpha” (or <span class="math inline">\(\alpha\)</span>) column, which is alpha as applied to a two-tailed hypothesis test. In a two-tailed hypothesis test, the confident interval is defined as <span class="math inline">\(\left\{\frac{alpha}{2}, 1-\frac{alpha}{2}\right\}\)</span>. The app allows us to explore how sensitive our scores are to changes in expert confidence by computing scores at various alpha values not selected by the expert but selected instead on the <em>Options &gt; Uncertainty and Discount</em> tab. Since most users will be more familiar with the general concept of uncertainty than the concept of alpha in two-tailed hypothesis testing, the app allows the user to set a range of uncertainty rather than setting alpha directly. Uncertainty and alpha are related in that maximum uncertainty occurs at a probability of 0.5, which is an alpha of 1. The relationship between uncertainty and alpha is <span class="math inline">\(uncertainty = alpha-0.5\)</span>.</p>
+<p>Expert predictions come in with four values: low, most likely, high, and confidence. These four values allow a distribution to be constructed which is used to estimate the outcome in alternative cases, including worst, best, and most likely scenarios. These case scenarios are designed to offer best estimates of realistic boundaries for the final outcome assuming for the worst case that all subobjectives are affected as negatively as they could be, or for the best case that all subobjectives are affected as positively as they could be. During the elicitation process each expert may also indicate how confident they are that the value will fall within their predicted range. The confidence estimate is reflected in the “Alpha” (or <span class="math inline">\(\alpha\)</span>) column, which is alpha as applied to a two-tailed hypothesis test. In a two-tailed hypothesis test, the confident interval is defined as <span class="math inline">\(\left\{\frac{alpha}{2}, 1-\frac{alpha}{2}\right\}\)</span>. The app allows us to explore how sensitive our scores are to changes in expert confidence by computing scores at various alpha values not selected by the expert but selected instead on the <em>Options &gt; Uncertainty and Discount</em> tab (Figure 18). Since most users will be more familiar with the general concept of uncertainty than the concept of alpha in two-tailed hypothesis testing, the app allows the user to set a range of uncertainty rather than setting alpha directly. Uncertainty and alpha are related in that maximum uncertainty occurs at a probability of 0.5, which is an alpha of 1. The relationship between uncertainty and alpha is <span class="math inline">\(uncertainty = alpha-0.5\)</span>.</p>
 <div>
 <p><img src="img/uncertaintySlider.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 18.</b> Uncertainty range is defined by moving each end of the slider independently.
+</p>
 </div>
 </div>
 <div id="value-weighting-objectives" class="section level2">
 <h2>Value Weighting Objectives</h2>
-<p>The app allows specifying as many as three nested objective hierarchy levels in the attribute table. Weights for each level and each objective are specified independently. In the example below, there are six fundamental objectives. For the first fundamental objective (Hydrography), seven objectives are listed. For the first objective (MLW), nine subobjectives are listed. The remaining fundamental objectives are not shown, nor are the subobjectives for the remaining listed objectives.</p>
-<div id="htmlwidget-ef6cb74781985b811370" style="width:800px;height:400px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef6cb74781985b811370">{"x":{"diagram":"digraph \"Value Weighting\" {\n    graph [rankdir=LR];\n//    node [shape=record];\n    \n//    fo [label =\"<f0> Fundamental Objective | <f1> Hydrography | <f2> &nbsp; &nbsp; Ecological Function/Integrity &nbsp; &nbsp; | <f3> Adverse Impacts | <f4> Ecosystem Services | <f5> Cost | <f6> T&E Spp\"];\n//    \n//    obj [label=\"<f0> Objective | <f1> MLW | <f2> MHW | <f3> FloodingExtent | <f4> &nbsp; &nbsp; FloodingDuration &nbsp; &nbsp; | <f5> Ponding | <f6> Deposition | <f7> Accretion\"]; \n//    \n//    subobj [label=\"<f0> Subobjective |<f1>  MLW-LHR | <f2> MLW-MC | <f3> MLW-MHR | <f4> &nbsp; MLW-LPDC &nbsp; | <f5> MLW-DH | <f6> MLW-LBB | <f7> MLW-UHR | <f7> MLW-UPDC | <f8> MLW-UBB\"];    \n    \n    fo [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\"><B>Fundamental Objectives &nbsp; &nbsp; &nbsp; <\/B><BR/>(weights sum to 1) &nbsp; &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f1\" BGCOLOR=\"LightSteelBlue\">Hydrography<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">Ecological Function/Integrity &nbsp; &nbsp; &nbsp; &nbsp; <\/TD><\/TR>\n            <TR><TD PORT=\"f3\">Adverse Impacts<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">Ecosystem Services<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">Cost<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">T&amp;E Spp<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    obj [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\"><B>Objectives &nbsp; &nbsp;<\/B><BR/>(weights sum to 1) &nbsp;  &nbsp; <\/TD><\/TR>\n            <TR><TD PORT=\"f1\" BGCOLOR=\"LightSteelBlue\">MLW<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">MHW<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">FloodingExtent &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">FloodingDuration &nbsp; &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">Ponding<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">Deposition<\/TD><\/TR>\n            <TR><TD PORT=\"f7\">Accretion<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    subobj [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\"><B>Subobjectives &nbsp; &nbsp;<\/B><BR/>(weights sum to 1) &nbsp; &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f1\">MLW-LHR<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">MLW-MC<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">MLW-MHR<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">MLW-LPDC<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">MLW-DH<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">MLW-LBB<\/TD><\/TR>\n            <TR><TD PORT=\"f7\">MLW-UHR<\/TD><\/TR>\n            <TR><TD PORT=\"f8\">MLW-UPDC<\/TD><\/TR>\n            <TR><TD PORT=\"f9\">MLW-UBB<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n        \n    fo:f1 -> {obj:f1 obj:f2 obj:f3 obj:f4 obj:f5 obj:f6 obj:f7} [label=\"layer 1\"];\n    \n    obj:f1 -> {subobj:f1 subobj:f2; subobj:f3; subobj:f4; subobj:f5; subobj:f6; subobj:f7; subobj:f7; subobj:f8} [label=\"layer 2\"];\n}\n\n\n\n//http://www.graphviz.org/pdf/dotguide.pdf\n//http://tonyballantyne.com/graphs.html\n\n\n\n\n\n \n\n\n\n\n\n\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>The app allows specifying as many as three nested objective hierarchy levels in the attribute table. Weights for each level and each objective are specified independently. In Figure 19 below, there are six fundamental objectives. For the first fundamental objective (Hydrography), seven objectives are listed. For the first objective (MLW), nine subobjectives are listed. The remaining fundamental objectives are not shown, nor are the subobjectives for the remaining listed objectives.</p>
+<div id="htmlwidget-66f1e39ac754b64caec6" style="width:800px;height:400px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-66f1e39ac754b64caec6">{"x":{"diagram":"digraph \"Value Weighting\" {\n    graph [rankdir=LR];\n//    node [shape=record];\n    \n//    fo [label =\"<f0> Fundamental Objective | <f1> Hydrography | <f2> &nbsp; &nbsp; Ecological Function/Integrity &nbsp; &nbsp; | <f3> Adverse Impacts | <f4> Ecosystem Services | <f5> Cost | <f6> T&E Spp\"];\n//    \n//    obj [label=\"<f0> Objective | <f1> MLW | <f2> MHW | <f3> FloodingExtent | <f4> &nbsp; &nbsp; FloodingDuration &nbsp; &nbsp; | <f5> Ponding | <f6> Deposition | <f7> Accretion\"]; \n//    \n//    subobj [label=\"<f0> Subobjective |<f1>  MLW-LHR | <f2> MLW-MC | <f3> MLW-MHR | <f4> &nbsp; MLW-LPDC &nbsp; | <f5> MLW-DH | <f6> MLW-LBB | <f7> MLW-UHR | <f7> MLW-UPDC | <f8> MLW-UBB\"];    \n    \n    fo [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\"><B>Fundamental Objectives &nbsp; &nbsp; &nbsp; <\/B><BR/>(weights sum to 1) &nbsp; &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f1\" BGCOLOR=\"LightSteelBlue\">Hydrography<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">Ecological Function/Integrity &nbsp; &nbsp; &nbsp; &nbsp; <\/TD><\/TR>\n            <TR><TD PORT=\"f3\">Adverse Impacts<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">Ecosystem Services<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">Cost<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">T&amp;E Spp<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    obj [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\"><B>Objectives &nbsp; &nbsp;<\/B><BR/>(weights sum to 1) &nbsp;  &nbsp; <\/TD><\/TR>\n            <TR><TD PORT=\"f1\" BGCOLOR=\"LightSteelBlue\">MLW<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">MHW<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">FloodingExtent &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">FloodingDuration &nbsp; &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">Ponding<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">Deposition<\/TD><\/TR>\n            <TR><TD PORT=\"f7\">Accretion<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n    subobj [\n        label=<<TABLE BORDER=\"1\" CELLBORDER=\"1\" CELLSPACING=\"0\">\n            <TR><TD PORT=\"f0\"><B>Subobjectives &nbsp; &nbsp;<\/B><BR/>(weights sum to 1) &nbsp; &nbsp;<\/TD><\/TR>\n            <TR><TD PORT=\"f1\">MLW-LHR<\/TD><\/TR>\n            <TR><TD PORT=\"f2\">MLW-MC<\/TD><\/TR>\n            <TR><TD PORT=\"f3\">MLW-MHR<\/TD><\/TR>\n            <TR><TD PORT=\"f4\">MLW-LPDC<\/TD><\/TR>\n            <TR><TD PORT=\"f5\">MLW-DH<\/TD><\/TR>\n            <TR><TD PORT=\"f6\">MLW-LBB<\/TD><\/TR>\n            <TR><TD PORT=\"f7\">MLW-UHR<\/TD><\/TR>\n            <TR><TD PORT=\"f8\">MLW-UPDC<\/TD><\/TR>\n            <TR><TD PORT=\"f9\">MLW-UBB<\/TD><\/TR>\n        <\/TABLE>> \n        shape = \"none\"\n    ];\n    \n        \n    fo:f1 -> {obj:f1 obj:f2 obj:f3 obj:f4 obj:f5 obj:f6 obj:f7} [label=\"layer 1\"];\n    \n    obj:f1 -> {subobj:f1 subobj:f2; subobj:f3; subobj:f4; subobj:f5; subobj:f6; subobj:f7; subobj:f7; subobj:f8} [label=\"layer 2\"];\n}\n\n\n\n//http://www.graphviz.org/pdf/dotguide.pdf\n//http://tonyballantyne.com/graphs.html\n\n\n\n\n\n \n\n\n\n\n\n\n\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 19.</b> Complete list of subobjectives for the objective “Mean Low Water” (MLW) within the fundamental objective “Hydrography”. Each level depicted in the diagram is weighted relative to other objectives within the level. Therefore, subobjectives in “MLW” are not directly weighted relative to subobjectives within “FloodingExtent” (not shown), although the objectives “MLW” and “FloodingExtent” may be weighted relative to one another directly.
+</p>
+</div>
 <p>At the top of the application page for editing weights is a box for specifying the number of weight scenarios to include in the output. For each weight scenario you can add a custom name (spaces will be removed). Weights intialized within the app will be assigned a default name of “WeightingX”.</p>
-<p>All values in the boxes beneath each weighting name can be edited. The default behavior is to weight each objective at each level equally and set the sum of all weights to 1. You can assign weights using any value; for example, you may use integers (e.g. 1, 2, 3) to set weights in which a weight of 2 indicates valuation twice as high as a weight of 1. To rescale the weights so they sum to 1 you can click the “Norm” button at the top of the column, and to reset the weights to the default of equal you can click the “Reset” button. In the column contents you can click the editing pencil icon to the left of each editing box to edit the next nested set of objectives. The pencil icon will appear regardless of whether nested objectives exist. In cases where only one objective level exists the same objective name will be repeated on the popup. It is not an error to change the weight for a single objective in a popup; however, because each nested level of weights are evaluated in isolation the weight will always be scaled to a value of 1 at all levels for which competing objectives are absent. The final weights are calculated in the app by normalizing all weights for each objective and eacy hierarchy level to sum to 1, then multiplying through the objectives and levels.</p>
+<p>All values in the boxes beneath each weighting name can be edited (Figure 20). The default behavior is to weight each objective at each level equally and set the sum of all weights to 1. You can assign weights using any value; for example, you may use integers (e.g. 1, 2, 3) to set weights in which a weight of 2 indicates valuation twice as high as a weight of 1. To rescale the weights so they sum to 1 you can click the “Norm” button at the top of the column, and to reset the weights to the default of equal you can click the “Reset” button. In the column contents you can click the editing pencil icon to the left of each editing box to edit the next nested set of objectives. The pencil icon will appear regardless of whether nested objectives exist (Figures 21 and 22). In cases where only one objective level exists the same objective name will be repeated on the popup. It is not an error to change the weight for a single objective in a popup; however, because each nested level of weights are evaluated in isolation the weight will always be scaled to a value of 1 at all levels for which competing objectives are absent. The final weights are calculated in the app by normalizing all weights for each objective and eacy hierarchy level to sum to 1, then multiplying through the objectives and levels.</p>
 <p>When uploading weights in the attribute table weights should be specified relative to all subobjectives, so the entire weight column would sum to 1 in a spreadsheet program. The app will normalize the weights internally regardless of whether they already sum to 1 when uploaded.</p>
 <p>If you assign weights in the app and wish to attach them to your attribute table you can do so in the “Raw Outputs” tab.</p>
 <div>
 <p><img src="img/weightObjectives.png"></p>
 </div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 20.</b> The weighting table for the fundamental objective level. The pad and pencil icons to the left of each input box are buttons to launch a nested level-editor.
+</p>
+</div>
 <div>
 <p><img src="img/weightSubobjectives.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 21.</b> The weighting table for the objective level. The pad and pencil icons appear regardless of whether nested subobjectives exist.
+</p>
 </div>
 <div>
 <p><img src="img/weightSubobjectivesMarg.png"></p>
 </div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 22.</b> The weighting table for the subobjective level. Attempting to edit nested subobjectives where none exist will always yield a weight of 1 after normalization.
+</p>
 </div>
 </div>
-<div id="exploring-results" class="section level1">
-<h1>Exploring Results</h1>
+</div>
+<div id="final-results" class="section level1">
+<h1>Final Results</h1>
 <p>The utility scores produced by the app are presented in a variety of tables and figures. The goal is to offer a series of diverse cross-sections through the predicted utilities, some of which can be used to simply convey the resulting utility and some of which can highlight strengths and weaknesses of policies relative to one another to optimize management decisions.</p>
 <p>Throughout the application the utilities are displayed in a consistent format: anywhere the subobjectives are listed individually the utility scores are discounted but not weighted, and anywhere the utility scores are listed in aggregate they are both weighted and discounted. There is one exception to this pattern: it is an option to view weighted and discounted individual subobjective utilities in the <em>Options &gt; Preview Utilities</em> menu.</p>
 <div id="the-consequence-table" class="section level2">
 <h2>The Consequence Table</h2>
-<p>This table lists all subobjective groups and the predicted utility for each policy at the end of the duration of the policy table. Each subobjective can score anywhere from 0 (worst) to 1 (best) in each policy each time step. If a subobjective achieves full utility in each time step, the resulting total utility will be equal to the number of time steps in the policy table. The range of scores in the consequence table is therefore between 0 and the number of rows in the policy table. The weights are listed for reference between the subobjective name and the policy utiity, but they are not applied to the predicted utility values.</p>
+<p>This table lists all subobjective groups and the predicted utility for each policy at the end of the duration of the policy table (Figure 23). Each subobjective can score anywhere from 0 (worst) to 1 (best) in each policy each time step. If a subobjective achieves full utility in each time step, the resulting total utility will be equal to the number of time steps in the policy table. The range of scores in the consequence table is therefore between 0 and the number of rows in the policy table. The weights are listed for reference between the subobjective name and the policy utiity, but they are not applied to the predicted utility values.</p>
 <div>
 <p><img src="img/consequenceTableCollapsed.png"></p>
 </div>
-<p>To the left of each subobjective name is a circular button. The button is blank by default, but where multiple subobjectives are grouped under a single objective the button is filled in with a <strong>+</strong> icon, and the utility displayed in the row is the average utility for the group. Clicking this button expands the row and shows a subtable, in which the exact utility for each subobjective can be looked up.</p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 23.</b> Consequence table with three subobjective groups defined for each objective. Scroll right in the app to see all policy scores.
+</p>
+</div>
+<p>To the left of each subobjective name is a circular button (Figure 24). The button is blank by default, but where multiple subobjectives are grouped under a single objective the button is filled in with a <strong>+</strong> icon, and the utility displayed in the row is the average utility for the group. Clicking this button expands the row and shows a subtable, in which the exact utility for each subobjective can be looked up.</p>
 <div>
 <p><img src="img/consequenceTableExpanded.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 24.</b> Expand/contract subobjective group subtables by clicking the filled circle to the left of the “Objective” column. Weight values in the expanded tables are relative to the expanded tables rather than to the parent table.
+</p>
 </div>
 </div>
 <div id="score-table" class="section level2">
 <h2>Score Table</h2>
 <p>The application is designed to distill the predicted effects of each policy on each subobjective to a single utility score which can be compared across policies. In addition to the single score per policy additional information are brought into the final score table, including multiple value weighting schemes and a number of estimates useful for determining the sensitivity of the process to expert opinion.</p>
-<p>The score table lists the final utility for each policy at the final time in the policy table. The scores for each policy listed in columns much like the consequence table, but all subobjective scores are summed at each time step. The sum of scores for each year is then scaled to range between 0 and 1 and the scores are summed across time steps. The scores therefore range between 0 and the number of rows in the policy table. On the right side of the table the last four columns are “Case”, “Alpha”, “Wt”, and “Uncertainty”. These columns list the parameters of scores calculated with the range of expert opinions provided by each expert during elicitation. For each weighting scheme, a score is computed for each uncertainty value in the best and worst case scenarios.</p>
+<p>The score table lists the final utility for each policy at the final time in the policy table (Figure 25). The scores for each policy listed in columns much like the consequence table, but all subobjective scores are summed at each time step. The sum of scores for each year is then scaled to range between 0 and 1 and the scores are summed across time steps. The scores therefore range between 0 and the number of rows in the policy table. On the right side of the table the last four columns are “Case”, “Alpha”, “Wt”, and “Uncertainty”. These columns list the parameters of scores calculated with the range of expert opinions provided by each expert during elicitation. For each weighting scheme, a score is computed for each uncertainty value in the best and worst case scenarios.</p>
 <div>
 <p><img src="img/finalScoreTable.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 25.</b> The final score table blends results and sensitivity analysis by presenting weighted, discounted scores for each weight/case/uncertainty scenario.
+</p>
 </div>
 </div>
 <div id="rank-table" class="section level2">
 <h2>Rank Table</h2>
-<p>Once the scores for each policy have been computed for each weighting scheme, case and uncertainty level, the simplest way to compare policies is to rank the policies by score from highest to lowest. The rank table does exactly this, allowing you to quickly identify which policy had the highest score (and hence the lowest rank) while also displaying whether changes in weighting scheme or expert uncertainty affected the rank. The score table are the rank table are accessible as tabs across the top of the page.</p>
+<p>Once the scores for each policy have been computed for each weighting scheme, case and uncertainty level, the simplest way to compare policies is to rank the policies by score from highest to lowest. The rank table does exactly this, allowing you to quickly identify which policy had the highest score (and hence the lowest rank) while also displaying whether changes in weighting scheme or expert uncertainty affected the rank (Figure 26). The score table are the rank table are accessible as tabs across the top of the page.</p>
 <div>
 <p><img src="img/finalRankTable.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 26.</b> The final rank table displays the rank of each policy for each weight/case/uncertainty scenario.
+</p>
 </div>
 </div>
 <div id="plotting" class="section level2">
 <h2>Plotting</h2>
-The plot options are depicted as tiles in the <em>Plot Results</em> tab. The plots preserve the app format wherein anywhere the subobjectives are listed individually the utility scores are discounted but not weighted, and anywhere the utility scores are listed in aggregate they are both weighted and discounted.<br />
+The plot options are depicted as tiles in the <em>Plot Results</em> tab (Figure 27). The plots preserve the app format wherein anywhere the subobjectives are listed individually the utility scores are discounted but not weighted, and anywhere the utility scores are listed in aggregate they are both weighted and discounted.<br />
 
 <div>
 <p><img src="img/plotting.png"></p>
 </div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 27.</b> The plot type selector from the “Plot Output” tab.
+</p>
+</div>
 <p>Each tile is a button that launches a plot builder. The plot builder typically offers a handful of parameters that can be customized about each plot, including the plot and axis titles. At the top-right of the plot builder are buttons that allow users to save either the plot image (as a PNG file) or the data behind the plot (as a CSV file). It is not necessary to specify the file extension in the name of each download. When the image is saved the resolution and font-size can be specified to shape the plot the intended use. To close the plot builder click anywhere around it, or scroll to the bottom and click the close button.</p>
-<p>The performance plot is designed to help evaluate whether the range of policies offers an adequate set of choices from which an optimal path forward can be selected. The plot consists of two barplots: the upper one grows up from the zero line and the bottom one grows down from the zero line. The X-axis lists each subobjective group, and the Y-axis is cumulative utility both above the zero line and below it.</p>
+<p>The performance plot is designed to help evaluate whether the range of policies offers an adequate set of choices from which an optimal path forward can be selected (Figure 28). The plot consists of two barplots: the upper one grows up from the zero line and the bottom one grows down from the zero line. The X-axis lists each subobjective group, and the Y-axis is cumulative utility both above the zero line and below it.</p>
 <div>
 <p><img src="img/plotPerformance.png"></p>
 </div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 28.</b> The performance plot illustrates the extent to which subobjectives are satisfied by at least one policy and which are satisfied by all policies.
+</p>
+</div>
 <p>The title of the upper barplot defaults to <em>Range Across Policies</em>, and it displays the score spread between the best-performing and worst-performing policy for each subobjective group as a dark bar. If all policies score similarly for a subobjective the bar will be small, and if the bar is large it indicates that the policies are not equally addressing that subobjective. Click on a bar of interest to identify the highest scoring policy and lowest scoring policy.</p>
-<p>The title of the lower barplot defaults to <em>Unmet Potential, Best Policy</em>, and it displays how many utility points the best-scoring policy stopped shy of the maximum as a light bar. If the best policy reached the maximum possible score the bar will be small, and if the bar is large it indicates that none of the policies are satisfying that subobjective. Click on a bar of interest to identify which was the best policy.</p>
+<p>The title of the lower barplot defaults to <em>Unmet Potential, Best Policy</em>, and it displays how many utility points the best-scoring policy stopped shy of the maximum as a light bar. If the best policy reached the maximum possible score the bar will be small, and if the bar is large it indicates that none of the policies are satisfying that subobjective. Click on a bar of interest to identify which was the best policy (Figure 29).</p>
 <div>
 <p><img src="img/plotPerformanceClick.png"></p>
 </div>
-<p>There are four extreme cases to watch for. In the first case there will be no dark top bar and no light bottom bar, indicating that all policies performed equally well. In the second case the dark top bar will be small and the light bottom bar will be tall, indicating that all policies performed poorly. In the third case the dark top bar will be tall and the light bottom bar will be small, indicating that at least one policy performed very well and at least one performed poorly. In the last case both the dark top bar and the light bottom bar will be roughly half-height, indicating that at least one policy performed poorly but no policy’s performance was fantastic.</p>
-<p>The cumulative utility plot can be configured to display either the score-to-date at each time step (annual accrual) or the average score for all subobjectives at each time step. The line type and Y-axis remain static as policies are selected and deseleced at the top-left.</p>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 29.</b> Clicking the performance table brings up a box defining which policies are best and worst performing for each subobjective.
+</p>
+</div>
+<p>There are four extreme cases to watch. In the first case there will be no dark top bar and no light bottom bar, indicating that all policies performed equally well. In the second case the dark top bar will be small and the light bottom bar will be tall, indicating that all policies performed poorly. In the third case the dark top bar will be tall and the light bottom bar will be small, indicating that at least one policy performed very well and at least one performed poorly. In the last case both the dark top bar and the light bottom bar will be roughly half-height, indicating that at least one policy performed poorly but no policy’s performance was fantastic.</p>
+<p>The cumulative utility plot can be configured to display either the score-to-date at each time step (annual accrual) or the average score for all subobjectives at each time step (Figure 30). The line type and Y-axis remain static as policies are selected and deseleced at the top-left.</p>
 <div>
 <p><img src="img/plotCumulative.png"></p>
+</div>
+<div class="imgcaptcontainer">
+<p>
+<b>Figure 30.</b> The utility accrued by all subobjectives at each time step by policy.
+</p>
 </div>
 </div>
 </div>
@@ -1469,6 +1628,10 @@ The plot options are depicted as tiles in the <em>Plot Results</em> tab. The plo
 <div id="restoring-a-saved-analysis" class="section level1">
 <h1>Restoring A Saved Analysis</h1>
 <p>To restore a saved analysis use the button with the upload from disk icon in the upper right corner and select the RDS file you wish to upload. The RDS file contains all raw data and screen control values, and the app will behave as if you had just uploaded the raw data files and it will recompute all downstream products using the restored screen values.</p>
+</div>
+<div id="server-disconnection-gray-screen" class="section level1">
+<h1>Server Disconnection (gray screen)</h1>
+<p>It is intended that users progress through the navigation menu from top-to-bottom, uploading files in the same order they are presented on-screen. At the bottom of each form “forward” and “back” navigation buttons facilitate orderly progression through the app. Once the tables have been uploaded most parameters can be adjusted in any order to allow the user to explore any number of “what-if” scenarios without resetting the app. Some combinations of adjustments may cause disconnection from the server, which disables all forms and turns the screen gray. In these cases it is necessary to refresh your browser and re-upload all tables. If the user encounters persistent server disconnections, a bug report to the developers may be sent from within the app using the menu at the top-right of the screen.</p>
 </div>
 
 
