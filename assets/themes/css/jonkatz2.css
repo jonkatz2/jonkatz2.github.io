@@ -151,6 +151,11 @@ html, body {
     margin: 20px auto;
 }
 
+.center800 {
+    width: 800px;
+    margin: auto;
+}
+
 .right800 {
     max-width: 800px;
     float:right;
@@ -158,6 +163,11 @@ html, body {
 
 .left800 {
     max-width: 800px;
+    float:left;
+}
+
+.left400 {
+    max-width: 400px;
     float:left;
 }
 
@@ -246,7 +256,7 @@ html, body {
         width:100%;
         padding: 34px 0px 0px 0px;
     }
-    .right800, .left800 {
+    .right800, .left800, .center800 {
         width: 95%;
     }
 }

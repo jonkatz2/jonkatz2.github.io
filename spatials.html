@@ -17,15 +17,16 @@ keywords: data visualization, shiny, R, CRAN, statistics
    </div> 
     <img class="right800" src="/assets/images_sm/spatial/map.png"></img>
         
-    <div style="clear: both;" class="right800">
+    <div style="clear: both;" class="center800">
         <p>A huge advantage to working with spatial data in R, or Python, or in any scripting platform outside of ArcGIS, is that data are not typically ready to map without some pre-processing, and the processing will usually be done in a scripting platform anyway. Here is a simple example. Air temperature is typically measured at points across the landscape, but everyone knows that air exists between those points and it must have a measureable temperature everywhere. To present air temperature data such as this we could avoid the issue completely and place it in a table with a row for each weather station, but that is boring to consume and fails to acknowledge the physical truths of the universe. It is better to attempt to interpolate between the points, which is where the scripting language comes in. Here is an example of a map that does exactly that for the state of Vermont, rendering isozones as a heatcolor gradient.</p>
+        <img class="left400" src="/assets/images_sm/spatial/unnamed-chunk-11-1.png"></img>
     </div>
-    <img class="left800" src="/assets/images_sm/spatial/unnamed-chunk-11-1.png"></img>
+    
     
     <div style="clear: both;" >
         <p>Another example of the advantages to working with spatial data in a scripting language rather than ArcGIS is that it is simple to use a script similar to how ArcGIS uses data models to batch-process multiple maps. Here are three similar maps created using the same script as the above map, but pointing it to new data for each iteration.</p>
     </div>
-    <img src="/assets/images_sm/spatial/temphoriz_counties.png"></img>
+    <img style="max-width:95%;" src="/assets/images_sm/spatial/temphoriz_counties.png"></img>
     
      <div style="clear: both;" class="left800">   
         <p>In a similar way it is also possible to combine and automate some data collection and mapping processes to present up-to-date information. In some cases this can be done interactively in a dynamic server-side application, and in other cases it may be for a static report to convey a snapshot of time. That is the case with the map of home sale prices below; these data were scraped from the web and mapped in a single script.</p>
