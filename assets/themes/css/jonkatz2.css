@@ -151,8 +151,18 @@ html, body {
     margin: 20px auto;
 }
 
+.right800 {
+    max-width: 800px;
+    float:right;
+}
+
+.left800 {
+    max-width: 800px;
+    float:left;
+}
+
 /* computer-specific layout */
-@media (min-width: 801px) {
+@media (min-width: 769px) {
     #navheader {
         position: fixed;
         width:100%;
@@ -208,7 +218,7 @@ html, body {
 
 
 /* Mobile-specific layout */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .container-fluid{
         max-width: 768px;
         padding: 0em 1em;
@@ -236,7 +246,9 @@ html, body {
         width:100%;
         padding: 34px 0px 0px 0px;
     }
-
+    .right800, .left800 {
+        width: 95%;
+    }
 }
 
 /* Screen-agnostic layout */
