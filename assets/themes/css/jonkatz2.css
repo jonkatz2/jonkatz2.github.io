@@ -151,6 +151,9 @@ html, body {
     margin: 20px auto;
 }
 
+#spatialparagraph1 {
+    padding-left: 15px;
+}
 
 /* computer-specific layout */
 @media (min-width: 1400px) {
@@ -242,9 +245,6 @@ html, body {
         padding: 34px 0px 0px 0px;
     }
     
-/*    #spatialparagraph1 {*/
-/*        padding-left: 15px;*/
-/*    }*/
 }
 
 /* Screen-agnostic layout */
