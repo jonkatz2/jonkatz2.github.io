@@ -151,12 +151,9 @@ html, body {
     margin: 20px auto;
 }
 
-#spatialparagraph1 {
-    padding-left: 20%;
-}
 
 /* computer-specific layout */
-@media (min-width: 769px) {
+@media (min-width: 1400px) {
     #navheader {
         position: fixed;
         width:100%;
@@ -202,6 +199,10 @@ html, body {
         text-align:left;
         padding-top:55px;
     }
+    
+    #spatialparagraph1 {
+        padding-left: 20%;
+    }
 
 }
 
@@ -241,9 +242,9 @@ html, body {
         padding: 34px 0px 0px 0px;
     }
     
-    #spatialparagraph1 {
-        padding-left: 0%;
-    }
+/*    #spatialparagraph1 {*/
+/*        padding-left: 15px;*/
+/*    }*/
 }
 
 /* Screen-agnostic layout */
