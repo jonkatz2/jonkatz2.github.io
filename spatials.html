@@ -10,7 +10,7 @@ keywords: data visualization, shiny, R, CRAN, statistics
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 col-md-offset-3">
+        <div class="col-md-4 col-md-offset-2">
             <p>Users of ArcGIS know that it has its origins in Python, and that many analyses can still be scripted in Python and run using the integrated development enviroment (IDLE, in ArcGIS parlance) that ships with every installation. I never went deep enough with ArcGIS to actually use the IDLE, but I am aware of its existence.</p>
             <p>What users of R know is that several high quality spatial analysis packages exist, with excellent documentation both in the manual and through the Stack Exchange community. I am pretty R-centric, so I think it may go as far as duplicating the functionality of ArcGIS -- but there is no question that it takes a lot more thought and experience to use.</p>
             <p>For example, until I started using R for spatial analysis I did not know that there is a standard way to specify coordinate reference systems: <a href="http://www.epsg.org/">the EPSG string</a>. Also, the first time someone sent me a file geodatabase it took me about an hour to install the ESRI driver to read it. I understand it may be native in Windows installations of GDAL, and may still need manual installation in Linux (I'm a dedicated Ubuntu user). If you need to install it, start with the driver documentation at <a href="http://www.gdal.org/drv_filegdb.html">http://www.gdal.org/drv_filegdb.html</a>.</p>
@@ -18,7 +18,7 @@ keywords: data visualization, shiny, R, CRAN, statistics
         </div> 
        
         <div class="col-md-6">
-            <img class="right800" src="/assets/images_sm/spatial/map.png"></img>
+            <img src="/assets/images_sm/spatial/map.png"></img>
         </div>    
     </div>
     
@@ -33,9 +33,9 @@ keywords: data visualization, shiny, R, CRAN, statistics
         <div class="col-md-6 col-md-offset-3">
             <p>Another example of the advantages to working with spatial data in a scripting language rather than ArcGIS is that it is simple to use a script similar to how ArcGIS uses data models to batch-process multiple maps. Here are three similar maps created using the same script as the above map, but pointing it to new data for each iteration.</p>
         </div>
-        <img style="max-width:95%;" src="/assets/images_sm/spatial/temphoriz_counties.png"></img>
+        <img style="max-width:95%;display:block;margin:auto;" src="/assets/images_sm/spatial/temphoriz_counties.png"></img>
         
-        <div class="col-md-4 col-md-offset-3">
+        <div class="col-md-4 col-md-offset-2">
             <p>In a similar way it is also possible to combine and automate some data collection and mapping processes to present up-to-date information. In some cases this can be done interactively in a dynamic server-side application, and in other cases it may be for a static report to convey a snapshot of time. That is the case with the map of home sale prices below; these data were scraped from the web and mapped in a single script.</p>
         </div>
         <div class="col-md-6">
