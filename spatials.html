@@ -18,28 +18,34 @@ keywords: data visualization, shiny, R, CRAN, statistics
         </div> 
        
         <div class="col-md-6">
-            <img style="max-width:95%;" src="/assets/images_sm/spatial/map.png"></img>
+            <img style="max-width:95%;" src="/assets/images_sm/spatial/map.png">
         </div>    
     </div>
     
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <p>A huge advantage to working with spatial data in R, or Python, or in any scripting platform outside of ArcGIS, is that data are not typically ready to map without some pre-processing -- and the processing will usually be done in a scripting platform anyway. Here is a simple example: air temperature is typically measured at points across the landscape, but everyone knows that air exists between those points and it must have a measureable temperature everywhere. To present air temperature data such as this we could avoid the issue completely and place it in a table with a row for each weather station, but that is boring to consume and fails to acknowledge the physical truths of the universe. It is better to attempt to interpolate between the points, which is where the scripting language comes in. Here is an example of a map that does exactly that for the state of Vermont, rendering isotherm zones as a heatcolor gradient and with county lines for reference.</p>
-            <img style="display:block;margin:auto;" src="/assets/images_sm/spatial/unnamed-chunk-11-1.png"></img>
+            <p>A huge advantage to working with spatial data in R, or Python, or in any scripting platform outside of ArcGIS, is that data are not typically ready to map without some pre-processing -- and the processing will usually be done in a scripting platform anyway. Here is a simple example: air temperature is typically measured at points across the landscape, but everyone knows that air exists between those points and it must have a measureable temperature everywhere. To present air temperature data such as this we could avoid the issue completely and place it in a table with a row for each weather station, but that is boring to consume and fails to acknowledge the physical truths of the universe. It is better to attempt to interpolate between the points, which is where the scripting language comes in. Here is an example of a map that does exactly that for the state of Vermont. The first image shows the locations of the monitoring stations on the digital elevation model, the second is the interpolated temperature with isotherms rendered in a heatcolor gradient and with county lines added for reference.</p>
         </div>
     </div>
     
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <p>Another example of the advantages to working with spatial data in a scripting language rather than ArcGIS is that it is simple to use a script similar to how ArcGIS uses data models to batch-process multiple maps. Here are three similar maps created using the same script as the above map, but pointing it to new data for each iteration.</p>
+        <div class="col-md-6 ">
+            <img style="float:right;" src="/assets/images_sm/spatial/unnamed-chunk-6-1.png">
         </div>
-        <img style="max-width:95%;display:block;margin:auto;" src="/assets/images_sm/spatial/temphoriz_counties.png"></img>
+        <div class="col-md-6 ">
+            <img style="float:left;" src="/assets/images_sm/spatial/unnamed-chunk-11-1.png">
+        </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <p>Another advantage to working with spatial data in a scripting language rather than ArcGIS is that it is simple to make what ArcGIS calls data models, which are used to batch-process multiple maps. Here are three similar maps created using the same script as the above map, but pointing it to new data for each iteration.</p>
+        </div>
+        <img style="max-width:95%;display:block;margin:auto;" src="/assets/images_sm/spatial/temphoriz_counties.png">
         
         <div class="col-md-4 col-md-offset-2">
-            <p>In a similar way it is also possible to combine and automate some data collection and mapping processes to present up-to-date information. In some cases this can be done interactively in a dynamic server-side application, and in other cases it may be for a static report to convey a snapshot of time. That is the case with the map of 2015 home sale prices below; these data were scraped from the web and mapped in a single script. I forgot to note on the map the numbers in the towns indicate the number of homes for sale at the time the data were grabbed.</p>
+            <p>In a similar way it is also possible to combine and automate some data collection and mapping processes to present up-to-date information. In some cases this can be done interactively in a dynamic server-side application, and in other cases it may be for a static report to convey a snapshot of time. That is the case with the map of 2015 home sale prices, which were scraped from the web and mapped in a single script. I forgot to note on the map the numbers in the towns indicate the number of homes for sale at the time the data were grabbed.</p>
         </div>
         <div class="col-md-6">
-            <img style="max-width:95%;" src="/assets/images_sm/spatial/unnamed-chunk-10-1.png"></img>
+            <img style="max-width:95%;" src="/assets/images_sm/spatial/unnamed-chunk-10-1.png">
         </div>
     </div>
 </div>
