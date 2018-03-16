@@ -151,24 +151,8 @@ html, body {
     margin: 20px auto;
 }
 
-.center800 {
-    width: 800px;
-    margin: auto;
-}
-
-.right800 {
-    max-width: 800px;
-    float:right;
-}
-
-.left800 {
-    max-width: 800px;
-    float:left;
-}
-
-.left400 {
-    max-width: 400px;
-    float:left;
+#spatialparagraph1 {
+    padding-left: 20%;
 }
 
 /* computer-specific layout */
@@ -256,8 +240,9 @@ html, body {
         width:100%;
         padding: 34px 0px 0px 0px;
     }
-    .right800, .left800, .center800 {
-        width: 95%;
+    
+    #spatialparagraph1 {
+        padding-left: 0%;
     }
 }
 
