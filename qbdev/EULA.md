@@ -1,3 +1,4 @@
+<div style="max-width:800px;margin:auto;">
 
 # 04/2018
 # WMI QUICKBOOKS CONNECT END USER LICENSE AGREEMENT  
@@ -16,7 +17,7 @@ You may copy the Software as reasonably necessary for back-up, archival or disas
 ##Technical Support.
 Technical support is offered at an hourly rate agreed upon prior to service.
 
-
+</div>
 
 
 
