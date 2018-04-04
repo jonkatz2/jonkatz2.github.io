@@ -1,0 +1,220 @@
+---
+layout: post
+title: "Web scraping with R, Again"
+date: 2018-04-04
+description: ""
+category: 
+tags: [R, Scraping]
+---
+{% include JB/setup %}
+
+The last time I wrote this my functions were only semi-coherent, looking at them no it seems I had modified them to look at sold listings and left them mostly broken. Hopefully I straighten a few things out here. These functions will fail with changes to the DOM, but they might work for a few weeks.
+
+```{r}
+library(rvest)
+
+url <- 'https://www.zillow.com/homes/for_sale/VT/58_rid/globalrelevanceex_sort/45.60443,-69.598389,42.112486,-75.305787_rect/7_zm/'
+
+# I manually checked the source html to find the correct node to read
+more.urls <- read_html(url) %>%
+  html_nodes(".zsg-pagination a") %>%
+  html_attr("href") 
+more.urls <- na.omit(unique(more.urls))
+# See how high the pagination goes
+more.urls <- strsplit(more.urls, '/')
+more.urls <- lapply(more.urls, function(x) x[length(x)])
+more.urls <- as.numeric(gsub('[_p]','', more.urls))
+more.urls <- max(more.urls)
+# Now paste together a url for each page
+urls <- c(url, paste0(url,2:more.urls,'_p/'))
+
+urls
+```
+
+Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an `lapply` loop. I haven't looked to see why the page caps the display at 500 listings; there are more there, maybe there are additional pages beyond 20.
+
+```{r}
+# The scraper function
+getZillow <- function(urls) {
+    # return a list of html <article></article> tags, one for each URL
+    lapply(urls, function(u) {
+        # call out the at-bat url in case there is an error
+        cat(u, '\n')
+        houses <- read_html(u) %>%
+          html_nodes("article")
+        houses
+    })
+}
+```
+
+To use this function I just need to give it the urls I made earlier:
+
+```{r eval=FALSE}
+zdata2 <- getZillow(urls)
+```
+
+I still need to parse the returned pointers. I read it by coercing it to a character vector, copying it off the console into my text editor.
+
+```{r eval=FALSE}
+# not run
+as.character(zdata2[[1]][1])
+```
+
+
+Here are the parsing functions. They include an argument to debug the script as it runs--this just means if you set `debugFun=cat` it will call out each node as it runs, and when it fails you can tease apart the node that caused the crash and get everything working again.  
+
+
+```{r eval=FALSE}
+# The workhorse
+parsePhotoCard <- function(houses, debugFun) {
+    z_id <- houses %>% html_attr("id")
+
+    debugFun('    address\n')
+    address <- houses %>%
+        html_node("div") %>%
+        html_node("span") 
+        
+    address <- lapply(address, function(x) {
+        x %>%
+        html_nodes("span") %>%
+        html_text(trim=TRUE)
+    })
+    
+    address <- lapply(address, function(x) {
+        tab <- data.frame(t(x))
+        names(tab) <- c('Address', 'Town', 'State', 'Zip')
+        tab
+    })
+    
+    address <- do.call(rbind.data.frame, address)
+    
+    debugFun('    geo\n')  
+    lat <- houses %>% html_attr("data-latitude")
+    lon <- houses %>% html_attr("data-longitude")
+
+    geo <- data.frame(lat=as.numeric(lat)*10e-7, long=as.numeric(lon)*10e-7)
+
+    debugFun('    price\n')  
+    price <- houses %>%
+        html_node("div") %>%
+        html_node("p") 
+    
+    price2 <- lapply(price, function(x) {
+        x %>%
+        html_nodes("span") %>% 
+        html_text(trim=TRUE)
+    })
+    
+    price3 <- lapply(price2, function(x) {
+        det <- strsplit(x[2], split=x[3])[[1]]
+        det[1:2] <- gsub('[^0-9\\.]', '', det[1:2])
+        tab <- data.frame(t(c(x[1], det)))
+        if(length(tab) < 4) tab <- data.frame(tab[1], NA, NA, tab[2])
+        names(tab) <- c('Price', 'Beds', 'Baths', 'Area')
+        tab
+    })
+    
+    price <- do.call(rbind.data.frame, price3)
+    
+    data.frame(z_id=z_id, address=address, geo, price)
+}
+
+# The parsing controller
+parseZillow <- function(zhouse.l, debugFun=function(...) NULL) {
+    len.h <-1:length(zhouse.l)
+    lapply(1:length(zhouse.l), function(x) {
+        debugFun(x, '\n')
+        houses <- zhouse.l[[x]]
+        parsePhotoCard(houses, debugFun)
+    })
+}
+
+
+# Here's how I put it all together
+zdata3 <- parseZillow(zdata2)
+zdata4 <- do.call(rbind.data.frame, zdata3)
+write.csv(zdata4, 'RS_2018Apr04.csv', row.names=FALSE)
+```
+```{r echo=FALSE}
+zdata4 <- read.csv('/home/jon/Documents/personalWebsite/zillowdata/RS_2018Apr04.csv')
+```
+```{r}
+head(zdata4)
+```
+
+There is also an embedded json to pass data to the map that can be parsed. This has more fields, but somehow less data overall.
+
+```{r eval=FALSE}
+library(jsonlite)
+
+# my version of plyr::rbind.fill
+rbf <- function(x, y) {
+    xn <- names(x)
+    yn <- names(y)
+    missx <- xn[!xn %in% yn]
+    missy <- yn[!yn %in% xn]
+    if(length(missy)) x[missy] <- NA
+    if(length(missx)) y[missx] <- NA
+    rbind(x, y)     
+}
+
+minibubble <- function(houses) {
+    jsondat <- houses %>% 
+        html_node(".minibubble", ) %>%
+        html_node(xpath = 'comment()')
+    # Pull the json out of the HTML comment
+    jsondat2 <- gsub('<!--', '', jsondat)  
+    jsondat2 <- gsub('-->', '', jsondat2)
+    # fix an escaped character that breaks the json
+    jsondat2 <- gsub('\\\\-', '-', jsondat2)  
+    jsondat3 <- lapply(jsondat2, function(x) data.frame(t(unlist(jsonlite::fromJSON(x)))))  
+    
+    jd3 <- jsondat3[[1]]
+    for(i in 2:length(jsondat3)) jd3 <- rbf(jd3, jsondat3[[i]])  
+    jd3
+}
+
+# The parsing controller
+parseMinibubble <- function(zhouse.l, debugFun=function(...) NULL) {
+    len.h <-1:length(zhouse.l)
+    lapply(1:length(zhouse.l), function(x) {
+        debugFun(x, '\n')
+        houses <- zhouse.l[[x]]
+        minibubble(houses)
+    })
+}
+
+# put it all together
+zdata5 <- parseMinibubble(zdata2)
+mb <- zdata5[[1]]
+for(i in 2:length(zdata5)) mb <- rbf(mb, zdata5[[i]])
+write.csv(mb, 'mb_2018Apr04.csv', row.names=FALSE)
+```
+```{r echo=FALSE}
+mb <- read.csv('/home/jon/Documents/personalWebsite/zillowdata/mb_2018Apr04.csv')
+```
+```{r}
+head(mb)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
