@@ -8,12 +8,18 @@ tags: [R, Scraping]
 ---
 {% include JB/setup %}
 
-The last time I wrote this my functions were only semi-coherent, looking at them no it seems I had modified them to look at sold listings and left them mostly broken. Hopefully I straighten a few things out here. These functions will fail with changes to the DOM, but they might work for a few weeks.
+The last time I wrote this my functions were only semi-coherent, looking at them no it seems I had modified them to look at sold listings and left them mostly broken. Hopefully I straighten out a few things here. These functions will fail with changes to the DOM, but they might work for a few weeks.
 
 
 ```r
 library(rvest)
+```
 
+```
+## Loading required package: xml2
+```
+
+```r
 url <- 'https://www.zillow.com/homes/for_sale/VT/58_rid/globalrelevanceex_sort/45.60443,-69.598389,42.112486,-75.305787_rect/7_zm/'
 
 # I manually checked the source html to find the correct node to read
@@ -55,7 +61,7 @@ urls
 ## [20] "https://www.zillow.com/homes/for_sale/VT/58_rid/globalrelevanceex_sort/45.60443,-69.598389,42.112486,-75.305787_rect/7_zm/20_p/"
 ```
 
-Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an `lapply` loop. I haven't looked to see why the page caps the display at 500 listings; there are more there, maybe there are additional pages beyond 20.
+Next I use a line from the demo script to scrape each of these URLs. Since I've now got 20 urls I go ahead and define a quick function to do the scraping. The function is really just an `lapply` loop. The page caps the display at 500 listings; there are more there, the solution may be to run this repeatedly for more local geographies.
 
 
 ```r
