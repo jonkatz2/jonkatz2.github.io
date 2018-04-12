@@ -177,7 +177,7 @@ The actual tables are pretty boring, so I'll save them for future plotting. I su
 
 ```r
 # Here's how I put it all together
-zdata3 <- parseSoldZillow(zdata2)
+zdata3 <- parseZillow(zdata2)
 zdata4 <- do.call(rbind.data.frame, zdata3)
 # Let numbers be numeric rather than factor
 for(i in c('lat', 'long', 'price', 'pricepersqft', 'beds','baths','sqft', 'acres', 'yr_built')) zdata4[i] <- as.numeric(as.character(zdata4[,i]))
