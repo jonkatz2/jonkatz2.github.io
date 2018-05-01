@@ -8,6 +8,8 @@ tags: [R, Scraping]
 ---
 {% include JB/setup %}
 
+<p style="font-weight:bold;">Edit: Someone noted that these functions are incoherent. I revisited this recently and <a href="{{BASE_PATH}}/2018/04/04/Web-scraping-with-R_again" target="_blank">got everything working again.</a></p>  
+
 I'm interested in what insights can be gleaned from real estate prices. Initially I was interested because I wanted to buy a home, and of course (believe it or not this was a surprise to me) there were more nuances than I had anticipated when choosing a location to spend the next $300,000. All of Vermont is beautiful, so at least that was not a consideration. What I do want is:
 
   * To be close to my current office, and close to potential future employment too.

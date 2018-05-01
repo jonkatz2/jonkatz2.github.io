@@ -8,7 +8,7 @@ tags: [R, Scraping]
 ---
 {% include JB/setup %}
 
-The last time I wrote this my functions were only semi-coherent, looking at them no it seems I had modified them to look at sold listings and left them mostly broken. Hopefully I straighten out a few things here. These functions will fail with changes to the DOM, but they might work for a few weeks.
+<p>The <a href="{{BASE_PATH}}/2016/05/13/Web-scraping-with-R" target="_blank">last time I wrote this</a> my functions were only semi-coherent, looking at them now it seems I had modified them to look at sold listings and left them mostly broken. Hopefully I straighten out a few things here. These functions will fail with changes to the DOM, but they might work for a few weeks.</p>
 
 ```{r}
 library(rvest)
