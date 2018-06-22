@@ -14,13 +14,16 @@ The AdminLTE framework has a place for a title in the upper left, which can be <
 
 The reason these won't work is because  -- unconventionally -- the shinydashboard package adds some CSS directly to the body of the page, presumably to override some of the AdminLTE styling. When CSS rules conflict the last one loaded takes precedence (<a target="_blank" href="http://css.maxdesign.com.au/selectutorial/advanced_conflict.htm">assuming equal weight</a>), so to override the package defaults we can add ours below it using the same strategy.  
 
-Here's what we want to create, view in Firefox responsive design mode at iPad Air resolution:  
+Here's what we want to create, viewed in Firefox responsive design mode at iPad Air resolution:  
+<br>
 ![](/assets/blog/customShinyDash/iPadAir.png)
 
-Here is the same app, with the sidebar hidden:  
+Here with the sidebar hidden. Since the image is occupying the title location, the fa-bars icon can't float left anymore when the title collapses.  
+<br>
 ![](/assets/blog/customShinyDash/iPadAirCollapsed.png)
 
 And here it is viewed at iPhone 6 Plus resolution, although I don't think anyone should fill out this survey on their phone:  
+<br>
 ![](/assets/blog/customShinyDash/iPhone6S.png)
 
 The CSS took some trial and error, and it is not perfect, but it should be good enough for now.  
