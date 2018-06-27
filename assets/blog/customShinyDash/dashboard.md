@@ -17,13 +17,20 @@ The AdminLTE framework has a place for a title in the upper left, which can be [
 
 The reason these won't work is because the shinydashboard package adds some CSS directly to the body of the page to override some of the AdminLTE styling. When CSS rules conflict the last one loaded takes precedence ([assuming equal weight](http://css.maxdesign.com.au/selectutorial/advanced_conflict.htm)), so to override the package defaults we need to add ours below it using the same strategy.  
 
+The default AdminLTE dasboard is pleasantly austere, with a place for a title above the sidebar and a blue navbar across the top.  
+<br>
+![](iPadAirNoImg.png)
+
 Here's what we want to create, view in Firefox responsive design mode at iPad Air resolution:  
+<br>
 ![](iPadAir.png)
 
 Here is the same app, with the sidebar hidden:  
+<br>
 ![](iPadAirCollapsed.png)
 
 And here it is viewed at iPhone 6 Plus resolution, although I don't think anyone should fill out this survey on their phone:  
+<br>
 ![](iPhone6S.png)
 
 The CSS took some trial and error, and it is not perfect, but it should be good enough for now.  

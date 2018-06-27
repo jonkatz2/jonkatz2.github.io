@@ -14,7 +14,11 @@ The AdminLTE framework has a place for a title in the upper left, which can be <
 
 The reason these won't work is because  -- unconventionally -- the shinydashboard package adds some CSS directly to the body of the page, presumably to override some of the AdminLTE styling. When CSS rules conflict the last one loaded takes precedence (<a target="_blank" href="http://css.maxdesign.com.au/selectutorial/advanced_conflict.htm">assuming equal weight</a>), so to override the package defaults we can add ours below it using the same strategy.  
 
-Here's what we want to create, viewed in Firefox responsive design mode at iPad Air resolution:  
+The default AdminLTE dasboard is pleasantly austere, with a place for a title above the sidebar and a blue navbar across the top. Here it is viewed in Firefox responsive design mode at iPad Air resolution:  
+<br>
+![](/assets/blog/customShinyDash/iPadAirNoImg.png)
+
+Here's what we want to create:  
 <br>
 ![](/assets/blog/customShinyDash/iPadAir.png)
 
