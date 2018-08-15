@@ -61,6 +61,11 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       </a>
 <!--    </div>-->
   </div>
+  <div class="row">
+    <div class="blogbanner">
+      <a href="{{site.posts.first.url}}">"The latest blog post: " {{site.posts.first.title}}</a>
+    </div>
+  </div>
 </div>
 
 <!--    <div style="font-size:1.25em;font-weight:bold;text-align:center;">-->

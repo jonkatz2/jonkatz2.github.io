@@ -10,7 +10,7 @@ tags: [R, shiny, shinydashboard, css, js, jQuery]
 
 
 I am working on an application that has four tabs, and I expect users to complete them sequentially. I point this out in written instructions in several places, and I could number the tabs, but it would be nice to take users on a tour of the controls so they don't have to read a bunch of words and think about them. [Intro.js](https://introjs.com/) is a nifty little add-on that will do exactly this.  
-</br>
+<br>
 ![](/assets/blog/introjs/introjs.png)
 
 Using Intro.js is simple. [Download the js and css files](https://github.com/usablica/intro.js/releases) and place them in your app's www directory; the js file goes into the js directory, and the css file into the css directory:  
