@@ -333,7 +333,20 @@ p {
   -ms-transform: translate(-50%, -50%)
 }
 
+#blogbanner {
+    background: #212121;
+    background: -moz-linear-gradient(top, #373737, #212121);
+    background: -webkit-linear-gradient(top, #373737, #212121);
+    background: -ms-linear-gradient(top, #373737, #212121);
+    background: -o-linear-gradient(top, #373737, #212121);
+    background: linear-gradient(top, #373737, #212121);
+    text-align: center;
+    font-size: 2em;
+}
 
+#blogbanner > a {
+    color: #FFF;
+}
 
 
 
