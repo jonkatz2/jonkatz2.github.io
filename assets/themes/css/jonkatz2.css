@@ -342,8 +342,11 @@ p {
     background: linear-gradient(top, #373737, #212121);
     text-align: center;
     font-size: 2em;
-    width: 100vw;
     padding: 0em 1em;
+    margin-top: 64px;
+    width: 100vw;
+    position: absolute;
+    left: 0;
 }
 
 #blogbanner > a {
