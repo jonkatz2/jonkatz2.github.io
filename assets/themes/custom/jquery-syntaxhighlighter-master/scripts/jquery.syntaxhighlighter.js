@@ -382,14 +382,14 @@ if ( typeof window.console.emulated === 'undefined' ) {
 				 */
 //				'prettifyBaseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter/prettify' : 'http://balupton.github.com/jquery-syntaxhighlighter/prettify',
 				
-				'prettifyBaseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter/prettify' :  '{{ BASE_PATH }}/assets/themes/custom/jquery-syntaxhighlighter-master/prettify',
+				'prettifyBaseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter/prettify' :  '/assets/themes/custom/jquery-syntaxhighlighter-master/prettify',
 
 				/**
 				 * The baseUrl to load our Syntax Highlighter from.
 				 * This is used to load in the stylesheet and additional themes.
 				 */
 //				'baseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter' : 'http://balupton.github.com/jquery-syntaxhighlighter'
-				'baseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter' : '/home/jon/Documents/personalWebsite/jonkatz2.github.io/assets/themes/custom/jquery-syntaxhighlighter-master/scripts'
+				'baseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter' : '/assets/themes/custom/jquery-syntaxhighlighter-master/scripts'
 			},
 
 			// Init
