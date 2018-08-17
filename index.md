@@ -55,7 +55,7 @@ keywords: Katz, data visualization, data analysis, shiny, R, CRAN, statistics
       </a>
 <!--    </div>-->
 <!--    <div class="col-sm-3">-->
-      <a href="http://jonkatz2.github.io/monitoR" class="mygrid">
+      <a href="http://jonkatz2.github.io/monitoR" class="mygrid" target="_blank">
         <p class="gridtitle">R Packages</p>
         <img class="gridimg" src="{{ BASE_PATH }}/assets/images_sm/monitor_sq.png" alt="R packages">
       </a>
