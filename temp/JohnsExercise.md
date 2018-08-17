@@ -1,3 +1,6 @@
+---
+layout: page
+---
 
 The task was to compute the change in proportion of visitors who will see an element in its current location vs a proposed location.  
 
