@@ -353,7 +353,11 @@ p {
     color: #FFF;
 }
 
-
+.pagepage-header {
+    min-height: 125px;
+    position: fixed;
+    top: 0px;
+}
 
 
 
