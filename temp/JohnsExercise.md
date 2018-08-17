@@ -2,9 +2,11 @@
 layout: page
 ---
 
+2018-08-17  
+
 The task was to compute the change in proportion of visitors who will see an element in its current location vs a proposed location.  
 
-I suggested a gamma distribution to compute probabilities, but it is easier to use that data as an empirical distribution than to attempt to back-fit the data to a set of shape parameters.  
+Yesterday I suggested a gamma distribution to compute probabilities, but it is easier to use the  data as an empirical distribution rather than attempt to back-fit the data to a set of shape parameters.  
 
 I can use the gamma to simulate one group of scroll data for each of 10 accounts:  
 
