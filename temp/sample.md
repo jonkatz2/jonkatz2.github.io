@@ -1,4 +1,5 @@
 
+  <head>
     <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -343,8 +344,9 @@
           text-align: center;
       }
     </style>
+  </head>
 
-
+  <body>
     <div class="container-fluid">
       <h2 style="text-align:center;">Input Sliders For Expert Elicitation</h2>
       <div class="row">
@@ -830,4 +832,5 @@
         <div style="min-height:200px;"></div>
       </div>
     </div>
-
+  </body>
+</html>
