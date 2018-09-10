@@ -350,7 +350,7 @@
     <div class="container-fluid">
       <h2 style="text-align:center;">Input Sliders For Expert Elicitation</h2>
       <div class="row">
-        <div class="col-sm-6" style="min-width:900px;">
+        <div class="col-sm-8" style="min-width:900px;">
           <p class="text-bold">4-point elicitation with repeating grouped categories: Each element on the x-axis contains any number of sub-elements (provided all elements have the same number of sub-elements).</p>
           <p class="text-bold">Default colors are a blue gradient. The ML cannot move beyond the H or L and vice-versa.</p>
           <div id="byGate" type="fourpointslider" style="" class="fourpointslider-input">
@@ -503,7 +503,7 @@
             <script type="text/javascript">fourpointslider( '#byGate' );</script>
           </div>
         </div>
-        <div class="col-sm-6" style="min-width:900px;">
+        <div class="col-sm-8" style="min-width:900px;">
           <div class="well" style="overflow:hidden;">
             <p class="text-bold">Sliders can be disabled programmatically. Customize colors by setting either a custom gradient or discrete values.</p>
             <div id="byBasin" type="fourpointslider" style="" class="fourpointslider-input">
@@ -655,7 +655,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6" style="min-width:900px;">
+        <div class="col-sm-8" style="min-width:900px;">
           <p class="text-bold">Single sliders per group. Turn background lines off for a cleaner look.</p>
           <div id="singles" type="fourpointslider" style="" class="fourpointslider-input">
             <style>#singles .highlow.fourpointslider0 .ui-slider-range {background: #0044B2;}</style>
@@ -721,7 +721,7 @@
             <script type="text/javascript">fourpointslider( '#singles' );</script>
           </div>
         </div>
-        <div class="col-sm-6" style="min-width:900px;">
+        <div class="col-sm-8" style="min-width:900px;">
           <div class="well" style="overflow:hidden;">
             <p class="text-bold">3-point elicitation sliders are linked to a numeric display. Backgrounds can be either white or transparent.</p>
             <div id="threepointers" type="threepointslider" style="display:inline-flex;" class="form-group shiny-input-container threepointslider">
