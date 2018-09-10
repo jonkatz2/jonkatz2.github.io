@@ -147,6 +147,10 @@
         font-weight:bold;
       }
       
+      table, td {
+        border: none;
+      }
+      
       /*.threepointslider {*/
       /*  padding:1em;*/
       /*  border: 1px solid gray;*/
