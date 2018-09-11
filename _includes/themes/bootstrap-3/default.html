@@ -31,7 +31,8 @@
     <script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-			  crossorigin="anonymous"></script>
+			  crossorigin="anonymous">
+    </script>
     
     <!-- Include a script highlighter via CDN  -->
     <!-- see http://balupton.github.io/jquery-syntaxhighlighter/demo/ -->
@@ -40,7 +41,10 @@
     <link href="{{ BASE_PATH }}/assets/themes/css/knitr-syntax.css" rel="stylesheet" type="text/css" media="all">
     <script type="text/javascript" src="{{ BASE_PATH }}/assets/themes/js/knitr-syntax.js"></script>
     
-
+    <script type="text/javascript>
+    ga('create', 'UA-104441725-1', {'allowAnchor': true});
+    ga('send', 'pageview', { 'page': location.pathname + location.search + location.hash});
+    </script>
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -128,4 +132,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="{{ BASE_PATH }}/assets/themes/bootstrap/js/bootstrap.min.js"></script>
   </body>
+  <footer>
+    {% include analytics-footer.html %}
+  </footer>
 </html>

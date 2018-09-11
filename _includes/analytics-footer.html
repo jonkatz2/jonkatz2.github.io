@@ -1,0 +1,9 @@
+<script type="text/javascript">
+  // from https://www.nichemarket.co.za/blog/track-anchor-tags-urls/
+  jQuery(document).ready(function () {
+    jQuery('.menu a').click(function(){
+      var match = jQuery(this).attr('href').match(/#\S+/);
+      ga('send', 'pageview', location.pathname + match[0]);
+    });
+  });  
+</script>
