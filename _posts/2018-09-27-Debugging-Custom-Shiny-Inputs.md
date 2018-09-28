@@ -33,7 +33,7 @@ There are three parts to a custom input:
   
 I felt that the third step is challenging because the documentation (the first link above) describes what methods your input needs, but not what each method does. The third link does a better job, but it doesn't really help if you are doing this for the first time and step 3 isn't working. The fourth link holds the key to sucess, and I'll try to describe why.  
 
-If you write R packages with the S4 method dispatch, you know what I mean when I say that a shiny input binding allows you to create a special js class and a few methods for that class. The shiny package will repeatedly and automatically call the methods that you write, and these methods work together to trasfer input values from the client-side to the server-side of your app.  
+If you write R packages with the S4 method dispatch, you know what I mean when I say that a shiny input binding is kind of like creating a special js class and a few methods for that class (even though technically it is just a binding, which is a function within a defined scope). The shiny package will repeatedly and automatically call the methods that you write, and these methods work together to trasfer input values from the client-side to the server-side of your app.  
 
 Here is the sample input from link 1, above:  
 
@@ -62,7 +62,7 @@ $.extend(incrementBinding, {
 Shiny.inputBindings.register(incrementBinding);
 ```
 <style>img {border:1px solid brown; margin:34px;}</style>
-The new class registered here is the `incrementBinding`, the the minimal methods that shiny will call are `find`, `getValue`, `setValue` (with `receiveMessage`), `subscribe`, and `unsubscribe`.  
+The new "class" (really a binding) registered here is the `incrementBinding`, the the minimal methods that shiny will call are `find`, `getValue`, `setValue` (with `receiveMessage`), `subscribe`, and `unsubscribe`.  
 
   * `find`:  
     * used by shiny to locate your input in the DOM during its timed scan.  
@@ -97,13 +97,13 @@ The problems I encountered were:
 Ultimately I spent a few hours working through the debugging console in Firefox to identify the source of each problem above. If you aren't familiar with debugging javascript, it is very similar to debugging R code (if you use `debug()`, `debugonce()`, or even sometimes `browser()` in R; I've not used `trace()` so I can't compare it).  
 
 To use the console, just right click and select "inspect element":  
-![](/assets/blog/customInputs/inspectElement.png)  
+![](/assets/blog/debugCustomInputs/inspectElement.png)  
 
 Or use the menu to select "web developer", then choose "Debugger" (shortcut: Ctrl+Shift+S) from the top of the list:  
-![](/assets/blog/customInputs/webDeveloper.png)  
+![](/assets/blog/debugCustomInputs/webDeveloper.png)  
 
 In the debugger, be sure you have the proper source selected, and then locate the function you need to step through. Place a breakpoint in the function by clicking a line number. Next time the function is called, it will stop at the breakpoint you selected and you can inspect the value for each variable within the function.  
-![](/assets/blog/customInputs/debugger.png)  
+![](/assets/blog/debugCustomInputs/debugger.png)  
 
 Other important aspects of debugging include adding `debugger;` to your javascript/jQuery, or sending yourself updates to the console via `console.log();` (which is analogous to sending messages to the console in shiny using `cat()`).
 
