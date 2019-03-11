@@ -84,6 +84,9 @@ tags: [D3, jQuery, oncoprint]
             border: none;
             margin-bottom: 0px;
         }
+        .oncoprinttooltip {
+            font-size: 0.8em;
+        }
         body {
             width: 100%;
             min-height: 100%;
@@ -98,7 +101,7 @@ tags: [D3, jQuery, oncoprint]
 <!--<body>-->
     <!-- Create a div where the graph will take place -->
     <div id="oncoprint"></div>
-
+    <p>I recently had the opportunity to build an oncoprint for a client. Oncoprints are gene mutation visualizations popularized by <a href="http://www.cbioportal.org/">cBioPortal</a>, and widely used in oncology research. There are a few R packages that make oncoprints, but none seem optimized for shiny applications. I developed this one specifically to use with the <a href="https://rstudio.github.io/r2d3/">r2d3 package</a>. That should explain some of the extraneous code, especially around setting the svg size, although it will be clear that this is my first D3 visualization. I'll post more on adapting this to a r2d3 script in a future post.</p>
     <script src="/assets/blog/oncoprint/oncoprint.js"></script>
 
 <!--</body>-->
