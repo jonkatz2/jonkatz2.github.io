@@ -1,0 +1,84 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+
+    <!--https://www.d3-graph-gallery.com/graph/heatmap_style.html-->
+    <!-- Load d3.js -->
+    <!--<script src="http://d3js.org/d3.v4.js"></script>-->
+    <!-- Load D3 -->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script
+	    src="https://code.jquery.com/jquery-3.3.1.min.js"
+	    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	    crossorigin="anonymous">
+    </script>
+    <script>
+        $('html').click(function(e) {
+            $('.genecontext-menu').css('opacity', 0).css('z-index', '-1');
+            $('.brushcontext-menu').css('opacity', 0).css('z-index', '-1');
+        });
+    </script>
+    <style src=""></style>
+    <style>
+        #oncoprint {
+            width: 1100px;
+            margin: auto;
+        }
+        .genecontext-menu:hover { 
+            background-color: #bfbfbf !important;
+            color: #333 !important; 
+            border: 1px #333 solid;
+        }
+        .brushcontext-menu li:hover { 
+            background-color: #bfbfbf !important;
+            color: #333 !important; 
+            border: 1px #333 solid;
+        }
+        .brushcontext-menu ul {
+            list-style: none;
+            margin-bottom: 0px;
+            padding: 0px;
+        }
+        .brushcontext-menu li {
+            padding: 0px 5px;
+        }
+        .outer-holder .brushed. .selection {
+            opacity: 0.5;
+        }
+        .tooltip:after {
+            right: 100%;
+            top: 25%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(255, 255, 255, 0);
+            border-right-color: rgba(51, 51, 51, 0.9);
+            border-width: 10px;
+            margin-top: -10px;
+        }
+        .tooltip .lab {
+            padding-right:0.6em; text-align:right;
+        }
+        body {
+            width: 100%;
+            min-height: 100%;
+            
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+
+</head>
+<body>
+    <!-- Create a div where the graph will take place -->
+    <div id="oncoprint"></div>
+
+    <script src="oncoprint.js"></script>
+
+</body>
