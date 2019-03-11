@@ -1,7 +1,7 @@
 // set the dimensions and margins of the graph
 var origmargin = {top: 10, right: 10, bottom: 10, left: 10},
   width = 1000 - origmargin.left - origmargin.right,
-  height = 450 - origmargin.top - origmargin.bottom;
+  height = 250 - origmargin.top - origmargin.bottom;
   
 // set the dimensions and margins of the graph
 var margin = {top: 5, right: 285, bottom: 30, left: 40},
