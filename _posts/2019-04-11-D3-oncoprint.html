@@ -102,6 +102,8 @@ tags: [D3, jQuery, oncoprint]
     <!-- Create a div where the graph will take place -->
     <div id="oncoprint"></div>
     <p>I recently had the opportunity to build an oncoprint for a client. Oncoprints are gene mutation visualizations popularized by <a href="http://www.cbioportal.org/">cBioPortal</a>, and widely used in oncology research. There are a few R packages that make oncoprints, but none seem optimized for shiny applications. I developed this one specifically to use with the <a href="https://rstudio.github.io/r2d3/">r2d3 package</a>. That should explain some of the extraneous code, especially around setting the svg size, although it will be clear that this is my first D3 visualization. I'll post more on adapting this to a r2d3 script in a future post.</p>
+    <p>There are a few features to highlight: each sample gets a tooltip, and users can zoom with their scrollwheel. Brushing is available at the top and bottom of the plot to select groups of samples. Right clicking the brushed region brings up a context menu, as does right clicking each gene (actions for the context menu are disabled outside of shiny).</p>
+    <p>Most of what makes an oncoprint an oncoprint is in how the samples are sorted. This version relies on R to do the sorting prior to passing the data to D3. I might update that in the future. In a shiny app, clicking a gene will sort the plot by that gene.</p>
     <script src="/assets/blog/oncoprint/oncoprint.js"></script>
 
 <!--</body>-->
