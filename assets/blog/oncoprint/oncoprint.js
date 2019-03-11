@@ -219,12 +219,12 @@ d3.csv("/assets/blog/oncoprint/genedata2.csv").then(function(data) {
           .exit();
 
         // remove all tooltips
-        d3.select("body").selectAll(".tooltip").remove();
+        d3.select("body").selectAll(".oncoprinttooltip").remove();
         // create a tooltip
         var tooltip = d3.select("body")
           .append("div")
           .style("opacity", 0)
-          .attr("class", "tooltip")
+          .attr("class", "oncoprinttooltip")
           .style("background-color", "rgb(51, 51, 51, 0.9)")
           .style("color", "#FFF")
   //        .style("border", "solid")
