@@ -247,7 +247,7 @@ d3.csv("/assets/blog/oncoprint/genedata2.csv").then(function(data) {
           if (d.mutation == "") {var mut = ""} 
           else {var mut = "<tr><td class='lab' style='vertical-align:top;'>Mutation</td><td>" + d.mutation + "</td></tr>"}
           tooltip
-            .html("<table><tr><td class='lab'>Model</td><td>" + d.group + "</td></tr><tr><td class='lab'>Gene</td><td>" + d.variable + "</td></tr><tr><td class='lab'>Alteration</td><td>" + d.value + "</td></tr>" + mut + "</table>")
+            .html("<table><tr><td class='lab'>Sample</td><td>" + d.group + "</td></tr><tr><td class='lab'>Gene</td><td>" + d.variable + "</td></tr><tr><td class='lab'>Alteration</td><td>" + d.value + "</td></tr>" + mut + "</table>")
             .style("left", (d3.event.pageX + 15) + "px")
             .style("top", (d3.event.pageY - 15) + "px")
   //          .style("left", (d3.mouse(this)[0]+70) + "px")
@@ -353,7 +353,7 @@ d3.csv("/assets/blog/oncoprint/genedata2.csv").then(function(data) {
             })
             .attr("transform", "translate(0," + y.bandwidth()/3 + ")")  
             .style("fill", function(d) { 
-              if (d.mutation == "") {return "#transparent"}
+              if (d.mutation == "") {return "transparent"}
               else if (d.mutation.match(/Fusion/) != null) {altcount[d.variable].Fusion += 1; samplecount[d.variable].push(d.group); return "#ffc125"}
   //            else if (d.mutation == "InDel") {return "#169e35"}
   //            else if (d.mutation == "SNV") {return "#800000"}
