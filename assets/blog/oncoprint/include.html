@@ -253,12 +253,13 @@
         }
         var mousemove = function(d) {
           if (d.mutation == "") {var mut = ""} 
-          else {var mut = "<tr><td class='lab' style='vertical-align:top;'>Mutation</td><td>" + d.mutation + "</td></tr>"}
+          else {var mut = "&lt;tr&gt;&lt;td class='lab' style='vertical-align:top;'&gt;Mutation&lt;/td&gt;&lt;td&gt;" + d.mutation + "&lt;/td&gt;&lt;/tr&gt;"}
           tooltip
-            .html("<table><tr><td class='lab'>Model</td><td>" + d.group + "</td></tr><tr><td class='lab'>Gene</td><td>" + d.variable + "</td></tr><tr><td class='lab'>Alteration</td><td>" + d.value + "</td></tr>" + mut + "</table>")
+            .html("&lt;table&gt;&lt;tr&gt;&lt;td class='lab'&gt;Model&lt;/td&gt;&lt;td&gt;" + d.group + "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class='lab'&gt;Gene&lt;/td&gt;&lt;td&gt;" + d.variable + "&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class='lab'&gt;Alteration&lt;/td&gt;&lt;td&gt;" + d.value + "&lt;/td&gt;&lt;/tr&gt;" + mut + "&lt;/table&gt;")
             .style("left", (d3.event.pageX + 15) + "px")
             .style("top", (d3.event.pageY - 15) + "px")
         }
+
         var mouseleave = function(d) {
           tooltip
             .style("opacity", 0)

@@ -280,7 +280,7 @@ d3.csv("https://raw.githubusercontent.com/jonkatz2/jonkatz2.github.io/master/ass
       })
       .attr("transform", "translate(0," + y.bandwidth()/3 + ")")  
       .style("fill", function(d) { 
-        if (d.mutation == "") {return "#transparent"}
+        if (d.mutation == "") {return "transparent"}
         else if (d.mutation.match(/Fusion/) != null) {altcount[d.variable].Fusion += 1; samplecount[d.variable].push(d.group); return "#ffc125"}
         else { altcount[d.variable].Mutation += 1; samplecount[d.variable].push(d.group); return "#169e35" }
       })
