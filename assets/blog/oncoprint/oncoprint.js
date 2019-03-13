@@ -33,8 +33,7 @@ var svg = d3.select("#oncoprint")
         "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("oncodata.csv").then(function(data) {
-//d3.csv("/assets/blog/oncoprint/genedata2.csv").then(function(data) {
+d3.csv("/assets/blog/oncoprint/oncodata.csv").then(function(data) {
   var g = svg.append("g")
     .attr("class", "outer-holder")
     .attr("transform", "translate(" + margin.left + "," + (margin.top+45) + ")");
