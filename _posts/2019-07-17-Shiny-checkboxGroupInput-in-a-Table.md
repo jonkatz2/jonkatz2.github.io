@@ -27,7 +27,7 @@ Making an input like this is really simple:
 	}
 	#reportgenegrouptable th {
 		background: #eee;
-		padding: 0em 0.5em;
+		padding: 0em 0.5em !important;
 		color: #333 !important;
 	}
 	#reportgenegrouptable tr:nth-child(even) {
@@ -38,10 +38,10 @@ Making an input like this is really simple:
 	}
 	#reportgenegrouptable td.checkbox {
 		text-align: center !important;
-		display: table-cell;
+		display: table-cell !important;
 	}
 	#reportgenegrouptable td:not(.checkbox) {
-		text-align: right;
+		text-align: right !important;
 	}
 </style>
 <div id="reportlolliplots" class="form-group shiny-input-checkboxgroup shiny-input-container">
