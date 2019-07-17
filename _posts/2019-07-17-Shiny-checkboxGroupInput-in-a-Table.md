@@ -23,7 +23,8 @@ I really like how easy it is to modify the simple inputs in shiny. For example l
 Making an input like this is really simple:
 <style>
 	#reportgenegrouptable, #reportgenegrouptable td, #reportgenegrouptable th {
-    		border: 1px transparent #373737  !important;
+    		border: none !important;
+		padding: 0px;
 	}
 	#reportgenegrouptable th {
 		background: #eee;
@@ -62,43 +63,43 @@ Making an input like this is really simple:
 		<th>Histogram</th>
 		  </tr></thead>
 		<tr>
-		  <td style="padding:0px 8px;">NOTCH1</td>
+		  <td>NOTCH1</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="NOTCH1"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="NOTCH1"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="NOTCH1"/></td>
 		</tr> 
 		<tr>
-		  <td style="padding:0px 8px;">EGFR</td>
+		  <td>EGFR</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="EGFR"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="EGFR"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="EGFR"/></td>
 		</tr> 
 		<tr>
-		  <td style="padding:0px 8px;">TPTE</td>
+		  <td>TPTE</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="TPTE"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="TPTE"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="TPTE"/></td>
 		</tr> 
 		<tr>
-		  <td style="padding:0px 8px;">TP53</td>
+		  <td>TP53</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="TP53"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="TP53"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="TP53"/></td>
 		</tr> 
 		<tr>
-		  <td style="padding:0px 8px;">KRAS</td>
+		  <td>KRAS</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="KRAS"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="KRAS"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="KRAS"/></td>
 		</tr> 
 		<tr>
-		  <td style="padding:0px 8px;">BRCA1</td>
+		  <td>BRCA1</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="BRCA1"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="BRCA1"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="BRCA1"/></td>
 		</tr> 
 		<tr>
-		  <td style="padding:0px 8px;">BRCA2</td>
+		  <td>BRCA2</td>
 		  <td class="checkbox"><input type="checkbox" name="reportlolliplots" value="BRCA2"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reportboxplots" value="BRCA2"/></td>
 		  <td class="checkbox"><input type="checkbox" name="reporthistograms" value="BRCA2"/></td>
