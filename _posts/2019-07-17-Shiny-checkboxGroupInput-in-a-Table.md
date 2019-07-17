@@ -161,13 +161,13 @@ The simplest way to do this is to use a custom message handler. Here's mine, tha
 ```
 Shiny.addCustomMessageHandler("updateCheckGroup",
   function(message) {
-	// Copied verbatim from shiny.js
-	// Escape jQuery selector metacharacters: !"#$%&'()*+,./:;<=>?@[\]^`{|}~
-	var exports = window.Shiny = window.Shiny || {};
-	var $escape = exports.$escape = function(val) {
-	  return val.replace(/([!"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~])/g, '\\$1');
-	}; 
-	// Adapted from shiny.js
+    // Copied verbatim from shiny.js
+    // Escape jQuery selector metacharacters: !"#$%&'()*+,./:;<=>?@[\]^`{|}~
+    var exports = window.Shiny = window.Shiny || {};
+    var $escape = exports.$escape = function(val) {
+      return val.replace(/([!"#$%&'()*+,.\/:;<=>?@\[\\\]^`{|}~])/g, '\\$1');
+    }; 
+    // Adapted from shiny.js
     var el = $(message.id + '.shiny-input-checkboxgroup');
     // Clear all checkboxes
     $('input:checkbox[name="' + $escape(message.id) + '"]').prop('checked', false);
