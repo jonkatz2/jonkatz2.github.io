@@ -23,7 +23,7 @@ I really like how easy it is to modify the simple inputs in shiny. For example l
 Making an input like this is really simple:
 <style>
 	#reportgenegrouptable, #reportgenegrouptable td, #reportgenegrouptable th {
-    		border: 0px transparent #373737  !important;
+    		border: 1px transparent #373737  !important;
 	}
 	#reportgenegrouptable th {
 		background: #eee;
@@ -40,8 +40,14 @@ Making an input like this is really simple:
 		text-align: center !important;
 		display: table-cell !important;
 	}
+	#reportgenegrouptable td.checkbox input[type="checkbox"] {
+		margin-left: 0px !important;
+	}
 	#reportgenegrouptable td:not(.checkbox) {
 		text-align: right !important;
+	}
+	##reportgenegrouptable td input[type="checkbox"] {
+		margin: 0px !important;
 	}
 </style>
 <div id="reportlolliplots" class="form-group shiny-input-checkboxgroup shiny-input-container">
