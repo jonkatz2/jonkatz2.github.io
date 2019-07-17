@@ -154,7 +154,7 @@ output$geneselectiontable <- renderUI({
 })
 ```
 
-Of course the updateCheckboxGroupInput function no longer works on this table, so we have to modify it a little bit. The reason it no longer works is because it locates the div, clears it, then recreates it, potentially with different choices. Since my table is rendered I can just re-render the table to change the choices, so my update function does not need to add or remove choices -- it only needs to check and un-check the boxes.  
+Of course the updateCheckboxGroupInput function no longer works on this table, so we have to modify it a little bit. The reason it no longer works is because it locates the div, clears it, then recreates it, potentially with different choices. Since my table is rendered  my update function does not need to add or remove choices -- it only needs to check and un-check the boxes.  
 
 The simplest way to do this is to use a custom message handler. Here's mine, that I source in as a script in my ui:  
 
