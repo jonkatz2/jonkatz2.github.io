@@ -13,8 +13,9 @@ tags: [R, shiny, javascript, jQuery, custom, input]
     crossorigin="anonymous">
 </script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">  
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">  
  
 
 I really like how easy it is to modify the simple inputs in shiny. For example last week I had to make three sets of checkboxGroupInputs, all with the same choices, to control which visuals would appear in a markdown report. My first draft had three distinct inputs, but this was not space efficient and felt completely inelegant. making a table of selections seemed like a much better idea, but of course no such input exists natively in shiny.  
@@ -27,7 +28,7 @@ Making an input like this is really simple:
 	#reportgenegrouptable th {
 		background: #eee;
 		padding: 0em 0.5em;
-		color: #333;
+		color: #333 !important;
 	}
 	#reportgenegrouptable tr:nth-child(even) {
 		background: #eee;
