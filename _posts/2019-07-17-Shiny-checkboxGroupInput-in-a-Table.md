@@ -47,7 +47,7 @@ Making an input like this is really simple:
 	#reportgenegrouptable td:not(.checkbox) {
 		text-align: right !important;
 	}
-	##reportgenegrouptable td input[type="checkbox"] {
+	#reportgenegrouptable td input[type="checkbox"] {
 		margin: 0px !important;
 	}
 </style>
