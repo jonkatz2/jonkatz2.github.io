@@ -40,8 +40,9 @@ Making an input like this is really simple:
 		text-align: center !important;
 		display: table-cell !important;
 	}
-	#reportgenegrouptable td.checkbox input[type="checkbox"] {
+	#reportgenegrouptable .checkbox input[type="checkbox"] {
 		margin-left: 0px !important;
+		float: none !important;
 	}
 	#reportgenegrouptable td:not(.checkbox) {
 		text-align: right !important;
