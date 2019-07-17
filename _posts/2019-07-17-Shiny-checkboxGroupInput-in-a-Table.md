@@ -7,6 +7,11 @@ category:
 tags: [R, shiny, javascript, jQuery, custom, input]
 ---
 {% include JB/setup %}
+<script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+</script>
 
 I really like how easy it is to modify the simple inputs in shiny. For example last week I had to make three sets of checkboxGroupInputs, all with the same choices, to control which visuals would appear in a markdown report. My first draft had three distinct inputs, but this was not space efficient and felt completely inelegant. making a table of selections seemed like a much better idea, but of course no such input exists natively in shiny.  
 
