@@ -12,6 +12,7 @@ tags: [R, shiny, javascript, jQuery, custom, input]
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">
 </script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css" integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA" crossorigin="anonymous">
  
@@ -21,20 +22,21 @@ I really like how easy it is to modify the simple inputs in shiny. For example l
 Making an input like this is really simple:
 <style>
 	#reportgenegrouptable, #reportgenegrouptable td, #reportgenegrouptable th {
-    		border: 0px transparent #373737
+    		border: 0px transparent #373737  !important;
 	}
 	#reportgenegrouptable th {
 		background: #eee;
 		padding: 0em 0.5em;
+		color: #333;
 	}
 	#reportgenegrouptable tr:nth-child(even) {
-		background: #eee
+		background: #eee;
 	}
 	#reportgenegrouptable tr:nth-child(odd) {
 		background: #FFF
 	}
 	#reportgenegrouptable td.checkbox {
-		text-align: center;
+		text-align: center !important;
 		display: table-cell;
 	}
 	#reportgenegrouptable td:not(.checkbox) {
